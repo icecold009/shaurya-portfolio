@@ -1,12 +1,16 @@
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 
 function App() {
     return (
-        <main>
-            <Hero />
-            <Projects />
-        </main>
+        <>
+            <Navbar />
+            <main>
+                <Hero />
+                <Projects />
+            </main>
+        </>
     );
 }
 
