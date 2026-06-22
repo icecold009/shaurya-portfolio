@@ -1,0 +1,141 @@
+:root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --text: #111827;
+    --muted: #5b6472;
+    --line: #dde3ea;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --max-width: 1100px;
+    --radius: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    background: linear-gradient(180deg, #f8faff 0%, #f6f7fb 100%);
+    color: var(--text);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+main {
+    width: min(var(--max-width), calc(100% - 2rem));
+    margin: 0 auto;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 0 4rem;
+}
+
+.hero-kicker {
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.hero-title {
+    margin: 0;
+    max-width: 10ch;
+    font-size: clamp(3rem, 9vw, 6.2rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+}
+
+.hero-description {
+    margin: 1.5rem 0 0;
+    max-width: 42rem;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--muted);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.95rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.98rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.18);
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.72);
+    border-color: var(--line);
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    border-color: #b9c6d8;
+    background: #ffffff;
+}
+
+@media (max-width: 700px) {
+    main {
+        width: min(var(--max-width), calc(100% - 1.5rem));
+    }
+
+    .hero {
+        padding: 4rem 0 3rem;
+        min-height: auto;
+    }
+
+    .hero-title {
+        max-width: 100%;
+        font-size: clamp(2.7rem, 14vw, 4.2rem);
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
