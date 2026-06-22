@@ -1,13 +1,13 @@
 :root {
     --bg: #f6f7fb;
-    --surface: #ffffff;
+    --surface: rgba(255, 255, 255, 0.78);
+    --surface-solid: #ffffff;
     --text: #111827;
     --muted: #5b6472;
     --line: #dde3ea;
     --accent: #2563eb;
     --accent-hover: #1d4ed8;
     --max-width: 1100px;
-    --radius: 20px;
 }
 
 * {
@@ -33,6 +33,46 @@ a {
 main {
     width: min(var(--max-width), calc(100% - 2rem));
     margin: 0 auto;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(16px);
+    background: rgba(246, 247, 251, 0.7);
+    border-bottom: 1px solid rgba(221, 227, 234, 0.7);
+}
+
+.navbar {
+    width: min(var(--max-width), calc(100% - 2rem));
+    margin: 0 auto;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text);
 }
 
 .hero {
@@ -110,9 +150,90 @@ main {
     background: #ffffff;
 }
 
+.projects {
+    padding: 2rem 0 5rem;
+}
+
+.section-heading {
+    margin-bottom: 2rem;
+}
+
+.section-label {
+    margin: 0 0 0.6rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.project-card {
+    background: var(--surface-solid);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 1.4rem;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+}
+
+.project-card h3 {
+    margin: 0 0 0.8rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.03em;
+}
+
+.project-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.project-stack {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    background: #eff4ff;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 700px) {
-    main {
+
+    main,
+    .navbar {
         width: min(var(--max-width), calc(100% - 1.5rem));
+    }
+
+    .navbar {
+        min-height: 64px;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
     }
 
     .hero {
