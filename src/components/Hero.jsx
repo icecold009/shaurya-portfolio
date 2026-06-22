@@ -1,6 +1,6 @@
 function Hero() {
     return (
-        <section className="hero section" id="home">
+        <section className="hero" id="home">
             <p className="hero-kicker">Computer Science Student • Full-Stack Developer</p>
 
             <h1 className="hero-title">
@@ -11,12 +11,12 @@ function Hero() {
 
             <p className="hero-description">
                 I build full-stack web apps, AI-powered tools, and technical projects with
-                a focus on clean UX, real functionality, and thoughtful engineering.
+                a focus on clean UI, real functionality, and thoughtful engineering.
             </p>
 
             <div className="hero-actions">
                 <a href="#projects" className="btn btn-primary">View Projects</a>
-                <a href="#contact" className="btn btn-secondary">Contact Me</a>
+                <a href="#contact" className="btn btn-secondary">Contact</a>
             </div>
         </section>
     );
