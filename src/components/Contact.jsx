@@ -13,11 +13,11 @@ function Contact() {
                 </p>
 
                 <div className="contact-links">
-                    <a href="mailto:your-email@example.com">Email</a>
-                    <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">
+                    <a href="mailto:sariashaurya09@gmail.com">Email</a>
+                    <a href="https://github.com/icecold009" target="_blank" rel="noreferrer">
                         GitHub
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer">
+                    <a href="https://linkedin.com/in/shaurya-saria009" target="_blank" rel="noreferrer">
                         LinkedIn
                     </a>
                 </div>

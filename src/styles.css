@@ -151,7 +151,8 @@ main {
 }
 
 .projects,
-.about {
+.about,
+.contact {
     padding: 2rem 0 5rem;
 }
 
@@ -178,7 +179,6 @@ main {
 .project-grid,
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
 }
 
@@ -186,9 +186,14 @@ main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .project-card,
 .about-copy,
-.about-note {
+.about-note,
+.contact-card {
     background: var(--surface-solid);
     border: 1px solid var(--line);
     border-radius: 24px;
@@ -205,7 +210,8 @@ main {
 
 .project-card p,
 .about-copy p,
-.about-note li {
+.about-note li,
+.contact-text {
     margin: 0;
     color: var(--muted);
     line-height: 1.7;
@@ -237,11 +243,58 @@ main {
     font-weight: 600;
 }
 
+.contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.contact-text {
+    max-width: 42rem;
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.contact-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #f8fbff;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.contact-links a:hover {
+    border-color: #bfd0f5;
+    color: var(--accent);
+    background: #ffffff;
+}
+
 @media (max-width: 900px) {
+
+    .project-grid,
+    .about-grid,
+    .contact-card {
+        grid-template-columns: 1fr;
+    }
 
     .project-grid,
     .about-grid {
         grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
@@ -284,7 +337,12 @@ main {
         align-items: stretch;
     }
 
-    .btn {
+    .btn,
+    .contact-links a {
+        width: 100%;
+    }
+
+    .contact-links {
         width: 100%;
     }
 }
