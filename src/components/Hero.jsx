@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Hero() {
     useEffect(() => {
@@ -64,8 +65,8 @@ function Hero() {
             </p>
 
             <div className="hero-actions">
-                <a href="#projects" className="btn btn-primary">View Projects</a>
-                <a href="#contact" className="btn btn-secondary">Get In Touch</a>
+                <Link to="/projects" className="btn btn-primary">View Projects</Link>
+                <Link to="/contact" className="btn btn-secondary">Get In Touch</Link>
             </div>
         </section>
     );

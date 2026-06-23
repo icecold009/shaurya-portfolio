@@ -697,3 +697,36 @@ footer {
         width: 100%;
     }
 }
+
+/* ─── PAGE LAYOUT ────────────────────────────────────── */
+.page-wrapper {
+    width: min(var(--max-width), calc(100% - 2rem));
+    margin: 0 auto;
+    padding-top: 2.5rem;
+}
+
+.page-header {
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.page-breadcrumb {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--green-dim);
+    letter-spacing: 0.08em;
+}
+
+.page-breadcrumb::before {
+    content: 'cd ~/';
+    color: var(--text-faint);
+}
+
+.nav-links a.nav-active {
+    color: var(--green);
+}
+
+.nav-links a.nav-active::before {
+    color: var(--green-dim);
+}

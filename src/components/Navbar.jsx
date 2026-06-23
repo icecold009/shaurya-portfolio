@@ -1,43 +1,45 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [dark, setDark] = useState(true); // default dark for matrix theme
+    const [dark, setDark] = useState(true);
+    const location = useLocation();
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
     }, [dark]);
 
-    const closeMenu = () => setMenuOpen(false);
+    useEffect(() => { setMenuOpen(false); }, [location]);
+
+    const navLinks = [
+        { to: "/projects", label: "projects" },
+        { to: "/about", label: "about" },
+        { to: "/contact", label: "contact" },
+    ];
+
+    const isActive = (path) => location.pathname === path;
 
     return (
         <header className="site-header">
             <nav className="navbar">
-                <a href="#home" className="brand">
+                <Link to="/" className="brand">
                     <span className="brand-prompt">root@shaurya</span>:~$
-                </a>
+                </Link>
 
                 <div className="nav-links desktop-nav">
-                    <a href="#projects" onClick={closeMenu}>projects</a>
-                    <a href="#about" onClick={closeMenu}>about</a>
-                    <a href="#skills" onClick={closeMenu}>skills</a>
-                    <a href="#contact" onClick={closeMenu}>contact</a>
+                    {navLinks.map(({ to, label }) => (
+                        <Link key={to} to={to} className={isActive(to) ? "nav-active" : ""}>
+                            {label}
+                        </Link>
+                    ))}
                 </div>
 
                 <div className="nav-right">
-                    <button
-                        className="theme-toggle"
-                        onClick={() => setDark(!dark)}
-                        aria-label="Toggle theme"
-                    >
+                    <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label="Toggle theme">
                         {dark ? "◑" : "○"}
                     </button>
-                    <button
-                        className="hamburger"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label="Toggle menu"
-                        aria-expanded={menuOpen}
-                    >
+                    <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}>
                         <span className={`ham-line ${menuOpen ? "open" : ""}`} />
                         <span className={`ham-line ${menuOpen ? "open" : ""}`} />
                         <span className={`ham-line ${menuOpen ? "open" : ""}`} />
@@ -46,10 +48,9 @@ function Navbar() {
             </nav>
 
             <div className={`mobile-menu ${menuOpen ? "mobile-menu--open" : ""}`}>
-                <a href="#projects" onClick={closeMenu}>projects</a>
-                <a href="#about" onClick={closeMenu}>about</a>
-                <a href="#skills" onClick={closeMenu}>skills</a>
-                <a href="#contact" onClick={closeMenu}>contact</a>
+                {navLinks.map(({ to, label }) => (
+                    <Link key={to} to={to}>{label}</Link>
+                ))}
             </div>
         </header>
     );
