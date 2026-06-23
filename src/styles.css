@@ -569,6 +569,19 @@ main {
     color: var(--text-faint);
 }
 
+.project-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--status-color);
+    border: 1px solid var(--status-color);
+    border-radius: 3px;
+    padding: 0.15rem 0.45rem;
+    opacity: 0.85;
+    flex-shrink: 0;
+}
+
 /* ─── ABOUT ──────────────────────────────────────────── */
 .about-grid {
     display: grid;
@@ -822,4 +835,167 @@ footer {
     .contact-links {
         width: 100%;
     }
+}
+
+/* ─── TIMELINE ───────────────────────────────────────── */
+.timeline-section {
+    padding: 2rem 0 5rem;
+}
+
+.timeline-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tl-filter {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 3px;
+    border: 1px solid var(--line-bright);
+    background: var(--bg-2);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.12s;
+}
+
+.tl-filter:hover {
+    color: var(--text);
+    border-color: var(--text-dim);
+    transform: translateY(-1px);
+}
+
+.tl-filter--on {
+    color: var(--fc, var(--green));
+    border-color: var(--fc, var(--green));
+    background: color-mix(in srgb, var(--fc, var(--green)) 10%, transparent);
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Vertical spine line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 1px;
+    background: var(--line-bright);
+}
+
+.tl-item {
+    position: relative;
+    padding-left: 2.2rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+
+.tl-item:first-child {
+    border-top: 1px solid var(--line);
+}
+
+.tl-item:hover {
+    background: var(--surface);
+}
+
+.tl-item--open {
+    background: var(--surface);
+}
+
+.tl-dot {
+    position: absolute;
+    left: 0.3rem;
+    top: 1.3rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--dc, var(--green));
+    box-shadow: 0 0 8px var(--dc, var(--green));
+    transition: transform 0.15s;
+    flex-shrink: 0;
+}
+
+.tl-item--open .tl-dot {
+    transform: scale(1.4);
+}
+
+.tl-body {
+    padding: 1.1rem 1rem 1.1rem 0;
+}
+
+.tl-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tl-year {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    min-width: 2.8rem;
+}
+
+.tl-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tc, var(--green));
+    border: 1px solid var(--tc, var(--green));
+    border-radius: 3px;
+    padding: 0.12rem 0.4rem;
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+.tl-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+}
+
+.tl-chevron {
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+/* Expand/collapse detail */
+.tl-detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease, padding 0.28s ease;
+    padding-top: 0;
+}
+
+.tl-item--open .tl-detail {
+    grid-template-rows: 1fr;
+    padding-top: 0.75rem;
+}
+
+.tl-detail>p {
+    overflow: hidden;
+    font-size: 0.93rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+    max-width: 56rem;
+    padding-bottom: 0.2rem;
 }

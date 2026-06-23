@@ -1,5 +1,7 @@
 import About from "../components/About";
 import Skills from "../components/skills";
+import Timeline from "../components/Timeline";
+
 export default function AboutPage() {
     return (
         <div className="page-wrapper">
@@ -8,6 +10,7 @@ export default function AboutPage() {
             </div>
             <About />
             <Skills />
+            <Timeline />
         </div>
     );
 }
