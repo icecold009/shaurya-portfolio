@@ -1035,3 +1035,175 @@ footer {
     max-width: 56rem;
     padding-bottom: 0.2rem;
 }
+
+/* ─── PROJECT CARD EXPAND ────────────────────────────── */
+
+/* Make the grid stack to 1 column so expansion has full width */
+.project-card--open {
+    grid-column: 1 / -1;
+    cursor: default;
+    border-color: var(--green-faint);
+    box-shadow: 0 8px 40px rgba(0, 255, 65, 0.09);
+    transform: none;
+    /* cancel the hover lift when open */
+}
+
+.project-card {
+    cursor: pointer;
+}
+
+.project-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.project-desc {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+    flex: 1;
+}
+
+.project-expand-hint {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-top: auto;
+    padding-top: 0.25rem;
+    transition: color 0.15s;
+}
+
+.project-card:hover .project-expand-hint {
+    color: var(--green-dim);
+}
+
+.project-card--open .project-expand-hint {
+    color: var(--green-dim);
+}
+
+/* Smooth expand via grid trick */
+.project-expanded {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card--open .project-expanded {
+    grid-template-rows: 1fr;
+}
+
+.project-expanded-inner {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding-top: 0;
+    transition: padding-top 0.35s ease;
+}
+
+.project-card--open .project-expanded-inner {
+    padding-top: 1.75rem;
+}
+
+/* Screenshot */
+.project-img-wrap {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 16 / 8.4;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.6) saturate(0.3) hue-rotate(80deg);
+    transition: filter 0.3s ease;
+}
+
+.project-card--open:hover .project-img {
+    filter: brightness(0.75) saturate(0.5) hue-rotate(80deg);
+}
+
+.project-img-overlay {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    font-family: var(--mono);
+}
+
+/* Highlights list */
+.project-highlights-label,
+.project-challenge-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dim);
+    margin-bottom: 0.85rem;
+}
+
+.project-highlights-label::before {
+    content: '// ';
+    color: var(--text-faint);
+}
+
+.project-challenge-label::before {
+    content: '// ';
+    color: var(--text-faint);
+}
+
+.project-highlights ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.project-highlights li {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    padding-left: 1.3rem;
+    position: relative;
+}
+
+.project-highlights li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--green-faint);
+    font-size: 0.85rem;
+}
+
+/* Challenge block */
+.project-challenge {
+    border-left: 2px solid var(--green-faint);
+    padding-left: 1.2rem;
+    padding-bottom: 0.25rem;
+}
+
+.project-challenge p:last-child {
+    font-size: 0.93rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+    font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .project-card--open {
+        grid-column: 1;
+    }
+}
