@@ -9,23 +9,24 @@ function About() {
             <div className="about-grid">
                 <div className="about-copy">
                     <p>
-                        I’m a student and junior developer based in Bengaluru, interested in
-                        full-stack development, educational technology, and AI-assisted tools.
+                        Student and junior developer based in Bengaluru. I work across the full stack —
+                        backend APIs, React frontends, cloud databases, and deployment pipelines.
                     </p>
-
                     <p>
-                        I enjoy building products that are practical, polished, and easy to use,
-                        especially projects that combine strong backend logic with clean frontend
-                        experiences.
+                        Currently studying Computer Science while building real projects:
+                        a music recognition engine, an AI study tool, and more.
+                        I care about code that's clean, products that work, and shipping things that matter.
                     </p>
                 </div>
 
                 <div className="about-note">
-                    <h3>What I’m focused on</h3>
+                    <h3>Current focus</h3>
                     <ul>
-                        <li>Building full-stack React applications</li>
-                        <li>Working with APIs, databases, and deployment workflows</li>
-                        <li>Creating projects that are useful for students and developers</li>
+                        <li>Full-stack React applications</li>
+                        <li>AI integration with Gemini API</li>
+                        <li>Backend APIs and database design</li>
+                        <li>Deployment and DevOps workflows</li>
+                        <li>Building tools for students and developers</li>
                     </ul>
                 </div>
             </div>
