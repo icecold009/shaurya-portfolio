@@ -1036,18 +1036,9 @@ footer {
     padding-bottom: 0.2rem;
 }
 
-/* ─── PROJECT CARD EXPAND ────────────────────────────── */
+/* ─── PROJECT MODAL ──────────────────────────────────── */
 
-/* Make the grid stack to 1 column so expansion has full width */
-.project-card--open {
-    grid-column: 1 / -1;
-    cursor: default;
-    border-color: var(--green-faint);
-    box-shadow: 0 8px 40px rgba(0, 255, 65, 0.09);
-    transform: none;
-    /* cancel the hover lift when open */
-}
-
+/* Keep cursor pointer on cards */
 .project-card {
     cursor: pointer;
 }
@@ -1081,70 +1072,143 @@ footer {
     color: var(--green-dim);
 }
 
-.project-card--open .project-expand-hint {
-    color: var(--green-dim);
+/* ── Backdrop ── */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: backdrop-in 0.2s ease forwards;
 }
 
-/* Smooth expand via grid trick */
-.project-expanded {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+@keyframes backdrop-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-.project-card--open .project-expanded {
-    grid-template-rows: 1fr;
-}
-
-.project-expanded-inner {
-    overflow: hidden;
+/* ── Modal card ── */
+.modal-card {
+    position: relative;
+    width: min(780px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--bg-2);
+    border: 1px solid var(--line-bright);
+    border-radius: 10px;
+    padding: 2.25rem;
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
-    padding-top: 0;
-    transition: padding-top 0.35s ease;
+    gap: 1.5rem;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--green-faint);
+    animation: modal-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-bright) transparent;
 }
 
-.project-card--open .project-expanded-inner {
-    padding-top: 1.75rem;
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-/* Screenshot */
-.project-img-wrap {
+/* ── Close button ── */
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid var(--line-bright);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.12s;
+    font-family: var(--mono);
+    z-index: 1;
+}
+
+.modal-close:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: var(--green-faint);
+    transform: scale(1.1);
+}
+
+/* ── Screenshot ── */
+.modal-img-wrap {
     position: relative;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid var(--line);
     aspect-ratio: 16 / 8.4;
+    flex-shrink: 0;
 }
 
-.project-img {
+.modal-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: brightness(0.6) saturate(0.3) hue-rotate(80deg);
-    transition: filter 0.3s ease;
+    filter: brightness(0.65) saturate(0.3) hue-rotate(80deg);
 }
 
-.project-card--open:hover .project-img {
-    filter: brightness(0.75) saturate(0.5) hue-rotate(80deg);
-}
-
-.project-img-overlay {
+.modal-img-overlay {
     position: absolute;
     bottom: 0.75rem;
     left: 0.75rem;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--text-faint);
     font-family: var(--mono);
 }
 
-/* Highlights list */
-.project-highlights-label,
-.project-challenge-label {
+/* ── Header inside modal ── */
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.modal-title {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 800;
+    color: var(--green);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.modal-desc {
+    font-size: 0.97rem;
+    line-height: 1.9;
+    color: var(--text-dim);
+}
+
+/* ── Section labels ── */
+.modal-section-label {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -1153,25 +1217,21 @@ footer {
     margin-bottom: 0.85rem;
 }
 
-.project-highlights-label::before {
+.modal-section-label::before {
     content: '// ';
     color: var(--text-faint);
 }
 
-.project-challenge-label::before {
-    content: '// ';
-    color: var(--text-faint);
-}
-
-.project-highlights ul {
+/* ── Highlights ── */
+.modal-highlights ul {
     list-style: none;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
+    gap: 0.6rem;
 }
 
-.project-highlights li {
+.modal-highlights li {
     font-size: 0.93rem;
     line-height: 1.7;
     color: var(--text-dim);
@@ -1179,31 +1239,41 @@ footer {
     position: relative;
 }
 
-.project-highlights li::before {
+.modal-highlights li::before {
     content: '→';
     position: absolute;
     left: 0;
     color: var(--green-faint);
-    font-size: 0.85rem;
 }
 
-/* Challenge block */
-.project-challenge {
+/* ── Challenge ── */
+.modal-challenge {
     border-left: 2px solid var(--green-faint);
     padding-left: 1.2rem;
     padding-bottom: 0.25rem;
 }
 
-.project-challenge p:last-child {
+.modal-challenge p:last-child {
     font-size: 0.93rem;
     line-height: 1.85;
     color: var(--text-dim);
     font-style: italic;
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
-    .project-card--open {
-        grid-column: 1;
+/* ── Mobile ── */
+@media (max-width: 700px) {
+    .modal-card {
+        padding: 1.5rem;
+        max-height: 95vh;
+        border-radius: 8px;
+    }
+
+    .modal-backdrop {
+        padding: 0.75rem;
+        align-items: flex-end;
+    }
+
+    .modal-card {
+        border-radius: 10px 10px 4px 4px;
     }
 }

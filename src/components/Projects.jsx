@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const projects = [
     {
@@ -66,10 +66,93 @@ const statusStyle = {
     ongoing: { label: "ongoing", color: "#5a9fff" },
 };
 
-function Projects() {
-    const [open, setOpen] = useState(null);
+function ProjectModal({ project: p, onClose }) {
+    const s = statusStyle[p.status];
 
-    const toggle = (i) => setOpen(open === i ? null : i);
+    // Close on Escape key
+    useEffect(() => {
+        const handler = (e) => { if (e.key === "Escape") onClose(); };
+        window.addEventListener("keydown", handler);
+        // Lock body scroll while modal is open
+        document.body.style.overflow = "hidden";
+        return () => {
+            window.removeEventListener("keydown", handler);
+            document.body.style.overflow = "";
+        };
+    }, [onClose]);
+
+    return (
+        <div
+            className="modal-backdrop"
+            onClick={onClose}
+            role="dialog"
+            aria-modal="true"
+            aria-label={p.title}
+        >
+            <article
+                className="modal-card"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Close button */}
+                <button className="modal-close" onClick={onClose} aria-label="Close">
+                    ✕
+                </button>
+
+                {/* Screenshot */}
+                <div className="modal-img-wrap">
+                    <img
+                        src={p.image}
+                        alt={`${p.title} screenshot`}
+                        className="modal-img"
+                        width="800"
+                        height="420"
+                        loading="lazy"
+                    />
+                    <div className="modal-img-overlay">// screenshot placeholder</div>
+                </div>
+
+                {/* Header */}
+                <div className="modal-header">
+                    <div className="project-title-row">
+                        <h2 className="modal-title">{p.title}</h2>
+                        <span className="project-status" style={{ "--status-color": s.color }}>
+                            {s.label}
+                        </span>
+                    </div>
+                    <div className="project-links" onClick={(e) => e.stopPropagation()}>
+                        <a href={p.github} className="project-link" target="_blank" rel="noreferrer">GH</a>
+                        {p.live && (
+                            <a href={p.live} className="project-link" target="_blank" rel="noreferrer">↗ live</a>
+                        )}
+                    </div>
+                </div>
+
+                <p className="modal-desc">{p.description}</p>
+                <span className="project-stack">{p.stack}</span>
+
+                {/* Highlights */}
+                <div className="modal-highlights">
+                    <p className="modal-section-label">what I built</p>
+                    <ul>
+                        {p.highlights.map((h, i) => (
+                            <li key={i}>{h}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Challenge */}
+                <div className="modal-challenge">
+                    <p className="modal-section-label">biggest challenge</p>
+                    <p>{p.challenge}</p>
+                </div>
+
+            </article>
+        </div>
+    );
+}
+
+function Projects() {
+    const [selected, setSelected] = useState(null);
 
     return (
         <section className="projects" id="projects">
@@ -81,26 +164,20 @@ function Projects() {
             <div className="project-grid">
                 {projects.map((p, i) => {
                     const s = statusStyle[p.status];
-                    const isOpen = open === i;
-
                     return (
                         <article
                             key={p.title}
-                            className={`project-card ${isOpen ? "project-card--open" : ""}`}
-                            onClick={() => toggle(i)}
+                            className="project-card"
+                            onClick={() => setSelected(p)}
                             role="button"
                             tabIndex={0}
-                            onKeyDown={(e) => e.key === "Enter" && toggle(i)}
-                            aria-expanded={isOpen}
+                            onKeyDown={(e) => e.key === "Enter" && setSelected(p)}
+                            aria-label={`Open ${p.title} details`}
                         >
-                            {/* ── Card header (always visible) ── */}
                             <div className="project-card-header">
                                 <div className="project-title-row">
                                     <h3>{p.title}</h3>
-                                    <span
-                                        className="project-status"
-                                        style={{ "--status-color": s.color }}
-                                    >
+                                    <span className="project-status" style={{ "--status-color": s.color }}>
                                         {s.label}
                                     </span>
                                 </div>
@@ -115,53 +192,21 @@ function Projects() {
                             <p className="project-desc">{p.description}</p>
                             <span className="project-stack">{p.stack}</span>
 
-                            {/* Expand hint */}
                             <div className="project-expand-hint">
-                                <span>{isOpen ? "▲ collapse" : "▼ see more"}</span>
+                                <span>▼ click to expand</span>
                             </div>
-
-                            {/* ── Expanded panel ── */}
-                            <div className="project-expanded">
-                                <div className="project-expanded-inner">
-
-                                    {/* Screenshot */}
-                                    <div className="project-img-wrap">
-                                        <img
-                                            src={p.image}
-                                            alt={`${p.title} screenshot`}
-                                            className="project-img"
-                                            loading="lazy"
-                                            width="800"
-                                            height="420"
-                                        />
-                                        <div className="project-img-overlay">
-                                            <span>// screenshot placeholder</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Highlights */}
-                                    <div className="project-highlights">
-                                        <p className="project-highlights-label">what I built</p>
-                                        <ul>
-                                            {p.highlights.map((h, j) => (
-                                                <li key={j}>{h}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {/* Challenge */}
-                                    <div className="project-challenge">
-                                        <p className="project-challenge-label">biggest challenge</p>
-                                        <p>{p.challenge}</p>
-                                    </div>
-
-                                </div>
-                            </div>
-
                         </article>
                     );
                 })}
             </div>
+
+            {/* Modal */}
+            {selected && (
+                <ProjectModal
+                    project={selected}
+                    onClose={() => setSelected(null)}
+                />
+            )}
         </section>
     );
 }
