@@ -20,6 +20,9 @@ function Contact() {
                     <a href="https://linkedin.com/in/shaurya-saria009" target="_blank" rel="noreferrer">
                         LinkedIn
                     </a>
+                    <a href="/resume.pdf" download className="btn btn-primary">
+                        Download CV
+                    </a>
                 </div>
             </div>
         </section>
