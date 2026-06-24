@@ -765,13 +765,98 @@ main {
 }
 
 /* ─── FOOTER ─────────────────────────────────────────── */
-footer {
+.site-footer {
     border-top: 1px solid var(--line);
-    padding: 1.5rem 0;
-    text-align: center;
+    padding: 2rem 0 1.5rem;
+    margin-top: 4rem;
+}
+
+.footer-inner {
+    width: min(var(--max-width), calc(100% - 2rem));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.footer-brand {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.04em;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
     font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: color 0.15s;
+}
+
+.footer-nav a::before {
+    content: './';
+    color: var(--text-faint);
+}
+
+.footer-nav a:hover {
+    color: var(--green);
+}
+
+.footer-links {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.footer-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line-bright);
+    border-radius: 4px;
+    color: var(--text-dim);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.footer-links a:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: var(--green-faint);
+}
+
+.footer-copy {
+    width: min(var(--max-width), calc(100% - 2rem));
+    margin: 0 auto;
+    font-size: 0.75rem;
     color: var(--text-faint);
     letter-spacing: 0.06em;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+}
+
+@media (max-width: 600px) {
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .footer-nav {
+        gap: 1rem;
+    }
 }
 
 /* ─── PAGE LAYOUT ────────────────────────────────────── */
