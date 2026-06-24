@@ -1277,3 +1277,73 @@ footer {
         border-radius: 10px 10px 4px 4px;
     }
 }
+
+/* ─── USES PAGE ──────────────────────────────────────── */
+.uses-section {
+    padding: 0 0 6rem;
+}
+
+.uses-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.uses-group {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.75rem;
+}
+
+.uses-group-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dim);
+    margin-bottom: 1.25rem;
+}
+
+.uses-group-title::before {
+    content: '// ';
+    color: var(--text-faint);
+}
+
+.uses-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.uses-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.uses-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.uses-name::before {
+    content: '→ ';
+    color: var(--green-faint);
+}
+
+.uses-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    padding-left: 1.3rem;
+}
+
+@media (max-width: 700px) {
+    .uses-grid {
+        grid-template-columns: 1fr;
+    }
+}
