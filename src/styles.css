@@ -1347,3 +1347,43 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* ─── 404 ────────────────────────────────────────────── */
+.notfound-wrap {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.notfound-code {
+    font-size: clamp(5rem, 18vw, 10rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--green-faint);
+    letter-spacing: -0.05em;
+    text-shadow: 0 0 60px rgba(0, 255, 65, 0.15);
+}
+
+.notfound-terminal {
+    background: var(--bg-2);
+    border: 1px solid var(--line-bright);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text-dim);
+    text-align: left;
+    min-width: min(480px, 90vw);
+    white-space: pre;
+}
+
+.notfound-terminal .notfound-cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--green);
+}
