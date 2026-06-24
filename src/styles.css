@@ -355,6 +355,15 @@ main {
     font-weight: 800;
     color: var(--green);
     text-shadow: 0 0 40px rgba(0, 255, 65, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 0.08em;
+}
+
+.scramble-line {
+    display: block;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
 }
 
 .hero-title .dim {
@@ -1471,4 +1480,90 @@ main {
 .notfound-terminal .notfound-cursor {
     animation: blink 1s step-end infinite;
     color: var(--green);
+}
+
+/* ─── SCROLL INDICATOR ───────────────────────────────── */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 1;
+    opacity: 0;
+    animation: fade-in-up 0.6s ease 1.8s forwards;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.scroll-line {
+    width: 48px;
+    height: 1px;
+    background: var(--line-bright);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-dot {
+    position: absolute;
+    top: -2px;
+    left: -8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: slide-right 1.6s ease-in-out 1.8s infinite;
+}
+
+@keyframes slide-right {
+    0% {
+        left: -8px;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 52px;
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-dot {
+        animation: none;
+        left: 20px;
+        opacity: 1;
+    }
+
+    .scroll-indicator {
+        animation: none;
+        opacity: 1;
+    }
 }
