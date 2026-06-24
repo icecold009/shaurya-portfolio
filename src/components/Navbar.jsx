@@ -15,6 +15,8 @@ function Navbar() {
     const navLinks = [
         { to: "/projects", label: "projects" },
         { to: "/about", label: "about" },
+        { to: "/artwork", label: "artwork" },   // ← add this
+        { to: "/uses", label: "uses" },          // ← if not already there
         { to: "/contact", label: "contact" },
     ];
 

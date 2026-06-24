@@ -6,6 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import UsesPage from "./pages/UsesPage";
 import NotFound from "./pages/NotFound";
+import ArtworkPage from "./pages/ArtworkPage";
 
 function App() {
     return (
@@ -19,13 +20,14 @@ function App() {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/uses" element={<UsesPage />} />
                     <Route path="*" element={<NotFound />} />
+                    <Route path="/artwork" element={<ArtworkPage />} />
                 </Routes>
             </main>
             <footer className="site-footer">
                 <div className="footer-inner">
                     <span className="footer-brand">root@shaurya:~$</span>
                     <nav className="footer-nav">
-                        {["/", "/projects", "/about", "/uses", "/contact"].map((path) => (
+                        {["/", "/projects", "/about", "/artwork", "/uses", "/contact"].map((path) => (
                             <Link key={path} to={path}>
                                 {path === "/" ? "home" : path.slice(1)}
                             </Link>

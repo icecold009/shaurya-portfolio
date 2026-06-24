@@ -1566,3 +1566,72 @@ main {
         opacity: 1;
     }
 }
+
+/* ─── ARTWORK PAGE ───────────────────────────────────── */
+.artwork-section {
+    padding: 0 0 6rem;
+}
+
+.artwork-grid {
+    columns: 3 280px;
+    column-gap: 1.25rem;
+}
+
+.artwork-card {
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.artwork-card:hover {
+    border-color: var(--green-faint);
+    box-shadow: 0 8px 32px rgba(0, 255, 65, 0.07);
+    transform: translateY(-3px);
+}
+
+.artwork-img-wrap {
+    width: 100%;
+    overflow: hidden;
+}
+
+.artwork-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: saturate(0.85);
+    transition: filter 0.3s, transform 0.3s;
+}
+
+.artwork-card:hover .artwork-img {
+    filter: saturate(1.1);
+    transform: scale(1.02);
+}
+
+.artwork-caption {
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border-top: 1px solid var(--line);
+}
+
+.artwork-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.artwork-meta {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+}
+
+.artwork-meta::before {
+    content: '// ';
+    color: var(--text-faint);
+}
