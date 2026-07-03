@@ -1,0 +1,14 @@
+# Building a Shazam Clone with React + Supabase
+
+The hardest part wasn't the audio — it was the fingerprinting pipeline...
+
+## The Stack
+
+- React frontend with Web Audio API
+- Supabase for storing fingerprint hashes
+- Node.js backend for matching
+
+## What I Learned
+
+Audio processing in the browser is surprisingly capable. The `AnalyserNode`
+gives you raw frequency data that you can hash into a spectrogram fingerprint.

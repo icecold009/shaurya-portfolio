@@ -7,6 +7,7 @@ import ContactPage from "./pages/ContactPage";
 import UsesPage from "./pages/UsesPage";
 import NotFound from "./pages/NotFound";
 import ArtworkPage from "./pages/ArtworkPage";
+import Blog from './components/Blog';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/projects" element={<ProjectsPage />} />
                     <Route path="/about" element={<AboutPage />} />
+                    <Route path="/blog" element={<Blog />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/uses" element={<UsesPage />} />
                     <Route path="*" element={<NotFound />} />
@@ -27,7 +29,7 @@ function App() {
                 <div className="footer-inner">
                     <span className="footer-brand">root@shaurya:~$</span>
                     <nav className="footer-nav">
-                        {["/", "/projects", "/about", "/artwork", "/uses", "/contact"].map((path) => (
+                        {["/", "/projects", "/about", "/artwork", "/uses", "/blog", "/contact"].map((path) => (
                             <Link key={path} to={path}>
                                 {path === "/" ? "home" : path.slice(1)}
                             </Link>
