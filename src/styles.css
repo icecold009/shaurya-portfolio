@@ -1716,3 +1716,12 @@ main {
         grid-template-columns: 1fr;
     }
 }
+
+.project-card {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 200, 50, 0.08);
+}
