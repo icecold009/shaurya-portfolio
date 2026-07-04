@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import { readdirSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
-const inputDir = './public/artwork';
+const inputDir = './public/artwork/originals';
 const outputDir = './public/artwork/compressed';
 mkdirSync(outputDir, { recursive: true });
 
