@@ -2,14 +2,19 @@ import sharp from 'sharp';
 import { readdirSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
-const inputDir = './public/artwork/originals';
-const outputDir = './public/artwork/compressed';
-mkdirSync(outputDir, { recursive: true });
+// --- Artwork (already done, keep for reference) ---
+// const artInput = './public/artwork/originals';
+// const artOutput = './public/artwork/compressed';
 
-readdirSync(inputDir).forEach(file => {
+// --- Certificates ---
+const certInput = './public/certificates/originals';
+const certOutput = './public/certificates/images';
+mkdirSync(certOutput, { recursive: true });
+
+readdirSync(certInput).forEach(file => {
     if (!file.match(/\.(jpg|jpeg|png)$/i)) return;
-    sharp(join(inputDir, file))
-        .resize(1400)
-        .webp({ quality: 82 })
-        .toFile(join(outputDir, file.replace(/\.(jpg|jpeg|png)$/i, '.webp')));
+    sharp(join(certInput, file))
+        .resize(1200)
+        .webp({ quality: 85 })
+        .toFile(join(certOutput, file.replace(/\.(jpg|jpeg|png)$/i, '.webp')));
 });
