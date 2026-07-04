@@ -1,1 +1,4 @@
 node_modules/
+
+# High-res originals — local backup only, never push
+public/artwork/originals/*
