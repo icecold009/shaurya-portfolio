@@ -31,7 +31,7 @@ function App() {
                 <div className="footer-inner">
                     <span className="footer-brand">root@shaurya:~$</span>
                     <nav className="footer-nav">
-                        {["/", "/projects", "/about", "/artwork", "/uses", "/blog", "/contact"].map((path) => (
+                        {["/", "/projects", "/about", "/artwork", "/certificates", "/uses", "/blog", "/contact"].map((path) => (
                             <Link key={path} to={path}>
                                 {path === "/" ? "home" : path.slice(1)}
                             </Link>
