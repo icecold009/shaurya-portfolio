@@ -8,6 +8,7 @@ import UsesPage from "./pages/UsesPage";
 import NotFound from "./pages/NotFound";
 import ArtworkPage from "./pages/ArtworkPage";
 import Blog from './components/Blog';
+import CertificatesPage from "./pages/CertificatesPage";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/uses" element={<UsesPage />} />
                     <Route path="*" element={<NotFound />} />
                     <Route path="/artwork" element={<ArtworkPage />} />
+                    <Route path="/certificates" element={<CertificatesPage />} />
                 </Routes>
             </main>
             <footer className="site-footer">
