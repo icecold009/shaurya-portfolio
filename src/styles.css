@@ -1913,3 +1913,55 @@ main {
         grid-column: 1 / -1;
     }
 }
+
+/* ─── CERTIFICATES PAGE ──────────────────────────────── */
+.cert-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.cert-section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 80px;
+    /* offset for sticky navbar */
+}
+
+.cert-section-header {
+    border-bottom: 1px solid var(--line-bright);
+    padding-bottom: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.cert-org-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1.25rem;
+}
+
+.cert-org-label::before {
+    content: '> ';
+    color: var(--green-faint);
+}
+
+.cert-group {
+    margin-bottom: 2.5rem;
+}
+
+.cert-pdf-link {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--green-dim);
+    transition: color 0.15s;
+}
+
+.cert-pdf-link:hover {
+    color: var(--green);
+}
