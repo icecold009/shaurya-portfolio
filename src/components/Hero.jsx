@@ -6,38 +6,36 @@ const CHARS = "01アイウエオABCDEF!@#$%";
 
 function useScramble(lines, containerRef) {
     useEffect(() => {
-        const el = containerRef.current;
-        if (!el) return;
-
-        let cancelled = false;
-        const spans = el.querySelectorAll(".scramble-line");
-
-        async function scrambleLine(span, finalText, delay) {
-            await new Promise((r) => setTimeout(r, delay));
-            if (cancelled) return;
-            const len = finalText.length;
-            const iterations = 14;
-            for (let i = 0; i <= iterations; i++) {
-                if (cancelled) return;
-                const revealed = Math.floor((i / iterations) * len);
-                let display = "";
-                for (let c = 0; c < len; c++) {
-                    if (finalText[c] === " ") { display += " "; continue; }
-                    display += c < revealed
-                        ? finalText[c]
-                        : CHARS[Math.floor(Math.random() * CHARS.length)];
-                }
-                span.textContent = display;
-                await new Promise((r) => setTimeout(r, 38));
+        const canvas = document.getElementById("matrix-canvas");
+        const ctx = canvas.getContext("2d");
+        let animId;
+        const resize = () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            cols = Math.floor(canvas.width / fontSize);
+            drops = Array(cols).fill(1);          // ← fix: reset drops on resize
+        };
+        const fontSize = 14;
+        const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノ";
+        let cols = Math.floor(canvas.width / fontSize);
+        let drops = Array(cols).fill(1);
+        resize();
+        window.addEventListener("resize", resize);
+        const draw = () => {
+            ctx.fillStyle = "rgba(6, 10, 6, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff41";
+            ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+            for (let i = 0; i < cols; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
             }
-            span.textContent = finalText;
-        }
-
-        lines.forEach((text, i) => {
-            scrambleLine(spans[i], text, i * 320);
-        });
-
-        return () => { cancelled = true; };
+            animId = requestAnimationFrame(draw);
+        };
+        draw();
+        return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
     }, []);
 }
 
