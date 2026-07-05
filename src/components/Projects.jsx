@@ -69,11 +69,9 @@ const statusStyle = {
 function ProjectModal({ project: p, onClose }) {
     const s = statusStyle[p.status];
 
-    // Close on Escape key
     useEffect(() => {
         const handler = (e) => { if (e.key === "Escape") onClose(); };
         window.addEventListener("keydown", handler);
-        // Lock body scroll while modal is open
         document.body.style.overflow = "hidden";
         return () => {
             window.removeEventListener("keydown", handler);
@@ -93,10 +91,13 @@ function ProjectModal({ project: p, onClose }) {
                 className="modal-card"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Close button */}
-                <button className="modal-close" onClick={onClose} aria-label="Close">
-                    ✕
-                </button>
+                {/* Sticky top-bar with title + close — stays visible while scrolling */}
+                <div className="modal-topbar">
+                    <span className="modal-topbar-title">{p.title}</span>
+                    <button className="modal-close" onClick={onClose} aria-label="Close">
+                        ✕
+                    </button>
+                </div>
 
                 {/* Screenshot */}
                 <div className="modal-img-wrap">
@@ -145,6 +146,11 @@ function ProjectModal({ project: p, onClose }) {
                     <p className="modal-section-label">biggest challenge</p>
                     <p>{p.challenge}</p>
                 </div>
+
+                {/* Bottom close — always reachable after scrolling */}
+                <button className="modal-close-bottom" onClick={onClose} aria-label="Close modal">
+                    [ close ]
+                </button>
 
             </article>
         </div>
