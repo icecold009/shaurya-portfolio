@@ -8,7 +8,7 @@ function Contact() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('sending');
-        const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        const res = await fetch('https://formspree.io/f/mwvdyllv', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form),
