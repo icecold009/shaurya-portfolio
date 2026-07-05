@@ -17,6 +17,7 @@ function Navbar() {
         { to: "/about", label: "about" },
         { to: "/artwork", label: "artwork" },
         { to: "/certificates", label: "certificates" },
+        { to: "/achievements", label: "achievements" },
         { to: "/uses", label: "uses" },
         { to: "/blog", label: "blog" },
         { to: "/contact", label: "contact" },
