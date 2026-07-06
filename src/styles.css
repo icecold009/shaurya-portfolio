@@ -2435,3 +2435,45 @@ main {
         padding: 0.6rem 0;
     }
 }
+
+/* ─── GITHUB HEATMAP ─────────────────────────────────── */
+.about-heatmap {
+    grid-column: 1 / -1;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.about-heatmap-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dim);
+    margin: 0;
+}
+
+.about-heatmap-frame {
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--line-bright);
+}
+
+.about-heatmap-meta {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    margin: 0;
+}
+
+.about-heatmap-meta::before {
+    content: '$ user: ';
+    color: var(--text-faint);
+    opacity: 0.6;
+}
