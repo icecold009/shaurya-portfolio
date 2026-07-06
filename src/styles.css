@@ -14,7 +14,7 @@
     --green: #00ff41;
     --green-dim: #00c832;
     --green-faint: #004d14;
-    --max-width: 1100px;
+    --max-width: 1260px;
     --mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
@@ -52,7 +52,7 @@ body {
     font-family: var(--mono);
     background: var(--bg);
     color: var(--text);
-    font-size: 1rem;
+    font-size: 1.0625rem;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -112,7 +112,7 @@ main {
 }
 
 .brand {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--green);
     letter-spacing: 0.02em;
@@ -135,7 +135,7 @@ main {
 }
 
 .nav-links a {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-dim);
     letter-spacing: 0.05em;
@@ -274,7 +274,7 @@ main {
 
 .mobile-menu a {
     padding: 1rem 1.5rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-dim);
     border-bottom: 1px solid var(--line);
@@ -319,7 +319,7 @@ main {
 
 .hero-kicker {
     margin: 0 0 1.5rem;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     color: var(--green);
@@ -372,7 +372,7 @@ main {
 .hero-description {
     margin: 2rem 0 0;
     max-width: 46rem;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     line-height: 1.9;
     color: var(--text-dim);
 }
@@ -397,7 +397,7 @@ main {
     padding: 0.75rem 1.6rem;
     border-radius: 4px;
     border: 1px solid transparent;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 700;
     font-family: var(--mono);
     letter-spacing: 0.06em;
@@ -466,7 +466,7 @@ main {
 
 .section-label {
     margin: 0 0 0.6rem;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -565,7 +565,7 @@ main {
 }
 
 .project-card p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.85;
     color: var(--text-dim);
     flex: 1;
@@ -626,7 +626,7 @@ main {
 }
 
 .about-copy p {
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 2;
     color: var(--text-dim);
 }
@@ -683,7 +683,7 @@ main {
     border-radius: 6px;
     border: 1px solid var(--line-bright);
     background: var(--bg-2);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-dim);
     letter-spacing: 0.03em;
@@ -727,7 +727,7 @@ main {
 }
 
 .contact-text {
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 2;
     color: var(--text-dim);
     max-width: 38rem;
@@ -1094,7 +1094,7 @@ main {
 }
 
 .tl-title {
-    font-size: 0.97rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
     flex: 1;
@@ -1775,7 +1775,7 @@ main {
 }
 
 .blog-title {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text);
     grid-column: 3;
@@ -2020,7 +2020,7 @@ main {
 }
 
 .achievement-title {
-    font-size: 0.97rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
 }
