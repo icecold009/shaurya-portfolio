@@ -105,6 +105,27 @@ function About() {
                     </ul>
                 </div>
 
+                {/* ── GitHub Activity Heatmap ── */}
+                <div className="about-heatmap">
+                    <p className="about-heatmap-label">// github_activity</p>
+                    <div className="about-heatmap-frame">
+                        <img
+                            src="https://ghchart.rshah.org/00ff41/icecold009"
+                            alt="GitHub contribution activity for icecold009"
+                            width="100%"
+                            height="auto"
+                            loading="lazy"
+                            style={{
+                                display: 'block',
+                                width: '100%',
+                                mixBlendMode: 'screen',
+                                filter: 'hue-rotate(160deg) saturate(1.4) brightness(0.9)',
+                            }}
+                        />
+                    </div>
+                    <p className="about-heatmap-meta">icecold009 · contributions past year</p>
+                </div>
+
             </div>
         </section>
     );
