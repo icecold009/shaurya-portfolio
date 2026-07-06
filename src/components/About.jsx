@@ -126,6 +126,25 @@ function About() {
                     <p className="about-heatmap-meta">icecold009 · contributions past year</p>
                 </div>
 
+                {/* ── Location Map ── */}
+                <div className="about-map-card">
+                    <p className="about-heatmap-label">// location</p>
+                    <div className="location-card">
+                        <img
+                            src="/map-bengaluru.png"
+                            alt="Map of Bengaluru, Karnataka"
+                            width="600"
+                            height="900"
+                            loading="lazy"
+                            className="location-map-img"
+                        />
+                    </div>
+                    <p className="about-heatmap-meta">
+                        Bengaluru, Karnataka, IN —{' '}
+                        <code className="location-coords">12.9716° N, 77.5946° E</code>
+                    </p>
+                </div>
+
             </div>
         </section>
     );

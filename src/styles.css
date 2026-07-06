@@ -668,6 +668,43 @@ main {
     color: var(--green-faint);
 }
 
+/* ─── LOCATION MAP ───────────────────────────────── */
+.about-map-card {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+}
+
+.location-card {
+    border: 1px solid var(--line-bright);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.5rem 0 0.6rem;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+.location-map-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    filter: brightness(0.85) saturate(0.4) hue-rotate(80deg);
+    transition: filter 0.3s ease;
+}
+
+.location-card:hover .location-map-img {
+    filter: brightness(0.95) saturate(0.6) hue-rotate(80deg);
+}
+
+.location-coords {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    background: none;
+    letter-spacing: 0.04em;
+}
+
 /* ─── SKILLS ─────────────────────────────────────────── */
 .skills-grid {
     display: flex;
