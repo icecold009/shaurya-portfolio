@@ -1,6 +1,5 @@
 import About from "../components/About";
 import Skills from "../components/skills";
-import Timeline from "../components/Timeline";
 
 export default function AboutPage() {
     return (
