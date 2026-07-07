@@ -17,7 +17,6 @@ function Navbar() {
         setMoreOpen(false);
     }, [location]);
 
-    // Close "more" dropdown when clicking outside
     useEffect(() => {
         const handler = (e) => {
             if (moreRef.current && !moreRef.current.contains(e.target)) {
@@ -31,6 +30,7 @@ function Navbar() {
     const primaryLinks = [
         { to: "/projects", label: "projects" },
         { to: "/about", label: "about" },
+        { to: "/timeline", label: "timeline" },
         { to: "/certificates", label: "certificates" },
         { to: "/achievements", label: "achievements" },
         { to: "/contact", label: "contact" },
@@ -44,7 +44,7 @@ function Navbar() {
 
     const allLinks = [...primaryLinks, ...secondaryLinks];
     const isActive = (path) => location.pathname === path;
-    const anySecondaryActive = secondaryLinks.some(l => isActive(l.to));
+    const anySecondaryActive = secondaryLinks.some((l) => isActive(l.to));
 
     return (
         <header className="site-header">
@@ -60,7 +60,6 @@ function Navbar() {
                         </Link>
                     ))}
 
-                    {/* "More" dropdown */}
                     <div
                         className={`nav-more ${moreOpen ? "nav-more--open" : ""} ${anySecondaryActive ? "nav-active" : ""}`}
                         ref={moreRef}
@@ -73,6 +72,7 @@ function Navbar() {
                         >
                             more {moreOpen ? "↑" : "↓"}
                         </button>
+
                         <div className="nav-more-dropdown" role="menu">
                             {secondaryLinks.map(({ to, label }) => (
                                 <Link
@@ -95,24 +95,37 @@ function Navbar() {
                         aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
                     >
                         {dark ? (
-                            /* Sun icon — switch TO light */
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" strokeWidth="2"
-                                strokeLinecap="round" strokeLinejoin="round"
-                                aria-hidden="true">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                            >
                                 <circle cx="12" cy="12" r="4" />
                                 <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
                             </svg>
                         ) : (
-                            /* Moon icon — switch TO dark */
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" strokeWidth="2"
-                                strokeLinecap="round" strokeLinejoin="round"
-                                aria-hidden="true">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                            >
                                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                             </svg>
                         )}
                     </button>
+
                     <button
                         className="hamburger"
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -126,10 +139,11 @@ function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile menu — all links flat */}
             <div className={`mobile-menu ${menuOpen ? "mobile-menu--open" : ""}`}>
                 {allLinks.map(({ to, label }) => (
-                    <Link key={to} to={to}>{label}</Link>
+                    <Link key={to} to={to}>
+                        {label}
+                    </Link>
                 ))}
             </div>
         </header>
