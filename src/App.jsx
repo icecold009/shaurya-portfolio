@@ -10,7 +10,6 @@ import ArtworkPage from "./pages/ArtworkPage";
 import Blog from "./components/Blog";
 import CertificatesPage from "./pages/CertificatesPage";
 import AchievementsPage from "./pages/AchievementsPage";
-import TimelinePage from "./pages/TimelinePage";
 
 function App() {
     return (
@@ -21,7 +20,6 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/projects" element={<ProjectsPage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/timeline" element={<TimelinePage />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/uses" element={<UsesPage />} />
