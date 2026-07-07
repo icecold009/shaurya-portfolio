@@ -5,3 +5,5 @@ public/artwork/originals/*
 
 # Certificate original images — local backup only
 public/certificates/originals/*
+
+/dist
