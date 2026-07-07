@@ -9,7 +9,6 @@ export default function AboutPage() {
             </div>
             <About />
             <Skills />
-            <Timeline />
         </div>
     );
 }
