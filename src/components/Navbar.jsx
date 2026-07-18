@@ -30,7 +30,6 @@ function Navbar() {
     const primaryLinks = [
         { to: "/projects", label: "projects" },
         { to: "/about", label: "about" },
-        { to: "/timeline", label: "timeline" },
         { to: "/certificates", label: "certificates" },
         { to: "/achievements", label: "achievements" },
         { to: "/contact", label: "contact" },
