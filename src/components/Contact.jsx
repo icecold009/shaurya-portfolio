@@ -56,7 +56,7 @@ function Contact() {
                         <a href="mailto:sariashaurya09@gmail.com">✉ Email</a>
                         <a href="https://github.com/icecold009" target="_blank" rel="noreferrer">⌥ GitHub</a>
                         <a href="https://linkedin.com/in/shaurya-saria009" target="_blank" rel="noreferrer">◈ LinkedIn</a>
-                        <a href="/resume.pdf" download className="btn btn-primary">↓ Resume</a>
+                        <a href="/resume.pdf" download className="btn btn-ghost">↓ Resume</a>
                     </div>
                 </div>
             </div>

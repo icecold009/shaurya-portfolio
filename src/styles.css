@@ -10,7 +10,7 @@
     --line-bright: #2a4a2a;
     --text: #e1f5e1;
     --text-dim: #9db89d;
-    --text-faint: #5f765f;
+    --text-faint: #6d8a6d;
     --green: #00ff41;
     --green-dim: #00c832;
     --green-faint: #004d14;
@@ -1979,9 +1979,14 @@ main {
         grid-template-rows: auto auto auto;
     }
 
-    .blog-title,
+    .blog-title {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
     .blog-excerpt {
         grid-column: 1 / -1;
+        grid-row: 3;
     }
 }
 
