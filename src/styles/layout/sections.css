@@ -1,0 +1,9 @@
+.home-sections {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(5rem, 9vw, 9rem);
+}
+
+section {
+    scroll-margin-top: 100px;
+}

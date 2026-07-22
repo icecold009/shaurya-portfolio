@@ -7,3 +7,5 @@ public/artwork/originals/*
 public/certificates/originals/*
 
 /dist
+
+src/styles.backup.css
