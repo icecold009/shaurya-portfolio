@@ -251,6 +251,12 @@ function ProjectCaseStudy({ project }) {
         <motion.article
             className={`case-study case-study-${project.accent}`}
             variants={shouldReduceMotion ? undefined : REVEAL}
+            initial={shouldReduceMotion ? undefined : "hidden"}
+            whileInView={shouldReduceMotion ? undefined : "visible"}
+            viewport={{
+                once: true,
+                amount: 0.08,
+            }}
         >
             <div className="case-study-meta">
                 <span>{project.number}</span>
@@ -371,26 +377,14 @@ export default function Projects() {
                 </motion.p>
             </motion.div>
 
-            <motion.div
-                className="case-study-list"
-                variants={
-                    shouldReduceMotion
-                        ? undefined
-                        : REVEAL_CONTAINER
-                }
-                initial={shouldReduceMotion ? undefined : "hidden"}
-                whileInView={
-                    shouldReduceMotion ? undefined : "visible"
-                }
-                viewport={REVEAL_VIEWPORT}
-            >
+            <div className="case-study-list">
                 {projects.map((project) => (
                     <ProjectCaseStudy
                         project={project}
                         key={project.title}
                     />
                 ))}
-            </motion.div>
+            </div>
         </section>
     );
 }
