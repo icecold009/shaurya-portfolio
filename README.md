@@ -34,24 +34,6 @@ https://shaurya-portfolio-sooty.vercel.app/
 - CSS
 - Vercel
 
-## Running Locally
-
-```bash
-git clone https://github.com/icecold009/shaurya-portfolio.git
-cd shaurya-portfolio
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173` in your browser.
-
-## Production Build
-
-```bash
-npm run build
-npm run preview
-```
-
 ## Project Structure
 
 ```text
