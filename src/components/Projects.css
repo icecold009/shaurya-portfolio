@@ -1053,3 +1053,131 @@
         transition: none;
     }
 }
+
+/* =========================================================
+   FINAL PROJECT PAGE AND RESPONSIVE CLEANUP
+   ========================================================= */
+
+.projects-page {
+    width: 100vw;
+    min-height: 100vh;
+    margin-left: calc(50% - 50vw);
+    padding-inline: clamp(1rem, 4vw, 4rem);
+    overflow: clip;
+    background: var(--bg);
+}
+
+.projects-page .selected-work {
+    padding-top: clamp(9rem, 14vw, 13rem);
+}
+
+.projects-page .case-study:first-child {
+    padding-top: clamp(4.5rem, 7vw, 7rem);
+}
+
+.case-study-heading h3,
+.case-study-introduction,
+.case-study-detail p {
+    overflow-wrap: anywhere;
+}
+
+.case-study-mockup img,
+.case-study-mockup svg {
+    max-width: 100%;
+}
+
+@media (max-width: 980px) {
+    .selected-work-header {
+        gap: 1.5rem;
+    }
+
+    .case-study {
+        padding-block: clamp(4.5rem, 8vw, 7rem);
+    }
+
+    .case-study-details {
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .projects-page {
+        padding-inline: 1rem;
+    }
+
+    .projects-page .selected-work {
+        padding-top: 8rem;
+    }
+
+    .selected-work-header {
+        padding-bottom: 3.5rem;
+    }
+
+    .selected-work-intro {
+        font-size: 1rem;
+    }
+
+    .case-study-meta {
+        grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+    }
+
+    .case-study-meta span:nth-child(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .case-study-heading {
+        margin-bottom: 2.5rem;
+    }
+
+    .case-study-mockup {
+        min-height: 28rem;
+    }
+
+    .case-study-details {
+        margin-top: 2.75rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .projects-page {
+        padding-inline: 0.75rem;
+    }
+
+    .projects-page .selected-work {
+        padding-top: 7rem;
+    }
+
+    .selected-work {
+        padding-bottom: 5rem;
+    }
+
+    .selected-work-header h2 {
+        max-width: none;
+    }
+
+    .case-study-meta {
+        grid-template-columns: 2rem minmax(0, 1fr);
+    }
+
+    .case-study-meta span:last-child {
+        display: none;
+    }
+
+    .case-study-heading>a {
+        font-size: 0.78rem;
+    }
+
+    .case-study-mockup {
+        min-height: 25rem;
+    }
+
+    .case-study-introduction {
+        font-size: 1.25rem;
+    }
+
+    .case-study-footer {
+        margin-top: 3rem;
+    }
+}
