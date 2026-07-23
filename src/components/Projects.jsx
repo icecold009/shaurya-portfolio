@@ -8,6 +8,8 @@ import {
     REVEAL_VIEWPORT,
 } from "../lib/motion";
 
+import "./Projects.css";
+
 const projects = [
     {
         number: "01",
