@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
@@ -8,17 +8,33 @@
     --surface-2: #131d13;
     --line: #1e2e1e;
     --line-bright: #2a4a2a;
+
     --text: #e1f5e1;
     --text-dim: #9db89d;
     --text-faint: #6d8a6d;
+
     --green: #00ff41;
     --green-dim: #00c832;
     --green-faint: #004d14;
+
     --max-width: 1260px;
-    --mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    --sans:
+        "Inter",
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    --mono:
+        "JetBrains Mono",
+        "Courier New",
+        monospace;
+
+    --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* LIGHT MODE — triggered by theme toggle */
+/* LIGHT MODE */
 [data-theme="light"] {
     --bg: #f0f4f0;
     --bg-2: #e8ede8;
@@ -26,9 +42,11 @@
     --surface-2: #d0dbd0;
     --line: #b8ccb8;
     --line-bright: #8aaa8a;
+
     --text: #102010;
     --text-dim: #284028;
     --text-faint: #5d745d;
+
     --green: #006622;
     --green-dim: #008833;
     --green-faint: #c8e6c8;
@@ -44,19 +62,30 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scroll-padding-top: 72px;
 }
 
 body {
-    font-family: var(--mono);
+    min-width: 320px;
+    overflow-x: hidden;
+
     background: var(--bg);
     color: var(--text);
-    font-size: 1.0625rem;
-    line-height: 1.7;
+
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.65;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    transition: background 0.3s ease, color 0.3s ease;
+    -moz-osx-font-smoothing: grayscale;
+
+    transition:
+        background 300ms var(--ease-editorial),
+        color 300ms var(--ease-editorial);
 }
 
 a {
@@ -64,21 +93,21 @@ a {
     text-decoration: none;
 }
 
-/* ─── SCANLINE OVERLAY ───────────────────────────────── */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0.09;
-    pointer-events: none;
-    z-index: 9999;
+button,
+input,
+textarea,
+select {
+    font: inherit;
 }
 
-[data-theme="light"] body::before {
-    display: none;
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    background: color-mix(in srgb, var(--green) 30%, transparent);
+    color: var(--text);
 }
 
 /* ─── LAYOUT ─────────────────────────────────────────── */
