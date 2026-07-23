@@ -1,39 +1,38 @@
-# shaurya-portfolio
+# Shaurya Saria Portfolio
 
-Personal portfolio of **Shaurya Saria** — student developer from Bengaluru building full-stack apps, AI-powered tools, and music recognition systems.
+Personal portfolio website for Shaurya Saria, a student developer from Bengaluru building full-stack applications, AI tools and digital experiences.
 
-🌐 **Live site:** coming soon
+## Live Website
 
----
+https://shaurya-portfolio-sooty.vercel.app/
 
-## Tech Stack
+## Featured Projects
 
-| Layer | Technology |
-|---|---|
-| Framework | React 18 + Vite 5 |
-| Routing | React Router v7 |
-| Blog / MDX | `@mdx-js/react` + `@mdx-js/rollup` |
-| Styling | Plain CSS (custom terminal aesthetic, dark/light mode) |
-| Contact form | Formspree |
-| Deployment | Vercel |
+- StadiumPulse AI
+- Music Recognition System
+- Past Paper AI
 
----
+## Features
 
-## Pages
+- Editorial project case studies
+- Smooth scrolling with Lenis
+- Page and scroll animations
+- Dark and light themes
+- Responsive navigation
+- MDX-powered blog
+- Dedicated projects, achievements, certificates, artwork and contact pages
 
-| Route | Description |
-|---|---|
-| `/` | Hero with matrix canvas, projects, skills, timeline, contact |
-| `/projects` | Full project cards with modal detail view |
-| `/about` | Bio, education, GitHub heatmap, Bengaluru map |
-| `/achievements` | Academic grades, olympiads, competitions, leadership |
-| `/certificates` | Certificate thumbnail gallery |
-| `/blog` | MDX-powered technical posts |
-| `/uses` | Tools and setup |
-| `/artwork` | Creative work |
-| `/contact` | Contact form + links |
+## Built With
 
----
+- React
+- Vite
+- React Router
+- Framer Motion
+- Lenis
+- Lucide React
+- MDX
+- CSS
+- Vercel
 
 ## Running Locally
 
@@ -44,35 +43,36 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`.
+Open `http://localhost:5173` in your browser.
 
-To build for production:
+## Production Build
 
 ```bash
 npm run build
 npm run preview
 ```
 
----
-
 ## Project Structure
-├── public/
-│ ├── resume.pdf # CV download
-│ ├── favicon.svg
-│ ├── map-bengaluru.png
-│ ├── certificates/ # Certificate images
-│ └── artwork/ # Artwork images
-├── src/
-│ ├── components/ # Reusable components (Hero, Navbar, Projects…)
-│ ├── pages/ # Route-level page components
-│ ├── posts/ # MDX blog posts
-│ ├── App.jsx # Root layout + routes
-│ ├── main.jsx
-│ └── styles.css # Global styles + CSS variables
-├── index.html
-├── vite.config.js
-└── package.json
+
+```text
+public/
+src/
+├── components/
+├── lib/
+├── pages/
+├── posts/
+├── App.jsx
+├── main.jsx
+└── styles.css
+```
+
+## Contact
+
+- GitHub: https://github.com/icecold009
+- Email: sariashaurya09@gmail.com
 
 ## License
 
-All rights reserved © 2026 Shaurya Saria.
+All rights reserved.
+
+Copyright 2026 Shaurya Saria.
