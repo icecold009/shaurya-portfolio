@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     BrowserRouter,
     Route,
@@ -9,6 +10,7 @@ import {
     motion,
     useReducedMotion,
 } from "framer-motion";
+import { useLenis } from "lenis/react";
 
 import Navbar from "./components/Navbar";
 import Blog from "./components/Blog";
@@ -25,6 +27,29 @@ import CertificatesPage from "./pages/CertificatesPage";
 import AchievementsPage from "./pages/AchievementsPage";
 
 import { EDITORIAL_EASE } from "./lib/motion";
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    const lenis = useLenis();
+
+    useEffect(() => {
+        if (lenis) {
+            lenis.scrollTo(0, {
+                immediate: true,
+            });
+
+            return;
+        }
+
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "auto",
+        });
+    }, [pathname, lenis]);
+
+    return null;
+}
 
 function AnimatedRoutes() {
     const location = useLocation();
@@ -107,6 +132,8 @@ function AnimatedRoutes() {
 function App() {
     return (
         <BrowserRouter>
+            <ScrollToTop />
+
             <Navbar />
 
             <main>
