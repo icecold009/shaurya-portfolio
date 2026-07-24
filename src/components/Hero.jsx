@@ -27,7 +27,10 @@ export default function Hero() {
             id="home"
             aria-labelledby="editorial-hero-title"
         >
-            <div className="editorial-hero-background" aria-hidden="true">
+            <div
+                className="editorial-hero-background"
+                aria-hidden="true"
+            >
                 <div className="editorial-hero-grid" />
                 <div className="editorial-hero-glow" />
             </div>
@@ -38,7 +41,11 @@ export default function Hero() {
             >
                 <motion.div
                     className="editorial-hero-topline"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
                     <span>Shaurya Saria</span>
                     <span>Bengaluru, India</span>
@@ -47,15 +54,24 @@ export default function Hero() {
 
                 <motion.p
                     className="editorial-hero-eyebrow"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
-                    Full-stack development · AI products · Interaction design
+                    Full-stack development · AI products ·
+                    Interaction design
                 </motion.p>
 
                 <motion.h1
                     id="editorial-hero-title"
                     className="editorial-hero-title"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
                     I design and build
                     <span> digital products</span>
@@ -64,18 +80,21 @@ export default function Hero() {
 
                 <motion.div
                     className="editorial-hero-bottom"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
                     <p className="editorial-hero-description">
-                        I build full-stack applications, AI-powered tools and
-                        thoughtful web experiences with a focus on clarity,
+                        I build full-stack applications,
+                        AI-powered tools and thoughtful web
+                        experiences with a focus on clarity,
                         performance and useful interaction.
                     </p>
 
                     <div className="editorial-hero-actions">
-                        <motion.a
-                            href="#selected-work"
-                            className="editorial-hero-primary"
+                        <motion.div
                             whileHover={
                                 shouldReduceMotion
                                     ? undefined
@@ -88,28 +107,43 @@ export default function Hero() {
                                     }
                             }
                         >
-                            View selected work
-                            <ArrowDownRight size={18} aria-hidden="true" />
-                        </motion.a>
+                            <Link
+                                to="/projects"
+                                className="editorial-hero-primary"
+                            >
+                                View selected work
+                                <ArrowDownRight
+                                    size={18}
+                                    aria-hidden="true"
+                                />
+                            </Link>
+                        </motion.div>
 
                         <Link
                             to="/contact"
                             className="editorial-hero-secondary"
                         >
                             Contact me
-                            <ArrowUpRight size={17} aria-hidden="true" />
+                            <ArrowUpRight
+                                size={17}
+                                aria-hidden="true"
+                            />
                         </Link>
                     </div>
                 </motion.div>
 
                 <motion.div
                     className="editorial-hero-index"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                     aria-hidden="true"
                 >
-                    <span>Selected work</span>
+                    <span>Portfolio</span>
                     <span>2024–2026</span>
-                    <span>Scroll to explore</span>
+                    <span>Explore the site</span>
                 </motion.div>
             </motion.div>
         </section>
