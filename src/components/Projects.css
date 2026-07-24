@@ -251,7 +251,7 @@
 
 .stadium-sidebar span.active {
     background: var(--green);
-    box-shadow: 0 0 1.2rem rgba(0, 255, 65, 0.34);
+    box-shadow: 0 0 1.2rem rgba(var(--accent-rgb), 0.34);
 }
 
 .stadium-dashboard-content {
@@ -295,9 +295,9 @@
 
 .stadium-live-status {
     padding: 0.45rem 0.7rem;
-    border: 1px solid rgba(0, 255, 65, 0.28);
+    border: 1px solid rgba(var(--accent-rgb), 0.28);
     border-radius: 999px;
-    background: rgba(0, 255, 65, 0.07);
+    background: rgba(var(--accent-rgb), 0.07);
     color: #5cff82;
     font-family: var(--mono);
     font-size: 0.6rem;
@@ -386,7 +386,7 @@
 }
 
 .stadium-chart-area {
-    fill: rgba(0, 255, 65, 0.07);
+    fill: rgba(var(--accent-rgb), 0.07);
 }
 
 .stadium-chart-line {
@@ -394,7 +394,7 @@
     stroke: #39ff6d;
     stroke-width: 3;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.28));
+    filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.28));
 }
 
 .stadium-alert {
@@ -430,7 +430,7 @@
     margin-top: 1.2rem;
     padding: 0.45rem 0.6rem;
     border-radius: 0.45rem;
-    background: rgba(0, 255, 65, 0.08);
+    background: rgba(var(--accent-rgb), 0.08);
     color: #58ff80;
     font-family: var(--mono);
     font-size: 0.54rem;
