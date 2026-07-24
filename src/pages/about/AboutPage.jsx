@@ -10,7 +10,7 @@ import {
     REVEAL,
     REVEAL_CONTAINER,
     REVEAL_VIEWPORT,
-} from "../lib/motion";
+} from "../../lib/motion";
 
 import "./AboutPage.css";
 
