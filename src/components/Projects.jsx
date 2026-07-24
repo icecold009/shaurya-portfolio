@@ -61,10 +61,40 @@ const projects = [
     },
 ];
 
-function ProjectVisual({ type, title }) {
+function ProjectVisual({ type, shouldReduceMotion }) {
+    const visualMotionProps = shouldReduceMotion
+        ? {}
+        : {
+            initial: {
+                opacity: 0,
+                scale: 0.985,
+            },
+            whileInView: {
+                opacity: 1,
+                scale: 1,
+            },
+            whileHover: {
+                scale: 1.018,
+            },
+            viewport: {
+                once: true,
+                amount: 0.25,
+            },
+            transition: {
+                duration: 0.7,
+                ease: EDITORIAL_EASE,
+            },
+        };
+
     if (type === "stadium") {
         return (
-            <div className="case-study-mockup case-study-mockup-stadium">
+            <motion.div
+                className="case-study-mockup case-study-mockup-stadium"
+                style={{
+                    transformOrigin: "center center",
+                }}
+                {...visualMotionProps}
+            >
                 <div className="mockup-window-bar">
                     <span />
                     <span />
@@ -129,6 +159,7 @@ function ProjectVisual({ type, title }) {
                                         className="stadium-chart-area"
                                         d="M0,145 C45,134 55,102 98,112 C140,122 155,72 205,82 C250,92 270,48 315,62 C365,77 385,28 430,42 C462,51 480,20 500,25 L500,170 L0,170 Z"
                                     />
+
                                     <path
                                         className="stadium-chart-line"
                                         d="M0,145 C45,134 55,102 98,112 C140,122 155,72 205,82 C250,92 270,48 315,62 C365,77 385,28 430,42 C462,51 480,20 500,25"
@@ -138,45 +169,67 @@ function ProjectVisual({ type, title }) {
 
                             <div className="stadium-alert">
                                 <small>Latest alert</small>
-                                <strong>Gate B congestion</strong>
+
+                                <strong>
+                                    Gate B congestion
+                                </strong>
+
                                 <p>
                                     Increased crowd density detected near
                                     the east entrance.
                                 </p>
-                                <span>Recommendation ready</span>
+
+                                <span>
+                                    Recommendation ready
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         );
     }
 
     if (type === "music") {
         return (
-            <div className="case-study-mockup case-study-mockup-music">
+            <motion.div
+                className="case-study-mockup case-study-mockup-music"
+                style={{
+                    transformOrigin: "center center",
+                }}
+                {...visualMotionProps}
+            >
                 <div className="music-interface">
                     <div className="music-topline">
                         <span>Listening session</span>
                         <small>Live input</small>
                     </div>
 
-                    <div className="music-disc" aria-hidden="true">
+                    <div
+                        className="music-disc"
+                        aria-hidden="true"
+                    >
                         <div className="music-disc-ring" />
+
                         <div className="music-disc-core">
                             <span>S</span>
                         </div>
                     </div>
 
-                    <div className="music-waveform" aria-hidden="true">
+                    <div
+                        className="music-waveform"
+                        aria-hidden="true"
+                    >
                         {[
-                            22, 38, 65, 42, 78, 54, 96, 62, 84, 48, 70,
-                            34, 88, 58, 74, 46, 92, 60, 78, 40, 68, 30,
-                            52, 24,
+                            22, 38, 65, 42, 78, 54, 96, 62,
+                            84, 48, 70, 34, 88, 58, 74, 46,
+                            92, 60, 78, 40, 68, 30, 52, 24,
                         ].map((height, index) => (
                             <span
                                 key={`${height}-${index}`}
-                                style={{ "--wave-height": `${height}%` }}
+                                style={{
+                                    "--wave-height": `${height}%`,
+                                }}
                             />
                         ))}
                     </div>
@@ -184,18 +237,26 @@ function ProjectVisual({ type, title }) {
                     <div className="music-result">
                         <div>
                             <small>Closest match</small>
-                            <strong>Audio fingerprint found</strong>
+                            <strong>
+                                Audio fingerprint found
+                            </strong>
                         </div>
 
                         <span>94.8%</span>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         );
     }
 
     return (
-        <div className="case-study-mockup case-study-mockup-paper">
+        <motion.div
+            className="case-study-mockup case-study-mockup-paper"
+            style={{
+                transformOrigin: "center center",
+            }}
+            {...visualMotionProps}
+        >
             <div className="paper-interface">
                 <aside className="paper-sidebar">
                     <div className="paper-logo">PA</div>
@@ -208,7 +269,10 @@ function ProjectVisual({ type, title }) {
                 <div className="paper-workspace">
                     <div className="paper-workspace-header">
                         <div>
-                            <small>Cambridge A-Level Mathematics</small>
+                            <small>
+                                Cambridge A-Level Mathematics
+                            </small>
+
                             <strong>Topic practice</strong>
                         </div>
 
@@ -218,12 +282,15 @@ function ProjectVisual({ type, title }) {
                     <div className="paper-question">
                         <div className="paper-question-meta">
                             <span>Question 4</span>
-                            <small>Integration · 6 marks</small>
+
+                            <small>
+                                Integration · 6 marks
+                            </small>
                         </div>
 
                         <p>
-                            Find the exact value of the area enclosed by
-                            the curve and the coordinate axes.
+                            Find the exact value of the area enclosed
+                            by the curve and the coordinate axes.
                         </p>
 
                         <div className="paper-equation">
@@ -233,6 +300,7 @@ function ProjectVisual({ type, title }) {
 
                     <div className="paper-feedback">
                         <span>AI feedback</span>
+
                         <p>
                             Your method is correct. Include the limits
                             before evaluating the integral.
@@ -240,7 +308,7 @@ function ProjectVisual({ type, title }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
@@ -252,7 +320,9 @@ function ProjectCaseStudy({ project }) {
             className={`case-study case-study-${project.accent}`}
             variants={shouldReduceMotion ? undefined : REVEAL}
             initial={shouldReduceMotion ? undefined : "hidden"}
-            whileInView={shouldReduceMotion ? undefined : "visible"}
+            whileInView={
+                shouldReduceMotion ? undefined : "visible"
+            }
             viewport={{
                 once: true,
                 amount: 0.08,
@@ -274,13 +344,16 @@ function ProjectCaseStudy({ project }) {
                     aria-label={`View ${project.title} on GitHub`}
                 >
                     View repository
-                    <ArrowUpRight size={18} aria-hidden="true" />
+                    <ArrowUpRight
+                        size={18}
+                        aria-hidden="true"
+                    />
                 </a>
             </div>
 
             <ProjectVisual
                 type={project.visual}
-                title={project.title}
+                shouldReduceMotion={shouldReduceMotion}
             />
 
             <div className="case-study-details">
@@ -302,7 +375,9 @@ function ProjectCaseStudy({ project }) {
             <div className="case-study-footer">
                 <div className="case-study-stack">
                     {project.stack.map((technology) => (
-                        <span key={technology}>{technology}</span>
+                        <span key={technology}>
+                            {technology}
+                        </span>
                     ))}
                 </div>
 
@@ -324,7 +399,11 @@ function ProjectCaseStudy({ project }) {
                     }
                 >
                     Explore project
-                    <ArrowUpRight size={18} aria-hidden="true" />
+
+                    <ArrowUpRight
+                        size={18}
+                        aria-hidden="true"
+                    />
                 </motion.a>
             </div>
         </motion.article>
@@ -347,22 +426,36 @@ export default function Projects() {
                         ? undefined
                         : REVEAL_CONTAINER
                 }
-                initial={shouldReduceMotion ? undefined : "hidden"}
+                initial={
+                    shouldReduceMotion
+                        ? undefined
+                        : "hidden"
+                }
                 whileInView={
-                    shouldReduceMotion ? undefined : "visible"
+                    shouldReduceMotion
+                        ? undefined
+                        : "visible"
                 }
                 viewport={REVEAL_VIEWPORT}
             >
                 <motion.p
                     className="selected-work-kicker"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
                     Selected work · 2025–2026
                 </motion.p>
 
                 <motion.h2
                     id="selected-work-title"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
                     Three projects,
                     <span> explored in depth.</span>
@@ -370,7 +463,11 @@ export default function Projects() {
 
                 <motion.p
                     className="selected-work-intro"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
                 >
                     A closer look at the problems, systems and product
                     decisions behind some of my most important work.
