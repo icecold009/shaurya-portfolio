@@ -1,4 +1,4 @@
-import Achievements from '../components/Achievements';
+import Achievements from '../../components/Achievements';
 
 export default function AchievementsPage() {
     return (

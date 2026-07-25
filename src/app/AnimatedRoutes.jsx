@@ -10,15 +10,15 @@ import {
 } from "framer-motion";
 
 import Home from "../pages/home/Home";
-import ProjectsPage from "../pages/ProjectsPage";
+import ProjectsPage from "../pages/projects/ProjectsPage";
 import AboutPage from "../pages/about/AboutPage";
-import Blog from "../components/Blog";
-import ContactPage from "../pages/ContactPage";
+import BlogPage from "../pages/blog/BlogPage";
+import ContactPage from "../pages/contact/ContactPage";
 import UsesPage from "../pages/uses/UsesPage";
 import NotFound from "../pages/not-found/NotFound";
 import ArtworkPage from "../pages/artwork/ArtworkPage";
 import CertificatesPage from "../pages/certificates/CertificatesPage";
-import AchievementsPage from "../pages/AchievementsPage";
+import AchievementsPage from "../pages/achievements/AchievementsPage";
 
 import { EDITORIAL_EASE } from "../lib/motion";
 
@@ -48,7 +48,7 @@ export default function AnimatedRoutes() {
                     <Route path="/" element={<Home />} />
                     <Route path="/projects" element={<ProjectsPage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog" element={<BlogPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/uses" element={<UsesPage />} />
                     <Route path="/artwork" element={<ArtworkPage />} />
