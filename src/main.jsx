@@ -5,6 +5,7 @@ import { ReactLenis } from "lenis/react";
 import App from "./app/App.jsx";
 import "lenis/dist/lenis.css";
 import "./styles/index.css";
+import "./styles/pages/editorial-pages.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>

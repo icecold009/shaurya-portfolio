@@ -109,7 +109,7 @@ export default function Hero() {
                         >
                             <Link
                                 to="/projects"
-                                className="editorial-hero-primary"
+                                className="editorial-hero-primary liquid-glass-control"
                             >
                                 View selected work
                                 <ArrowDownRight
