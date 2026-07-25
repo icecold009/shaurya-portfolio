@@ -1,0 +1,325 @@
+/* About page supporting styles */
+
+/* ─── LOCATION MAP ───────────────────────────────── */
+.about-map-card {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+}
+
+.location-card {
+    border: 1px solid var(--line-bright);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.5rem 0 0.6rem;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+.location-map-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    filter: brightness(0.85) saturate(0.4) hue-rotate(80deg);
+    transition: filter 0.3s ease;
+}
+
+.location-card:hover .location-map-img {
+    filter: brightness(0.95) saturate(0.6) hue-rotate(80deg);
+}
+
+.location-coords {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    background: none;
+    letter-spacing: 0.04em;
+}
+
+/* ─── SKILLS ─────────────────────────────────────────── */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid var(--line-bright);
+    background: var(--bg-2);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.03em;
+    font-family: var(--mono);
+    cursor: default;
+    transition: border-color 0.15s, color 0.15s, background 0.15s,
+        transform 0.12s, box-shadow 0.15s;
+}
+
+.skill-chip:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-faint);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0, 255, 65, 0.12);
+}
+
+.skill-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0.75);
+    transition: filter 0.15s;
+}
+
+.skill-chip:hover .skill-icon {
+    filter: brightness(1) drop-shadow(0 0 4px rgba(0, 255, 65, 0.5));
+}
+
+
+.about-grid--3col {
+    grid-template-columns: 180px 1fr 1fr;
+    align-items: start;
+}
+
+@media (max-width: 1000px) {
+    .about-grid--3col {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-avatar-wrap {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .about-avatar {
+        width: 72px;
+        height: 72px;
+        flex-shrink: 0;
+    }
+
+    .about-avatar svg {
+        width: 72px;
+        height: 72px;
+    }
+}
+
+@media (max-width: 700px) {
+    .about-grid--3col {
+        grid-template-columns: 1fr;
+    }
+}
+
+.about-avatar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+}
+
+.about-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--line-bright);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.08);
+}
+
+.about-avatar svg {
+    display: block;
+    width: 120px;
+    height: 120px;
+}
+
+.about-avatar-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.04em;
+}
+
+.about-avatar-label::before {
+    content: '$ ';
+    color: var(--text-faint);
+}
+
+.about-avatar-sub {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+}
+
+/* Where I'm headed */
+.about-headed {
+    margin-top: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line-bright);
+    border-radius: 6px;
+    border-left: 2px solid var(--green-faint);
+}
+
+.about-headed h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+}
+
+.about-headed h3::before {
+    content: '> ';
+    color: var(--text-faint);
+}
+
+.about-headed p {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+}
+
+.about-hl {
+    color: var(--text);
+    font-weight: 700;
+}
+
+/* Kaggle link */
+.about-kaggle-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    border: 1px solid var(--line-bright);
+    border-radius: 4px;
+    padding: 0.45rem 0.9rem;
+    transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.12s;
+}
+
+.about-kaggle-link::before {
+    content: '↗ ';
+    color: var(--text-faint);
+}
+
+.about-kaggle-link:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: var(--green-faint);
+    transform: translateY(-2px);
+}
+
+/* Education block */
+.about-edu {
+    margin-bottom: 0.25rem;
+}
+
+.about-edu-school {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+}
+
+.about-edu-sub {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.85rem;
+}
+
+.about-edu-subjects {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.about-edu-subjects li {
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    padding-left: 1.3rem;
+    position: relative;
+    line-height: 1.55;
+}
+
+.about-edu-subjects li::before {
+    content: '─';
+    position: absolute;
+    left: 0;
+    color: var(--green-faint);
+}
+
+.about-subject-code {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--green-dim);
+    border: 1px solid var(--green-faint);
+    border-radius: 3px;
+    padding: 0.05rem 0.35rem;
+    margin-right: 0.5rem;
+    letter-spacing: 0.06em;
+}
+
+/* ─── NAVBAR MORE DROPDOWN ───────────────────────────── */
+
+.about-heatmap {
+    grid-column: 1 / -1;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.about-heatmap-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dim);
+    margin: 0;
+}
+
+.about-heatmap-frame {
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--line-bright);
+}
+
+.about-heatmap-meta {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    margin: 0;
+}
+
+.about-heatmap-meta::before {
+    content: '$ user: ';
+    color: var(--text-faint);
+    opacity: 0.6;
+}
+
+/* ─── TIMELINE ─────────────────────────────────── */
