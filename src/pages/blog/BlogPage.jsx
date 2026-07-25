@@ -1,13 +1,19 @@
-import { useState } from 'react';
-import { posts } from '../posts/index.js';
-import BlogPost from './BlogPost';
+import { useState } from "react";
 
-function Blog() {
+import { posts } from "../../posts/index.js";
+import BlogPostPage from "./BlogPostPage";
+
+export default function BlogPage() {
     const [activeSlug, setActiveSlug] = useState(null);
 
     if (activeSlug) {
-        const post = posts.find(p => p.slug === activeSlug);
-        return <BlogPost post={post} onBack={() => setActiveSlug(null)} />;
+        const post = posts.find((entry) => entry.slug === activeSlug);
+        return (
+            <BlogPostPage
+                post={post}
+                onBack={() => setActiveSlug(null)}
+            />
+        );
     }
 
     return (
@@ -18,14 +24,18 @@ function Blog() {
             </div>
 
             <div className="blog-list">
-                {posts.map(post => (
+                {posts.map((post) => (
                     <article
                         key={post.slug}
                         className="blog-row"
                         onClick={() => setActiveSlug(post.slug)}
                         role="button"
                         tabIndex={0}
-                        onKeyDown={e => e.key === 'Enter' && setActiveSlug(post.slug)}
+                        onKeyDown={(event) => {
+                            if (event.key === "Enter") {
+                                setActiveSlug(post.slug);
+                            }
+                        }}
                     >
                         <span className="blog-date">{post.date}</span>
                         <span className="blog-tag">{post.tag}</span>
@@ -37,5 +47,3 @@ function Blog() {
         </section>
     );
 }
-
-export default Blog;

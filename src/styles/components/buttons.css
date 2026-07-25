@@ -1,35 +1,82 @@
+/* Buttons */
+
+/* ─── BUTTONS ────────────────────────────────────────── */
 .btn {
-    min-height: 48px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.75rem 1.4rem;
-
+    min-height: 48px;
+    padding: 0.75rem 1.6rem;
+    border-radius: 6px;
     border: 1px solid transparent;
-    border-radius: var(--radius-sm);
-
+    font-size: 0.95rem;
     font-weight: 700;
+    font-family: var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     cursor: pointer;
-
-    transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        color var(--transition-fast);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
+    transition: background 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease, transform 0.12s ease,
+        box-shadow 0.15s ease;
 }
 
 .btn-primary {
-    background: var(--green);
+    background: linear-gradient(180deg, var(--green), var(--green-dim));
+    border-color: var(--green);
     color: var(--bg);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.22);
+}
+
+.btn-primary::before {
+    content: '[ ';
+}
+
+.btn-primary::after {
+    content: ' ]';
+}
+
+.btn-primary:hover {
+    background: linear-gradient(180deg, #6dff8f, var(--green));
+    color: var(--bg);
+    box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.38), 0 0 8px rgba(var(--accent-rgb), 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
 }
 
 .btn-secondary {
-    border-color: var(--line-bright);
     background: var(--surface);
+    border-color: var(--line-bright);
     color: var(--text);
+}
+
+.btn-secondary:hover {
+    border-color: var(--green-dim);
+    color: var(--green-dim);
+    background: rgba(0, 200, 50, 0.12);
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.btn-ghost {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--text-dim);
+}
+
+.btn-ghost:hover {
+    border-color: var(--line-bright);
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateY(-2px);
+}
+
+.btn-ghost:active {
+    transform: translateY(0) scale(0.97);
 }

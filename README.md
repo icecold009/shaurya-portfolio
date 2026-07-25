@@ -43,9 +43,14 @@ src/
 ├── lib/
 ├── pages/
 ├── posts/
+├── styles/
+│   ├── base/
+│   ├── components/
+│   ├── layout/
+│   ├── pages/
+│   └── utilities/
 ├── App.jsx
-├── main.jsx
-└── styles.css
+└── main.jsx
 ```
 
 ## Contact

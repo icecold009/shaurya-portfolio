@@ -1,0 +1,91 @@
+/* Shared responsive rules */
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    main,
+    .navbar {
+        width: min(var(--max-width), calc(100% - 1.5rem));
+    }
+
+    .navbar {
+        min-height: 60px;
+        gap: 0.75rem;
+    }
+
+    .brand {
+        font-size: 0.92rem;
+        line-height: 1.2;
+    }
+
+    .hero {
+        padding: 4rem 0 3rem;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 11vw, 3.5rem);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn,
+    .contact-links a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .contact-links {
+        width: 100%;
+    }
+
+    .mobile-menu a {
+        padding: 0.95rem 1rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ─── TIMELINE ───────────────────────────────────────── */

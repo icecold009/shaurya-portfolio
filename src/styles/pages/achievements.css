@@ -1,0 +1,475 @@
+/* Achievements and timeline styles */
+
+.timeline-section {
+    padding: 2rem 0 5rem;
+}
+
+.timeline-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tl-filter {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 3px;
+    border: 1px solid var(--line-bright);
+    background: var(--bg-2);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.12s;
+}
+
+.tl-filter:hover {
+    color: var(--text);
+    border-color: var(--text-dim);
+    transform: translateY(-1px);
+}
+
+.tl-filter--on {
+    color: var(--fc, var(--green));
+    border-color: var(--fc, var(--green));
+    background: color-mix(in srgb, var(--fc, var(--green)) 10%, transparent);
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Vertical spine line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 1px;
+    background: var(--line-bright);
+}
+
+.tl-item {
+    position: relative;
+    padding-left: 2.2rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+
+.tl-item:first-child {
+    border-top: 1px solid var(--line);
+}
+
+.tl-item:hover {
+    background: var(--surface);
+}
+
+.tl-item--open {
+    background: var(--surface);
+}
+
+.tl-dot {
+    position: absolute;
+    left: 0.3rem;
+    top: 1.3rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--dc, var(--green));
+    box-shadow: 0 0 8px var(--dc, var(--green));
+    transition: transform 0.15s;
+    flex-shrink: 0;
+}
+
+.tl-item--open .tl-dot {
+    transform: scale(1.4);
+}
+
+.tl-body {
+    padding: 1.1rem 1rem 1.1rem 0;
+}
+
+.tl-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tl-year {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    min-width: 2.8rem;
+}
+
+.tl-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tc, var(--green));
+    border: 1px solid var(--tc, var(--green));
+    border-radius: 3px;
+    padding: 0.12rem 0.4rem;
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+.tl-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+}
+
+.tl-chevron {
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+/* Expand/collapse detail */
+.tl-detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease, padding 0.28s ease;
+    padding-top: 0;
+}
+
+.tl-item--open .tl-detail {
+    grid-template-rows: 1fr;
+    padding-top: 0.75rem;
+}
+
+.tl-detail>p {
+    overflow: hidden;
+    font-size: 0.93rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+    max-width: 56rem;
+    padding-bottom: 0.2rem;
+}
+
+/* ─── PROJECT MODAL ──────────────────────────────────── */
+
+.achievements {
+    padding: 0 0 6rem;
+}
+
+.achievements-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.achievement-category {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dim);
+    margin-bottom: 1rem;
+}
+
+.achievement-category::before {
+    content: '// ';
+    color: var(--text-faint);
+}
+
+.achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.achievement-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.1rem 1.4rem;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.achievement-card:hover {
+    background: var(--surface);
+    border-color: var(--green-faint);
+}
+
+.achievement-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.35rem;
+}
+
+.achievement-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.achievement-title::before {
+    content: '→ ';
+    color: var(--green-faint);
+}
+
+.achievement-meta {
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.achievement-detail {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin: 0;
+    padding-left: 1.3rem;
+}
+
+/* ─── ABOUT — EXPANDED ───────────────────────────────── */
+
+.timeline-page-section {
+    width: min(1100px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 4.5rem 0 5rem;
+}
+
+.timeline-page-section--compact {
+    padding-top: 2rem;
+}
+
+.timeline-page-heading {
+    margin-bottom: 1.5rem;
+}
+
+.timeline-page-intro {
+    max-width: 64ch;
+    color: var(--text-dim);
+    font-size: 1.02rem;
+    line-height: 1.75;
+    margin-top: 0.75rem;
+}
+
+.timeline-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.timeline-chip {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text-dim);
+    padding: 0.65rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    text-transform: lowercase;
+    transition: 180ms ease;
+}
+
+.timeline-chip:hover {
+    border-color: var(--line-bright);
+    color: var(--text);
+    transform: translateY(-1px);
+}
+
+.timeline-chip--active {
+    color: var(--text);
+    border-color: var(--chip);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--chip) 35%, transparent);
+}
+
+.timeline-page {
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    padding-left: 2.2rem;
+}
+
+.timeline-page-line {
+    position: absolute;
+    left: 0.7rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background:
+        linear-gradient(to bottom,
+            transparent 0%,
+            var(--line-bright) 6%,
+            var(--line-bright) 94%,
+            transparent 100%);
+    opacity: 0.8;
+}
+
+.timeline-card {
+    position: relative;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, transparent), var(--surface-2));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.1rem 1.1rem 1.15rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.timeline-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-bright);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-card--now {
+    border-color: color-mix(in srgb, #ff6b6b 45%, var(--line));
+}
+
+.timeline-card-dot {
+    position: absolute;
+    left: -1.86rem;
+    top: 1.45rem;
+    width: 0.78rem;
+    height: 0.78rem;
+    border-radius: 50%;
+    background: var(--dot);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--dot) 12%, transparent);
+}
+
+.timeline-card-dot--pulse {
+    animation: timelinePulse 1.8s ease-in-out infinite;
+}
+
+.timeline-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+    margin-bottom: 0.55rem;
+}
+
+.timeline-card-date {
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    letter-spacing: 0.02em;
+}
+
+.timeline-card-tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--tag) 45%, var(--line));
+    color: var(--tag);
+    background: color-mix(in srgb, var(--tag) 10%, transparent);
+    border-radius: 999px;
+    padding: 0.26rem 0.58rem;
+    font-size: 0.77rem;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
+}
+
+.timeline-card-title {
+    font-size: 1.08rem;
+    line-height: 1.25;
+    margin: 0 0 0.45rem;
+    color: var(--text);
+}
+
+.timeline-card-metric {
+    font-size: 0.96rem;
+    color: var(--accent);
+    margin: 0 0 0.55rem;
+    line-height: 1.55;
+}
+
+.timeline-card-detail {
+    margin: 0;
+    color: var(--text-dim);
+    line-height: 1.78;
+    max-width: 70ch;
+}
+
+@keyframes timelinePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 color-mix(in srgb, #ff6b6b 35%, transparent);
+    }
+
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 8px color-mix(in srgb, #ff6b6b 0%, transparent);
+    }
+}
+
+@media (max-width: 768px) {
+    .timeline-page-section {
+        width: min(100% - 1.2rem, 100%);
+        padding: 3.25rem 0 4rem;
+    }
+
+    .timeline-toolbar {
+        gap: 0.55rem;
+        margin-bottom: 1.6rem;
+    }
+
+    .timeline-chip {
+        font-size: 0.86rem;
+        padding: 0.58rem 0.82rem;
+    }
+
+    .timeline-page {
+        padding-left: 1.55rem;
+        gap: 1rem;
+    }
+
+    .timeline-page-line {
+        left: 0.45rem;
+    }
+
+    .timeline-card {
+        padding: 1rem 0.95rem 1rem;
+        border-radius: 16px;
+    }
+
+    .timeline-card-dot {
+        left: -1.24rem;
+        width: 0.68rem;
+        height: 0.68rem;
+    }
+
+    .timeline-card-title {
+        font-size: 1rem;
+    }
+
+    .timeline-card-date {
+        font-size: 0.84rem;
+    }
+
+    .timeline-card-metric,
+    .timeline-card-detail,
+    .timeline-page-intro {
+        font-size: 0.95rem;
+    }
+}
+
+@media (hover: none) {
+
+    .timeline-chip:active,
+    .timeline-card:active {
+        transform: scale(0.985);
+    }
+}

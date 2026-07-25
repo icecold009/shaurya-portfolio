@@ -1,11 +1,11 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
 const postModules = {
-    'shazam-clone': lazy(() => import('../posts/shazam-clone.mdx')),
-    'birdclef-2026': lazy(() => import('../posts/birdclef-2026.mdx')),
+    "shazam-clone": lazy(() => import("../../posts/shazam-clone.mdx")),
+    "birdclef-2026": lazy(() => import("../../posts/birdclef-2026.mdx")),
 };
 
-function BlogPost({ post, onBack }) {
+export default function BlogPostPage({ post, onBack }) {
     const Content = postModules[post.slug];
 
     return (
@@ -28,5 +28,3 @@ function BlogPost({ post, onBack }) {
         </section>
     );
 }
-
-export default BlogPost;
