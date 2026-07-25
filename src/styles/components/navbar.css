@@ -32,7 +32,7 @@
         linear-gradient(135deg,
             rgba(255, 255, 255, 0.075),
             rgba(255, 255, 255, 0.025) 42%,
-            rgba(0, 255, 65, 0.035)),
+            rgba(var(--accent-rgb), 0.035)),
         rgba(8, 14, 9, 0.48);
 
     backdrop-filter:
@@ -96,7 +96,7 @@
         linear-gradient(135deg,
             rgba(255, 255, 255, 0.09),
             rgba(255, 255, 255, 0.03) 45%,
-            rgba(0, 255, 65, 0.045)),
+            rgba(var(--accent-rgb), 0.045)),
         rgba(6, 12, 7, 0.62);
 
     box-shadow:
@@ -134,7 +134,7 @@
 
     background:
         linear-gradient(145deg,
-            rgba(0, 255, 65, 0.13),
+            rgba(var(--accent-rgb), 0.13),
             rgba(255, 255, 255, 0.025));
 
     color: var(--green);
@@ -143,7 +143,7 @@
 
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 0 20px rgba(0, 255, 65, 0.07);
+        0 0 20px rgba(var(--accent-rgb), 0.07);
 }
 
 .nav-brand-copy {
@@ -246,7 +246,7 @@
     border-radius: 999px;
     background: var(--green);
 
-    box-shadow: 0 0 8px rgba(0, 255, 65, 0.55);
+    box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.55);
 }
 
 .desktop-more {
@@ -318,7 +318,7 @@
 }
 
 .desktop-more-link--active {
-    background: rgba(0, 255, 65, 0.1);
+    background: rgba(var(--accent-rgb), 0.1);
     color: var(--green);
 }
 
@@ -369,18 +369,18 @@
 
 .nav-icon-button:hover,
 .mobile-menu-trigger:hover {
-    border-color: rgba(0, 255, 65, 0.32);
+    border-color: rgba(var(--accent-rgb), 0.32);
 
     background:
         linear-gradient(145deg,
-            rgba(0, 255, 65, 0.11),
+            rgba(var(--accent-rgb), 0.11),
             rgba(255, 255, 255, 0.035));
 
     color: var(--green);
 
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.09),
-        0 8px 22px rgba(0, 255, 65, 0.07);
+        0 8px 22px rgba(var(--accent-rgb), 0.07);
 }
 
 .nav-icon-button:active,
@@ -416,8 +416,8 @@
 }
 
 .mobile-menu-trigger--open {
-    border-color: rgba(0, 255, 65, 0.35);
-    background: rgba(0, 255, 65, 0.1);
+    border-color: rgba(var(--accent-rgb), 0.35);
+    background: rgba(var(--accent-rgb), 0.1);
     color: var(--green);
 }
 
@@ -440,7 +440,7 @@
 
     background:
         radial-gradient(circle at 80% 10%,
-            rgba(0, 255, 65, 0.06),
+            rgba(var(--accent-rgb), 0.06),
             transparent 38%),
         rgba(0, 0, 0, 0.48);
 
@@ -468,7 +468,7 @@
 
     background:
         radial-gradient(circle at 80% 0%,
-            rgba(0, 255, 65, 0.12),
+            rgba(var(--accent-rgb), 0.12),
             transparent 34%),
         linear-gradient(145deg,
             rgba(255, 255, 255, 0.075),
@@ -561,7 +561,7 @@
 }
 
 .mobile-nav-close:hover {
-    border-color: rgba(0, 255, 65, 0.35);
+    border-color: rgba(var(--accent-rgb), 0.35);
     color: var(--green);
 }
 
@@ -636,11 +636,11 @@
 }
 
 .mobile-primary-link--active {
-    border-color: rgba(0, 255, 65, 0.18);
+    border-color: rgba(var(--accent-rgb), 0.18);
 
     background:
         linear-gradient(90deg,
-            rgba(0, 255, 65, 0.12),
+            rgba(var(--accent-rgb), 0.12),
             rgba(255, 255, 255, 0.025));
 
     color: var(--green);
@@ -734,8 +734,8 @@
 }
 
 .mobile-secondary-link--active {
-    border-color: rgba(0, 255, 65, 0.2);
-    background: rgba(0, 255, 65, 0.1);
+    border-color: rgba(var(--accent-rgb), 0.2);
+    background: rgba(var(--accent-rgb), 0.1);
     color: var(--green);
 }
 
@@ -776,7 +776,7 @@
     border-radius: 50%;
     background: var(--green);
 
-    box-shadow: 0 0 9px rgba(0, 255, 65, 0.65);
+    box-shadow: 0 0 9px rgba(var(--accent-rgb), 0.65);
 }
 
 .mobile-social-links {
@@ -812,8 +812,8 @@
 }
 
 .mobile-social-links a:hover {
-    border-color: rgba(0, 255, 65, 0.22);
-    background: rgba(0, 255, 65, 0.1);
+    border-color: rgba(var(--accent-rgb), 0.22);
+    background: rgba(var(--accent-rgb), 0.1);
     color: var(--green);
 }
 

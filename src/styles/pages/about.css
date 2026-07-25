@@ -67,7 +67,7 @@
     color: var(--green);
     background: var(--green-faint);
     transform: translateY(-3px);
-    box-shadow: 0 4px 16px rgba(0, 255, 65, 0.12);
+    box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.12);
 }
 
 .skill-icon {
@@ -80,7 +80,7 @@
 }
 
 .skill-chip:hover .skill-icon {
-    filter: brightness(1) drop-shadow(0 0 4px rgba(0, 255, 65, 0.5));
+    filter: brightness(1) drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.5));
 }
 
 
@@ -136,7 +136,7 @@
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid var(--line-bright);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.08);
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.08);
 }
 
 .about-avatar svg {

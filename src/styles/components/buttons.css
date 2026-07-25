@@ -24,7 +24,7 @@
     background: linear-gradient(180deg, var(--green), var(--green-dim));
     border-color: var(--green);
     color: var(--bg);
-    box-shadow: 0 0 18px rgba(0, 255, 65, 0.22);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.22);
 }
 
 .btn-primary::before {
@@ -38,7 +38,7 @@
 .btn-primary:hover {
     background: linear-gradient(180deg, #6dff8f, var(--green));
     color: var(--bg);
-    box-shadow: 0 0 28px rgba(0, 255, 65, 0.38), 0 0 8px rgba(0, 255, 65, 0.5);
+    box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.38), 0 0 8px rgba(var(--accent-rgb), 0.5);
     transform: translateY(-2px);
 }
 
