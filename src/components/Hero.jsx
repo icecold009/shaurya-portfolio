@@ -8,6 +8,7 @@ import {
     REVEAL_CONTAINER,
 } from "../lib/motion";
 
+import InteractivePortrait from "./InteractivePortrait";
 import "./Hero.css";
 
 export default function Hero() {
@@ -34,6 +35,8 @@ export default function Hero() {
                 <div className="editorial-hero-grid" />
                 <div className="editorial-hero-glow" />
             </div>
+
+            <InteractivePortrait />
 
             <motion.div
                 className="editorial-hero-inner"
