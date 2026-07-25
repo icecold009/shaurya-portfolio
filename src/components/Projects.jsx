@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import {
     EDITORIAL_EASE,
@@ -25,6 +25,7 @@ const projects = [
         stack: ["React", "Supabase", "Gemini", "Realtime", "RLS"],
         github: "https://github.com/icecold009/stadiumpulse-ai",
         visual: "stadium",
+        thumbnail: "/projects/stadiumpulse.svg",
         accent: "01",
     },
     {
@@ -41,6 +42,7 @@ const projects = [
         stack: ["Python", "FastAPI", "React", "FFT", "Supabase"],
         github: "https://github.com/icecold009/music-recognition",
         visual: "music",
+        thumbnail: "/projects/music-recognition.svg",
         accent: "02",
     },
     {
@@ -57,7 +59,43 @@ const projects = [
         stack: ["React", "Gemini", "PDF parsing", "Vercel"],
         github: "https://github.com/icecold009/past-paper-ai",
         visual: "paper",
+        thumbnail: "/projects/past-paper-ai.svg",
         accent: "03",
+    },
+    // Placeholder entries: replace the fields below with future work.
+    {
+        number: "04",
+        year: "2026",
+        category: "Placeholder Â· Replace me",
+        title: "Your next project",
+        description:
+            "Replace this text with the problem, product or experiment you want to document next.",
+        contribution:
+            "Add your role here: what you designed, built, researched or shipped.",
+        outcome:
+            "Add the result here: what changed, who it helped and what you learned.",
+        stack: ["Add stack", "Add tool"],
+        github: null,
+        visual: "placeholder",
+        thumbnail: "/projects/placeholder-04.svg",
+        accent: "04",
+    },
+    {
+        number: "05",
+        year: "2026",
+        category: "Placeholder Â· Replace me",
+        title: "Another project",
+        description:
+            "A second editable slot for a project, case study or creative experiment.",
+        contribution:
+            "Describe the specific contribution you made to this work.",
+        outcome:
+            "Describe the outcome, metric or insight worth sharing.",
+        stack: ["Add stack", "Add tool"],
+        github: null,
+        visual: "placeholder",
+        thumbnail: "/projects/placeholder-05.svg",
+        accent: "05",
     },
 ];
 
@@ -249,6 +287,19 @@ function ProjectVisual({ type, shouldReduceMotion }) {
         );
     }
 
+    if (type === "placeholder") {
+        return (
+            <motion.div
+                className="case-study-mockup case-study-mockup-placeholder"
+                {...visualMotionProps}
+            >
+                <span>PROJECT PREVIEW</span>
+                <strong>Replace this visual</strong>
+                <small>Add an image, interface or experiment here.</small>
+            </motion.div>
+        );
+    }
+
     return (
         <motion.div
             className="case-study-mockup case-study-mockup-paper"
@@ -317,6 +368,7 @@ function ProjectCaseStudy({ project }) {
 
     return (
         <motion.article
+            id={`project-detail-${project.number}`}
             className={`case-study case-study-${project.accent}`}
             variants={shouldReduceMotion ? undefined : REVEAL}
             initial={shouldReduceMotion ? undefined : "hidden"}
@@ -337,18 +389,21 @@ function ProjectCaseStudy({ project }) {
             <div className="case-study-heading">
                 <h3>{project.title}</h3>
 
-                <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`View ${project.title} on GitHub`}
-                >
-                    View repository
-                    <ArrowUpRight
-                        size={18}
-                        aria-hidden="true"
-                    />
-                </a>
+                {project.github ? (
+                    <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`View ${project.title} on GitHub`}
+                    >
+                        View repository
+                        <ArrowUpRight size={18} aria-hidden="true" />
+                    </a>
+                ) : (
+                    <span className="case-study-link--placeholder">
+                        Project link pending
+                    </span>
+                )}
             </div>
 
             <ProjectVisual
@@ -381,32 +436,88 @@ function ProjectCaseStudy({ project }) {
                     ))}
                 </div>
 
-                <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="case-study-link"
-                    whileHover={
-                        shouldReduceMotion
-                            ? undefined
-                            : {
-                                x: 6,
-                                transition: {
-                                    duration: 0.35,
-                                    ease: EDITORIAL_EASE,
-                                },
-                            }
-                    }
-                >
-                    Explore project
-
-                    <ArrowUpRight
-                        size={18}
-                        aria-hidden="true"
-                    />
-                </motion.a>
+                {project.github ? (
+                    <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="case-study-link"
+                        whileHover={
+                            shouldReduceMotion
+                                ? undefined
+                                : {
+                                    x: 6,
+                                    transition: {
+                                        duration: 0.35,
+                                        ease: EDITORIAL_EASE,
+                                    },
+                                }
+                        }
+                    >
+                        Explore project
+                        <ArrowUpRight size={18} aria-hidden="true" />
+                    </motion.a>
+                ) : (
+                    <span className="case-study-link case-study-link--placeholder">
+                        Add project link
+                    </span>
+                )}
             </div>
         </motion.article>
+    );
+}
+
+function ProjectFolderBrowser() {
+    return (
+        <div className="project-browser" aria-labelledby="project-browser-title">
+            <div className="project-browser-heading">
+                <div>
+                    <p className="selected-work-kicker">Project index</p>
+                    <h3>Browse the archive.</h3>
+                </div>
+                <span className="project-browser-hint">
+                    <ArrowRight size={15} aria-hidden="true" />
+                    scroll to explore
+                </span>
+            </div>
+
+            <div className="project-folder-rail" role="list">
+                {projects.map((project) => (
+                    <a
+                        className="project-file"
+                        href={`#project-detail-${project.number}`}
+                        key={project.title}
+                        role="listitem"
+                        aria-label={`Open ${project.title} overview`}
+                    >
+                        <img
+                            src={project.thumbnail}
+                            alt={`${project.title} preview`}
+                            loading="lazy"
+                        />
+                    </a>
+                ))}
+            </div>
+
+            <nav className="project-list" aria-label="Project list">
+                <div className="project-list-heading">
+                    <span>Project list</span>
+                    <span>{String(projects.length).padStart(2, "0")} files</span>
+                </div>
+                {projects.map((project) => (
+                    <a
+                        className="project-list-item"
+                        href={`#project-detail-${project.number}`}
+                        key={`list-${project.title}`}
+                    >
+                        <span>{project.number}</span>
+                        <strong>{project.title}</strong>
+                        <small>{project.category}</small>
+                        <ArrowUpRight size={17} aria-hidden="true" />
+                    </a>
+                ))}
+            </nav>
+        </div>
     );
 }
 
@@ -457,7 +568,7 @@ export default function Projects() {
                             : REVEAL
                     }
                 >
-                    Three projects,
+                    Projects,
                     <span> explored in depth.</span>
                 </motion.h2>
 
@@ -474,7 +585,34 @@ export default function Projects() {
                 </motion.p>
             </motion.div>
 
-            <div className="case-study-list">
+            <nav className="project-index" aria-label="Project index">
+                <div className="project-index__heading">
+                    <span>Quick access</span>
+                    <span>{String(projects.length).padStart(2, "0")} projects</span>
+                </div>
+
+                {projects.map((project) => (
+                    <a
+                        className="project-index__item"
+                        href={`#project-detail-${project.number}`}
+                        key={`quick-${project.title}`}
+                    >
+                        <span>{project.number}</span>
+                        <strong>{project.title}</strong>
+                        <small>{project.category}</small>
+                        <ArrowUpRight size={17} aria-hidden="true" />
+                    </a>
+                ))}
+            </nav>
+
+            <ProjectFolderBrowser />
+
+            <div className="project-details-heading">
+                <p className="selected-work-kicker">Detailed view</p>
+                <span>Scroll vertically for the full case studies.</span>
+            </div>
+
+            <div className="case-study-list" id="project-details">
                 {projects.map((project) => (
                     <ProjectCaseStudy
                         project={project}

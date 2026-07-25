@@ -16,6 +16,7 @@
 @import "./components/modal.css";
 @import "./components/project-card.css";
 @import "./components/section-heading.css";
+@import "./components/liquid-effects.css";
 
 /* Pages */
 @import "./pages/home.css";

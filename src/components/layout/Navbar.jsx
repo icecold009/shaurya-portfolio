@@ -200,7 +200,7 @@ function Navbar() {
                     .filter(Boolean)
                     .join(" ")}
             >
-                <nav className="navbar" aria-label="Main navigation">
+                <nav className="navbar liquid-glass-surface" aria-label="Main navigation">
                     <Link
                         to="/"
                         className="nav-brand"

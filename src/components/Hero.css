@@ -54,11 +54,22 @@
 }
 
 .editorial-hero-inner {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
     width: min(1440px, calc(100% - 3rem));
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     padding-block: clamp(8rem, 13vw, 12rem) clamp(4rem, 7vw, 6rem);
+}
+
+.editorial-hero-topline,
+.editorial-hero-eyebrow,
+.editorial-hero-title,
+.editorial-hero-bottom,
+.editorial-hero-index {
+    pointer-events: auto;
 }
 
 .editorial-hero-topline {
@@ -97,7 +108,7 @@
 }
 
 .editorial-hero-title {
-    max-width: 14ch;
+    max-width: 11ch;
     margin-top: clamp(1.3rem, 2.5vw, 2rem);
     color: var(--text);
     font-family: var(--sans,

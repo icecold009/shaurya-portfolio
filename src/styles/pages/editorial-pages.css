@@ -1,0 +1,379 @@
+/* Shared editorial system for the secondary pages. */
+
+.page-wrapper {
+    position: relative;
+    width: min(1440px, calc(100% - 3rem));
+    min-height: 70vh;
+    padding-top: clamp(7rem, 12vw, 10rem);
+    isolation: isolate;
+}
+
+.page-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: -1;
+    width: 100vw;
+    height: 34rem;
+    transform: translateX(-50%);
+    pointer-events: none;
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--line) 32%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--line) 32%, transparent) 1px, transparent 1px);
+    background-size: 96px 96px;
+    mask-image: linear-gradient(to bottom, transparent, black 18%, transparent 92%);
+    opacity: 0.35;
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-height: clamp(8rem, 17vw, 14rem);
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+    padding: 0 0 1.1rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.page-breadcrumb {
+    color: color-mix(in srgb, var(--green) 65%, var(--text-dim));
+    font-family: var(--mono);
+    font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.page-breadcrumb::before {
+    content: "./";
+    margin-right: 0.55rem;
+    color: var(--text-faint);
+}
+
+.section-heading {
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.section-label {
+    color: color-mix(in srgb, var(--green) 68%, var(--text-dim));
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 650;
+    letter-spacing: 0.11em;
+}
+
+.section-heading h2 {
+    max-width: 14ch;
+    font-size: clamp(2.8rem, 6vw, 6rem);
+    font-weight: 560;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+}
+
+.contact,
+.artwork-section,
+.uses-section,
+.achievements,
+.blog,
+.blog-post {
+    padding: 0 0 clamp(5rem, 10vw, 9rem);
+}
+
+.artwork-card,
+.uses-group,
+.achievement-card,
+.contact-success,
+.contact-card,
+.timeline-card {
+    border-color: color-mix(in srgb, var(--text) 12%, var(--line));
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--text) 6%, transparent), transparent 42%),
+        color-mix(in srgb, var(--surface-2) 84%, transparent);
+    box-shadow:
+        0 16px 42px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.artwork-card,
+.uses-group,
+.achievement-card,
+.timeline-card {
+    transition: transform 350ms var(--ease-editorial), border-color 350ms var(--ease-editorial), box-shadow 350ms var(--ease-editorial);
+}
+
+.artwork-card:hover,
+.uses-group:hover,
+.achievement-card:hover,
+.timeline-card:hover {
+    border-color: color-mix(in srgb, var(--green) 38%, var(--line));
+    box-shadow: 0 22px 55px rgba(var(--accent-rgb), 0.09);
+}
+
+.uses-group,
+.achievement-card,
+.contact-card,
+.contact-success,
+.timeline-card {
+    border-radius: 1rem;
+}
+
+.uses-group {
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.uses-group-title,
+.achievement-category,
+.cert-org-label {
+    color: color-mix(in srgb, var(--green) 68%, var(--text-dim));
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+}
+
+.uses-name,
+.achievement-title,
+.artwork-title,
+.blog-title {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+}
+
+.uses-desc,
+.achievement-detail,
+.contact-text,
+.blog-excerpt,
+.blog-post-body p {
+    color: var(--text-dim);
+}
+
+.artwork-grid {
+    column-gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.artwork-card {
+    border-radius: 1rem;
+}
+
+.artwork-img {
+    filter: saturate(0.78) contrast(1.02);
+}
+
+.artwork-card:hover .artwork-img {
+    filter: saturate(1) contrast(1.04);
+}
+
+.cert-tabs,
+.timeline-filters,
+.timeline-toolbar {
+    gap: 0.6rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.cert-tabs a,
+.tl-filter,
+.timeline-chip {
+    border-color: var(--line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface-2) 76%, transparent);
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+}
+
+.cert-tabs a:hover,
+.tl-filter:hover,
+.timeline-chip:hover,
+.timeline-chip--active,
+.tl-filter--on {
+    border-color: color-mix(in srgb, var(--green) 50%, var(--line));
+    background: color-mix(in srgb, var(--green) 10%, transparent);
+    color: var(--text);
+}
+
+.cert-section {
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.cert-section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.9rem;
+    border-bottom-color: var(--line);
+}
+
+.cert-group {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.cert-org-label {
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.blog {
+    padding-top: 0;
+}
+
+.blog-list {
+    border-top-color: var(--line-bright);
+}
+
+.blog-row {
+    position: relative;
+    padding: clamp(1.25rem, 3vw, 2rem) 0;
+    border-bottom-color: var(--line);
+    transition: background 250ms ease, padding-inline 350ms var(--ease-editorial);
+}
+
+.blog-row:hover,
+.blog-row:focus-visible {
+    padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+    background: color-mix(in srgb, var(--surface-2) 65%, transparent);
+}
+
+.blog-tag {
+    border-radius: 999px;
+    border-color: color-mix(in srgb, var(--green) 40%, var(--line));
+    color: color-mix(in srgb, var(--green) 70%, var(--text-dim));
+}
+
+.blog-post-header {
+    max-width: 58rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom-color: var(--line-bright);
+}
+
+.blog-post-title {
+    max-width: 12ch;
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 560;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+}
+
+.blog-post-body {
+    max-width: 68ch;
+}
+
+.blog-post-body h2,
+.blog-post-body h3 {
+    margin-top: 3rem;
+    color: var(--text);
+}
+
+.blog-post-body pre {
+    border-radius: 1rem;
+    border-color: var(--line);
+    background: var(--surface-2);
+}
+
+.contact-grid {
+    gap: clamp(2rem, 6vw, 6rem);
+}
+
+.contact-form {
+    gap: 1.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+    min-height: 3.3rem;
+    border-radius: 0.75rem;
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--surface-2) 74%, transparent);
+    padding: 0.9rem 1rem;
+}
+
+.form-group textarea {
+    min-height: 9rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: color-mix(in srgb, var(--green) 68%, var(--line));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 12%, transparent);
+}
+
+.contact-sidebar {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+}
+
+.contact-text {
+    max-width: 20ch;
+    font-size: clamp(1.35rem, 3vw, 2.2rem);
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+}
+
+.contact-links a {
+    border-radius: 999px;
+    border-color: var(--line);
+    background: transparent;
+}
+
+.contact-links a:hover {
+    border-color: var(--green);
+    background: color-mix(in srgb, var(--green) 10%, transparent);
+}
+
+.notfound-wrap {
+    min-height: 78vh;
+    padding-top: 8rem;
+}
+
+.notfound-terminal {
+    border-radius: 1rem;
+    border-color: var(--line-bright);
+    background: var(--surface-2);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 720px) {
+    .page-wrapper {
+        width: min(100% - 1.25rem, 100%);
+        padding-top: 6rem;
+    }
+
+    .page-wrapper::before {
+        background-size: 64px 64px;
+    }
+
+    .page-header {
+        min-height: 7rem;
+        margin-bottom: 3rem;
+    }
+
+    .section-heading h2 {
+        font-size: clamp(2.5rem, 13vw, 4.25rem);
+    }
+
+    .contact-sidebar {
+        min-height: 17rem;
+    }
+
+    .blog-row {
+        grid-template-columns: 1fr 1fr;
+        padding-block: 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .artwork-card,
+    .uses-group,
+    .achievement-card,
+    .timeline-card,
+    .blog-row {
+        transition: none;
+    }
+}
