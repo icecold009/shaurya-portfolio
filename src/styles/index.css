@@ -30,9 +30,6 @@
 @import "./pages/blog.css";
 @import "./pages/not-found.css";
 
-/* Display type */
-@import "./components/heading-type.css";
-
 /* Utilities */
 @import "./utilities/animations.css";
 @import "./utilities/accessibility.css";
