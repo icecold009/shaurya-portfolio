@@ -387,7 +387,15 @@ function ProjectCaseStudy({ project }) {
             </div>
 
             <div className="case-study-heading">
-                <h3>{project.title}</h3>
+                <h3
+                    className={
+                        project.number === "02" || project.number === "04"
+                            ? "heading-italic"
+                            : undefined
+                    }
+                >
+                    {project.title}
+                </h3>
 
                 {project.github ? (
                     <a

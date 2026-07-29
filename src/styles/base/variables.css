@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
@@ -10,8 +10,8 @@
     --line-bright: #2a4a2a;
 
     --text: #e1f5e1;
-    --text-dim: #9db89d;
-    --text-faint: #6d8a6d;
+    --text-dim: #abc6ab;
+    --text-faint: #85a185;
 
     --green: #00ff41;
     --green-dim: #00c832;
@@ -20,14 +20,14 @@
     --max-width: 1260px;
 
     --sans:
-        "Inter",
+        "Archivo",
         "Helvetica Neue",
         Helvetica,
         Arial,
         sans-serif;
 
     --mono:
-        "JetBrains Mono",
+        "IBM Plex Mono",
         "Courier New",
         monospace;
 
@@ -50,8 +50,8 @@
 
     /* Navy text */
     --text: #172033;
-    --text-dim: #4f5e75;
-    --text-faint: #7a8699;
+    --text-dim: #40506a;
+    --text-faint: #5d6b82;
 
     /* Blue accent */
     --green: #2563eb;

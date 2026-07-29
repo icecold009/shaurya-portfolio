@@ -148,6 +148,72 @@ export default function Hero() {
                     <span>2024–2026</span>
                     <span>Explore the site</span>
                 </motion.div>
+
+                <motion.section
+                    className="hero-report-deck"
+                    variants={
+                        shouldReduceMotion
+                            ? undefined
+                            : REVEAL
+                    }
+                    aria-labelledby="hero-report-deck-title"
+                >
+                    <div className="hero-report-deck-heading">
+                        <span className="hero-report-deck-label">Reading list / 02</span>
+                        <h2 id="hero-report-deck-title">
+                            My favourite <em>reports.</em>
+                        </h2>
+                    </div>
+
+                    <div className="hero-report-cards">
+                        <a
+                            className="hero-report-card hero-report-card--plan-a"
+                            href="https://ai-2040.com/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <div className="hero-report-card-topline">
+                                <span>AI 2040</span>
+                                <span>01</span>
+                            </div>
+                            <div className="hero-report-card-content">
+                                <p className="hero-report-card-source">AI Futures Project</p>
+                                <h3>Plan A</h3>
+                                <p>
+                                    A constructive scenario for slowing the race to
+                                    superintelligence through transparency, coordination,
+                                    and shared guardrails.
+                                </p>
+                            </div>
+                            <span className="hero-report-card-link">
+                                Read the report <span aria-hidden="true">↗</span>
+                            </span>
+                        </a>
+
+                        <a
+                            className="hero-report-card hero-report-card--ai-2027"
+                            href="https://ai-2027.com/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <div className="hero-report-card-topline">
+                                <span>AI 2027</span>
+                                <span>02</span>
+                            </div>
+                            <div className="hero-report-card-content">
+                                <p className="hero-report-card-source">AI Futures Project</p>
+                                <h3>A scenario, not a prophecy.</h3>
+                                <p>
+                                    A concrete forecast of how superhuman AI could reshape
+                                    the next decade, with slowdown and race endings to test.
+                                </p>
+                            </div>
+                            <span className="hero-report-card-link">
+                                Read the report <span aria-hidden="true">↗</span>
+                            </span>
+                        </a>
+                    </div>
+                </motion.section>
             </motion.div>
         </section>
     );

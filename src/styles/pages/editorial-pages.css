@@ -146,6 +146,12 @@
     letter-spacing: -0.025em;
 }
 
+.blog-title.heading-italic {
+    color: color-mix(in srgb, var(--green) 54%, var(--text));
+    font-style: italic;
+    font-weight: 430;
+}
+
 .uses-desc,
 .achievement-detail,
 .contact-text,
@@ -381,5 +387,118 @@
     .timeline-card,
     .blog-row {
         transition: none;
+    }
+}
+
+/* Shared readable metadata */
+.section-label,
+.uses-group-title,
+.achievement-category,
+.cert-org-label,
+.cert-tabs a,
+.tl-filter,
+.timeline-chip {
+    font-size: 0.72rem;
+}
+
+.editorial-hero-topline,
+.editorial-hero-index,
+.about-editorial__topline,
+.about-editorial__index,
+.contact-topline,
+.contact-ending__index,
+.footer-eyebrow {
+    font-size: 0.70rem;
+}
+
+.hero-report-deck-label,
+.hero-report-card-topline,
+.hero-report-card-source,
+.about-editorial__facts dt,
+.about-editorial__section-heading span,
+.about-editorial__section-heading p,
+.about-editorial__principle-number,
+.about-editorial__stack-row h2,
+.about-editorial__links a small,
+.contact-column-heading,
+.form-group label,
+.contact-availability span,
+.blog-row .blog-tag,
+.contact-ending__eyebrow,
+.footer-eyebrow {
+    font-size: 0.68rem;
+}
+
+.blog-archive-rail,
+.blog-post-rail,
+.blog-post-kicker,
+.blog-featured-label,
+.blog-list-heading,
+.blog-featured-meta,
+.blog-featured-footer,
+.blog-row-meta,
+.blog-reading-time,
+.blog-post-aside,
+.achievements-rail,
+.achievement-group-heading,
+.achievements-overview,
+.achievement-card-header,
+.project-index__heading,
+.project-index__item > span,
+.project-index__item > small,
+.case-study-meta,
+.case-study-detail span,
+.case-study-stack span,
+.project-details-heading > span,
+.selected-work-header::before {
+    font-size: 0.71rem;
+}
+
+.nav-brand-copy small,
+.mobile-nav-identity small,
+.desktop-more-label,
+.mobile-nav-section-label,
+.mobile-link-index,
+.contact-ending__nav > p,
+.contact-ending__social > p,
+.footer-nav > p,
+.footer-explore > p,
+.footer-social > p,
+.contact-ending__bottom p,
+.footer-bottom p {
+    font-size: 0.64rem;
+}
+
+@media (max-width: 720px) {
+    .editorial-hero-topline,
+    .editorial-hero-index,
+    .about-editorial__topline,
+    .about-editorial__index,
+    .contact-topline,
+    .contact-ending__index,
+    .footer-eyebrow,
+    .achievements-rail {
+        font-size: 0.66rem;
+    }
+
+    .hero-report-deck-label,
+    .hero-report-card-topline,
+    .hero-report-card-source,
+    .about-editorial__facts dt,
+    .about-editorial__section-heading span,
+    .about-editorial__section-heading p,
+    .about-editorial__principle-number,
+    .about-editorial__stack-row h2,
+    .about-editorial__links a small,
+    .contact-column-heading,
+    .form-group label,
+    .contact-availability span,
+    .blog-row .blog-tag,
+    .contact-ending__eyebrow {
+        font-size: 0.64rem;
+    }
+
+    .achievements-overview span {
+        font-size: 0.62rem;
     }
 }
