@@ -10,8 +10,8 @@
     --line-bright: #2a4a2a;
 
     --text: #e1f5e1;
-    --text-dim: #9db89d;
-    --text-faint: #6d8a6d;
+    --text-dim: #abc6ab;
+    --text-faint: #85a185;
 
     --green: #00ff41;
     --green-dim: #00c832;
@@ -50,8 +50,8 @@
 
     /* Navy text */
     --text: #172033;
-    --text-dim: #4f5e75;
-    --text-faint: #7a8699;
+    --text-dim: #40506a;
+    --text-faint: #5d6b82;
 
     /* Blue accent */
     --green: #2563eb;
