@@ -26,7 +26,8 @@ body {
     font-weight: 400;
     line-height: 1.65;
 
-    font-synthesis: none;
+    /* The selected font has no italic face; allow CSS to visibly synthesize it. */
+    font-synthesis: style;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
