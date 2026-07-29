@@ -12,6 +12,15 @@
     mask-image: radial-gradient(ellipse at center, black 42%, transparent 78%);
 }
 
+@media (min-width: 901px) {
+    .interactive-portrait {
+        top: 17%;
+        right: clamp(6rem, 10vw, 12rem);
+        width: min(30vw, 28rem);
+        height: min(42vw, 34rem);
+    }
+}
+
 .interactive-portrait canvas {
     display: block;
     width: 100%;
@@ -21,10 +30,10 @@
 
 @media (max-width: 900px) {
     .interactive-portrait {
-        top: 31%;
-        right: 0;
-        width: min(38vw, 20rem);
-        height: min(56vw, 25rem);
+        top: 20%;
+        right: clamp(1rem, 7vw, 4rem);
+        width: min(48vw, 24rem);
+        height: min(68vw, 30rem);
         opacity: 0.78;
     }
 }
