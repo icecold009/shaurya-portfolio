@@ -24,7 +24,7 @@ export default function BlogPage() {
             </div>
 
             <div className="blog-list">
-                {posts.map((post) => (
+                    {posts.map((post, index) => (
                     <article
                         key={post.slug}
                         className="blog-row"
@@ -39,7 +39,13 @@ export default function BlogPage() {
                     >
                         <span className="blog-date">{post.date}</span>
                         <span className="blog-tag">{post.tag}</span>
-                        <h3 className="blog-title">{post.title}</h3>
+                        <h3
+                            className={`blog-title ${
+                                index === 1 ? "heading-italic" : ""
+                            }`}
+                        >
+                            {post.title}
+                        </h3>
                         <p className="blog-excerpt">{post.excerpt}</p>
                     </article>
                 ))}

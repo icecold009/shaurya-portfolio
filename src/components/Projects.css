@@ -115,6 +115,12 @@
     line-height: 0.92;
 }
 
+.case-study-heading h3.heading-italic {
+    color: color-mix(in srgb, var(--green) 54%, var(--text));
+    font-style: italic;
+    font-weight: 430;
+}
+
 .case-study-heading>a {
     flex: 0 0 auto;
     display: inline-flex;

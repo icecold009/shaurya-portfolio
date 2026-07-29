@@ -382,6 +382,12 @@
     text-transform: uppercase;
 }
 
+.about-editorial__stack-row h2.heading-italic {
+    color: color-mix(in srgb, var(--green) 54%, var(--text-faint));
+    font-style: italic;
+    font-weight: 430;
+}
+
 .about-editorial__stack-row p {
     margin: 0;
 

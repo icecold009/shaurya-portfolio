@@ -146,6 +146,12 @@
     letter-spacing: -0.025em;
 }
 
+.blog-title.heading-italic {
+    color: color-mix(in srgb, var(--green) 54%, var(--text));
+    font-style: italic;
+    font-weight: 430;
+}
+
 .uses-desc,
 .achievement-detail,
 .contact-text,

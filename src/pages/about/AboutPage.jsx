@@ -341,7 +341,15 @@ export default function AboutPage() {
                                     className="about-editorial__stack-row"
                                     key={group.label}
                                 >
-                                    <h2>{group.label}</h2>
+                                    <h2
+                                        className={
+                                            group.label === "AI and data"
+                                                ? "heading-italic"
+                                                : undefined
+                                        }
+                                    >
+                                        {group.label}
+                                    </h2>
 
                                     <p>
                                         {group.tools.join(" · ")}
