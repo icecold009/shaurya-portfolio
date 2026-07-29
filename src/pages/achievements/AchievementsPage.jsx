@@ -2,10 +2,7 @@ import Achievements from '../../components/Achievements';
 
 export default function AchievementsPage() {
     return (
-        <div className="page-wrapper">
-            <div className="page-header">
-                <p className="page-breadcrumb">achievements</p>
-            </div>
+        <div className="page-wrapper achievements-page-shell">
             <Achievements />
         </div>
     );
