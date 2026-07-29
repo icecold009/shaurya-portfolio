@@ -1,0 +1,59 @@
+/* Dense, editorial display type for the portfolio's major headings. */
+
+.editorial-hero-title,
+.about-editorial__title,
+.selected-work-header h2,
+.section-heading h2,
+.case-study-heading h3,
+.contact-ending__heading h2 {
+    font-family: var(--sans);
+    font-weight: 720;
+    letter-spacing: -0.085em;
+    line-height: 0.86;
+}
+
+.section-heading h2 {
+    line-height: 0.9;
+}
+
+.about-editorial__principle h2,
+.about-editorial__stack-row h2,
+.blog-title,
+.blog-post-title {
+    font-family: var(--sans);
+    font-weight: 680;
+    letter-spacing: -0.055em;
+}
+
+.about-editorial__principle h2 {
+    line-height: 0.94;
+}
+
+.blog-title,
+.blog-post-title {
+    line-height: 0.98;
+}
+
+.editorial-hero-title span,
+.about-editorial__title span,
+.selected-work-header h2 span,
+.section-heading h2 em,
+.case-study-heading h3.heading-italic,
+.about-editorial__principle h2 em,
+.about-editorial__stack-row h2.heading-italic,
+.blog-title.heading-italic,
+.contact-ending__heading h2 span {
+    font-weight: 480;
+    letter-spacing: -0.075em;
+}
+
+@media (max-width: 600px) {
+    .editorial-hero-title,
+    .about-editorial__title,
+    .selected-work-header h2,
+    .section-heading h2,
+    .case-study-heading h3,
+    .contact-ending__heading h2 {
+        letter-spacing: -0.07em;
+    }
+}

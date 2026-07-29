@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
@@ -20,14 +20,14 @@
     --max-width: 1260px;
 
     --sans:
-        "Inter",
+        "Archivo",
         "Helvetica Neue",
         Helvetica,
         Arial,
         sans-serif;
 
     --mono:
-        "JetBrains Mono",
+        "IBM Plex Mono",
         "Courier New",
         monospace;
 
