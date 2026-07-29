@@ -29,7 +29,7 @@ function Contact() {
         <section className="contact" id="contact">
             <div className="section-heading">
                 <p className="section-label">Contact</p>
-                <h2>Let's build something useful.</h2>
+                <h2>Let's <em>build something useful.</em></h2>
             </div>
             <div className="contact-grid">
                 <form className="contact-form" onSubmit={handleSubmit}>

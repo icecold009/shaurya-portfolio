@@ -57,7 +57,7 @@ export default function UsesPage() {
             <section className="uses-section">
                 <div className="section-heading">
                     <p className="section-label">Setup</p>
-                    <h2>What I use to build things.</h2>
+                    <h2>What I use to <em>build things.</em></h2>
                 </div>
                 <div className="uses-grid">
                     {uses.map((group) => (

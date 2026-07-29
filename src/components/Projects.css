@@ -1784,6 +1784,11 @@
     white-space: nowrap;
 }
 
+.project-browser-heading h3 em {
+    font-style: italic;
+    font-weight: 430;
+}
+
 .project-browser-hint {
     position: absolute;
     right: 0;

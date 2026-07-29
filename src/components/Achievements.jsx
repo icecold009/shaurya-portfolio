@@ -141,7 +141,7 @@ function Achievements() {
         <section className="achievements" id="achievements">
             <div className="section-heading">
                 <p className="section-label">Achievements</p>
-                <h2>Competitions, awards, and recognition.</h2>
+                <h2>Competitions, <em>awards,</em> and recognition.</h2>
             </div>
 
             <div className="achievements-body">

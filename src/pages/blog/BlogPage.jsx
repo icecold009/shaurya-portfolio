@@ -20,7 +20,7 @@ export default function BlogPage() {
         <section className="blog" id="blog">
             <div className="section-heading">
                 <p className="section-label">Writing</p>
-                <h2>Things I've figured out.</h2>
+                <h2>Things I've <em>figured out.</em></h2>
             </div>
 
             <div className="blog-list">

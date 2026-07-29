@@ -32,7 +32,7 @@ export default function ArtworkPage() {
             <section className="artwork-section">
                 <div className="section-heading">
                     <p className="section-label">Creative Work</p>
-                    <h2>Things I make outside of code.</h2>
+                    <h2>Things I make <em>outside of code.</em></h2>
                 </div>
                 <div className="artwork-grid">
                     {pieces.map((p, i) => (

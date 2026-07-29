@@ -333,6 +333,12 @@
     line-height: 1.08;
 }
 
+.about-editorial__principle h2 em {
+    color: color-mix(in srgb, var(--green) 54%, var(--text));
+    font-style: italic;
+    font-weight: 430;
+}
+
 .about-editorial__principle p {
     max-width: 38rem;
     margin: 0;

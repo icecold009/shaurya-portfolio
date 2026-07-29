@@ -17,19 +17,19 @@ import "./AboutPage.css";
 const principles = [
     {
         number: "01",
-        title: "Clarity before complexity",
+        title: <>Clarity before <em>complexity</em></>,
         description:
             "I prefer simple interfaces, understandable systems and deliberate decisions over unnecessary abstraction.",
     },
     {
         number: "02",
-        title: "Build end to end",
+        title: <>Build <em>end to end</em></>,
         description:
             "I enjoy moving across product thinking, frontend interaction, backend logic, databases and deployment.",
     },
     {
         number: "03",
-        title: "Ship and improve",
+        title: <>Ship and <em>improve</em></>,
         description:
             "Working software creates better questions. I build, observe what works and refine from real feedback.",
     },

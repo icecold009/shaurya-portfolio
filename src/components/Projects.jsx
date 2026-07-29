@@ -473,7 +473,7 @@ function ProjectFolderBrowser() {
             <div className="project-browser-heading">
                 <div>
                     <p className="selected-work-kicker">Project index</p>
-                    <h3>Browse the archive.</h3>
+                    <h3>Browse the <em>archive.</em></h3>
                 </div>
                 <span className="project-browser-hint">
                     <ArrowRight size={15} aria-hidden="true" />
