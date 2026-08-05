@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="#0D0D18"/>
+  <rect x="52" y="48" width="536" height="324" rx="20" fill="#0C0C1B" stroke="#A19BFF" stroke-opacity=".35"/>
+  <text x="84" y="91" fill="#F0EFFF" font-family="Arial" font-size="15" font-weight="700">TOKEN SMART ROUTER</text>
+  <text x="84" y="127" fill="#A19BFF" font-family="Arial" font-size="12">ROUTING POLICY ACTIVE</text>
+  <rect x="84" y="178" width="150" height="78" rx="12" fill="#191932" stroke="#A19BFF" stroke-opacity=".5"/>
+  <text x="104" y="203" fill="#B8B4FF" font-family="Arial" font-size="11">PROMPT</text>
+  <text x="104" y="229" fill="#F0EFFF" font-family="Arial" font-size="14" font-weight="700">Explain recursion</text>
+  <path d="M234 217H295M295 217V178H355M295 217V256H355" stroke="#A19BFF" stroke-opacity=".7"/>
+  <rect x="355" y="145" width="174" height="64" rx="12" fill="#10251F" stroke="#65E9A6" stroke-opacity=".6"/>
+  <text x="375" y="171" fill="#65E9A6" font-family="Arial" font-size="11">LOCAL ROUTE</text>
+  <text x="375" y="192" fill="#F0EFFF" font-family="Arial" font-size="13" font-weight="700">0 tokens spent</text>
+  <rect x="355" y="227" width="174" height="64" rx="12" fill="#2A1C18" stroke="#FFA45F" stroke-opacity=".6"/>
+  <text x="375" y="253" fill="#FFA45F" font-family="Arial" font-size="11">FIREWORKS ROUTE</text>
+  <text x="375" y="274" fill="#F0EFFF" font-family="Arial" font-size="13" font-weight="700">Deep reasoning</text>
+  <text x="84" y="338" fill="#6FE9AD" font-family="Arial" font-size="12">92% LOCAL CONFIDENCE · ROUTE: LOCAL</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="#081016"/>
+  <rect x="52" y="48" width="536" height="324" rx="20" fill="#0B151B" stroke="#76CAFF" stroke-opacity=".3"/>
+  <text x="84" y="91" fill="#DDF4FF" font-family="Arial" font-size="15" font-weight="700">LOCAL CAMERA / 01</text>
+  <circle cx="548" cy="84" r="5" fill="#65E9A6"/>
+  <rect x="84" y="120" width="334" height="190" rx="14" fill="#203542"/>
+  <rect x="154" y="155" width="76" height="104" rx="8" stroke="#65E9A6" stroke-width="3"/>
+  <circle cx="192" cy="187" r="18" stroke="#DFFFEF"/>
+  <rect x="287" y="145" width="76" height="104" rx="8" stroke="#76CAFF" stroke-width="3"/>
+  <circle cx="325" cy="177" r="18" stroke="#DFF4FF"/>
+  <rect x="438" y="120" width="118" height="190" rx="14" fill="#14242B"/>
+  <text x="458" y="150" fill="#9BB9C5" font-family="Arial" font-size="11">TODAY</text>
+  <text x="458" y="202" fill="#EFFBFF" font-family="Arial" font-size="32" font-weight="700">12/18</text>
+  <text x="458" y="224" fill="#65E9A6" font-family="Arial" font-size="11">PRESENT</text>
+  <rect x="84" y="337" width="472" height="1" fill="#76CAFF" fill-opacity=".3"/>
+  <text x="84" y="357" fill="#9BB9C5" font-family="Arial" font-size="11">RECOGNITION FEED · 05 FPS</text>
+</svg>

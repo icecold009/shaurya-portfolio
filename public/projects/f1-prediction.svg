@@ -1,0 +1,13 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="#160D12"/>
+  <rect x="52" y="48" width="536" height="324" rx="20" fill="#140E12" stroke="#FF7481" stroke-opacity=".3"/>
+  <text x="84" y="91" fill="#FFE7EA" font-family="Arial" font-size="13">2024 FORECAST / ROLLING ORIGIN</text>
+  <text x="84" y="126" fill="#FFF1F3" font-family="Arial" font-size="28" font-weight="700">Championship outlook</text>
+  <rect x="472" y="72" width="88" height="30" rx="15" fill="#FF7481" fill-opacity=".13" stroke="#FF7481" stroke-opacity=".4"/>
+  <text x="492" y="92" fill="#FF9CA8" font-family="Arial" font-size="12">ρ 0.832</text>
+  <path d="M92 273H548M92 219H548M92 165H548" stroke="white" stroke-opacity=".1"/>
+  <path d="M92 271C142 250 159 207 206 219C251 230 280 177 325 194C370 211 400 151 450 170C493 185 518 132 548 142V296H92V271Z" fill="#FF5769" fill-opacity=".16"/>
+  <path d="M92 271C142 250 159 207 206 219C251 230 280 177 325 194C370 211 400 151 450 170C493 185 518 132 548 142" stroke="#FF7481" stroke-width="3" stroke-linecap="round"/>
+  <text x="84" y="338" fill="#FF9CA8" font-family="Arial" font-size="12">01  VERSTAPPEN</text>
+  <text x="457" y="338" fill="#FF9CA8" font-family="Arial" font-size="12">312 PTS</text>
+</svg>

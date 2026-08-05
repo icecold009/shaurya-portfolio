@@ -31,16 +31,16 @@ const projects = [
     {
         number: "02",
         year: "2025",
-        category: "Audio · Machine learning · Web",
-        title: "Music Recognition System",
+        category: "Audio · Python · Flask",
+        title: "Audio Recognition",
         description:
-            "A Shazam-style recognition system that records audio in the browser, creates frequency fingerprints and matches them against stored songs.",
+            "A DIY Shazam that accepts microphone recordings or uploads, normalizes the audio and identifies tracks through multiple matching backends.",
         contribution:
-            "I built the complete pipeline from microphone capture and audio processing to the Python matching API and Supabase fingerprint database.",
+            "I built the shared audio pipeline, Flask browser UI and CLI flow, then added provider adapters alongside a local spectrogram and constellation-hash matcher.",
         outcome:
-            "A working browser-based recognition flow capable of returning likely song matches from short audio samples.",
-        stack: ["Python", "FastAPI", "React", "FFT", "Supabase"],
-        github: "https://github.com/icecold009/music-recognition",
+            "One same-origin application for microphone and file recognition, with bounded input handling, normalized results and honest no-match states.",
+        stack: ["Python", "Flask", "FFmpeg", "Fingerprinting", "Docker"],
+        github: "https://github.com/icecold009/Audio-Recognition",
         visual: "music",
         thumbnail: "/projects/music-recognition.svg",
         accent: "02",
@@ -56,46 +56,79 @@ const projects = [
             "I designed the experience around real revision problems, including question extraction, topic filtering and mark-scheme-aware feedback.",
         outcome:
             "A more direct way for students to navigate papers, practise specific topics and understand how their answers can improve.",
-        stack: ["React", "Gemini", "PDF parsing", "Vercel"],
+        stack: ["Python", "Gemini", "PDF parsing", "Flask"],
         github: "https://github.com/icecold009/past-paper-ai",
         visual: "paper",
         thumbnail: "/projects/past-paper-ai.svg",
         accent: "03",
     },
-    // Placeholder entries: replace the fields below with future work.
     {
         number: "04",
         year: "2026",
-        category: "Placeholder Â· Replace me",
-        title: "Your next project",
+        category: "Full-stack · Web · Data",
+        title: "Movie Tracker",
         description:
-            "Replace this text with the problem, product or experiment you want to document next.",
+            "A personal watch tracker for movies and series, with TMDB metadata, structured ratings, watch status and an explainable recommendation baseline.",
         contribution:
-            "Add your role here: what you designed, built, researched or shipped.",
+            "I built the Flask and PostgreSQL application, protected the admin mutation boundary, added the editorial watchlist UI and shipped the canonical Vercel deployment.",
         outcome:
-            "Add the result here: what changed, who it helped and what you learned.",
-        stack: ["Add stack", "Add tool"],
-        github: null,
-        visual: "placeholder",
-        thumbnail: "/projects/placeholder-04.svg",
+            "A live, responsive watchlist with separate public and admin experiences, TMDB-backed cover art and deterministic recommendations that stay transparent about their limits.",
+        stack: ["Flask", "PostgreSQL", "Supabase", "TMDB", "Vercel"],
+        github: "https://github.com/icecold009/movie-tracker",
+        visual: "movie",
+        thumbnail: "/projects/movie-tracker.svg",
         accent: "04",
     },
     {
         number: "05",
         year: "2026",
-        category: "Placeholder Â· Replace me",
-        title: "Another project",
+        category: "Computer vision · Offline · Flask",
+        title: "Face Attendance System",
         description:
-            "A second editable slot for a project, case study or creative experiment.",
+            "A local-first face recognition system that turns a webcam into a live attendance dashboard without requiring a cloud service.",
         contribution:
-            "Describe the specific contribution you made to this work.",
+            "I built the Flask dashboard, enrollment workflow, live recognition loop, attendance deduplication and CSV reporting path, with a dependency-safe fallback for development.",
         outcome:
-            "Describe the outcome, metric or insight worth sharing.",
-        stack: ["Add stack", "Add tool"],
-        github: null,
-        visual: "placeholder",
-        thumbnail: "/projects/placeholder-05.svg",
+            "A self-contained workflow for enrolling people, recognizing faces at the camera and producing daily records while keeping the runtime local and inspectable.",
+        stack: ["Python", "OpenCV", "Flask", "face-recognition", "CSV"],
+        github: "https://github.com/icecold009/face-attendance-opencv-python",
+        visual: "attendance",
+        thumbnail: "/projects/face-attendance.svg",
         accent: "05",
+    },
+    {
+        number: "06",
+        year: "2026",
+        category: "Data science · ML · Evaluation",
+        title: "F1 Championship Prediction",
+        description:
+            "A chronological forecasting project that estimates final Formula 1 standings from prior-season driver, constructor and reliability signals.",
+        contribution:
+            "I designed the leak-aware feature pipeline, rolling-origin evaluation and report generation so every forecast can be traced back to an earlier season.",
+        outcome:
+            "A reproducible benchmark that treats the previous-points ranking as a serious baseline instead of hiding when a more complex model underperforms it.",
+        stack: ["Python", "Pandas", "scikit-learn", "Jupyter", "Pytest"],
+        github: "https://github.com/icecold009/f1-championship-prediction",
+        visual: "f1",
+        thumbnail: "/projects/f1-prediction.svg",
+        accent: "06",
+    },
+    {
+        number: "07",
+        year: "2026",
+        category: "AI · Routing · Full-stack",
+        title: "Token Smart Router",
+        description:
+            "An AI routing layer that answers simple prompts locally and sends genuinely complex requests to a configured Fireworks model.",
+        contribution:
+            "I built the React/Vite interface, Express API and Docker workflow around a deliberately small routing policy that makes the cost decision visible.",
+        outcome:
+            "A focused prototype for reducing unnecessary model calls while keeping a clear path from prompt classification to hosted inference.",
+        stack: ["React", "Express", "Docker", "Fireworks AI"],
+        github: "https://github.com/icecold009/token-smart-router",
+        visual: "router",
+        thumbnail: "/projects/token-router.svg",
+        accent: "07",
     },
 ];
 
@@ -287,15 +320,93 @@ function ProjectVisual({ type, shouldReduceMotion }) {
         );
     }
 
-    if (type === "placeholder") {
+    if (type === "movie") {
         return (
             <motion.div
-                className="case-study-mockup case-study-mockup-placeholder"
+                className="case-study-mockup case-study-mockup-movie"
                 {...visualMotionProps}
             >
-                <span>PROJECT PREVIEW</span>
-                <strong>Replace this visual</strong>
-                <small>Add an image, interface or experiment here.</small>
+                <div className="movie-interface">
+                    <div className="movie-topline">
+                        <div>
+                            <small>My watch tracker</small>
+                            <strong>Keep the good stories close.</strong>
+                        </div>
+                        <span>Admin view</span>
+                    </div>
+                    <div className="movie-stats">
+                        <article><small>Watched</small><strong>48</strong></article>
+                        <article><small>To watch</small><strong>16</strong></article>
+                        <article><small>Top tier</small><strong>08</strong></article>
+                    </div>
+                    <div className="movie-list">
+                        <div><span className="movie-poster movie-poster-one" /><p><strong>Past Lives</strong><small>Drama · 10/10</small></p><b>Watched</b></div>
+                        <div><span className="movie-poster movie-poster-two" /><p><strong>Arrival</strong><small>Science fiction · 9/10</small></p><b>Watched</b></div>
+                        <div><span className="movie-poster movie-poster-three" /><p><strong>Perfect Days</strong><small>Drama · Want to watch</small></p><b>Queue</b></div>
+                    </div>
+                </div>
+            </motion.div>
+        );
+    }
+
+    if (type === "attendance") {
+        return (
+            <motion.div
+                className="case-study-mockup case-study-mockup-attendance"
+                {...visualMotionProps}
+            >
+                <div className="attendance-interface">
+                    <div className="attendance-topline"><span>Local camera / 01</span><b>● live</b></div>
+                    <div className="attendance-grid">
+                        <div className="attendance-camera">
+                            <div className="attendance-face attendance-face-one"><span>ARJUN</span></div>
+                            <div className="attendance-face attendance-face-two"><span>MEERA</span></div>
+                            <div className="attendance-camera-label">Recognition feed · 05 fps</div>
+                        </div>
+                        <aside className="attendance-panel">
+                            <small>Today</small>
+                            <strong>12 / 18</strong>
+                            <span>present</span>
+                            <div className="attendance-progress"><i /></div>
+                            <p>One record per person, per day.</p>
+                        </aside>
+                    </div>
+                    <div className="attendance-log"><span>Latest mark</span><strong>Meera Kapoor</strong><small>09:42:18 · saved to CSV</small></div>
+                </div>
+            </motion.div>
+        );
+    }
+
+    if (type === "f1") {
+        return (
+            <motion.div
+                className="case-study-mockup case-study-mockup-f1"
+                {...visualMotionProps}
+            >
+                <div className="f1-interface">
+                    <div className="f1-header"><div><small>2024 forecast / rolling origin</small><strong>Championship outlook</strong></div><span>ρ 0.832</span></div>
+                    <div className="f1-chart"><div className="f1-chart-axis"><span>300 pts</span><span>150</span><span>0</span></div><svg viewBox="0 0 600 220" role="img" aria-label="Illustrative predicted championship points chart"><path className="f1-grid-line" d="M0 40H600M0 110H600M0 180H600" /><path className="f1-chart-fill" d="M0 180 C70 164 86 92 155 108 S255 56 320 77 S420 34 488 58 S545 25 600 32 L600 220 L0 220Z" /><path className="f1-chart-line" d="M0 180 C70 164 86 92 155 108 S255 56 320 77 S420 34 488 58 S545 25 600 32" /></svg></div>
+                    <div className="f1-table"><div><span>01</span><strong>Verstappen</strong><b>312 pts</b></div><div><span>02</span><strong>Norris</strong><b>278 pts</b></div><div><span>03</span><strong>Leclerc</strong><b>241 pts</b></div></div>
+                </div>
+            </motion.div>
+        );
+    }
+
+    if (type === "router") {
+        return (
+            <motion.div
+                className="case-study-mockup case-study-mockup-router"
+                {...visualMotionProps}
+            >
+                <div className="router-interface">
+                    <div className="router-topline"><span>Token Smart Router</span><small>routing policy active</small></div>
+                    <div className="router-flow">
+                        <div className="router-node router-input"><small>Prompt</small><strong>Explain recursion</strong><span>short / definitional</span></div>
+                        <div className="router-branch"><i /><i /></div>
+                        <div className="router-destinations"><div className="router-node router-local"><small>Local route</small><strong>Instant answer</strong><span>0 tokens spent</span></div><div className="router-node router-cloud"><small>Fireworks route</small><strong>Deep reasoning</strong><span>only when needed</span></div></div>
+                    </div>
+                    <div className="router-footer"><span>92% local confidence</span><b>route: local</b></div>
+                </div>
             </motion.div>
         );
     }
@@ -389,7 +500,7 @@ function ProjectCaseStudy({ project }) {
             <div className="case-study-heading">
                 <h3
                     className={
-                        project.number === "02" || project.number === "04"
+                        ["02", "04", "06"].includes(project.number)
                             ? "heading-italic"
                             : undefined
                     }
@@ -397,21 +508,15 @@ function ProjectCaseStudy({ project }) {
                     {project.title}
                 </h3>
 
-                {project.github ? (
-                    <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`View ${project.title} on GitHub`}
-                    >
-                        View repository
-                        <ArrowUpRight size={18} aria-hidden="true" />
-                    </a>
-                ) : (
-                    <span className="case-study-link--placeholder">
-                        Project link pending
-                    </span>
-                )}
+                <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`View ${project.title} on GitHub`}
+                >
+                    View repository
+                    <ArrowUpRight size={18} aria-hidden="true" />
+                </a>
             </div>
 
             <ProjectVisual
@@ -444,32 +549,26 @@ function ProjectCaseStudy({ project }) {
                     ))}
                 </div>
 
-                {project.github ? (
-                    <motion.a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="case-study-link"
-                        whileHover={
-                            shouldReduceMotion
-                                ? undefined
-                                : {
-                                    x: 6,
-                                    transition: {
-                                        duration: 0.35,
-                                        ease: EDITORIAL_EASE,
-                                    },
-                                }
-                        }
-                    >
-                        Explore project
-                        <ArrowUpRight size={18} aria-hidden="true" />
-                    </motion.a>
-                ) : (
-                    <span className="case-study-link case-study-link--placeholder">
-                        Add project link
-                    </span>
-                )}
+                <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="case-study-link"
+                    whileHover={
+                        shouldReduceMotion
+                            ? undefined
+                            : {
+                                x: 6,
+                                transition: {
+                                    duration: 0.35,
+                                    ease: EDITORIAL_EASE,
+                                },
+                            }
+                    }
+                >
+                    Explore project
+                    <ArrowUpRight size={18} aria-hidden="true" />
+                </motion.a>
             </div>
         </motion.article>
     );

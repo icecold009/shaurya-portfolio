@@ -1,0 +1,19 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="#211711"/>
+  <circle cx="532" cy="58" r="150" fill="#B86D48" fill-opacity=".22"/>
+  <rect x="52" y="48" width="536" height="324" rx="20" fill="#120F0D" stroke="#E8B27D" stroke-opacity=".35"/>
+  <text x="84" y="96" fill="#F8E9DA" font-family="Arial" font-size="15" font-weight="700">MY WATCH TRACKER</text>
+  <text x="84" y="132" fill="#FFF3E6" font-family="Arial" font-size="28" font-weight="700">Keep the good stories close.</text>
+  <rect x="84" y="170" width="140" height="104" rx="12" fill="#2A1C16"/>
+  <rect x="240" y="170" width="140" height="104" rx="12" fill="#2A1C16"/>
+  <rect x="396" y="170" width="140" height="104" rx="12" fill="#2A1C16"/>
+  <text x="104" y="198" fill="#C6A38B" font-family="Arial" font-size="12">WATCHED</text>
+  <text x="104" y="243" fill="#FFF3E6" font-family="Arial" font-size="38" font-weight="700">48</text>
+  <text x="260" y="198" fill="#C6A38B" font-family="Arial" font-size="12">TO WATCH</text>
+  <text x="260" y="243" fill="#FFF3E6" font-family="Arial" font-size="38" font-weight="700">16</text>
+  <text x="416" y="198" fill="#C6A38B" font-family="Arial" font-size="12">TOP TIER</text>
+  <text x="416" y="243" fill="#FFF3E6" font-family="Arial" font-size="38" font-weight="700">08</text>
+  <path d="M84 313H556" stroke="#E8B27D" stroke-opacity=".28"/>
+  <circle cx="103" cy="340" r="12" fill="#B86D48"/>
+  <text x="128" y="345" fill="#D7BCA7" font-family="Arial" font-size="13">Past Lives · 10/10</text>
+</svg>

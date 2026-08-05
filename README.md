@@ -9,8 +9,12 @@ https://shaurya-portfolio-sooty.vercel.app/
 ## Featured Projects
 
 - StadiumPulse AI
-- Music Recognition System
+- Audio Recognition
 - Past Paper AI
+- Movie Tracker
+- Face Attendance System
+- F1 Championship Prediction
+- Token Smart Router
 
 ## Features
 
