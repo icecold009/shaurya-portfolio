@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { formatPostDate, posts } from "../../posts/index.js";
 import BlogPostPage from "./BlogPostPage";
@@ -11,7 +12,11 @@ function openOnKeyboard(event, onOpen) {
 }
 
 function BlogPage() {
-    const [activeSlug, setActiveSlug] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const requestedSlug = searchParams.get("post");
+    const [activeSlug, setActiveSlug] = useState(() =>
+        posts.some((post) => post.slug === requestedSlug) ? requestedSlug : null
+    );
 
     if (activeSlug) {
         const post = posts.find((entry) => entry.slug === activeSlug);
@@ -19,7 +24,10 @@ function BlogPage() {
         return (
             <BlogPostPage
                 post={post}
-                onBack={() => setActiveSlug(null)}
+                onBack={() => {
+                    setActiveSlug(null);
+                    setSearchParams({});
+                }}
             />
         );
     }
@@ -38,11 +46,11 @@ function BlogPage() {
                 <div className="blog-archive-heading">
                     <div>
                         <p className="section-label">Field notes</p>
-                        <h2>Things I've <em>figured out.</em></h2>
+                        <h2>Notes from the <em>workbench.</em></h2>
                     </div>
                     <p className="blog-archive-description">
-                        Notes from building products, studying systems, and
-                        trying to make complicated things feel a little clearer.
+                        A running log of building, studying and learning in
+                        public—from model limits to the smallest useful version.
                     </p>
                 </div>
             </header>

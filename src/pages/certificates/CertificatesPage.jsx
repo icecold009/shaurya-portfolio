@@ -22,7 +22,7 @@ const sections = [
                         title: "IYMC Qualification Round",
                         year: "2025",
                         img: "/certificates/images/cert-IYMC-Qualification-Round.webp",
-                        pdf: "/certificates/pdfs/cert-IYMC-Qualifying-round.pdf",
+                        pdf: "/certificates/pdfs/cert-IYMC-Qualification-Round.pdf",
                     },
                     {
                         title: "IYMC Performance Report",
@@ -51,7 +51,7 @@ const sections = [
                         title: "MIT EWB Participant Certificate",
                         year: "2026",
                         img: "/certificates/images/cert-MIT-EWB-Participation.webp",
-                        pdf: "/certificates/pdfs/cert-MIT-EWB-Participant.pdf",
+                        pdf: "/certificates/pdfs/cert-MIT-EWB-Participation.pdf",
                     },
                 ],
             },
@@ -62,25 +62,25 @@ const sections = [
                         title: "NFO Stage Qualifier",
                         year: "2025",
                         img: "/certificates/images/cert-NFO-Stage-1.webp",
-                        pdf: "public/certificates/pdfs/cert-NFO-Stage-1.pdf",
+                        pdf: "/certificates/pdfs/cert-NFO-Stage-1.pdf",
                     },
                     {
                         title: "NFO Stage National",
                         year: "2026",
                         img: "/certificates/images/cert-NFO-Stage-National.webp",
-                        pdf: "public/certificates/pdfs/cert-NFO-Stage-National.pdf",
+                        pdf: "/certificates/pdfs/cert-NFO-Stage-National.pdf",
                     },
                     {
                         title: "NFO Stage Qualifier Performance Report",
                         year: "2025",
                         img: "/certificates/images/cert-NFO-Performance-Report-2025.webp",
-                        pdf: "public/certificates/pdfs/cert-NFO-Performance-Report-2025.pdf",
+                        pdf: "/certificates/pdfs/cert-NFO-Performance-Report-2025.pdf",
                     },
                     {
                         title: "NFO Stage National Performance Report",
                         year: "2026",
                         img: "/certificates/images/cert-NFO-Performance-Report-2026.webp",
-                        pdf: "public/certificates/pdfs/cert-NFO-Performance-Report-2026.pdf",
+                        pdf: "/certificates/pdfs/cert-NFO-Performance-Report-2026.pdf",
                     }
                 ],
             },
@@ -91,7 +91,7 @@ const sections = [
                         title: "Wharton Investment Competition",
                         year: "2025",
                         img: "/certificates/images/cert-Wharton-Investment-Competition.webp",
-                        pdf: "/certificates/pdfs/cert-Wharton-Investment-Competition.pdf",
+                        pdf: null,
                     },
                 ],
             },
@@ -159,7 +159,7 @@ const sections = [
                         title: "Data Science Certificate",
                         year: "2025",
                         img: "/certificates/images/cert-IIT-Madras-Data-Science.webp",
-                        pdf: "/certificates/pdfs/cert-IIT-Madras-Data-Science.pdf",
+                        pdf: null,
                     },
                 ],
             },
@@ -255,7 +255,7 @@ export default function CertificatesPage() {
 
             <section className="artwork-section">
                 <div className="section-heading">
-                    <p className="section-label">Credentials</p>
+                    <p className="section-label">Proof of the work</p>
                     <h2>Certificates &amp; <em>awards.</em></h2>
                 </div>
 

@@ -39,12 +39,12 @@ function Contact() {
             <div className="contact-topline" aria-hidden="true">
                 <span>Direct line</span>
                 <span>Bengaluru, India</span>
-                <span>Open to good problems</span>
+                <span>Open to thoughtful problems</span>
             </div>
 
             <div className="section-heading">
                 <p className="section-label">Start a conversation</p>
-                <h2>Let&apos;s <em>build something useful.</em></h2>
+                <h2>Let&apos;s <em>work on something real.</em></h2>
             </div>
 
             <div className="contact-grid">
@@ -83,7 +83,7 @@ function Contact() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="message">What are you working on?</label>
+                            <label htmlFor="message">What are you building or trying to understand?</label>
                             <textarea
                                 id="message"
                                 rows="5"
@@ -112,7 +112,9 @@ function Contact() {
                     </div>
 
                     <p className="contact-text">
-                        Open to internships, collabs, and interesting projects.
+                        I am especially interested in internships, research,
+                        AI and data products, and collaborations where the
+                        problem is worth understanding properly.
                     </p>
 
                     <div className="contact-links">
@@ -138,7 +140,7 @@ function Contact() {
 
                     <div className="contact-availability">
                         <span>Availability</span>
-                        <strong>Internships and thoughtful collaborations</strong>
+                        <strong>Internships · research · thoughtful collaborations</strong>
                     </div>
                 </aside>
             </div>
