@@ -14,6 +14,7 @@ const postModules = {
     "data-products-need-honesty": lazy(() =>
         import("../../posts/data-products-need-honesty.mdx")
     ),
+    "30-days-of-ai": lazy(() => import("../../posts/30-days-of-ai.mdx")),
     "smallest-useful-version": lazy(() =>
         import("../../posts/smallest-useful-version.mdx")
     ),

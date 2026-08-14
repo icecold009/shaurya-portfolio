@@ -40,6 +40,14 @@ export const posts = [
         excerpt: 'Good dashboards do not hide uncertainty; they give people enough context to make a better call.',
     },
     {
+        slug: '30-days-of-ai',
+        title: 'What 30 days of AI taught me',
+        date: '2026-02-28',
+        tag: 'Learning',
+        readingTime: '6 min read',
+        excerpt: 'A practical month of prompting, data workflows, automation, agents, and rapid prototyping.',
+    },
+    {
         slug: 'smallest-useful-version',
         title: 'Find the smallest useful version',
         date: '2026-01-01',

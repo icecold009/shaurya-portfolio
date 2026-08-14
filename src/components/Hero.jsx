@@ -212,6 +212,27 @@ export default function Hero() {
                                 Read the report <span aria-hidden="true">↗</span>
                             </span>
                         </a>
+
+                        <Link
+                            className="hero-report-card hero-report-card--30-days-ai"
+                            to="/blog?post=30-days-of-ai"
+                        >
+                            <div className="hero-report-card-topline">
+                                <span>30 Days of AI</span>
+                                <span>03</span>
+                            </div>
+                            <div className="hero-report-card-content">
+                                <p className="hero-report-card-source">Personal note · Feb 2026</p>
+                                <h3>From prompts to prototypes.</h3>
+                                <p>
+                                    What a month of prompting, data workflows, automation,
+                                    agents, and rapid prototyping changed in how I work.
+                                </p>
+                            </div>
+                            <span className="hero-report-card-link">
+                                Read the note <span aria-hidden="true">↗</span>
+                            </span>
+                        </Link>
                     </div>
                 </motion.section>
             </motion.div>

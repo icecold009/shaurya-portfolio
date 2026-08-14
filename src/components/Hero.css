@@ -228,7 +228,7 @@
 
 .hero-report-deck {
     align-self: flex-start;
-    width: min(100%, 43rem);
+    width: min(100%, 60rem);
     margin-top: clamp(3rem, 7vw, 6rem);
     pointer-events: auto;
 }
@@ -272,7 +272,7 @@
 
 .hero-report-cards {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(0.65rem, 1.5vw, 1rem);
     padding-top: 1rem;
 }
@@ -298,6 +298,10 @@
 
 .hero-report-card--plan-a {
     transform: rotate(-0.6deg);
+}
+
+.hero-report-card--30-days-ai {
+    transform: translateY(0.55rem) rotate(-0.7deg);
 }
 
 .hero-report-card:hover,
@@ -405,6 +409,10 @@
     .hero-report-deck {
         width: min(100%, 40rem);
     }
+
+    .hero-report-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 600px) {
@@ -488,7 +496,8 @@
 
     .hero-report-card,
     .hero-report-card--plan-a,
-    .hero-report-card--ai-2027 {
+    .hero-report-card--ai-2027,
+    .hero-report-card--30-days-ai {
         min-height: 14rem;
         transform: none;
     }
@@ -496,7 +505,9 @@
     .hero-report-card--ai-2027:hover,
     .hero-report-card--ai-2027:focus-visible,
     .hero-report-card--plan-a:hover,
-    .hero-report-card--plan-a:focus-visible {
+    .hero-report-card--plan-a:focus-visible,
+    .hero-report-card--30-days-ai:hover,
+    .hero-report-card--30-days-ai:focus-visible {
         transform: translateY(-0.35rem);
     }
 }

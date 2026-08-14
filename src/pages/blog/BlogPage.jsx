@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { formatPostDate, posts } from "../../posts/index.js";
 import BlogPostPage from "./BlogPostPage";
@@ -11,7 +12,11 @@ function openOnKeyboard(event, onOpen) {
 }
 
 function BlogPage() {
-    const [activeSlug, setActiveSlug] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const requestedSlug = searchParams.get("post");
+    const [activeSlug, setActiveSlug] = useState(() =>
+        posts.some((post) => post.slug === requestedSlug) ? requestedSlug : null
+    );
 
     if (activeSlug) {
         const post = posts.find((entry) => entry.slug === activeSlug);
@@ -19,7 +24,10 @@ function BlogPage() {
         return (
             <BlogPostPage
                 post={post}
-                onBack={() => setActiveSlug(null)}
+                onBack={() => {
+                    setActiveSlug(null);
+                    setSearchParams({});
+                }}
             />
         );
     }
