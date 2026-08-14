@@ -212,7 +212,7 @@ function Navbar() {
 
                         <span className="nav-brand-copy">
                             <strong>Shaurya</strong>
-                            <small>student developer</small>
+                            <small>AI + software builder</small>
                         </span>
                     </Link>
 
@@ -593,8 +593,8 @@ function Navbar() {
                                 <div>
                                     <span className="mobile-status-dot" />
                                     <p>
-                                        Open to internships and
-                                        collaborations
+                                        Open to internships, research
+                                        and collaborations
                                     </p>
                                 </div>
 

@@ -70,9 +70,8 @@ export default function Footer() {
                     <Link to="/">Shaurya Saria</Link>
 
                     <p>
-                        Student developer building full-stack
-                        applications, AI tools and thoughtful digital
-                        experiences.
+                        Bengaluru-based student developer working across
+                        machine learning, full-stack products and interfaces.
                     </p>
                 </div>
 

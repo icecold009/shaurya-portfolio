@@ -17,21 +17,21 @@ import "./AboutPage.css";
 const principles = [
     {
         number: "01",
-        title: <>Clarity before <em>complexity</em></>,
+        title: <>Start with the real <em>question</em></>,
         description:
-            "I prefer simple interfaces, understandable systems and deliberate decisions over unnecessary abstraction.",
+            "I define the user, the input and the smallest useful outcome before reaching for a larger stack.",
     },
     {
         number: "02",
-        title: <>Build <em>end to end</em></>,
+        title: <>Make the system <em>explain itself</em></>,
         description:
-            "I enjoy moving across product thinking, frontend interaction, backend logic, databases and deployment.",
+            "I want the interface, model, data path and failure state to be understandable—not just the happy path.",
     },
     {
         number: "03",
-        title: <>Ship and <em>improve</em></>,
+        title: <>Keep the first version <em>small</em></>,
         description:
-            "Working software creates better questions. I build, observe what works and refine from real feedback.",
+            "A focused prototype creates better evidence than a polished idea that has never met a real user or input.",
     },
 ];
 
@@ -95,6 +95,12 @@ const profileLinks = [
         value: "Kaggle",
         href: "https://www.kaggle.com/icecold009",
         external: true,
+    },
+    {
+        label: "Writing",
+        value: "Field notes",
+        to: "/blog",
+        external: false,
     },
 ];
 
@@ -163,8 +169,8 @@ export default function AboutPage() {
                         className="about-editorial__eyebrow"
                         variants={itemVariant}
                     >
-                        Student developer · Product engineering
-                        · Applied AI
+                        Student developer · Machine learning
+                        · Product engineering
                     </motion.p>
 
                     <motion.h1
@@ -172,8 +178,8 @@ export default function AboutPage() {
                         className="about-editorial__title"
                         variants={itemVariant}
                     >
-                        Curious about how systems work.
-                        <span> Focused on making them useful.</span>
+                        I like hard problems that become
+                        <span> useful software.</span>
                     </motion.h1>
 
                     <motion.div
@@ -181,11 +187,12 @@ export default function AboutPage() {
                         variants={itemVariant}
                     >
                         <p className="about-editorial__intro">
-                            I am Shaurya, a developer based in
-                            Bengaluru. I build full-stack
-                            products, AI-powered tools and web
-                            experiences that turn technical
-                            ideas into practical software.
+                            I am Shaurya Saria, a student developer
+                            based in Bengaluru. I move between
+                            mathematics, machine learning, full-stack
+                            products and interface design—usually by
+                            building the first version and learning
+                            what the idea actually needs.
                         </p>
 
                         <dl className="about-editorial__facts">
@@ -197,16 +204,16 @@ export default function AboutPage() {
                             <div>
                                 <dt>Working across</dt>
                                 <dd>
-                                    Software, AI and product
-                                    design
+                                    ML experiments, full-stack
+                                    products and interfaces
                                 </dd>
                             </div>
 
                             <div>
                                 <dt>Interested in</dt>
                                 <dd>
-                                    Internships and ambitious
-                                    collaborations
+                                    Internships, research and
+                                    thoughtful collaborations
                                 </dd>
                             </div>
                         </dl>
@@ -243,38 +250,38 @@ export default function AboutPage() {
                     >
                         <p className="about-editorial__story-lead">
                             I like working where engineering,
-                            design and problem-solving overlap.
+                            design and problem-solving overlap—
+                            especially when the problem is still
+                            a little undefined.
                         </p>
 
                         <div className="about-editorial__story-copy">
                             <p>
-                                I started building seriously
-                                while studying mathematics,
-                                physics, further mathematics and
-                                computer science. Those subjects
-                                shaped how I approach software:
-                                break difficult systems into
-                                understandable parts, then make
-                                those parts work together.
+                                I started building seriously while
+                                studying mathematics, physics,
+                                further mathematics and computer
+                                science. Those subjects shaped my
+                                default approach: break a difficult
+                                system into understandable parts,
+                                then make the parts work together.
                             </p>
 
                             <p>
-                                My projects have taken me through
-                                React interfaces, backend APIs,
-                                database architecture, AI
-                                integration, deployment and
-                                security. I am most interested in
-                                products that help people make
-                                better decisions or complete
-                                difficult work more easily.
+                                That has led to a deliberately mixed
+                                project archive: F1 forecasting,
+                                audio fingerprinting, Cambridge past
+                                papers, face attendance, a movie
+                                tracker, stadium operations and AI
+                                routing. The common thread is making
+                                technical ideas usable.
                             </p>
 
                             <p>
-                                I care about visual clarity, but
-                                not decoration for its own sake.
-                                The final product should feel
-                                considered because the underlying
-                                structure is considered.
+                                I care about visual clarity, but not
+                                decoration for its own sake. A good
+                                interface should reveal how the
+                                system behaves, where it is uncertain
+                                and what the user can do next.
                             </p>
                         </div>
                     </motion.div>
@@ -328,7 +335,7 @@ export default function AboutPage() {
                         variants={itemVariant}
                     >
                         <span>03</span>
-                        <p>Tools and profiles</p>
+                        <p>Tools and trails</p>
                     </motion.header>
 
                     <div className="about-editorial__tools-layout">

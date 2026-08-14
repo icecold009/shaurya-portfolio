@@ -64,17 +64,17 @@ const toolGroups = [
         tools: [
             {
                 name: "React + Vite",
-                detail: "Fast iteration for product surfaces, dashboards and this portfolio.",
+                detail: "This portfolio, Token Smart Router and the fast product surfaces I use to test an idea.",
                 tags: ["JSX", "HMR"],
             },
             {
                 name: "Vanilla CSS",
-                detail: "Custom properties, responsive layouts and deliberate visual systems.",
+                detail: "The editorial layouts, theme tokens and responsive systems that keep my interfaces recognisable.",
                 tags: ["CSS", "Tokens"],
             },
             {
                 name: "Framer Motion",
-                detail: "Small, purposeful transitions that support hierarchy and orientation.",
+                detail: "Small transitions for hierarchy and orientation, not motion added just to make a page feel busy.",
                 tags: ["Motion", "A11y"],
             },
         ],
@@ -87,17 +87,17 @@ const toolGroups = [
         tools: [
             {
                 name: "Python",
-                detail: "Data work, audio pipelines, computer vision and practical automation.",
+                detail: "F1 evaluation, audio recognition, computer vision, past-paper tooling and practical automation.",
                 tags: ["Scripts", "ML"],
             },
             {
                 name: "Gemini + Fireworks",
-                detail: "Model APIs used behind explicit product boundaries and fallback states.",
+                detail: "Gemini for study and AI experiments; Fireworks for the routing prototype—with boundaries kept visible.",
                 tags: ["AI", "APIs"],
             },
             {
                 name: "Pandas + scikit-learn",
-                detail: "Chronological experiments with baselines, evaluation and reproducible reports.",
+                detail: "Chronological experiments, serious baselines and reproducible reports rather than leaderboard theatre.",
                 tags: ["Data", "Models"],
             },
         ],
@@ -110,17 +110,17 @@ const toolGroups = [
         tools: [
             {
                 name: "Flask",
-                detail: "Simple, inspectable servers for focused tools and same-origin web apps.",
+                detail: "Focused same-origin apps for audio recognition, Movie Tracker and the local attendance workflow.",
                 tags: ["Python", "HTTP"],
             },
             {
                 name: "Supabase + Postgres",
-                detail: "Data, authentication and realtime primitives where the product needs them.",
+                detail: "Structured product data, ownership boundaries and realtime primitives where the workflow needs them.",
                 tags: ["SQL", "RLS"],
             },
             {
                 name: "FFmpeg",
-                detail: "A bounded conversion step for messy real-world audio inputs.",
+                detail: "The bounded conversion step that makes inconsistent audio inputs usable by the recognition pipeline.",
                 tags: ["Audio", "CLI"],
             },
         ],
@@ -133,19 +133,19 @@ const toolGroups = [
         tools: [
             {
                 name: "GitHub",
-                detail: "Feature branches, reviewable commits, issue context and public project history.",
+                detail: "Feature branches, reviewable commits, public project history and the place I keep the work honest.",
                 tags: ["Git", "Review"],
                 link: "https://github.com/icecold009",
             },
             {
                 name: "Vercel",
-                detail: "The deployment path for the portfolio and selected web applications.",
+                detail: "The deployment path for this portfolio and selected web applications when a project is ready to share.",
                 tags: ["Deploy", "Web"],
                 link: "https://vercel.com",
             },
             {
                 name: "Docker + Actions",
-                detail: "Portable runtime checks and automated gates when a project earns the extra weight.",
+                detail: "Portable runtime checks and automated gates when reproducibility matters more than keeping setup tiny.",
                 tags: ["CI", "Runtime"],
             },
         ],
@@ -190,20 +190,22 @@ export default function UsesPage() {
                         <span> more signal.</span>
                     </h1>
                     <p className="uses-hero-description">
-                        The tools, habits and boundaries behind the things I build—from
-                        small interfaces to AI systems that need to behave honestly.
+                        The tools, habits and boundaries behind my ML experiments,
+                        full-stack products and interfaces—from small prototypes to
+                        AI systems that need to behave honestly.
                     </p>
                 </div>
 
                 <div className="uses-status-card" aria-label="Current setup status">
                     <div className="uses-status-topline">
-                        <span><i /> currently building</span>
+                        <span><i /> current working system</span>
                         <span>2026.08</span>
                     </div>
                     <div className="uses-status-mark">S</div>
                     <p>
-                        A compact toolchain for shipping full-stack products,
-                        testing their edges and documenting what is still unknown.
+                        A compact toolchain for turning questions into
+                        working software, then checking what the software
+                        actually proves.
                     </p>
                     <div className="uses-status-footer">
                         <span>Based in Bengaluru</span>
@@ -220,9 +222,9 @@ export default function UsesPage() {
                     </div>
                     <div>
                         <p className="uses-lead">
-                            My setup is intentionally unremarkable. The interesting part is
-                            how the pieces are combined: small enough to reason about, strong
-                            enough to carry a real workflow.
+                            My setup is intentionally ordinary. The interesting part is
+                            how it is combined across my projects: small enough to reason
+                            about, strong enough to carry a real workflow.
                         </p>
                         <div className="uses-principles">
                             {principles.map((principle) => (
@@ -249,7 +251,7 @@ export default function UsesPage() {
                                 <Workflow size={18} aria-hidden="true" />
                                 <span>From question to release</span>
                             </div>
-                            <p>Every project gets a smaller first version.</p>
+                            <p>Every project gets a version that can teach me something.</p>
                         </div>
                         <div className="uses-workflow-list">
                             {workflow.map((step, index) => (
@@ -277,8 +279,9 @@ export default function UsesPage() {
                             <h2 id="uses-tools-title">Tools earn their place by <em>doing a job.</em></h2>
                         </div>
                         <p>
-                            This is a living list, not a shopping list. The stack changes when
-                            the problem changes.
+                            This is a living list, not a shopping list. React carries the
+                            interfaces, Python carries the experiments, and the boundaries
+                            between them stay visible.
                         </p>
                     </div>
 
@@ -333,9 +336,9 @@ export default function UsesPage() {
                     </div>
                     <div className="uses-terminal-body">
                         <p><span>$</span> git status --short --branch</p>
-                        <p className="uses-terminal-success">feature/work-in-progress · clean enough to share</p>
+                        <p className="uses-terminal-success">working-system · claims kept inspectable</p>
                         <p><span>$</span> echo $NEXT_STEP</p>
-                        <p>make the evidence easier to inspect.</p>
+                        <p>write down what the prototype actually proves.</p>
                     </div>
                     <div className="uses-terminal-footer">
                         <Layers3 size={16} aria-hidden="true" />

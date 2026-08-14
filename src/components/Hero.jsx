@@ -52,7 +52,7 @@ export default function Hero() {
                 >
                     <span>Shaurya Saria</span>
                     <span>Bengaluru, India</span>
-                    <span>Student developer</span>
+                    <span>AI + software builder</span>
                 </motion.div>
 
                 <motion.p
@@ -63,7 +63,7 @@ export default function Hero() {
                             : REVEAL
                     }
                 >
-                    Full-stack development · AI products ·
+                    Machine learning · Full-stack products ·
                     Interaction design
                 </motion.p>
 
@@ -76,9 +76,9 @@ export default function Hero() {
                             : REVEAL
                     }
                 >
-                    I design and build
-                    <span> digital products</span>
-                    that solve real problems.
+                    I build systems that
+                    <span> make difficult work</span>
+                    easier to understand.
                 </motion.h1>
 
                 <motion.div
@@ -90,10 +90,11 @@ export default function Hero() {
                     }
                 >
                     <p className="editorial-hero-description">
-                        I build full-stack applications,
-                        AI-powered tools and thoughtful web
-                        experiences with a focus on clarity,
-                        performance and useful interaction.
+                        I am Shaurya, a Bengaluru-based student
+                        developer working across machine learning,
+                        full-stack products and interfaces. I care
+                        about making useful software honest enough
+                        to inspect.
                     </p>
 
                     <div className="editorial-hero-actions">
@@ -159,9 +160,9 @@ export default function Hero() {
                     aria-labelledby="hero-report-deck-title"
                 >
                     <div className="hero-report-deck-heading">
-                        <span className="hero-report-deck-label">Reading list / 02</span>
+                        <span className="hero-report-deck-label">Reading list / 03</span>
                         <h2 id="hero-report-deck-title">
-                            My favourite <em>reports.</em>
+                            Reports and notes I keep <em>returning to.</em>
                         </h2>
                     </div>
 

@@ -114,26 +114,16 @@ const achievements = [
             },
         ],
     },
-    {
-        category: 'Kaggle Competitions',
-        items: [
-            {
-                title: 'Digit Recognizer',
-                detail: 'Competition result to be added.',
-                meta: 'Kaggle · 2024',
-            },
-            {
-                title: 'BirdCLEF',
-                detail: 'Competition result to be added.',
-                meta: 'Kaggle · 2024',
-            },
-            {
-                title: 'NeurIPS Competition',
-                detail: 'Competition result to be added.',
-                meta: 'Kaggle · 2024',
-            },
-        ],
-    },
+        {
+            category: 'Open Source & Engineering',
+            items: [
+                {
+                    title: 'Node.js UTF-8 Fast Paths',
+                    detail: 'Opened a draft upstream contribution adding UTF-8 aliases to fs fast paths, with regression tests and benchmark work.',
+                    meta: 'Node.js · 2026',
+                },
+            ],
+        },
 ];
 
 const totalAchievements = achievements.reduce(
@@ -153,11 +143,12 @@ function Achievements() {
             <div className="achievements-intro">
                 <div>
                     <p className="section-label">Selected record</p>
-                    <h1>Work that earned its <em>place.</em></h1>
+                    <h1>The work behind the <em>work.</em></h1>
                 </div>
                 <p className="achievements-intro-copy">
-                    Academic milestones, competitions and community work that
-                    have shaped how I think, build and contribute.
+                    Academic milestones, competitions, leadership and
+                    engineering work that have shaped how I think, build and
+                    contribute.
                 </p>
             </div>
 

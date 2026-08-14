@@ -17,11 +17,11 @@ const projects = [
         category: "AI · Full-stack · Operations",
         title: "StadiumPulse AI",
         description:
-            "An AI-assisted operations platform designed to help stadium teams manage alerts, crowd movement and real-time decisions during large sporting events.",
+            "A simulated stadium-operations dashboard for turning venue telemetry into zone status, grounded alerts and recommendations.",
         contribution:
-            "I designed the product experience and built the full-stack application, including role-based workflows, live operational alerts and AI-generated recommendations.",
+            "I shaped the product surface and full-stack workflow around an operator's questions: what is happening, where, how urgent it is and what action is suggested.",
         outcome:
-            "A single operational interface for venue staff, volunteers and managers to identify issues and respond faster.",
+            "A focused prototype for making operational decisions legible during a crowded event without presenting simulated telemetry as live production data.",
         stack: ["React", "Supabase", "Gemini", "Realtime", "RLS"],
         github: "https://github.com/icecold009/stadiumpulse-ai",
         visual: "stadium",
@@ -34,7 +34,7 @@ const projects = [
         category: "Audio · Python · Flask",
         title: "Audio Recognition",
         description:
-            "A DIY Shazam that accepts microphone recordings or uploads, normalizes the audio and identifies tracks through multiple matching backends.",
+            "The DIY Shazam-style project where I built a complete path from microphone input or upload to normalized audio and fingerprint matching.",
         contribution:
             "I built the shared audio pipeline, Flask browser UI and CLI flow, then added provider adapters alongside a local spectrogram and constellation-hash matcher.",
         outcome:
@@ -51,11 +51,11 @@ const projects = [
         category: "Education · AI · Product design",
         title: "Past Paper AI",
         description:
-            "An AI study assistant for Cambridge A-Level students that turns past papers into structured, interactive practice.",
+            "A Cambridge A-Level study tool that turns past papers into structured practice instead of leaving revision buried inside PDFs.",
         contribution:
-            "I designed the experience around real revision problems, including question extraction, topic filtering and mark-scheme-aware feedback.",
+            "I designed the experience around question extraction, subject and topic filtering, and mark-scheme-aware feedback across the supported paper set.",
         outcome:
-            "A more direct way for students to navigate papers, practise specific topics and understand how their answers can improve.",
+            "A more direct revision workflow for finding the right question, practising a topic and understanding how an answer can improve.",
         stack: ["Python", "Gemini", "PDF parsing", "Flask"],
         github: "https://github.com/icecold009/past-paper-ai",
         visual: "paper",
@@ -68,11 +68,11 @@ const projects = [
         category: "Full-stack · Web · Data",
         title: "Movie Tracker",
         description:
-            "A personal watch tracker for movies and series, with TMDB metadata, structured ratings, watch status and an explainable recommendation baseline.",
+            "A personal watch tracker for movies and series, built around TMDB metadata, structured ratings, watch status and a transparent recommendation baseline.",
         contribution:
-            "I built the Flask and PostgreSQL application, protected the admin mutation boundary, added the editorial watchlist UI and shipped the canonical Vercel deployment.",
+            "I built the Flask and PostgreSQL application, separated public browsing from protected mutations, and shaped the watchlist around how I actually choose what to watch next.",
         outcome:
-            "A live, responsive watchlist with separate public and admin experiences, TMDB-backed cover art and deterministic recommendations that stay transparent about their limits.",
+            "A clear public and admin experience with TMDB-backed cover art and deterministic recommendations that stay transparent about their limits.",
         stack: ["Flask", "PostgreSQL", "Supabase", "TMDB", "Vercel"],
         github: "https://github.com/icecold009/movie-tracker",
         visual: "movie",
@@ -85,7 +85,7 @@ const projects = [
         category: "Computer vision · Offline · Flask",
         title: "Face Attendance System",
         description:
-            "A local-first face recognition system that turns a webcam into a live attendance dashboard without requiring a cloud service.",
+            "A local-first face recognition system that turns a webcam into an attendance workflow without requiring a cloud service.",
         contribution:
             "I built the Flask dashboard, enrollment workflow, live recognition loop, attendance deduplication and CSV reporting path, with a dependency-safe fallback for development.",
         outcome:
@@ -102,11 +102,11 @@ const projects = [
         category: "Data science · ML · Evaluation",
         title: "F1 Championship Prediction",
         description:
-            "A chronological forecasting project that estimates final Formula 1 standings from prior-season driver, constructor and reliability signals.",
+            "A leakage-safe forecasting study that estimates final Formula 1 standings from signals available before a season begins.",
         contribution:
             "I designed the leak-aware feature pipeline, rolling-origin evaluation and report generation so every forecast can be traced back to an earlier season.",
         outcome:
-            "A reproducible benchmark that treats the previous-points ranking as a serious baseline instead of hiding when a more complex model underperforms it.",
+            "A reproducible benchmark whose most useful lesson was that a simple previous-season baseline can deserve more trust than a complex model.",
         stack: ["Python", "Pandas", "scikit-learn", "Jupyter", "Pytest"],
         github: "https://github.com/icecold009/f1-championship-prediction",
         visual: "f1",
@@ -119,7 +119,7 @@ const projects = [
         category: "AI · Routing · Full-stack",
         title: "Token Smart Router",
         description:
-            "An AI routing layer that answers simple prompts locally and sends genuinely complex requests to a configured Fireworks model.",
+            "A compact AI routing layer that answers simple prompts locally and sends genuinely complex requests to a configured Fireworks model.",
         contribution:
             "I built the React/Vite interface, Express API and Docker workflow around a deliberately small routing policy that makes the cost decision visible.",
         outcome:
@@ -208,9 +208,9 @@ function ProjectVisual({ type, shouldReduceMotion }) {
                             </article>
 
                             <article>
-                                <small>System health</small>
-                                <strong>98%</strong>
-                                <span>Operational</span>
+                                <small>Telemetry state</small>
+                                <strong>Ready</strong>
+                                <span>Simulation</span>
                             </article>
                         </div>
 
@@ -313,7 +313,7 @@ function ProjectVisual({ type, shouldReduceMotion }) {
                             </strong>
                         </div>
 
-                        <span>94.8%</span>
+                        <span>matched</span>
                     </div>
                 </div>
             </motion.div>
@@ -384,7 +384,7 @@ function ProjectVisual({ type, shouldReduceMotion }) {
                 {...visualMotionProps}
             >
                 <div className="f1-interface">
-                    <div className="f1-header"><div><small>2024 forecast / rolling origin</small><strong>Championship outlook</strong></div><span>ρ 0.832</span></div>
+                    <div className="f1-header"><div><small>walk-forward / baseline check</small><strong>Championship outlook</strong></div><span>baseline</span></div>
                     <div className="f1-chart"><div className="f1-chart-axis"><span>300 pts</span><span>150</span><span>0</span></div><svg viewBox="0 0 600 220" role="img" aria-label="Illustrative predicted championship points chart"><path className="f1-grid-line" d="M0 40H600M0 110H600M0 180H600" /><path className="f1-chart-fill" d="M0 180 C70 164 86 92 155 108 S255 56 320 77 S420 34 488 58 S545 25 600 32 L600 220 L0 220Z" /><path className="f1-chart-line" d="M0 180 C70 164 86 92 155 108 S255 56 320 77 S420 34 488 58 S545 25 600 32" /></svg></div>
                     <div className="f1-table"><div><span>01</span><strong>Verstappen</strong><b>312 pts</b></div><div><span>02</span><strong>Norris</strong><b>278 pts</b></div><div><span>03</span><strong>Leclerc</strong><b>241 pts</b></div></div>
                 </div>
@@ -405,7 +405,7 @@ function ProjectVisual({ type, shouldReduceMotion }) {
                         <div className="router-branch"><i /><i /></div>
                         <div className="router-destinations"><div className="router-node router-local"><small>Local route</small><strong>Instant answer</strong><span>0 tokens spent</span></div><div className="router-node router-cloud"><small>Fireworks route</small><strong>Deep reasoning</strong><span>only when needed</span></div></div>
                     </div>
-                    <div className="router-footer"><span>92% local confidence</span><b>route: local</b></div>
+                    <div className="router-footer"><span>simple prompt / local path</span><b>route: local</b></div>
                 </div>
             </motion.div>
         );
@@ -687,8 +687,9 @@ export default function Projects() {
                             : REVEAL
                     }
                 >
-                    A closer look at the problems, systems and product
-                    decisions behind some of my most important work.
+                    A working archive across ML evaluation, audio systems,
+                    education, operations and product tooling—showing what
+                    I built, what I chose not to hide and what I learned.
                 </motion.p>
             </motion.div>
 
