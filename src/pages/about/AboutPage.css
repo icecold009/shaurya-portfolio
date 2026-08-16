@@ -349,6 +349,64 @@
     line-height: 1.7;
 }
 
+.about-editorial__experience {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid var(--line);
+    background: var(--line);
+}
+
+.about-editorial__experience-card {
+    min-height: 18rem;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.4rem, 3vw, 2.5rem);
+    background: var(--bg);
+}
+
+.about-editorial__experience-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.about-editorial__experience-card h2 {
+    margin: auto 0 0.65rem;
+    color: var(--text);
+    font-size: clamp(1.7rem, 3vw, 3rem);
+    font-weight: 520;
+    letter-spacing: -0.06em;
+    line-height: 1;
+}
+
+.about-editorial__experience-role {
+    margin: 0;
+    color: color-mix(in srgb, var(--green) 62%, var(--text));
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.about-editorial__experience-card > p:last-child {
+    max-width: 28rem;
+    margin: 1rem 0 0;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
 .about-editorial__tools-layout {
     display: grid;
     grid-template-columns:
@@ -504,6 +562,14 @@
         gap: 1.5rem;
     }
 
+    .about-editorial__experience {
+        grid-template-columns: 1fr;
+    }
+
+    .about-editorial__experience-card {
+        min-height: 15rem;
+    }
+
     .about-editorial__links {
         width: min(100%, 40rem);
     }
@@ -588,6 +654,10 @@
     .about-editorial__principle {
         grid-template-columns: 2.5rem 1fr;
         gap: 1rem;
+    }
+
+    .about-editorial__experience-card {
+        min-height: 14rem;
     }
 
     .about-editorial__principle h2 {

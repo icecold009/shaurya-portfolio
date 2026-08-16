@@ -80,6 +80,26 @@ const achievements = [
         ],
     },
     {
+        category: 'Additional records',
+        items: [
+            {
+                title: 'IIT Madras Electronic Systems',
+                detail: 'Certificate record from the IIT Madras Electronic Systems programme.',
+                meta: 'IIT Madras · 2026',
+            },
+            {
+                title: 'John Locke Institute Scholarship',
+                detail: 'Scholarship record from the John Locke Institute.',
+                meta: 'John Locke Institute · certificate',
+            },
+            {
+                title: 'IPHC / ICSC Records',
+                detail: 'Participation and result records from IPHC and ICSC.',
+                meta: 'International · 2023-present',
+            },
+        ],
+    },
+    {
         category: 'Leadership & Community',
         items: [
             {

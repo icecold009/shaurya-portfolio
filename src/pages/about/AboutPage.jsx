@@ -11,6 +11,7 @@ import {
     REVEAL_CONTAINER,
     REVEAL_VIEWPORT,
 } from "../../lib/motion";
+import { profileLinks as sharedProfileLinks } from "../../lib/profileLinks";
 
 import "./AboutPage.css";
 
@@ -32,6 +33,30 @@ const principles = [
         title: <>Keep the first version <em>small</em></>,
         description:
             "A focused prototype creates better evidence than a polished idea that has never met a real user or input.",
+    },
+];
+
+const experiences = [
+    {
+        organization: "Infinitea",
+        role: "Data Analytics Intern",
+        meta: "Apr 2025 · 3 weeks · Offline",
+        detail:
+            "Analysed customer-ordering data and weekly sales reports to identify peak hours and best-selling items, then linked those patterns to inventory and stock planning.",
+    },
+    {
+        organization: "Vivek Agro Foods",
+        role: "Graphic Design & Market Research Intern",
+        meta: "Apr 2024 · 4 weeks · Hybrid",
+        detail:
+            "Designed marketing materials for whole-wheat and grain products using Canva and Adobe Photoshop, and researched grain types, customers and competitors.",
+    },
+    {
+        organization: "National Sports Club of India (NSCI)",
+        role: "Mentor and Organiser - Art Workshop",
+        meta: "May 2025 · 2 days · Offline",
+        detail:
+            "Coordinated participant materials and group activities, and guided students through creative exercises connecting visual communication with professional presentation.",
     },
 ];
 
@@ -84,18 +109,11 @@ const profileLinks = [
         to: "/projects",
         external: false,
     },
-    {
-        label: "Code",
-        value: "GitHub",
-        href: "https://github.com/icecold009",
-        external: true,
-    },
-    {
-        label: "Data",
-        value: "Kaggle",
-        href: "https://www.kaggle.com/icecold009",
-        external: true,
-    },
+    ...sharedProfileLinks.map((link) => ({
+        ...link,
+        label: "Profile",
+        value: link.label,
+    })),
     {
         label: "Writing",
         value: "Field notes",
@@ -225,6 +243,7 @@ export default function AboutPage() {
                         aria-hidden="true"
                     >
                         <span>Background</span>
+                        <span>Experience</span>
                         <span>Process</span>
                         <span>Tools</span>
                     </motion.div>
@@ -298,6 +317,44 @@ export default function AboutPage() {
                         variants={itemVariant}
                     >
                         <span>02</span>
+                        <p>Experience</p>
+                    </motion.header>
+
+                    <motion.div
+                        className="about-editorial__experience"
+                        variants={itemVariant}
+                    >
+                        {experiences.map((experience, index) => (
+                            <article
+                                className="about-editorial__experience-card"
+                                key={experience.organization}
+                            >
+                                <div className="about-editorial__experience-topline">
+                                    <span>{String(index + 1).padStart(2, "0")}</span>
+                                    <span>{experience.meta}</span>
+                                </div>
+
+                                <h2>{experience.organization}</h2>
+                                <p className="about-editorial__experience-role">
+                                    {experience.role}
+                                </p>
+                                <p>{experience.detail}</p>
+                            </article>
+                        ))}
+                    </motion.div>
+                </div>
+            </motion.section>
+
+            <motion.section
+                className="about-editorial__section"
+                {...sectionMotion}
+            >
+                <div className="about-editorial__shell">
+                    <motion.header
+                        className="about-editorial__section-heading"
+                        variants={itemVariant}
+                    >
+                        <span>03</span>
                         <p>How I work</p>
                     </motion.header>
 
@@ -334,7 +391,7 @@ export default function AboutPage() {
                         className="about-editorial__section-heading"
                         variants={itemVariant}
                     >
-                        <span>03</span>
+                        <span>04</span>
                         <p>Tools and trails</p>
                     </motion.header>
 
@@ -387,13 +444,14 @@ export default function AboutPage() {
                                     </>
                                 );
 
-                                if (link.external) {
+                                if (link.href) {
                                     return (
                                         <motion.a
-                                            key={link.label}
+                                            key={link.key || link.label}
                                             href={link.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            target={link.external ? "_blank" : undefined}
+                                            rel={link.external ? "noopener noreferrer" : undefined}
+                                            download={link.download ? true : undefined}
                                             whileHover={linkHover}
                                         >
                                             {content}
@@ -403,7 +461,7 @@ export default function AboutPage() {
 
                                 return (
                                     <motion.div
-                                        key={link.label}
+                                        key={link.key || link.label}
                                         whileHover={linkHover}
                                     >
                                         <Link to={link.to}>
