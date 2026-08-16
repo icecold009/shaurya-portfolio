@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { profileLinks } from "../lib/profileLinks";
+
 function Contact() {
     const [status, setStatus] = useState("idle");
     const [form, setForm] = useState({
@@ -118,24 +120,17 @@ function Contact() {
                     </p>
 
                     <div className="contact-links">
-                        <a href="mailto:sariashaurya09@gmail.com">Email</a>
-                        <a
-                            href="https://github.com/icecold009"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            GitHub
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/shaurya-saria009"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            LinkedIn
-                        </a>
-                        <a href="/resume.pdf" download>
-                            Download resume
-                        </a>
+                        {profileLinks.map((link) => (
+                            <a
+                                key={link.key}
+                                href={link.href}
+                                target={link.external ? "_blank" : undefined}
+                                rel={link.external ? "noreferrer" : undefined}
+                                download={link.download ? true : undefined}
+                            >
+                                {link.label}
+                            </a>
+                        ))}
                     </div>
 
                     <div className="contact-availability">

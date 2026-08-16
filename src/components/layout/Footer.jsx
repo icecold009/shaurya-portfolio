@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { profileLinks } from "../../lib/profileLinks";
+
 import "./Footer.css";
 
 const footerNavigation = [
@@ -104,19 +106,18 @@ export default function Footer() {
                 <div className="contact-ending__social">
                     <p>Connect</p>
 
-                    <a
-                        href="https://github.com/icecold009"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        GitHub
-                        <span aria-hidden="true">↗</span>
-                    </a>
-
-                    <a href="mailto:sariashaurya09@gmail.com">
-                        Email
-                        <span aria-hidden="true">↗</span>
-                    </a>
+                    {profileLinks.map((link) => (
+                        <a
+                            key={link.key}
+                            href={link.href}
+                            target={link.external ? "_blank" : undefined}
+                            rel={link.external ? "noreferrer" : undefined}
+                            download={link.download ? true : undefined}
+                        >
+                            {link.label}
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                    ))}
                 </div>
             </div>
 

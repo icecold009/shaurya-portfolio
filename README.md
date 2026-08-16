@@ -15,6 +15,7 @@ https://shaurya-portfolio-sooty.vercel.app/
 - Face Attendance System
 - F1 Championship Prediction
 - Token Smart Router
+- Student Dropout Risk Prediction
 
 ## Features
 
@@ -37,6 +38,14 @@ https://shaurya-portfolio-sooty.vercel.app/
 - MDX
 - CSS
 - Vercel
+
+## Resume sync
+
+The build checks for a LaTeX CV at `resume/resume.tex` or the path in
+`RESUME_TEX`. When present, `npm run build` compiles it with `latexmk` and
+updates `public/resume.pdf`; if the source is not available, the existing PDF
+is left unchanged. Run `npm run sync:resume -- path/to/resume.tex` to sync it
+explicitly.
 
 ## Project Structure
 

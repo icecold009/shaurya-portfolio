@@ -1,5 +1,7 @@
+import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import {
     EDITORIAL_EASE,
@@ -130,6 +132,23 @@ const projects = [
         thumbnail: "/projects/token-router.svg",
         accent: "07",
     },
+    {
+        number: "08",
+        year: "2025",
+        category: "Data science · Education · Risk modeling",
+        title: "Student Dropout Risk Prediction",
+        description:
+            "A student-dropout risk prediction project documented through a report, template workbook, sample data and an updated dataset.",
+        contribution:
+            "I completed the prediction exercise by working through the supplied workbook and datasets, keeping the analysis structured and traceable.",
+        outcome:
+            "A documented academic project showing how structured data and reporting can support risk analysis without turning a prediction into a fixed label.",
+        stack: ["Python", "Pandas", "scikit-learn", "Matplotlib"],
+        github: null,
+        visual: "dropout",
+        thumbnail: null,
+        accent: "08",
+    },
 ];
 
 function ProjectVisual({ type, shouldReduceMotion }) {
@@ -190,7 +209,7 @@ function ProjectVisual({ type, shouldReduceMotion }) {
                             </div>
 
                             <span className="stadium-live-status">
-                                Live
+                                Simulation
                             </span>
                         </div>
 
@@ -392,6 +411,50 @@ function ProjectVisual({ type, shouldReduceMotion }) {
         );
     }
 
+    if (type === "dropout") {
+        return (
+            <motion.div
+                className="case-study-mockup case-study-mockup-dropout"
+                {...visualMotionProps}
+            >
+                <div className="dropout-interface">
+                    <div className="dropout-header">
+                        <div>
+                            <small>project archive / illustrative view</small>
+                            <strong>Early intervention view</strong>
+                        </div>
+                        <span>review, do not label</span>
+                    </div>
+
+                    <div className="dropout-score-grid">
+                        <article>
+                            <small>Attendance signal</small>
+                            <strong>Review</strong>
+                            <span>recent change detected</span>
+                        </article>
+                        <article>
+                            <small>Academic signal</small>
+                            <strong>Stable</strong>
+                            <span>compare with context</span>
+                        </article>
+                        <article>
+                            <small>Next step</small>
+                            <strong>Talk first</strong>
+                            <span>human review required</span>
+                        </article>
+                    </div>
+
+                    <div className="dropout-table">
+                        <div><span>Signal</span><span>Weight</span><span>Action</span></div>
+                        <div><strong>Attendance trend</strong><b>medium</b><small>check in</small></div>
+                        <div><strong>Assessment pattern</strong><b>low</b><small>monitor</small></div>
+                        <div><strong>Support context</strong><b>unknown</b><small>ask, don't assume</small></div>
+                    </div>
+                </div>
+            </motion.div>
+        );
+    }
+
     if (type === "router") {
         return (
             <motion.div
@@ -474,13 +537,13 @@ function ProjectVisual({ type, shouldReduceMotion }) {
     );
 }
 
-function ProjectCaseStudy({ project }) {
+function ProjectCaseStudy({ project, featured = false }) {
     const shouldReduceMotion = useReducedMotion();
 
     return (
         <motion.article
             id={`project-detail-${project.number}`}
-            className={`case-study case-study-${project.accent}`}
+            className={`case-study case-study-${project.accent} ${featured ? "case-study--featured" : "case-study--archive"}`}
             variants={shouldReduceMotion ? undefined : REVEAL}
             initial={shouldReduceMotion ? undefined : "hidden"}
             whileInView={
@@ -508,15 +571,21 @@ function ProjectCaseStudy({ project }) {
                     {project.title}
                 </h3>
 
-                <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`View ${project.title} on GitHub`}
-                >
-                    View repository
-                    <ArrowUpRight size={18} aria-hidden="true" />
-                </a>
+                {project.github ? (
+                    <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`View ${project.title} on GitHub`}
+                    >
+                        View repository
+                        <ArrowUpRight size={18} aria-hidden="true" />
+                    </a>
+                ) : (
+                    <span className="case-study-source-note">
+                        CV / Drive record
+                    </span>
+                )}
             </div>
 
             <ProjectVisual
@@ -549,26 +618,32 @@ function ProjectCaseStudy({ project }) {
                     ))}
                 </div>
 
-                <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="case-study-link"
-                    whileHover={
-                        shouldReduceMotion
-                            ? undefined
-                            : {
-                                x: 6,
-                                transition: {
-                                    duration: 0.35,
-                                    ease: EDITORIAL_EASE,
-                                },
-                            }
-                    }
-                >
-                    Explore project
-                    <ArrowUpRight size={18} aria-hidden="true" />
-                </motion.a>
+                {project.github ? (
+                    <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="case-study-link"
+                        whileHover={
+                            shouldReduceMotion
+                                ? undefined
+                                : {
+                                    x: 6,
+                                    transition: {
+                                        duration: 0.35,
+                                        ease: EDITORIAL_EASE,
+                                    },
+                                }
+                        }
+                    >
+                        Explore project
+                        <ArrowUpRight size={18} aria-hidden="true" />
+                    </motion.a>
+                ) : (
+                    <span className="case-study-source-note">
+                        Project record · repository not linked
+                    </span>
+                )}
             </div>
         </motion.article>
     );
@@ -597,11 +672,17 @@ function ProjectFolderBrowser() {
                         role="listitem"
                         aria-label={`Open ${project.title} overview`}
                     >
-                        <img
-                            src={project.thumbnail}
-                            alt={`${project.title} preview`}
-                            loading="lazy"
-                        />
+                        {project.thumbnail ? (
+                            <img
+                                src={project.thumbnail}
+                                alt={`${project.title} preview`}
+                                loading="lazy"
+                            />
+                        ) : (
+                            <span className="project-file-placeholder" aria-hidden="true">
+                                {project.number}
+                            </span>
+                        )}
                     </a>
                 ))}
             </div>
@@ -687,15 +768,15 @@ export default function Projects() {
                             : REVEAL
                     }
                 >
-                    A working archive across ML evaluation, audio systems,
-                    education, operations and product tooling—showing what
-                    I built, what I chose not to hide and what I learned.
+                    Three featured projects, followed by a working archive across
+                    ML evaluation, audio systems, education, operations and product
+                    tooling—showing what I built, what I chose not to hide and what I learned.
                 </motion.p>
             </motion.div>
 
             <nav className="project-index" aria-label="Project index">
                 <div className="project-index__heading">
-                    <span>Quick access</span>
+                    <span>Find a project</span>
                     <span>{String(projects.length).padStart(2, "0")} projects</span>
                 </div>
 
@@ -715,17 +796,40 @@ export default function Projects() {
 
             <ProjectFolderBrowser />
 
+            <div className="project-writing-callout">
+                <div>
+                    <span className="selected-work-kicker">Competition note</span>
+                    <h3>How I approached <em>BirdCLEF 2026.</em></h3>
+                </div>
+                <p>
+                    The Kaggle audio-classification write-up sits alongside the
+                    project archive, with the decisions and limitations left visible.
+                </p>
+                <Link to="/blog?post=birdclef-2026">
+                    Read the write-up
+                    <ArrowUpRight size={17} aria-hidden="true" />
+                </Link>
+            </div>
+
             <div className="project-details-heading">
                 <p className="selected-work-kicker">Detailed view</p>
                 <span>Scroll vertically for the full case studies.</span>
             </div>
 
             <div className="case-study-list" id="project-details">
-                {projects.map((project) => (
-                    <ProjectCaseStudy
-                        project={project}
-                        key={project.title}
-                    />
+                {projects.map((project, index) => (
+                    <Fragment key={project.title}>
+                        {index === 3 && (
+                            <div className="project-archive-divider" role="separator" aria-label="More work in the archive">
+                                <span>More work</span>
+                                <span>{String(projects.length - 3).padStart(2, "0")} projects in the archive</span>
+                            </div>
+                        )}
+                        <ProjectCaseStudy
+                            project={project}
+                            featured={index < 3}
+                        />
+                    </Fragment>
                 ))}
             </div>
         </section>

@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
+import { profileLinks } from "../../lib/profileLinks";
+
 const primaryLinks = [
     { to: "/", label: "Home", index: "01" },
     { to: "/projects", label: "Projects", index: "02" },
@@ -340,15 +342,22 @@ function Navbar() {
                     </div>
 
                     <div className="navbar-actions">
-                        <a
-                            href="https://github.com/icecold009"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="nav-icon-button nav-github-button"
-                            aria-label="Open Shaurya's GitHub profile"
+                        <nav
+                            className="navbar-profile-links"
+                            aria-label="Profile links"
                         >
-                            <GithubIcon size={18} />
-                        </a>
+                            {profileLinks.map((link) => (
+                                <a
+                                    key={link.key}
+                                    href={link.href}
+                                    target={link.external ? "_blank" : undefined}
+                                    rel={link.external ? "noreferrer" : undefined}
+                                    download={link.download ? true : undefined}
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
+                        </nav>
 
                         <button
                             type="button"
@@ -599,19 +608,22 @@ function Navbar() {
                                 </div>
 
                                 <div className="mobile-social-links">
-                                    <a
-                                        href="https://github.com/icecold009"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        <GithubIcon size={17} />
-                                        GitHub
-                                    </a>
-
-                                    <a href="mailto:sariashaurya09@gmail.com">
-                                        <Mail size={17} />
-                                        Email
-                                    </a>
+                                    {profileLinks.map((link) => (
+                                        <a
+                                            key={link.key}
+                                            href={link.href}
+                                            target={link.external ? "_blank" : undefined}
+                                            rel={link.external ? "noreferrer" : undefined}
+                                            download={link.download ? true : undefined}
+                                        >
+                                            {link.key === "github" ? (
+                                                <GithubIcon size={17} />
+                                            ) : link.key === "email" ? (
+                                                <Mail size={17} />
+                                            ) : null}
+                                            {link.label}
+                                        </a>
+                                    ))}
                                 </div>
                             </div>
                         </motion.aside>

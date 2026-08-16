@@ -21,7 +21,7 @@ export default function App() {
 
         const cleanupTimer = window.setTimeout(() => {
             loader.remove();
-        }, 520);
+        }, 300);
 
         return () => {
             window.cancelAnimationFrame(frame);
