@@ -33,9 +33,13 @@ export default function App() {
         <BrowserRouter>
             <ScrollToTop />
 
+            <a className="skip-link" href="#main-content">
+                Skip to main content
+            </a>
+
             <Navbar />
 
-            <main>
+            <main id="main-content">
                 <AnimatedRoutes />
             </main>
 
@@ -43,3 +47,4 @@ export default function App() {
         </BrowserRouter>
     );
 }
+

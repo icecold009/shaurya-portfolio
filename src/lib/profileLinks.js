@@ -28,6 +28,5 @@ export const profileLinks = [
         label: "Resume",
         href: "/resume.pdf",
         external: false,
-        download: true,
     },
 ];

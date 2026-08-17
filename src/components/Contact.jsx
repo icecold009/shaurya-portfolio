@@ -14,18 +14,38 @@ function Contact() {
         event.preventDefault();
         setStatus("sending");
 
-        const response = await fetch("https://formspree.io/f/mwvdyllv", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
-        });
+        try {
+            const response = await fetch("https://formspree.io/f/mwvdyllv", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
 
-        setStatus(response.ok ? "sent" : "error");
+            setStatus(response.ok ? "sent" : "error");
+        } catch {
+            setStatus("error");
+        }
+    };
+
+    const handleFieldChange = (field) => (event) => {
+        setForm((currentForm) => ({
+            ...currentForm,
+            [field]: event.target.value,
+        }));
+
+        if (status === "error") {
+            setStatus("idle");
+        }
     };
 
     if (status === "sent") {
         return (
-            <section className="contact" id="contact">
+            <section
+                className="contact"
+                id="contact"
+                role="status"
+                aria-live="polite"
+            >
                 <div className="contact-success">
                     <span className="contact-success-icon" aria-hidden="true">
                         +
@@ -56,16 +76,18 @@ function Contact() {
                         <p>Send a note</p>
                     </div>
 
-                    <form className="contact-form" onSubmit={handleSubmit}>
+                    <form
+                        className="contact-form"
+                        onSubmit={handleSubmit}
+                        aria-busy={status === "sending"}
+                    >
                         <div className="form-group">
                             <label htmlFor="name">Your name</label>
                             <input
                                 id="name"
                                 autoComplete="name"
                                 value={form.name}
-                                onChange={(event) =>
-                                    setForm({ ...form, name: event.target.value })
-                                }
+                                onChange={handleFieldChange("name")}
                                 required
                             />
                         </div>
@@ -77,9 +99,7 @@ function Contact() {
                                 type="email"
                                 autoComplete="email"
                                 value={form.email}
-                                onChange={(event) =>
-                                    setForm({ ...form, email: event.target.value })
-                                }
+                                onChange={handleFieldChange("email")}
                                 required
                             />
                         </div>
@@ -90,9 +110,7 @@ function Contact() {
                                 id="message"
                                 rows="5"
                                 value={form.message}
-                                onChange={(event) =>
-                                    setForm({ ...form, message: event.target.value })
-                                }
+                                onChange={handleFieldChange("message")}
                                 required
                             />
                         </div>
@@ -104,6 +122,17 @@ function Contact() {
                         >
                             {status === "sending" ? "Sending..." : "Send message ->"}
                         </button>
+
+                        {status === "error" && (
+                            <p className="contact-form-feedback" role="alert">
+                                I couldn&apos;t send that message. Please try
+                                again or email me directly at{" "}
+                                <a href="mailto:sariashaurya09@gmail.com">
+                                    sariashaurya09@gmail.com
+                                </a>
+                                .
+                            </p>
+                        )}
                     </form>
                 </div>
 
@@ -144,3 +173,4 @@ function Contact() {
 }
 
 export default Contact;
+
