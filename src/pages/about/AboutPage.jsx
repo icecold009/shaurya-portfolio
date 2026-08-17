@@ -383,7 +383,7 @@ export default function AboutPage() {
             </motion.section>
 
             <motion.section
-                className="about-editorial__section about-editorial__section--last"
+                className="about-editorial__section"
                 {...sectionMotion}
             >
                 <div className="about-editorial__shell">
@@ -470,6 +470,71 @@ export default function AboutPage() {
                                     </motion.div>
                                 );
                             })}
+                        </motion.div>
+                    </div>
+                </div>
+            </motion.section>
+
+            <motion.section
+                className="about-editorial__section about-editorial__section--last"
+                aria-labelledby="about-resume-title"
+                {...sectionMotion}
+            >
+                <div className="about-editorial__shell">
+                    <motion.header
+                        className="about-editorial__section-heading"
+                        variants={itemVariant}
+                    >
+                        <span>05</span>
+                        <p>Resume</p>
+                    </motion.header>
+
+                    <div className="about-editorial__resume-layout">
+                        <motion.div
+                            className="about-editorial__resume-copy"
+                            variants={itemVariant}
+                        >
+                            <p className="about-editorial__resume-kicker">
+                                A quick read
+                            </p>
+
+                            <h2 id="about-resume-title">
+                                See the full picture
+                                <em> in one place.</em>
+                            </h2>
+
+                            <p>
+                                Read my current resume here without leaving
+                                the portfolio. The PDF preview is scrollable,
+                                and the full document is available in a new tab
+                                if you want to keep it nearby.
+                            </p>
+
+                            <a
+                                className="about-editorial__resume-link"
+                                href="/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Open full resume
+                                <ArrowUpRight size={18} aria-hidden="true" />
+                            </a>
+                        </motion.div>
+
+                        <motion.div
+                            className="about-editorial__resume-preview"
+                            variants={itemVariant}
+                        >
+                            <iframe
+                                title="Shaurya Saria resume preview"
+                                src="/resume.pdf#view=FitH"
+                                loading="lazy"
+                            >
+                                <p>
+                                    Your browser does not support an embedded
+                                    PDF. <a href="/resume.pdf">Open the resume</a>.
+                                </p>
+                            </iframe>
                         </motion.div>
                     </div>
                 </div>

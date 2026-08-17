@@ -271,6 +271,7 @@ function Navbar() {
                                         setMoreOpen((open) => !open)
                                     }
                                     aria-expanded={moreOpen}
+                                    aria-controls="desktop-more-menu"
                                     aria-haspopup="menu"
                                 >
                                     More
@@ -283,6 +284,7 @@ function Navbar() {
                                 <AnimatePresence>
                                     {moreOpen && (
                                         <motion.div
+                                            id="desktop-more-menu"
                                             className="desktop-more-menu"
                                             role="menu"
                                             initial={

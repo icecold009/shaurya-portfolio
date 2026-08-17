@@ -10,6 +10,31 @@
     white-space: nowrap;
 }
 
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 50%;
+    z-index: 3000;
+    transform: translate(-50%, -180%);
+
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line-bright);
+    border-radius: 0.55rem;
+    background: var(--surface-2);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 180ms var(--ease-editorial);
+}
+
+.skip-link:focus {
+    transform: translate(-50%, 0);
+}
+
 :focus-visible {
     outline: 2px solid var(--green);
     outline-offset: 3px;
