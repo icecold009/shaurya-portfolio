@@ -20,7 +20,7 @@ import ArtworkPage from "../pages/artwork/ArtworkPage";
 import CertificatesPage from "../pages/certificates/CertificatesPage";
 import AchievementsPage from "../pages/achievements/AchievementsPage";
 
-import { EDITORIAL_EASE } from "../lib/motion";
+import { PAGE_REVEAL } from "../lib/motion";
 
 export default function AnimatedRoutes() {
     const location = useLocation();
@@ -32,16 +32,13 @@ export default function AnimatedRoutes() {
             initial: { opacity: 0, y: 18 },
             animate: { opacity: 1, y: 0 },
             exit: { opacity: 0, y: -12 },
-            transition: {
-                duration: 0.45,
-                ease: EDITORIAL_EASE,
-            },
+            transition: PAGE_REVEAL,
         };
 
     return (
         <AnimatePresence mode="wait" initial={false}>
             <motion.div
-                key={location.pathname}
+                key={`${location.pathname}${location.search}`}
                 {...transitionProps}
             >
                 <Routes location={location}>

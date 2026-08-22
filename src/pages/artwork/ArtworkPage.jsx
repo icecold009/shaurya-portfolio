@@ -32,7 +32,7 @@ export default function ArtworkPage() {
             <section className="artwork-section">
                 <div className="section-heading">
                     <p className="section-label">Work away from the terminal</p>
-                    <h2>Drawing taught me to see <em>structure first.</em></h2>
+                    <h1>Drawing taught me to see <em>structure first.</em></h1>
                 </div>
                 <div className="artwork-grid">
                     {pieces.map((p, i) => (

@@ -77,4 +77,11 @@
     box-shadow: 0 16px 40px rgba(0, 200, 50, 0.08);
 }
 
+@media (hover: none), (pointer: coarse) {
+    .artwork-card:hover,
+    .project-card:hover {
+        transform: none;
+    }
+}
+
 /* ─── BLOG LIST ──────────────────────────────────────── */

@@ -62,7 +62,7 @@
     margin-bottom: 1.2rem;
 }
 
-.blog-archive-heading h2 {
+.blog-archive-heading h1 {
     max-width: 9ch;
     margin: 0;
     font-size: clamp(3.8rem, 10vw, 9.5rem);
@@ -111,6 +111,12 @@
     background: color-mix(in srgb, var(--green) 7%, var(--surface-2));
     outline: none;
     transform: translateY(-3px);
+}
+
+@media (hover: none), (pointer: coarse) {
+    .blog-featured:hover {
+        transform: none;
+    }
 }
 
 .blog-featured-meta {

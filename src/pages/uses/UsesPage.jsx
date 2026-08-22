@@ -157,9 +157,10 @@ const reveal = {
     visible: { opacity: 1, y: 0 },
 };
 
-function Reveal({ children, className, delay = 0, reduceMotion }) {
+function Reveal({ children, className, delay = 0, reduceMotion, id }) {
     return (
         <motion.div
+            id={id}
             className={className}
             variants={reduceMotion ? undefined : reveal}
             initial={reduceMotion ? undefined : "hidden"}
@@ -194,6 +195,10 @@ export default function UsesPage() {
                         full-stack products and interfaces—from small prototypes to
                         AI systems that need to behave honestly.
                     </p>
+                    <a className="uses-hero-action" href="#uses-workflow">
+                        See the working system
+                        <ArrowUpRight size={17} aria-hidden="true" />
+                    </a>
                 </div>
 
                 <div className="uses-status-card" aria-label="Current setup status">
@@ -214,7 +219,7 @@ export default function UsesPage() {
                 </div>
             </header>
 
-            <main className="uses-content">
+            <div className="uses-content">
                 <Reveal className="uses-intro-grid" reduceMotion={reduceMotion}>
                     <div className="uses-section-marker">
                         <span>01</span>
@@ -240,7 +245,7 @@ export default function UsesPage() {
                     </div>
                 </Reveal>
 
-                <Reveal className="uses-workflow-section" reduceMotion={reduceMotion} delay={0.05}>
+                <Reveal className="uses-workflow-section" reduceMotion={reduceMotion} delay={0.05} id="uses-workflow">
                     <div className="uses-section-marker">
                         <span>02</span>
                         <span>How work moves</span>
@@ -345,7 +350,7 @@ export default function UsesPage() {
                         <span>Tool choices are provisional. Working habits are the durable part.</span>
                     </div>
                 </Reveal>
-            </main>
+            </div>
         </div>
     );
 }

@@ -59,6 +59,26 @@
     line-height: 1.55;
 }
 
+.uses-hero-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--green);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.uses-hero-action:hover,
+.uses-hero-action:focus-visible {
+    color: var(--green);
+}
+
 .uses-status-card {
     position: relative;
     min-height: 24rem;
