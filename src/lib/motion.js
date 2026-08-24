@@ -1,14 +1,40 @@
 export const EDITORIAL_EASE = [0.22, 1, 0.36, 1];
 
 export const EDITORIAL_DURATION = {
-    fast: 0.35,
-    normal: 0.55,
-    reveal: 0.8,
+    fast: 0.14,
+    normal: 0.24,
+    popover: 0.18,
+    drawer: 0.32,
+    page: 0.24,
+    reveal: 0.72,
 };
 
 export const EDITORIAL_STAGGER = {
-    delay: 0.08,
-    interval: 0.1,
+    delay: 0,
+    interval: 0.05,
+};
+
+export const PRESS = {
+    scale: 0.975,
+    transition: {
+        duration: EDITORIAL_DURATION.fast,
+        ease: EDITORIAL_EASE,
+    },
+};
+
+export const POPOVER = {
+    duration: EDITORIAL_DURATION.popover,
+    ease: EDITORIAL_EASE,
+};
+
+export const DRAWER = {
+    duration: EDITORIAL_DURATION.drawer,
+    ease: EDITORIAL_EASE,
+};
+
+export const PAGE_REVEAL = {
+    duration: EDITORIAL_DURATION.page,
+    ease: EDITORIAL_EASE,
 };
 
 export const REVEAL = {

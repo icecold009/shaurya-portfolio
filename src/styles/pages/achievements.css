@@ -80,6 +80,33 @@
     line-height: 1.5;
 }
 
+.achievements-intro-action {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 0.45rem;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--green);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.achievements-intro-action:hover,
+.achievements-intro-action:focus-visible {
+    color: var(--green);
+}
+
+@media (hover: none), (pointer: coarse) {
+    .achievements-page-shell .achievement-card:hover {
+        transform: none;
+    }
+}
+
 .achievements-overview {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

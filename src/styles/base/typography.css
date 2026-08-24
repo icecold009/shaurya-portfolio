@@ -21,7 +21,9 @@ p {
 .editorial-hero-title,
 .about-editorial__title,
 .selected-work-header h2,
+.selected-work-header h1,
 .section-heading h2,
+.section-heading h1,
 .case-study-heading h3,
 .contact-ending__heading h2 {
     font-family: var(--sans);
@@ -30,6 +32,7 @@ p {
     line-height: 0.86;
 }
 
+.section-heading h1,
 .section-heading h2 {
     line-height: 0.9;
 }
@@ -55,7 +58,9 @@ p {
 .editorial-hero-title span,
 .about-editorial__title span,
 .selected-work-header h2 span,
+.selected-work-header h1 span,
 .section-heading h2 em,
+.section-heading h1 em,
 .case-study-heading h3.heading-italic,
 .about-editorial__principle h2 em,
 .about-editorial__stack-row h2.heading-italic,
@@ -69,7 +74,9 @@ p {
     .editorial-hero-title,
     .about-editorial__title,
     .selected-work-header h2,
+    .selected-work-header h1,
     .section-heading h2,
+    .section-heading h1,
     .case-study-heading h3,
     .contact-ending__heading h2 {
         letter-spacing: -0.07em;

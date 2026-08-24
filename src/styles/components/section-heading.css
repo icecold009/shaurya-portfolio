@@ -27,6 +27,7 @@
     color: var(--text-faint);
 }
 
+.section-heading h1,
 .section-heading h2 {
     margin: 0;
     font-size: clamp(2.2rem, 4vw, 3.2rem);
@@ -36,6 +37,7 @@
     color: var(--text);
 }
 
+.section-heading h1 em,
 .section-heading h2 em {
     color: color-mix(in srgb, var(--green) 54%, var(--text));
     font-style: italic;

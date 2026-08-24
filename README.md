@@ -97,4 +97,3 @@ The portfolio is intentionally opinionated about clarity: motion should explain 
 ## License
 
 All rights reserved. Copyright 2026 Shaurya Saria.
-

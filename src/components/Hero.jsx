@@ -13,6 +13,9 @@ import "./Hero.css";
 
 export default function Hero() {
     const shouldReduceMotion = useReducedMotion();
+    const canHover =
+        typeof window !== "undefined" &&
+        window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     const revealProps = shouldReduceMotion
         ? {}
@@ -100,7 +103,7 @@ export default function Hero() {
                     <div className="editorial-hero-actions">
                         <motion.div
                             whileHover={
-                                shouldReduceMotion
+                                shouldReduceMotion || !canHover
                                     ? undefined
                                     : {
                                         y: -3,

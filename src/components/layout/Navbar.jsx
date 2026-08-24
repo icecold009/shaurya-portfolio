@@ -12,6 +12,7 @@ import {
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { profileLinks } from "../../lib/profileLinks";
+import { DRAWER, POPOVER } from "../../lib/motion";
 
 const primaryLinks = [
     { to: "/", label: "Home", index: "01" },
@@ -67,6 +68,7 @@ function Navbar() {
     const mobilePanelRef = useRef(null);
     const closeButtonRef = useRef(null);
     const menuTriggerRef = useRef(null);
+    const moreTriggerRef = useRef(null);
 
     const isDark = theme === "dark";
 
@@ -111,7 +113,10 @@ function Navbar() {
                 menuTriggerRef.current?.focus();
             }
 
-            setMoreOpen(false);
+            if (moreOpen) {
+                setMoreOpen(false);
+                moreTriggerRef.current?.focus();
+            }
         };
 
         document.addEventListener("mousedown", handleOutsideClick);
@@ -121,7 +126,7 @@ function Navbar() {
             document.removeEventListener("mousedown", handleOutsideClick);
             document.removeEventListener("keydown", handleEscape);
         };
-    }, [menuOpen]);
+    }, [menuOpen, moreOpen]);
 
     useEffect(() => {
         if (!menuOpen) return;
@@ -255,6 +260,7 @@ function Navbar() {
                                 ref={moreRef}
                             >
                                 <button
+                                    ref={moreTriggerRef}
                                     type="button"
                                     className={[
                                         "desktop-more-trigger",
@@ -307,7 +313,8 @@ function Navbar() {
                                                 scale: 0.98,
                                             }}
                                             transition={{
-                                                duration: 0.17,
+                                                duration: POPOVER.duration,
+                                                ease: POPOVER.ease,
                                             }}
                                         >
                                             <p className="desktop-more-label">
@@ -482,9 +489,8 @@ function Navbar() {
                                 x: "100%",
                             }}
                             transition={{
-                                type: "spring",
-                                stiffness: 340,
-                                damping: 34,
+                                duration: DRAWER.duration,
+                                ease: DRAWER.ease,
                             }}
                         >
                             <div className="mobile-nav-header">
@@ -537,9 +543,7 @@ function Navbar() {
                                                     x: 0,
                                                 }}
                                                 transition={{
-                                                    delay:
-                                                        0.06 +
-                                                        itemIndex * 0.045,
+                                                    delay: itemIndex * 0.04,
                                                 }}
                                             >
                                                 <NavLink

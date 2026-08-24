@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const achievements = [
     {
         category: 'Academic',
@@ -170,6 +172,9 @@ function Achievements() {
                     engineering work that have shaped how I think, build and
                     contribute.
                 </p>
+                <Link className="achievements-intro-action" to="/certificates">
+                    Open certificates <span aria-hidden="true">↗</span>
+                </Link>
             </div>
 
             <div className="achievements-overview" aria-label="Achievements overview">

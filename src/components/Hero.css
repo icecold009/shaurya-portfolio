@@ -521,3 +521,12 @@
         transition: none;
     }
 }
+
+@media (hover: none), (pointer: coarse) {
+    .hero-report-card:hover,
+    .hero-report-card--ai-2027:hover,
+    .hero-report-card--plan-a:hover,
+    .hero-report-card--30-days-ai:hover {
+        transform: none;
+    }
+}

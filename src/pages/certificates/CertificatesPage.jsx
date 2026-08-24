@@ -256,7 +256,7 @@ export default function CertificatesPage() {
             <section className="artwork-section">
                 <div className="section-heading">
                     <p className="section-label">Proof of the work</p>
-                    <h2>Certificates &amp; <em>awards.</em></h2>
+                    <h1>Certificates &amp; <em>awards.</em></h1>
                 </div>
 
                 {/* Section tabs */}

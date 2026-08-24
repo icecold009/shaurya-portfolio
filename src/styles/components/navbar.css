@@ -322,6 +322,7 @@
     box-shadow:
         0 24px 65px rgba(0, 0, 0, 0.38),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform-origin: top right;
 }
 
 .desktop-more-label {
@@ -521,6 +522,7 @@
         -25px 0 80px rgba(0, 0, 0, 0.48),
         inset 0 1px 0 rgba(255, 255, 255, 0.12),
         inset 0 -1px 0 rgba(255, 255, 255, 0.025);
+    transform-origin: right center;
 }
 
 .mobile-nav-panel::before {

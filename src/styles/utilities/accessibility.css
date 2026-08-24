@@ -40,6 +40,12 @@
     outline-offset: 3px;
 }
 
+button:disabled,
+a[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.58;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -48,6 +54,26 @@
         scroll-behavior: auto !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: 100ms !important;
+    }
+
+    :where(
+            button:not([disabled]),
+            a,
+            [role="button"],
+            .case-study-mockup,
+            .project-folder,
+            .project-file,
+            .hero-report-card,
+            .blog-featured,
+            .artwork-card,
+            .achievement-card,
+            .uses-tool-group
+        ):active {
+        transform: none !important;
+    }
+
+    .interactive-portrait {
+        pointer-events: none;
     }
 }
