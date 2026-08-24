@@ -31,8 +31,10 @@
     transition: color 0.15s;
 }
 
-.project-card:hover .project-expand-hint {
-    color: var(--green-dim);
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover .project-expand-hint {
+        color: var(--green-dim);
+    }
 }
 
 /* ── Backdrop ── */
@@ -48,16 +50,6 @@
     padding: 1.5rem;
     opacity: 1;
     transition: opacity var(--duration-popover) var(--ease-out);
-}
-
-@keyframes backdrop-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 /* ── Modal card ── */
@@ -94,18 +86,6 @@
     }
 }
 
-@keyframes modal-in {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
 /* ── Close button ── */
 .modal-close {
     position: absolute;
@@ -127,11 +107,13 @@
     z-index: 1;
 }
 
-.modal-close:hover {
-    color: var(--green);
-    border-color: var(--green);
-    background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
-    transform: scale(1.1);
+@media (hover: hover) and (pointer: fine) {
+    .modal-close:hover {
+        color: var(--green);
+        border-color: var(--green);
+        background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
+        transform: scale(1.03);
+    }
 }
 
 /* ── Screenshot ── */
@@ -281,11 +263,13 @@
     transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.12s;
 }
 
-.modal-close:hover {
-    color: var(--green);
-    border-color: var(--green);
-    background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
-    transform: scale(1.1);
+@media (hover: hover) and (pointer: fine) {
+    .modal-close:hover {
+        color: var(--green);
+        border-color: var(--green);
+        background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
+        transform: scale(1.03);
+    }
 }
 
 /* Sticky topbar — stays at top of scroll container */
@@ -340,10 +324,12 @@
     transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
-.modal-close-bottom:hover {
-    color: var(--green);
-    border-color: var(--green);
-    background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
+@media (hover: hover) and (pointer: fine) {
+    .modal-close-bottom:hover {
+        color: var(--green);
+        border-color: var(--green);
+        background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
+    }
 }
 
 @media (max-width: 768px) {

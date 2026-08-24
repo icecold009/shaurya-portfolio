@@ -63,7 +63,8 @@ export default function InteractivePortrait() {
         let dots = [];
         let width = 0;
         let height = 0;
-        let reducedMotion = false;
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let reducedMotion = mediaQuery.matches;
         const finePointer = window.matchMedia(
             "(hover: hover) and (pointer: fine)",
         ).matches;
@@ -77,6 +78,7 @@ export default function InteractivePortrait() {
             canvas.height = Math.round(height * ratio);
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
             dots = createPortraitDots(width, height, portrait);
+            if (!finePointer || reducedMotion) render(performance.now());
         };
 
         const movePointer = (event) => {
@@ -90,9 +92,21 @@ export default function InteractivePortrait() {
             pointer.active = false;
         };
 
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const stopAnimation = () => {
+            if (animationFrame !== undefined) {
+                window.cancelAnimationFrame(animationFrame);
+                animationFrame = undefined;
+            }
+        };
+
+        const startAnimation = () => {
+            stopAnimation();
+            render(performance.now());
+        };
+
         const updateMotionPreference = () => {
             reducedMotion = mediaQuery.matches;
+            startAnimation();
         };
 
         const render = (time) => {
@@ -128,7 +142,9 @@ export default function InteractivePortrait() {
             });
 
             context.globalAlpha = 1;
-            animationFrame = window.requestAnimationFrame(render);
+            if (finePointer && !reducedMotion) {
+                animationFrame = window.requestAnimationFrame(render);
+            }
         };
 
         const rebuild = () => {
@@ -137,7 +153,6 @@ export default function InteractivePortrait() {
 
         portrait.addEventListener("load", rebuild);
         portrait.src = "/images/shaurya-portrait.jpeg";
-        updateMotionPreference();
         mediaQuery.addEventListener("change", updateMotionPreference);
         if (finePointer) {
             canvas.addEventListener("pointermove", movePointer);
@@ -146,10 +161,10 @@ export default function InteractivePortrait() {
         resize();
         resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(canvas);
-        animationFrame = window.requestAnimationFrame(render);
+        startAnimation();
 
         return () => {
-            window.cancelAnimationFrame(animationFrame);
+            stopAnimation();
             resizeObserver?.disconnect();
             portrait.removeEventListener("load", rebuild);
             mediaQuery.removeEventListener("change", updateMotionPreference);
