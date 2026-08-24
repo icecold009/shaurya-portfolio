@@ -63,7 +63,11 @@ export default function InteractivePortrait() {
         let dots = [];
         let width = 0;
         let height = 0;
-        let reducedMotion = false;
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let reducedMotion = mediaQuery.matches;
+        const finePointer = window.matchMedia(
+            "(hover: hover) and (pointer: fine)",
+        ).matches;
 
         const resize = () => {
             const bounds = canvas.getBoundingClientRect();
@@ -74,6 +78,7 @@ export default function InteractivePortrait() {
             canvas.height = Math.round(height * ratio);
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
             dots = createPortraitDots(width, height, portrait);
+            if (!finePointer || reducedMotion) render(performance.now());
         };
 
         const movePointer = (event) => {
@@ -87,9 +92,21 @@ export default function InteractivePortrait() {
             pointer.active = false;
         };
 
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const stopAnimation = () => {
+            if (animationFrame !== undefined) {
+                window.cancelAnimationFrame(animationFrame);
+                animationFrame = undefined;
+            }
+        };
+
+        const startAnimation = () => {
+            stopAnimation();
+            render(performance.now());
+        };
+
         const updateMotionPreference = () => {
             reducedMotion = mediaQuery.matches;
+            startAnimation();
         };
 
         const render = (time) => {
@@ -109,7 +126,7 @@ export default function InteractivePortrait() {
                 const dx = idleX - pointer.x;
                 const dy = idleY - pointer.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                const influence = pointer.active
+                const influence = !reducedMotion && finePointer && pointer.active
                     ? Math.max(0, 1 - distance / POINTER_RADIUS)
                     : 0;
                 const push = influence * influence * 30;
@@ -125,7 +142,9 @@ export default function InteractivePortrait() {
             });
 
             context.globalAlpha = 1;
-            animationFrame = window.requestAnimationFrame(render);
+            if (finePointer && !reducedMotion) {
+                animationFrame = window.requestAnimationFrame(render);
+            }
         };
 
         const rebuild = () => {
@@ -134,28 +153,35 @@ export default function InteractivePortrait() {
 
         portrait.addEventListener("load", rebuild);
         portrait.src = "/images/shaurya-portrait.jpeg";
-        updateMotionPreference();
         mediaQuery.addEventListener("change", updateMotionPreference);
-        canvas.addEventListener("pointermove", movePointer);
-        canvas.addEventListener("pointerleave", clearPointer);
+        if (finePointer) {
+            canvas.addEventListener("pointermove", movePointer);
+            canvas.addEventListener("pointerleave", clearPointer);
+        }
         resize();
         resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(canvas);
-        animationFrame = window.requestAnimationFrame(render);
+        startAnimation();
 
         return () => {
-            window.cancelAnimationFrame(animationFrame);
+            stopAnimation();
             resizeObserver?.disconnect();
             portrait.removeEventListener("load", rebuild);
             mediaQuery.removeEventListener("change", updateMotionPreference);
-            canvas.removeEventListener("pointermove", movePointer);
-            canvas.removeEventListener("pointerleave", clearPointer);
+            if (finePointer) {
+                canvas.removeEventListener("pointermove", movePointer);
+                canvas.removeEventListener("pointerleave", clearPointer);
+            }
         };
     }, []);
 
     return (
-        <div className="interactive-portrait" aria-hidden="true">
-            <canvas ref={canvasRef} />
+        <div
+            className="interactive-portrait"
+            role="img"
+            aria-label="Portrait of Shaurya Saria rendered as an interactive dot field"
+        >
+            <canvas ref={canvasRef} aria-hidden="true" />
         </div>
     );
 }

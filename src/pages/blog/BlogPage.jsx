@@ -46,7 +46,7 @@ function BlogPage() {
                 <div className="blog-archive-heading">
                     <div>
                         <p className="section-label">Field notes</p>
-                        <h2>Notes from the <em>workbench.</em></h2>
+                        <h1>Notes from the <em>workbench.</em></h1>
                     </div>
                     <p className="blog-archive-description">
                         A running log of building, studying and learning in

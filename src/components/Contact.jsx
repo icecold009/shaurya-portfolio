@@ -66,7 +66,7 @@ function Contact() {
 
             <div className="section-heading">
                 <p className="section-label">Start a conversation</p>
-                <h2>Let&apos;s <em>work on something real.</em></h2>
+                <h1>Let&apos;s <em>work on something real.</em></h1>
             </div>
 
             <div className="contact-grid">

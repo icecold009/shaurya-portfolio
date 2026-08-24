@@ -2,6 +2,8 @@
 
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
+    color-scheme: dark;
+
     --bg: #060a06;
     --bg-2: #0b100b;
     --surface: #0e150e;
@@ -18,6 +20,7 @@
     --green-faint: #004d14;
 
     --max-width: 1260px;
+    --content-width: 70rem;
 
     --sans:
         "Archivo",
@@ -32,12 +35,26 @@
         monospace;
 
     --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+    /* Interaction timing: repeated UI stays crisp; only editorial reveals linger. */
+    --duration-press: 140ms;
+    --duration-popover: 180ms;
+    --duration-drawer: 320ms;
+    --duration-page: 240ms;
+    --duration-reveal: 720ms;
+
+    --transition-fast: var(--duration-press) var(--ease-out);
+    --transition-normal: var(--duration-page) var(--ease-editorial);
 
     --accent-rgb: 0, 255, 65;
 }
 
 /* LIGHT MODE */
 [data-theme="light"] {
+    color-scheme: light;
+
     /* Cream and white backgrounds */
     --bg: #f7f3e8;
     --bg-2: #efe9dc;

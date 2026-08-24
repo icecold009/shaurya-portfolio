@@ -21,3 +21,74 @@
         opacity: 0;
     }
 }
+
+/* Shared motion contract. Press states are immediate; editorial reveals are not. */
+:where(
+        button:not([disabled]),
+        a,
+        [role="button"],
+        .pressable,
+        .artwork-card,
+        .achievement-card,
+        .uses-tool-group,
+        .hero-report-card,
+        .blog-featured,
+        .blog-row,
+        .case-study-mockup,
+        .project-folder,
+        .project-file,
+        .project-index__item,
+        .project-list-item
+    ) {
+    transition-property: transform, opacity, background-color, border-color,
+        color, box-shadow;
+    transition-duration: var(--duration-page);
+    transition-timing-function: var(--ease-editorial);
+}
+
+:where(
+        button:not([disabled]),
+        a,
+        [role="button"],
+        .pressable,
+        .artwork-card,
+        .achievement-card,
+        .uses-tool-group,
+        .hero-report-card,
+        .blog-featured,
+        .blog-row,
+        .project-folder,
+        .project-file,
+        .project-index__item,
+        .project-list-item
+    ):active {
+    transform: scale(0.975);
+}
+
+/* Hover is a fine-pointer affordance, never a touch interaction requirement. */
+@media (hover: hover) and (pointer: fine) {
+    :where(.interactive-lift, .pressable):hover {
+        transform: translateY(-0.2rem);
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .interactive-portrait {
+        pointer-events: none;
+    }
+
+    .interactive-portrait canvas {
+        cursor: default;
+    }
+
+    .project-folder:hover,
+    .project-file:hover,
+    .case-study:hover .case-study-mockup,
+    .hero-report-card:hover,
+    .blog-featured:hover,
+    .artwork-card:hover,
+    .achievement-card:hover,
+    .uses-tool-group:hover {
+        transform: none;
+    }
+}
