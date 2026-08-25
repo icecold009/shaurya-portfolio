@@ -66,4 +66,3 @@ Feature branch: `codex/luna-portfolio-performance-proof`
 - [ ] Lint, tests, build, routes, and assets are reproducible.
 - [ ] Every case study is current, honest, accessible, and privacy-safe.
 - [ ] Feature branch is pushed and clean; `main` is untouched and unmerged.
-
