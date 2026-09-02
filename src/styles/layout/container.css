@@ -1,13 +1,13 @@
 /* Shared layout primitives */
 
 .page-container {
-    width: min(var(--max-width), calc(100% - 2rem));
+    width: min(var(--max-width), calc(100% - 2.5rem));
     margin-inline: auto;
 }
 
 /* ─── LAYOUT ─────────────────────────────────────────── */
 main {
-    width: min(var(--max-width), calc(100% - 2rem));
+    width: min(var(--max-width), calc(100% - 2.5rem));
     margin: 0 auto;
 }
 

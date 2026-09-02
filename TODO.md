@@ -1,5 +1,17 @@
 # Final Luna plan — Shaurya Portfolio
 
+## Mobile-first redesign — Package 1
+
+- [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.
+- [x] Preserve the accessible mobile drawer, focus restoration, Escape handling, body-scroll lock, theme control, and secondary pages under Explore.
+- [x] Remove the interactive portrait, Lenis wrapper/dependency, legacy home stylesheet, and unreferenced portrait assets.
+- [x] Enforce the 20 px mobile page gutter and fit the complete 390×844 hero, including both CTAs, within the first viewport.
+- [ ] Independent validation before starting Package 2 project disclosure.
+
+Local evidence: `npm.cmd run build` passes; Browser validation covers 320×568, 390×844, 768×1024, and 1440×900, both themes, menu open/close/focus restoration, CTA routing, and narrow-viewport overflow checks. A real browser 200% zoom pass remains for independent validation. Hosted/deployment evidence is intentionally not claimed.
+
+Next package: create `codex/mobile-first-project-disclosure` from this accepted base and implement the single-open expandable project model.
+
 Repository: `C:\Users\91829\OneDrive\Documents\GitHub\shaurya-portfolio`
 Reviewed: clean `main` at `d839f9e` on 2026-08-25
 Feature branch: `codex/luna-portfolio-performance-proof`

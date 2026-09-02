@@ -64,7 +64,6 @@ a[aria-disabled="true"] {
             .case-study-mockup,
             .project-folder,
             .project-file,
-            .hero-report-card,
             .blog-featured,
             .artwork-card,
             .achievement-card,
@@ -73,7 +72,4 @@ a[aria-disabled="true"] {
         transform: none !important;
     }
 
-    .interactive-portrait {
-        pointer-events: none;
-    }
 }

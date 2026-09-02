@@ -4,20 +4,20 @@
 :root {
     color-scheme: dark;
 
-    --bg: #060a06;
-    --bg-2: #0b100b;
-    --surface: #0e150e;
-    --surface-2: #131d13;
-    --line: #1e2e1e;
-    --line-bright: #2a4a2a;
+    --bg: #0b1220;
+    --bg-2: #111b2d;
+    --surface: #121d30;
+    --surface-2: #18263b;
+    --line: #263650;
+    --line-bright: #3b5274;
 
-    --text: #e1f5e1;
-    --text-dim: #b6cfb6;
-    --text-faint: #97b197;
+    --text: #e9eef7;
+    --text-dim: #b7c4d9;
+    --text-faint: #8d9bb2;
 
-    --green: #00ff41;
-    --green-dim: #00c832;
-    --green-faint: #004d14;
+    --green: #7da8ff;
+    --green-dim: #9abaff;
+    --green-faint: #1d355d;
 
     --max-width: 1260px;
     --content-width: 70rem;
@@ -42,13 +42,13 @@
     --duration-press: 140ms;
     --duration-popover: 180ms;
     --duration-drawer: 320ms;
-    --duration-page: 240ms;
+    --duration-page: 200ms;
     --duration-reveal: 720ms;
 
     --transition-fast: var(--duration-press) var(--ease-out);
     --transition-normal: var(--duration-page) var(--ease-editorial);
 
-    --accent-rgb: 0, 255, 65;
+    --accent-rgb: 125, 168, 255;
 }
 
 /* LIGHT MODE */

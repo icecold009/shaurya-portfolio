@@ -31,7 +31,7 @@
 
     main,
     .navbar {
-        width: min(var(--max-width), calc(100% - 1.5rem));
+        width: min(var(--max-width), calc(100% - 2.5rem));
     }
 
     .navbar {
@@ -42,20 +42,6 @@
     .brand {
         font-size: 0.92rem;
         line-height: 1.2;
-    }
-
-    .hero {
-        padding: 4rem 0 3rem;
-        min-height: auto;
-    }
-
-    .hero-title {
-        font-size: clamp(2rem, 11vw, 3.5rem);
-    }
-
-    .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
     }
 
     .btn,
