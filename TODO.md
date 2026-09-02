@@ -10,6 +10,8 @@
 
 Local evidence: `npm.cmd run build` passes; Browser validation covers 320×568, 390×844, 768×1024, and 1440×900, both themes, menu open/close/focus restoration, CTA routing, and narrow-viewport overflow checks. A real browser 200% zoom pass remains for independent validation. Hosted/deployment evidence is intentionally not claimed.
 
+Implementation commit: `d2ac369` (`feat(portfolio): build mobile-first shell`).
+
 Next package: create `codex/mobile-first-project-disclosure` from this accepted base and implement the single-open expandable project model.
 
 Repository: `C:\Users\91829\OneDrive\Documents\GitHub\shaurya-portfolio`
