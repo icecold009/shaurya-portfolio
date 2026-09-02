@@ -10,18 +10,6 @@
     }
 }
 
-@keyframes availability-pulse {
-    from {
-        transform: scale(0.7);
-        opacity: 0.9;
-    }
-
-    to {
-        transform: scale(1.6);
-        opacity: 0;
-    }
-}
-
 /* Shared motion contract. Press states are immediate; editorial reveals are not. */
 :where(
         button:not([disabled]),
@@ -31,7 +19,6 @@
         .artwork-card,
         .achievement-card,
         .uses-tool-group,
-        .hero-report-card,
         .blog-featured,
         .blog-row,
         .case-study-mockup,
@@ -54,7 +41,6 @@
         .artwork-card,
         .achievement-card,
         .uses-tool-group,
-        .hero-report-card,
         .blog-featured,
         .blog-row,
         .project-folder,
@@ -73,18 +59,9 @@
 }
 
 @media (hover: none), (pointer: coarse) {
-    .interactive-portrait {
-        pointer-events: none;
-    }
-
-    .interactive-portrait canvas {
-        cursor: default;
-    }
-
     .project-folder:hover,
     .project-file:hover,
     .case-study:hover .case-study-mockup,
-    .hero-report-card:hover,
     .blog-featured:hover,
     .artwork-card:hover,
     .achievement-card:hover,

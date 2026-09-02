@@ -4,8 +4,8 @@ export const EDITORIAL_DURATION = {
     fast: 0.14,
     normal: 0.24,
     popover: 0.18,
-    drawer: 0.32,
-    page: 0.24,
+    drawer: 0.2,
+    page: 0.2,
     reveal: 0.72,
 };
 
