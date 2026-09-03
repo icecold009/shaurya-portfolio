@@ -4,7 +4,7 @@ const sections = [
         label: "Competitions",
         groups: [
             {
-                org: "IYMC — International Youth Math Challenge",
+                org: "IYMC: International Youth Math Challenge",
                 entries: [
                     {
                         title: "IYMC Final Round Silver",
@@ -33,7 +33,7 @@ const sections = [
                 ],
             },
             {
-                org: "EWB — Engineers Without Borders",
+                org: "EWB: Engineers Without Borders",
                 entries: [
                     {
                         title: "MIT EWB Individual Certificate",
@@ -56,7 +56,7 @@ const sections = [
                 ],
             },
             {
-                org: "NFO — National Finance Olympiad",
+                org: "NFO: National Finance Olympiad",
                 entries: [
                     {
                         title: "NFO Stage Qualifier",
@@ -85,7 +85,7 @@ const sections = [
                 ],
             },
             {
-                org: "Wharton — Investment Competition",
+                org: "Wharton: Investment Competition",
                 entries: [
                     {
                         title: "Wharton Investment Competition",
@@ -190,7 +190,7 @@ const sections = [
                         pdf: "/certificates/pdfs/cert-Claude-Code-In-Action.pdf",
                     },
                     {
-                        title: "AI Fluency — Capabilities and Limitations",
+                        title: "AI Fluency: Capabilities and Limitations",
                         year: "2025",
                         img: "/certificates/images/cert-AI-fluency-Capabilities-and-limitations.webp",
                         pdf: "/certificates/pdfs/cert-AI-fluency-Capabilities-and-limitations.pdf",
@@ -280,7 +280,7 @@ export default function CertificatesPage() {
                                 {/* Org divider */}
                                 <p className="cert-org-label">{group.org}</p>
 
-                                {/* Cards grid — reuses existing artwork-grid */}
+                                {/* Cards grid: reuses existing artwork-grid */}
                                 <div className="artwork-grid">
                                     {group.entries.map((entry, ei) => (
                                         <figure key={ei} className="artwork-card">

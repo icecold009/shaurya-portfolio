@@ -36,7 +36,8 @@ const projects = [
         stack: ["React", "Supabase", "Gemini", "Realtime", "RLS"],
         github: "https://github.com/icecold009/stadiumpulse-ai",
         visual: "stadium",
-        thumbnail: "/projects/stadiumpulse.svg",
+        thumbnail: "/projects/stadiumpulse-live-login.png",
+        thumbnailAlt: "StadiumPulse AI PulseOps command center sign-in screen",
         accent: "01",
     },
     {
@@ -62,7 +63,8 @@ const projects = [
         stack: ["Python", "Flask", "FFmpeg", "Fingerprinting", "Docker"],
         github: "https://github.com/icecold009/Audio-Recognition",
         visual: "music",
-        thumbnail: "/projects/music-recognition.svg",
+        thumbnail: "/projects/audio-recognition-fft.png",
+        thumbnailAlt: "Audio Recognition frequency spectrum diagnostic",
         accent: "02",
     },
     {
@@ -114,7 +116,8 @@ const projects = [
         stack: ["Flask", "PostgreSQL", "Supabase", "TMDB", "Vercel"],
         github: "https://github.com/icecold009/movie-tracker",
         visual: "movie",
-        thumbnail: "/projects/movie-tracker.svg",
+        thumbnail: "/projects/movie-tracker-production.png",
+        thumbnailAlt: "Movie Tracker production watchlist screenshot",
         accent: "04",
     },
     {
@@ -166,7 +169,8 @@ const projects = [
         stack: ["Python", "Pandas", "scikit-learn", "Jupyter", "Pytest"],
         github: "https://github.com/icecold009/f1-championship-prediction",
         visual: "f1",
-        thumbnail: "/projects/f1-prediction.svg",
+        thumbnail: "/projects/f1-predicted-vs-actual-2023.png",
+        thumbnailAlt: "F1 Championship Prediction chart comparing predicted and actual standings",
         accent: "06",
     },
     {
@@ -223,7 +227,7 @@ const projects = [
     },
 ];
 
-function ProjectVisual({ type, shouldReduceMotion }) {
+function ProjectVisual({ type, shouldReduceMotion, thumbnail, thumbnailAlt, title }) {
     const canHover =
         typeof window !== "undefined" &&
         window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -252,6 +256,24 @@ function ProjectVisual({ type, shouldReduceMotion }) {
                 ease: EDITORIAL_EASE,
             },
         };
+
+    const hasRealThumbnail = thumbnail && !thumbnail.endsWith(".svg");
+
+    if (hasRealThumbnail) {
+        return (
+            <motion.figure
+                className={`case-study-mockup case-study-mockup-image case-study-mockup-image--${type}`}
+                {...visualMotionProps}
+            >
+                <img
+                    src={thumbnail}
+                    alt={thumbnailAlt ?? `${title} project screenshot`}
+                    loading="lazy"
+                    decoding="async"
+                />
+            </motion.figure>
+        );
+    }
 
     if (type === "stadium") {
         return (
@@ -676,6 +698,9 @@ function ProjectCaseStudy({ project, featured = false }) {
             <ProjectVisual
                 type={project.visual}
                 shouldReduceMotion={shouldReduceMotion}
+                thumbnail={project.thumbnail}
+                thumbnailAlt={project.thumbnailAlt}
+                title={project.title}
             />
 
             <div className="case-study-details">
@@ -859,8 +884,9 @@ function ProjectFolderBrowser() {
                         {project.thumbnail ? (
                             <img
                                 src={project.thumbnail}
-                                alt={`${project.title} preview`}
+                                alt={project.thumbnailAlt ?? `${project.title} project preview`}
                                 loading="lazy"
+                                decoding="async"
                             />
                         ) : (
                             <span className="project-file-placeholder" aria-hidden="true">
@@ -954,7 +980,7 @@ export default function Projects() {
                 >
                     Three featured projects, followed by a working archive across
                     ML evaluation, audio systems, education, operations and product
-                    tooling—showing what I built, what I chose not to hide and what I learned.
+                    tooling, showing what I built, what I chose not to hide and what I learned.
                 </motion.p>
 
                 <motion.a

@@ -34,12 +34,14 @@ export default function NotFound() {
     }, []);
 
     return (
-        <div className="notfound-wrap">
-            <p className="notfound-code">404</p>
-            <pre className="notfound-terminal">{shown}<span className="notfound-cursor">█</span></pre>
-            <Link to="/" className="btn btn-primary" style={{ marginTop: "2rem" }}>
-                cd ~/home
-            </Link>
+        <div className="page-wrapper not-found-page-shell">
+            <div className="notfound-wrap">
+                <p className="notfound-code">404</p>
+                <pre className="notfound-terminal">{shown}<span className="notfound-cursor">█</span></pre>
+                <Link to="/" className="btn btn-primary" style={{ marginTop: "2rem" }}>
+                    cd ~/home
+                </Link>
+            </div>
         </div>
     );
 }

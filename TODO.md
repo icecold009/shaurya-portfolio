@@ -1,6 +1,6 @@
-# Final Luna plan — Shaurya Portfolio
+# Final Luna plan: Shaurya Portfolio
 
-## Mobile-first redesign — Package 1
+## Mobile-first redesign: Package 1
 
 - [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.
 - [x] Preserve the accessible mobile drawer, focus restoration, Escape handling, body-scroll lock, theme control, and secondary pages under Explore.
@@ -13,6 +13,29 @@ Local evidence: `npm.cmd run build` passes; Browser validation covers 320×568, 
 Implementation commit: `d2ac369` (`feat(portfolio): build mobile-first shell`).
 
 Next package: create `codex/mobile-first-project-disclosure` from this accepted base and implement the single-open expandable project model.
+
+## Copy and project imagery cleanup
+
+- [x] Remove every U+2014 em dash from website copy, metadata, docs, and styles.
+- [x] Replace featured project thumbnails with repository-sourced project visuals.
+- [x] Replace the Movie Tracker archive thumbnail with its committed production screenshot.
+- [ ] Independently review image crops, captions, and accessibility at mobile and desktop sizes.
+
+Evidence: Audio Recognition uses `docs/screenshots/fft-output.png`, F1 uses `docs/predicted_vs_actual_2023.png`, Movie Tracker uses `docs/assets/production/production-desktop-2026-08-16.png`, and StadiumPulse uses a screenshot captured from its public deployed command center at `https://stadiumpulse-ai-nine.vercel.app/login` because the repository does not commit a screenshot asset. Local build, route/asset checks, and responsive Browser evidence are required before this package is accepted.
+
+Implementation commit: `8d02f53` (`feat(portfolio): use real project imagery and remove em dashes`).
+
+## Shared route coherence cleanup
+
+- [x] Put About, Projects, Writing, Not Found, Uses, Artwork, Certificates, Achievements, and Contact on the same centered page shell.
+- [x] Align mobile gutters, opening rhythm, heading type, flat surfaces, borders, and interaction feedback with the homepage system.
+- [x] Remove route-specific full-bleed offsets, heavy card gradients, and shadow treatments that made secondary pages feel unrelated.
+- [x] Keep dark and light themes, keyboard navigation, reduced-motion behavior, and existing content/routes intact.
+
+Evidence: Browser checks at 320x568, 390x844, 768x1024, and 1440x900 cover every route, including the missing-route fallback. All checked routes report no horizontal overflow and no em dash copy; light-theme rendering was also checked on the About route. `npm.cmd run build` passes.
+
+Implementation branch: `codex/remove-em-dashes-real-project-images-20260903`.
+Implementation commit: `93fc0e5` (`refactor(portfolio): unify secondary page shell`).
 
 Repository: `C:\Users\91829\OneDrive\Documents\GitHub\shaurya-portfolio`
 Reviewed: clean `main` at `d839f9e` on 2026-08-25

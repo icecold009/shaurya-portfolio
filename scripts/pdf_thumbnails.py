@@ -10,7 +10,7 @@ from pathlib import Path
 #   for pdf in pdf_dir.glob("*.pdf"):
 #       out = thumb_dir / (pdf.stem + ".webp")
 #       if out.exists():
-#           print(f"skipping {pdf.stem} — already exists")
+#           print(f"skipping {pdf.stem}: already exists")
 #           continue
 #       try:
 #           pages = convert_from_path(pdf, dpi=150, first_page=1, last_page=1,
