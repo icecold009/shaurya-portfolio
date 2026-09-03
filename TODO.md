@@ -23,6 +23,8 @@ Next package: create `codex/mobile-first-project-disclosure` from this accepted 
 
 Evidence: Audio Recognition uses `docs/screenshots/fft-output.png`, F1 uses `docs/predicted_vs_actual_2023.png`, Movie Tracker uses `docs/assets/production/production-desktop-2026-08-16.png`, and StadiumPulse uses a screenshot captured from its public deployed command center at `https://stadiumpulse-ai-nine.vercel.app/login` because the repository does not commit a screenshot asset. Local build, route/asset checks, and responsive Browser evidence are required before this package is accepted.
 
+Implementation commit: `8d02f53` (`feat(portfolio): use real project imagery and remove em dashes`).
+
 Repository: `C:\Users\91829\OneDrive\Documents\GitHub\shaurya-portfolio`
 Reviewed: clean `main` at `d839f9e` on 2026-08-25
 Feature branch: `codex/luna-portfolio-performance-proof`
