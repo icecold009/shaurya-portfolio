@@ -26,7 +26,7 @@ const principles = [
         number: "02",
         title: <>Make the system <em>explain itself</em></>,
         description:
-            "I want the interface, model, data path and failure state to be understandable—not just the happy path.",
+            "I want the interface, model, data path and failure state to be understandable, not just the happy path.",
     },
     {
         number: "03",
@@ -208,7 +208,7 @@ export default function AboutPage() {
                             I am Shaurya Saria, a student developer
                             based in Bengaluru. I move between
                             mathematics, machine learning, full-stack
-                            products and interface design—usually by
+                            products and interface design, usually by
                             building the first version and learning
                             what the idea actually needs.
                         </p>
@@ -269,7 +269,7 @@ export default function AboutPage() {
                     >
                         <p className="about-editorial__story-lead">
                             I like working where engineering,
-                            design and problem-solving overlap—
+                            design and problem-solving overlap,
                             especially when the problem is still
                             a little undefined.
                         </p>

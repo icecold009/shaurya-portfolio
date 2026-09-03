@@ -13,7 +13,8 @@ const featuredProjects = [
         category: "AI · Full-stack · Operations",
         summary: "A simulated operations dashboard that turns venue telemetry into legible zone status, alerts, and next actions.",
         status: "Prototype · simulated data",
-        image: "/projects/stadiumpulse.svg",
+        image: "/projects/stadiumpulse-live-login.png",
+        imageAlt: "StadiumPulse AI PulseOps command center sign-in screen",
         hash: "#project-detail-01",
     },
     {
@@ -22,7 +23,8 @@ const featuredProjects = [
         category: "Audio · Python · Flask",
         summary: "A local-first recognition path from microphone or upload to normalized audio and fingerprint matching.",
         status: "Prototype · source linked",
-        image: "/projects/music-recognition.svg",
+        image: "/projects/audio-recognition-fft.png",
+        imageAlt: "Audio Recognition frequency spectrum diagnostic",
         hash: "#project-detail-02",
     },
     {
@@ -31,7 +33,8 @@ const featuredProjects = [
         category: "ML · Evaluation · Research",
         summary: "A leakage-safe forecasting study that tests pre-season signals against a simple previous-season baseline.",
         status: "Research study · source linked",
-        image: "/projects/f1-prediction.svg",
+        image: "/projects/f1-predicted-vs-actual-2023.png",
+        imageAlt: "F1 Championship Prediction chart comparing predicted and actual 2023 standings",
         hash: "#project-detail-06",
     },
 ];
@@ -61,8 +64,8 @@ export default function Home() {
                 <div className="home-project-list">
                     {featuredProjects.map((project) => (
                         <article className="home-project-card" key={project.title}>
-                            <div className="home-project-card__visual">
-                                <img src={project.image} alt={`${project.title} project preview`} loading="lazy" />
+                            <div className={`home-project-card__visual home-project-card__visual--${project.number}`}>
+                                <img src={project.image} alt={project.imageAlt} loading="lazy" decoding="async" />
                             </div>
                             <div className="home-project-card__body">
                                 <div className="home-project-card__meta">
@@ -92,7 +95,7 @@ export default function Home() {
                 </div>
                 <div className="home-profile-grid">
                     <p className="home-profile-lead">
-                        I like working where engineering, design, and problem-solving overlap—especially when the problem is still a little undefined.
+                        I like working where engineering, design, and problem-solving overlap, especially when the problem is still a little undefined.
                     </p>
                     <div className="home-profile-facts">
                         <div><span>Based in</span><strong>Bengaluru, India</strong></div>

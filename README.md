@@ -1,4 +1,4 @@
-# Shaurya Saria — Portfolio
+# Shaurya Saria | Portfolio
 
 The personal portfolio of Shaurya Saria, a Bengaluru-based student developer working across machine learning, full-stack products, and interaction design.
 
@@ -18,11 +18,11 @@ This site is designed to feel like an editorial archive rather than a list of li
 
 ## Screenshots
 
-### Home — desktop
+### Home: desktop
 
 ![Portfolio home page](artifacts/portfolio-home-dark.png)
 
-### Navigation — mobile
+### Navigation: mobile
 
 ![Portfolio mobile navigation](artifacts/mobile-navigation-dark.png)
 

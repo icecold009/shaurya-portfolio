@@ -22,7 +22,7 @@ const principles = [
         number: "02",
         title: "Make the boundary visible.",
         description:
-            "Credentials, model limits, fallbacks and incomplete evidence should be part of the product story—not hidden footnotes.",
+            "Credentials, model limits, fallbacks and incomplete evidence should be part of the product story, not hidden footnotes.",
     },
     {
         number: "03",
@@ -92,7 +92,7 @@ const toolGroups = [
             },
             {
                 name: "Gemini + Fireworks",
-                detail: "Gemini for study and AI experiments; Fireworks for the routing prototype—with boundaries kept visible.",
+                detail: "Gemini for study and AI experiments; Fireworks for the routing prototype, with boundaries kept visible.",
                 tags: ["AI", "APIs"],
             },
             {
@@ -192,7 +192,7 @@ export default function UsesPage() {
                     </h1>
                     <p className="uses-hero-description">
                         The tools, habits and boundaries behind my ML experiments,
-                        full-stack products and interfaces—from small prototypes to
+                        full-stack products and interfaces, from small prototypes to
                         AI systems that need to behave honestly.
                     </p>
                     <a className="uses-hero-action" href="#uses-workflow">

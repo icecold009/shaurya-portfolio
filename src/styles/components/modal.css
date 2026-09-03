@@ -241,7 +241,7 @@
 
 /* ─── USES PAGE ──────────────────────────────────────── */
 
-/* Remove old absolute close positioning — topbar replaces it */
+/* Remove old absolute close positioning: topbar replaces it */
 .modal-close {
     /* override: no longer absolute */
     position: static;
@@ -272,7 +272,7 @@
     }
 }
 
-/* Sticky topbar — stays at top of scroll container */
+/* Sticky topbar: stays at top of scroll container */
 .modal-topbar {
     position: sticky;
     top: 0;

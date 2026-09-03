@@ -50,7 +50,7 @@ function BlogPage() {
                     </div>
                     <p className="blog-archive-description">
                         A running log of building, studying and learning in
-                        public—from model limits to the smallest useful version.
+                        public, from model limits to the smallest useful version.
                     </p>
                 </div>
             </header>
