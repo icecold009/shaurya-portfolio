@@ -25,6 +25,17 @@ Evidence: Audio Recognition uses `docs/screenshots/fft-output.png`, F1 uses `doc
 
 Implementation commit: `8d02f53` (`feat(portfolio): use real project imagery and remove em dashes`).
 
+## Shared route coherence cleanup
+
+- [x] Put About, Projects, Writing, Not Found, Uses, Artwork, Certificates, Achievements, and Contact on the same centered page shell.
+- [x] Align mobile gutters, opening rhythm, heading type, flat surfaces, borders, and interaction feedback with the homepage system.
+- [x] Remove route-specific full-bleed offsets, heavy card gradients, and shadow treatments that made secondary pages feel unrelated.
+- [x] Keep dark and light themes, keyboard navigation, reduced-motion behavior, and existing content/routes intact.
+
+Evidence: Browser checks at 320x568, 390x844, 768x1024, and 1440x900 cover every route, including the missing-route fallback. All checked routes report no horizontal overflow and no em dash copy; light-theme rendering was also checked on the About route. `npm.cmd run build` passes.
+
+Implementation branch: `codex/remove-em-dashes-real-project-images-20260903`.
+
 Repository: `C:\Users\91829\OneDrive\Documents\GitHub\shaurya-portfolio`
 Reviewed: clean `main` at `d839f9e` on 2026-08-25
 Feature branch: `codex/luna-portfolio-performance-proof`

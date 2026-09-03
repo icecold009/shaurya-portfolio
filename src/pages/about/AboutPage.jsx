@@ -157,7 +157,8 @@ export default function AboutPage() {
         };
 
     return (
-        <div className="about-editorial">
+        <div className="page-wrapper about-page-shell">
+            <div className="about-editorial">
             <section
                 className="about-editorial__hero"
                 aria-labelledby="about-editorial-title"
@@ -539,6 +540,7 @@ export default function AboutPage() {
                     </div>
                 </div>
             </motion.section>
+            </div>
         </div>
     );
 }
