@@ -63,6 +63,14 @@ npm run build
 npm run preview
 ```
 
+The full local quality gate is:
+
+```bash
+npm run verify
+```
+
+It runs the repository's dependency-free source lint, route and static-asset integrity checks, Node test suite, and production build. The gate does not claim hosted, device, or production evidence.
+
 The build is allowed to update `public/resume.pdf` only when a LaTeX source is available. The source can live at `resume/resume.tex` or at the path supplied through `RESUME_TEX`.
 
 To synchronise a resume explicitly:

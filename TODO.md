@@ -35,6 +35,17 @@ Validation evidence: `npm.cmd test` passes 8/8 and `npm.cmd run build` passes. F
 
 Implementation branch: `codex/artwork-certificate-disclosure`.
 
+## Reproducible quality and evidence gates: Package 4
+
+- [x] Add dependency-free source linting for em dashes, image alternatives, and safe new-tab links.
+- [x] Add route, static-asset, project-record, and artwork-record integrity validation.
+- [x] Add deterministic missing and present-source resume-sync tests.
+- [x] Add one-command local verification and a GitHub Actions quality workflow.
+- [x] Document the local gate and its evidence boundary.
+- [ ] Independent validation before starting Package 5 accessibility and editorial audit.
+
+Implementation branch: `codex/quality-evidence-audit`.
+
 ## Mobile-first redesign: Package 1
 
 - [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.

@@ -6,7 +6,10 @@
     "scripts": {
         "dev": "vite",
         "sync:resume": "node scripts/sync-resume.mjs",
-        "test": "node --test tests/projectSearch.test.mjs tests/blogSelection.test.mjs tests/mediaSelection.test.mjs",
+        "lint": "node scripts/lint-source.mjs",
+        "test": "node --test tests/projectSearch.test.mjs tests/blogSelection.test.mjs tests/mediaSelection.test.mjs tests/resumeSync.test.mjs",
+        "verify:assets": "node scripts/verify-static-integrity.mjs",
+        "verify": "node scripts/verify-quality.mjs",
         "build": "npm run sync:resume -- --optional && vite build",
         "preview": "vite preview"
     },
