@@ -134,7 +134,7 @@
     align-self: center;
 }
 
-.blog-featured-content h3 {
+.blog-featured-content h2 {
     max-width: 10ch;
     margin: 0 0 1.8rem;
     color: var(--text);
@@ -244,7 +244,7 @@
     color: var(--text-faint);
 }
 
-.blog-row h3 {
+.blog-row h2 {
     max-width: 22ch;
     margin: 0 0 0.7rem;
     color: var(--text);
@@ -467,7 +467,7 @@
         margin-bottom: 4rem;
     }
 
-    .blog-featured-content h3 {
+    .blog-featured-content h2 {
         margin-bottom: 1.5rem;
         font-size: clamp(2.8rem, 15vw, 5.5rem);
     }

@@ -130,7 +130,7 @@ function BlogPage() {
                         <span>{featuredPost.readingTime}</span>
                     </div>
                     <div className="blog-featured-content">
-                        <h3 className="heading-italic">{featuredPost.title}</h3>
+                        <h2 className="heading-italic">{featuredPost.title}</h2>
                         <p>{featuredPost.excerpt}</p>
                     </div>
                     <div className="blog-featured-footer">
@@ -176,9 +176,9 @@ function BlogPage() {
                                     <span className="blog-tag">{post.tag}</span>
                                     <span className="blog-reading-time">{post.readingTime}</span>
                                 </div>
-                                <h3 className={index % 2 === 1 ? "heading-italic" : ""}>
+                                <h2 className={index % 2 === 1 ? "heading-italic" : ""}>
                                     {post.title}
-                                </h3>
+                                </h2>
                                 <p className="blog-excerpt">{post.excerpt}</p>
                             </div>
                             <span className="blog-row-arrow" aria-hidden="true">↗</span>

@@ -160,9 +160,9 @@ function Navbar() {
 
                     <div className="navbar-actions">
                         <nav className="navbar-profile-links" aria-label="Profile links">
-                            {desktopProfileLinks.map((link) => <a key={link.key} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>)}
+                            {desktopProfileLinks.map((link) => <a key={link.key} href={link.href} target="_blank" rel="noreferrer" aria-label={`${link.label} (opens in a new tab)`}>{link.label}</a>)}
                         </nav>
-                        {resumeLink && <a className="navbar-resume-link" href={resumeLink.href} target="_blank" rel="noopener noreferrer">Résumé</a>}
+                        {resumeLink && <a className="navbar-resume-link" href={resumeLink.href} target="_blank" rel="noopener noreferrer" aria-label="Open résumé PDF in a new tab">Résumé</a>}
                         <button type="button" className="nav-icon-button" onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
                             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
                         </button>
@@ -192,7 +192,7 @@ function Navbar() {
                             <div className="mobile-nav-footer">
                                 <div className="mobile-status"><span className="mobile-status-dot" /><p>Open to internships, research, and collaborations</p></div>
                                 <div className="mobile-social-links">
-                                    {profileLinks.map((link) => <a key={link.key} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} download={link.download ? true : undefined}>{link.key === "github" ? <GithubIcon size={16} /> : link.key === "email" ? <Mail size={16} /> : null}{link.label}</a>)}
+                                    {profileLinks.map((link) => <a key={link.key} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} download={link.download ? true : undefined} aria-label={link.external ? `${link.label} (opens in a new tab)` : link.label}>{link.key === "github" ? <GithubIcon size={16} /> : link.key === "email" ? <Mail size={16} /> : null}{link.label}</a>)}
                                 </div>
                             </div>
                         </motion.aside>

@@ -485,7 +485,7 @@ function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
-                        aria-label={`View ${project.title} on GitHub`}
+                        aria-label={`View ${project.title} on GitHub in a new tab`}
                     >
                         Source
                         <ArrowUpRight size={18} aria-hidden="true" />
@@ -574,6 +574,7 @@ function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
                             target="_blank"
                             rel="noreferrer"
                             className="case-study-proof-action"
+                            aria-label={`View ${project.title} source on GitHub in a new tab`}
                         >
                             Source
                             <ArrowUpRight size={15} aria-hidden="true" />
@@ -594,6 +595,7 @@ function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
                             target="_blank"
                             rel="noreferrer"
                             className="case-study-proof-action"
+                            aria-label={`Try ${project.title} demo in a new tab`}
                         >
                             Try it
                             <ArrowUpRight size={15} aria-hidden="true" />
@@ -615,6 +617,7 @@ function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
                             rel="noreferrer"
                             className="case-study-proof-action"
                             title="Open the repository evidence"
+                            aria-label={`View ${project.title} repository evidence in a new tab`}
                         >
                             Evidence
                             <ArrowUpRight size={15} aria-hidden="true" />
@@ -650,6 +653,7 @@ function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
                         target="_blank"
                         rel="noreferrer"
                         className="case-study-link"
+                        aria-label={`Open ${project.title} repository in a new tab`}
                         whileHover={
                             shouldReduceMotion || !canHover
                                 ? undefined

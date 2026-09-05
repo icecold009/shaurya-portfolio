@@ -453,6 +453,7 @@ export default function AboutPage() {
                                             target={link.external ? "_blank" : undefined}
                                             rel={link.external ? "noopener noreferrer" : undefined}
                                             download={link.download ? true : undefined}
+                                            aria-label={link.external ? `${link.label} (opens in a new tab)` : link.label}
                                             whileHover={linkHover}
                                         >
                                             {content}
@@ -516,6 +517,7 @@ export default function AboutPage() {
                                 href="/resume.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Open full résumé PDF in a new tab"
                             >
                                 Open full resume
                                 <ArrowUpRight size={18} aria-hidden="true" />

@@ -166,7 +166,7 @@ export default function ProjectDetailDialog({ project, onClose, triggerElement }
 
                     <div className="project-detail-dialog__actions">
                         {project.github ? (
-                            <a href={project.github} target="_blank" rel="noreferrer">
+                            <a href={project.github} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} repository in a new tab`}>
                                 Open repository
                                 <ArrowUpRight size={16} aria-hidden="true" />
                             </a>

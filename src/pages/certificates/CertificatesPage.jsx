@@ -382,7 +382,7 @@ export default function CertificatesPage() {
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
                                                                 className="cert-pdf-link"
-                                                                aria-label={`Open PDF for ${certificate.title}`}
+                                                                aria-label={`Open PDF for ${certificate.title} in a new tab`}
                                                             >
                                                                 view pdf ↗
                                                             </a>

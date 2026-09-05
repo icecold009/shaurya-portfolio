@@ -46,6 +46,18 @@ Implementation branch: `codex/artwork-certificate-disclosure`.
 
 Implementation branch: `codex/quality-evidence-audit`.
 
+## Accessibility and editorial audit: Package 5
+
+- [x] Restore a strict archive heading hierarchy by using `h2` for blog entries beneath the page `h1`.
+- [x] Label new-tab and PDF destinations for assistive technology while preserving visible link copy.
+- [x] Give the contact section an explicit heading relationship and retain form field labels.
+- [x] Scope artwork and project hover affordances to fine pointers so touch does not depend on hover state.
+- [x] Verify the mobile navigation focus loop, Escape cleanup, page landmarks, link labels, and not-found containment in Browser.
+- [x] Reconcile stale README statements about the removed interactive portrait and Lenis dependency.
+- [ ] Independent validation before starting Package 6 final visual and performance evidence.
+
+Implementation branch: `codex/accessibility-editorial-audit`.
+
 ## Mobile-first redesign: Package 1
 
 - [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.
@@ -89,28 +101,21 @@ Feature branch: `codex/luna-portfolio-performance-proof`
 
 - Vite production build passes.
 - Optional resume sync reports that `resume/resume.tex` is absent, then correctly continues.
-- No lint or test scripts exist.
-- The portrait now stops for coarse pointers and reduced motion, but not while offscreen/hidden.
-
-## Code-review conclusion
-
-`InteractivePortrait.jsx` keeps a RAF loop alive for every fine-pointer, motion-enabled mount, regardless of intersection or document visibility. Pointer capability is captured once. `artwork.css` applies hover globally and the coarse-pointer override removes transform but leaves hover shadow. These are the first two slices.
+- `npm.cmd run lint`, `npm.cmd test`, `npm.cmd run verify:assets`, and `npm.cmd run build` pass locally.
+- The homepage uses a static portrait, so there is no portrait RAF loop to gate or measure.
 
 ## Build checklist
 
-- [ ] **1. Make portrait eligibility dynamic**
-  Files: `src/components/InteractivePortrait.jsx`.
-  What to build: Combine fine-pointer media query, reduced-motion query, IntersectionObserver, and `document.visibilityState`. Start/stop one RAF as eligibility changes; listen for both media-query changes.
-  Acceptance: No RAF remains when offscreen, hidden, coarse-pointer, reduced-motion, or unmounted; returning onscreen renders correctly.
-  Verify: Instrumented component tests with mocked RAF, matchMedia, intersection, visibility, and unmount.
+- [x] **1. Make portrait eligibility dynamic**
+  Not applicable: the interactive portrait was removed and replaced by a static image in the mobile-first shell.
 
-- [ ] **2. Fully gate hover and scope motion**
+- [x] **2. Fully gate hover and scope motion**
   Files: `src/styles/pages/artwork.css`, modal/animation utilities, affected components.
   What to build: Put hover-only transform and shadow inside `(hover: hover) and (pointer: fine)`; keep focus-visible and active feedback independent. Remove broad/dead animation rules only when proven unused.
   Acceptance: Touch cannot retain hover shadow/transform and keyboard focus remains visible.
   Verify: CSS/source assertion plus coarse/fine pointer browser screenshots.
 
-- [ ] **3. Add reproducible quality scripts**
+- [x] **3. Add reproducible quality scripts**
   Files: `package.json`, ESLint config, component tests, CI.
   What to build: Add lint, Vitest/Testing Library, and a route/asset validator. Keep optional resume sync deterministic and test missing/present source behavior.
   Acceptance: `npm run lint`, `npm test`, and `npm run build` work from a clean install.
@@ -122,7 +127,7 @@ Feature branch: `codex/luna-portfolio-performance-proof`
   Acceptance: Mock, local, hosted, AI-generated, and production claims are visibly distinct; screenshots match current UI and contain no private data.
   Verify: Route inventory and link/asset checker; manual content review.
 
-- [ ] **5. Finish accessibility and editorial conversion**
+- [x] **5. Finish accessibility and editorial conversion**
   Files: app shell, navbar, project cards, case studies, not-found state.
   What to build: Verify skip link, landmarks, headings, image alternatives, external-link purpose, menu/modal focus, contrast, CTA hierarchy, and removed/private-project handling.
   Acceptance: Navigation and primary contact/project actions remain clear at 320px, 200% zoom, keyboard-only, and reduced motion.

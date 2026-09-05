@@ -144,7 +144,7 @@ export default function MediaDetailDialog({ item, kind, onClose, triggerElement 
                     <span>{isCertificate ? "Image record" : "Original study"}</span>
                     <div className="media-detail-dialog__actions">
                         {item.pdf ? (
-                            <a href={item.pdf} target="_blank" rel="noopener noreferrer">
+                            <a href={item.pdf} target="_blank" rel="noopener noreferrer" aria-label={`Open PDF for ${item.title} in a new tab`}>
                                 Open PDF
                                 <ArrowUpRight size={16} aria-hidden="true" />
                             </a>
