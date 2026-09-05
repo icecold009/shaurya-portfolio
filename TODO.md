@@ -22,6 +22,17 @@ Implementation branch: `codex/mobile-first-project-disclosure`.
 
 Implementation branch: `codex/blog-url-state`.
 
+## Artwork and certificate disclosure: Package 3
+
+- [x] Add stable artwork identifiers and a shared URL-driven media detail viewer.
+- [x] Add certificate detail views with unique identifiers for duplicate certificate titles.
+- [x] Preserve direct certificate PDF links and existing section anchors.
+- [x] Add focus trapping/restoration, Escape/backdrop close, body-scroll cleanup, invalid-ID cleanup, and reduced-motion-safe styling.
+- [x] Add media URL-state tests and verify the production build and rendered browser behavior.
+- [ ] Independent validation before starting Package 4 quality and evidence audit.
+
+Implementation branch: `codex/artwork-certificate-disclosure`.
+
 ## Mobile-first redesign: Package 1
 
 - [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.

@@ -1,58 +1,93 @@
-// src/pages/ArtworkPage.jsx
-const pieces = [
-    { title: "Jeep", medium: "Charcoal-Pencil", year: "2023", src: "/artwork/compressed/piece-01.webp" },
-    { title: "Cheetah", medium: "Pencil Shading", year: "2022", src: "/artwork/compressed/piece-02.webp" },
-    { title: "Wolf", medium: "Pencil Shading", year: "2023", src: "/artwork/compressed/piece-03.webp" },
-    { title: "Giraffe", medium: "Pencil Shading", year: "2022", src: "/artwork/compressed/piece-04.webp" },
-    { title: "Horse", medium: "Pencil Shading", year: "2022", src: "/artwork/compressed/piece-05.webp" },
-    { title: "Dragon Face", medium: "Pencil Shading", year: "2022", src: "/artwork/compressed/piece-06.webp" },
-    { title: "Dog", medium: "Pencil Shading", year: "2023", src: "/artwork/compressed/piece-07.webp" },
-    { title: "Tiger", medium: "Pencil Shading", year: "2022", src: "/artwork/compressed/piece-08.webp" },
-    { title: "Leopard", medium: "Pencil Shading", year: "2022", src: "/artwork/compressed/piece-09.webp" },
-    { title: "3D City", medium: "Pencil Shading and Pen", year: "2020", src: "/artwork/compressed/piece-10.webp" },
-    { title: "Figurine", medium: "Color Pencils", year: "2020", src: "/artwork/compressed/piece-11.webp" },
-    { title: "Mech Dragon", medium: "Markers", year: "2021", src: "/artwork/compressed/piece-12.webp" },
-    { title: "3D House", medium: "Pencil Shading and Pen", year: "2021", src: "/artwork/compressed/piece-13.webp" },
-    { title: "Thanos", medium: "Paint", year: "2024", src: "/artwork/compressed/piece-14.webp" },
-    { title: "Mech", medium: "Pencil Shading and Pen", year: "2021", src: "/artwork/compressed/piece-15.webp" },
-    { title: "Elephant", medium: "Pen", year: "2020", src: "/artwork/compressed/piece-16.webp" },
-    { title: "Plant", medium: "Paint", year: "2020", src: "/artwork/compressed/piece-17.webp" },
-    { title: "Dragon Full", medium: "Pen", year: "2020", src: "/artwork/compressed/piece-18.webp" },
-    { title: "Face Mask", medium: "Markers", year: "2021", src: "/artwork/compressed/piece-19.webp" },
-    { title: "Portrait", medium: "Oil Pastels", year: "2023", src: "/artwork/compressed/piece-20.webp" },
-    { title: "Leaves", medium: "Pencil Shading", year: "2023", src: "/artwork/compressed/piece-21.webp" },
-];
+import { useCallback, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 
-export default function ArtworkPage() {
+import MediaDetailDialog from "../../components/MediaDetailDialog";
+import { artworkPieces } from "../../data/artwork";
+import {
+    getMediaFromSearchParams,
+    updateMediaSearchParams,
+} from "../../lib/mediaSelection";
+
+function ArtworkPage() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const selectedPiece = getMediaFromSearchParams(searchParams, "piece", artworkPieces);
+    const triggerElementRef = useRef(null);
+
+    useEffect(() => {
+        if (!searchParams.has("piece") || selectedPiece) {
+            return undefined;
+        }
+
+        setSearchParams(updateMediaSearchParams(searchParams, "piece"), { replace: true });
+        return undefined;
+    }, [searchParams, selectedPiece, setSearchParams]);
+
+    const openPiece = useCallback(
+        (piece, triggerElement) => {
+            triggerElementRef.current = triggerElement;
+            setSearchParams(updateMediaSearchParams(searchParams, "piece", piece.id), {
+                replace: false,
+            });
+        },
+        [searchParams, setSearchParams],
+    );
+
+    const closePiece = useCallback(() => {
+        setSearchParams(updateMediaSearchParams(searchParams, "piece"), {
+            replace: false,
+        });
+    }, [searchParams, setSearchParams]);
+
     return (
-        <div className="page-wrapper">
-            <div className="page-header">
-                <p className="page-breadcrumb">artwork</p>
+        <>
+            <div className="page-wrapper">
+                <div className="page-header">
+                    <p className="page-breadcrumb">artwork</p>
+                </div>
+                <section className="artwork-section">
+                    <div className="section-heading">
+                        <p className="section-label">Work away from the terminal</p>
+                        <h1>Drawing taught me to see <em>structure first.</em></h1>
+                    </div>
+                    <div className="artwork-grid">
+                        {artworkPieces.map((piece) => (
+                            <figure key={piece.id} className="artwork-card">
+                                <button
+                                    type="button"
+                                    className="artwork-card-trigger"
+                                    onClick={(event) => openPiece(piece, event.currentTarget)}
+                                    aria-haspopup="dialog"
+                                    aria-label={`Open ${piece.title} artwork`}
+                                >
+                                    <div className="artwork-img-wrap">
+                                        <img
+                                            src={piece.src}
+                                            alt={piece.title}
+                                            loading="lazy"
+                                            className="artwork-img"
+                                        />
+                                    </div>
+                                </button>
+                                <figcaption className="artwork-caption">
+                                    <span className="artwork-title">{piece.title}</span>
+                                    <span className="artwork-meta">{piece.medium} · {piece.year}</span>
+                                </figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                </section>
             </div>
-            <section className="artwork-section">
-                <div className="section-heading">
-                    <p className="section-label">Work away from the terminal</p>
-                    <h1>Drawing taught me to see <em>structure first.</em></h1>
-                </div>
-                <div className="artwork-grid">
-                    {pieces.map((p, i) => (
-                        <figure key={i} className="artwork-card">
-                            <div className="artwork-img-wrap">
-                                <img
-                                    src={p.src}
-                                    alt={p.title}
-                                    loading="lazy"
-                                    className="artwork-img"
-                                />
-                            </div>
-                            <figcaption className="artwork-caption">
-                                <span className="artwork-title">{p.title}</span>
-                                <span className="artwork-meta">{p.medium} · {p.year}</span>
-                            </figcaption>
-                        </figure>
-                    ))}
-                </div>
-            </section>
-        </div>
+
+            {selectedPiece ? (
+                <MediaDetailDialog
+                    item={selectedPiece}
+                    kind="artwork"
+                    onClose={closePiece}
+                    triggerElement={triggerElementRef.current}
+                />
+            ) : null}
+        </>
     );
 }
+
+export default ArtworkPage;
