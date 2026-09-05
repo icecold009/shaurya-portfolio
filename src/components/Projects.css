@@ -3357,3 +3357,65 @@
         transition: none;
     }
 }
+
+/* Uniform project gallery */
+
+.case-study-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.case-study {
+    height: 100%;
+}
+
+.case-study-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    height: 100%;
+    padding: clamp(0.8rem, 1.5vw, 1.1rem);
+}
+
+.case-study-toggle__preview {
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+}
+
+.case-study-toggle__preview img {
+    object-fit: cover;
+}
+
+.case-study-toggle__name {
+    display: flex;
+    align-items: flex-start;
+    min-height: 3.8rem;
+    padding-top: 0.9rem;
+}
+
+.case-study-toggle__title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: var(--text);
+    font-size: clamp(1.15rem, 2.5vw, 1.8rem);
+    line-height: 1.02;
+}
+
+.case-study-toggle__title.heading-italic {
+    color: color-mix(in srgb, var(--green) 54%, var(--text));
+}
+
+.case-study--expanded {
+    grid-column: auto;
+}
+
+@media (max-width: 720px) {
+    .case-study-list {
+        grid-template-columns: 1fr;
+    }
+}
