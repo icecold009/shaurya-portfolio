@@ -1,7 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
     EDITORIAL_EASE,
@@ -9,223 +9,30 @@ import {
     REVEAL_CONTAINER,
     REVEAL_VIEWPORT,
 } from "../lib/motion";
+import {
+    filterProjects,
+    getProjectFromHash,
+    getProjectTag,
+} from "../lib/projectSearch";
 
 import "./Projects.css";
+import { projects } from "../data/projects";
+import ProjectDetailDialog from "./ProjectDetailDialog";
 
-const projects = [
-    {
-        number: "01",
-        year: "2026",
-        category: "AI · Full-stack · Operations",
-        title: "StadiumPulse AI",
-        description:
-            "A simulated stadium-operations dashboard for turning venue telemetry into zone status, grounded alerts and recommendations.",
-        problem:
-            "Event operators need a fast way to move from scattered signals to a grounded next action.",
-        constraints:
-            "The telemetry is simulated, so the interface must never imply live venue monitoring or production alerting.",
-        contribution:
-            "I shaped the product surface and full-stack workflow around an operator's questions: what is happening, where, how urgent it is and what action is suggested.",
-        decisions:
-            "I made the operator's questions the primary information architecture and kept alert context beside the action it supports.",
-        outcome:
-            "A focused prototype for making operational decisions legible during a crowded event without presenting simulated telemetry as live production data.",
-        limitations:
-            "It still needs real operator feedback, authorized data sources and a hosted verification pass before any deployment claim.",
-        status: "Prototype · simulated data",
-        stack: ["React", "Supabase", "Gemini", "Realtime", "RLS"],
-        github: "https://github.com/icecold009/stadiumpulse-ai",
-        visual: "stadium",
-        thumbnail: "/projects/stadiumpulse-live-login.png",
-        thumbnailAlt: "StadiumPulse AI PulseOps command center sign-in screen",
-        accent: "01",
-    },
-    {
-        number: "02",
-        year: "2025",
-        category: "Audio · Python · Flask",
-        title: "Audio Recognition",
-        description:
-            "The DIY Shazam-style project where I built a complete path from microphone input or upload to normalized audio and fingerprint matching.",
-        problem:
-            "Recognition is only useful when inconsistent audio inputs can reach one understandable result path.",
-        constraints:
-            "Uploads, microphone capture, conversion and no-match states need to stay bounded and inspectable on a local-first stack.",
-        contribution:
-            "I built the shared audio pipeline, Flask browser UI and CLI flow, then added provider adapters alongside a local spectrogram and constellation-hash matcher.",
-        decisions:
-            "I kept provider adapters beside a local matcher so the interface can distinguish a useful result from an unavailable provider.",
-        outcome:
-            "One same-origin application for microphone and file recognition, with bounded input handling, normalized results and honest no-match states.",
-        limitations:
-            "Catalog coverage, noisy audio performance and any public hosted flow remain to be measured outside the repository.",
-        status: "Prototype · source linked",
-        stack: ["Python", "Flask", "FFmpeg", "Fingerprinting", "Docker"],
-        github: "https://github.com/icecold009/Audio-Recognition",
-        visual: "music",
-        thumbnail: "/projects/audio-recognition-fft.png",
-        thumbnailAlt: "Audio Recognition frequency spectrum diagnostic",
-        accent: "02",
-    },
-    {
-        number: "03",
-        year: "2025",
-        category: "Education · AI · Product design",
-        title: "Past Paper AI",
-        description:
-            "A Cambridge A-Level study tool that turns past papers into structured practice instead of leaving revision buried inside PDFs.",
-        problem:
-            "Students need to reach the right question and feedback without manually searching a pile of past-paper PDFs.",
-        constraints:
-            "The supported paper set, extraction quality and mark-scheme context define what the product can responsibly promise.",
-        contribution:
-            "I designed the experience around question extraction, subject and topic filtering, and mark-scheme-aware feedback across the supported paper set.",
-        decisions:
-            "I treated the supported corpus and feedback path as first-class product boundaries instead of presenting every PDF as equally understood.",
-        outcome:
-            "A more direct revision workflow for finding the right question, practising a topic and understanding how an answer can improve.",
-        limitations:
-            "Coverage, model quality and real student outcomes need corpus, identity and production evidence before broader claims.",
-        status: "Prototype · source linked",
-        stack: ["Python", "Gemini", "PDF parsing", "Flask"],
-        github: "https://github.com/icecold009/past-paper-ai",
-        visual: "paper",
-        thumbnail: "/projects/past-paper-ai.svg",
-        accent: "03",
-    },
-    {
-        number: "04",
-        year: "2026",
-        category: "Full-stack · Web · Data",
-        title: "Movie Tracker",
-        description:
-            "A personal watch tracker for movies and series, built around TMDB metadata, structured ratings, watch status and a transparent recommendation baseline.",
-        problem:
-            "A watchlist becomes less useful when status, ratings and the next recommendation live in separate places.",
-        constraints:
-            "Public browsing, protected mutations, third-party metadata and recommendation logic need separate trust boundaries.",
-        contribution:
-            "I built the Flask and PostgreSQL application, separated public browsing from protected mutations, and shaped the watchlist around how I actually choose what to watch next.",
-        decisions:
-            "I kept recommendations deterministic and visible so a suggestion can be inspected instead of treated as a mysterious score.",
-        outcome:
-            "A clear public and admin experience with TMDB-backed cover art and deterministic recommendations that stay transparent about their limits.",
-        limitations:
-            "The hosted database, authentication and deployment behavior still need live verification before this is presented as a public service.",
-        status: "Prototype · source linked",
-        stack: ["Flask", "PostgreSQL", "Supabase", "TMDB", "Vercel"],
-        github: "https://github.com/icecold009/movie-tracker",
-        visual: "movie",
-        thumbnail: "/projects/movie-tracker-production.png",
-        thumbnailAlt: "Movie Tracker production watchlist screenshot",
-        accent: "04",
-    },
-    {
-        number: "05",
-        year: "2026",
-        category: "Computer vision · Offline · Flask",
-        title: "Face Attendance System",
-        description:
-            "A local-first face recognition system that turns a webcam into an attendance workflow without requiring a cloud service.",
-        problem:
-            "Small teams need attendance records without sending camera input to a third-party service by default.",
-        constraints:
-            "Camera permissions, local dependencies, duplicate marks and uncertain recognition results must fail visibly.",
-        contribution:
-            "I built the Flask dashboard, enrollment workflow, live recognition loop, attendance deduplication and CSV reporting path, with a dependency-safe fallback for development.",
-        decisions:
-            "I kept the workflow local and separated enrollment, recognition and export so each step can be checked independently.",
-        outcome:
-            "A self-contained workflow for enrolling people, recognizing faces at the camera and producing daily records while keeping the runtime local and inspectable.",
-        limitations:
-            "Recognition accuracy, consent, hardware coverage and real-world privacy review are outside this portfolio preview.",
-        status: "Prototype · local-first",
-        stack: ["Python", "OpenCV", "Flask", "face-recognition", "CSV"],
-        github: "https://github.com/icecold009/face-attendance-opencv-python",
-        visual: "attendance",
-        thumbnail: "/projects/face-attendance.svg",
-        accent: "05",
-    },
-    {
-        number: "06",
-        year: "2026",
-        category: "Data science · ML · Evaluation",
-        title: "F1 Championship Prediction",
-        description:
-            "A leakage-safe forecasting study that estimates final Formula 1 standings from signals available before a season begins.",
-        problem:
-            "A forecast is not useful if its features quietly contain information from after the prediction point.",
-        constraints:
-            "Chronological splits, pre-season features and a simple baseline are more important than a flattering single score.",
-        contribution:
-            "I designed the leak-aware feature pipeline, rolling-origin evaluation and report generation so every forecast can be traced back to an earlier season.",
-        decisions:
-            "I compared the model with a previous-season baseline and treated the evaluation design as part of the result.",
-        outcome:
-            "A reproducible benchmark whose most useful lesson was that a simple previous-season baseline can deserve more trust than a complex model.",
-        limitations:
-            "The dataset is historical and the forecast is not a live betting, strategy or future-results guarantee.",
-        status: "Research study · source linked",
-        stack: ["Python", "Pandas", "scikit-learn", "Jupyter", "Pytest"],
-        github: "https://github.com/icecold009/f1-championship-prediction",
-        visual: "f1",
-        thumbnail: "/projects/f1-predicted-vs-actual-2023.png",
-        thumbnailAlt: "F1 Championship Prediction chart comparing predicted and actual standings",
-        accent: "06",
-    },
-    {
-        number: "07",
-        year: "2026",
-        category: "AI · Routing · Full-stack",
-        title: "Token Smart Router",
-        description:
-            "A compact AI routing layer that answers simple prompts locally and sends genuinely complex requests to a configured Fireworks model.",
-        problem:
-            "Not every prompt needs a hosted model, but the cost and routing decision is often hidden from the person using the tool.",
-        constraints:
-            "The router depends on configured credentials and a deliberately small policy; it is not a general model-quality benchmark.",
-        contribution:
-            "I built the React/Vite interface, Express API and Docker workflow around a deliberately small routing policy that makes the cost decision visible.",
-        decisions:
-            "I exposed the route beside the response and kept the policy small enough to inspect before adding more model complexity.",
-        outcome:
-            "A focused prototype for reducing unnecessary model calls while keeping a clear path from prompt classification to hosted inference.",
-        limitations:
-            "Hosted inference, credentials, latency and routing quality need an authorized environment before performance claims are made.",
-        status: "Prototype · hosted path unverified",
-        stack: ["React", "Express", "Docker", "Fireworks AI"],
-        github: "https://github.com/icecold009/token-smart-router",
-        visual: "router",
-        thumbnail: "/projects/token-router.svg",
-        accent: "07",
-    },
-    {
-        number: "08",
-        year: "2025",
-        category: "Data science · Education · Risk modeling",
-        title: "Student Dropout Risk Prediction",
-        description:
-            "A student-dropout risk prediction project documented through a report, template workbook, sample data and an updated dataset.",
-        problem:
-            "A structured prediction exercise should show how the inputs and reporting support a decision, not turn a student into a fixed label.",
-        constraints:
-            "The available workbook, sample data and academic context limit what can be inferred responsibly.",
-        contribution:
-            "I completed the prediction exercise by working through the supplied workbook and datasets, keeping the analysis structured and traceable.",
-        decisions:
-            "I kept the report and data artifacts together so the analysis can be read as a documented exercise rather than a production risk system.",
-        outcome:
-            "A documented academic project showing how structured data and reporting can support risk analysis without turning a prediction into a fixed label.",
-        limitations:
-            "There is no linked source repository or production evaluation record in this portfolio entry.",
-        status: "Archive record · source link pending",
-        stack: ["Python", "Pandas", "scikit-learn", "Matplotlib"],
-        github: null,
-        visual: "dropout",
-        thumbnail: null,
-        accent: "08",
-    },
-];
+function ProjectIndexLink({ project, className, onOpenProject, children }) {
+    return (
+        <a
+            className={className}
+            href={`#project-detail-${project.number}`}
+            onClick={(event) => {
+                event.preventDefault();
+                onOpenProject(project, event.currentTarget);
+            }}
+        >
+            {children}
+        </a>
+    );
+}
 
 function ProjectVisual({ type, shouldReduceMotion, thumbnail, thumbnailAlt, title }) {
     const canHover =
@@ -636,7 +443,7 @@ function ProjectVisual({ type, shouldReduceMotion, thumbnail, thumbnailAlt, titl
     );
 }
 
-function ProjectCaseStudy({ project, featured = false }) {
+function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
     const shouldReduceMotion = useReducedMotion();
     const canHover =
         typeof window !== "undefined" &&
@@ -678,7 +485,7 @@ function ProjectCaseStudy({ project, featured = false }) {
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
-                        aria-label={`View ${project.title} on GitHub`}
+                        aria-label={`View ${project.title} on GitHub in a new tab`}
                     >
                         Source
                         <ArrowUpRight size={18} aria-hidden="true" />
@@ -688,6 +495,16 @@ function ProjectCaseStudy({ project, featured = false }) {
                         CV / Drive record
                     </span>
                 )}
+
+                <button
+                    type="button"
+                    className="case-study-preview-trigger"
+                    onClick={(event) => onOpenProject(project, event.currentTarget)}
+                    aria-label={`Open a quick view of ${project.title}`}
+                >
+                    Quick view
+                    <ArrowRight size={16} aria-hidden="true" />
+                </button>
             </div>
 
             <div className="case-study-lede">
@@ -757,6 +574,7 @@ function ProjectCaseStudy({ project, featured = false }) {
                             target="_blank"
                             rel="noreferrer"
                             className="case-study-proof-action"
+                            aria-label={`View ${project.title} source on GitHub in a new tab`}
                         >
                             Source
                             <ArrowUpRight size={15} aria-hidden="true" />
@@ -777,6 +595,7 @@ function ProjectCaseStudy({ project, featured = false }) {
                             target="_blank"
                             rel="noreferrer"
                             className="case-study-proof-action"
+                            aria-label={`Try ${project.title} demo in a new tab`}
                         >
                             Try it
                             <ArrowUpRight size={15} aria-hidden="true" />
@@ -798,6 +617,7 @@ function ProjectCaseStudy({ project, featured = false }) {
                             rel="noreferrer"
                             className="case-study-proof-action"
                             title="Open the repository evidence"
+                            aria-label={`View ${project.title} repository evidence in a new tab`}
                         >
                             Evidence
                             <ArrowUpRight size={15} aria-hidden="true" />
@@ -833,6 +653,7 @@ function ProjectCaseStudy({ project, featured = false }) {
                         target="_blank"
                         rel="noreferrer"
                         className="case-study-link"
+                        aria-label={`Open ${project.title} repository in a new tab`}
                         whileHover={
                             shouldReduceMotion || !canHover
                                 ? undefined
@@ -858,13 +679,13 @@ function ProjectCaseStudy({ project, featured = false }) {
     );
 }
 
-function ProjectFolderBrowser() {
+function ProjectFolderBrowser({ visibleProjects, onOpenProject }) {
     return (
         <div className="project-browser" aria-labelledby="project-browser-title">
             <div className="project-browser-heading">
                 <div>
                     <p className="selected-work-kicker">Project index</p>
-                    <h3>Browse the <em>archive.</em></h3>
+                    <h3 id="project-browser-title">Browse the <em>archive.</em></h3>
                 </div>
                 <span className="project-browser-hint">
                     <ArrowRight size={15} aria-hidden="true" />
@@ -873,13 +694,14 @@ function ProjectFolderBrowser() {
             </div>
 
             <div className="project-folder-rail" role="list">
-                {projects.map((project) => (
-                    <a
+                {visibleProjects.map((project) => (
+                    <ProjectIndexLink
                         className="project-file"
-                        href={`#project-detail-${project.number}`}
                         key={project.title}
                         role="listitem"
                         aria-label={`Open ${project.title} overview`}
+                        onOpenProject={onOpenProject}
+                        project={project}
                     >
                         {project.thumbnail ? (
                             <img
@@ -893,26 +715,27 @@ function ProjectFolderBrowser() {
                                 {project.number}
                             </span>
                         )}
-                    </a>
+                    </ProjectIndexLink>
                 ))}
             </div>
 
             <nav className="project-list" aria-label="Project list">
                 <div className="project-list-heading">
                     <span>Project list</span>
-                    <span>{String(projects.length).padStart(2, "0")} files</span>
+                    <span>{String(visibleProjects.length).padStart(2, "0")} files</span>
                 </div>
-                {projects.map((project) => (
-                    <a
+                {visibleProjects.map((project) => (
+                    <ProjectIndexLink
                         className="project-list-item"
-                        href={`#project-detail-${project.number}`}
                         key={`list-${project.title}`}
+                        onOpenProject={onOpenProject}
+                        project={project}
                     >
                         <span>{project.number}</span>
                         <strong>{project.title}</strong>
                         <small>{project.category}</small>
                         <ArrowUpRight size={17} aria-hidden="true" />
-                    </a>
+                    </ProjectIndexLink>
                 ))}
             </nav>
         </div>
@@ -921,140 +744,320 @@ function ProjectFolderBrowser() {
 
 export default function Projects() {
     const shouldReduceMotion = useReducedMotion();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const [hashValue, setHashValue] = useState(() =>
+        typeof window === "undefined" ? "" : window.location.hash,
+    );
+    const triggerElementRef = useRef(null);
+
+    const query = searchParams.get("q") ?? "";
+    const tag = searchParams.get("tag") ?? "";
+    const visibleProjects = useMemo(
+        () => filterProjects(projects, { query, tag }),
+        [query, tag],
+    );
+    const projectTags = useMemo(
+        () => Array.from(new Set(projects.map(getProjectTag))),
+        [],
+    );
+    const queryProject = projects.find(
+        (project) => project.id === searchParams.get("project"),
+    );
+    const hashProject = getProjectFromHash(hashValue, projects);
+    const selectedProject = queryProject ?? hashProject;
+
+    useEffect(() => {
+        const handleHashChange = () => setHashValue(window.location.hash);
+
+        window.addEventListener("hashchange", handleHashChange);
+        return () => window.removeEventListener("hashchange", handleHashChange);
+    }, []);
+
+    const writeSearchParams = useCallback(
+        (updates, { replace = true, clearProject = false } = {}) => {
+            const next = new URLSearchParams(searchParams);
+
+            Object.entries(updates).forEach(([key, value]) => {
+                if (value) {
+                    next.set(key, value);
+                } else {
+                    next.delete(key);
+                }
+            });
+
+            if (clearProject) {
+                next.delete("project");
+            }
+
+            const nextSearch = next.toString();
+            navigate(
+                {
+                    pathname: location.pathname,
+                    search: nextSearch ? `?${nextSearch}` : "",
+                    hash: "",
+                },
+                { replace },
+            );
+            setHashValue("");
+        },
+        [location.pathname, navigate, searchParams],
+    );
+
+    const openProject = useCallback(
+        (project, triggerElement) => {
+            triggerElementRef.current = triggerElement;
+            const next = new URLSearchParams(searchParams);
+            next.set("project", project.id);
+
+            navigate(
+                {
+                    pathname: location.pathname,
+                    search: `?${next.toString()}`,
+                    hash: "",
+                },
+                { replace: false },
+            );
+            setHashValue("");
+        },
+        [location.pathname, navigate, searchParams],
+    );
+
+    const closeProject = useCallback(() => {
+        const next = new URLSearchParams(searchParams);
+        next.delete("project");
+        const nextSearch = next.toString();
+
+        navigate(
+            {
+                pathname: location.pathname,
+                search: nextSearch ? `?${nextSearch}` : "",
+                hash: "",
+            },
+            { replace: false },
+        );
+        setHashValue("");
+    }, [location.pathname, navigate, searchParams]);
 
     return (
-        <section
-            className="selected-work"
-            id="selected-work"
-            aria-labelledby="selected-work-title"
-        >
-            <motion.div
-                className="selected-work-header"
-                variants={
-                    shouldReduceMotion
-                        ? undefined
-                        : REVEAL_CONTAINER
-                }
-                initial={
-                    shouldReduceMotion
-                        ? undefined
-                        : "hidden"
-                }
-                whileInView={
-                    shouldReduceMotion
-                        ? undefined
-                        : "visible"
-                }
-                viewport={REVEAL_VIEWPORT}
+        <>
+            <section
+                className="selected-work"
+                id="selected-work"
+                aria-labelledby="selected-work-title"
             >
-                <motion.p
-                    className="selected-work-kicker"
+                <motion.div
+                    className="selected-work-header"
                     variants={
                         shouldReduceMotion
                             ? undefined
-                            : REVEAL
+                            : REVEAL_CONTAINER
                     }
-                >
-                    Selected work · 2025–2026
-                </motion.p>
-
-                <motion.h1
-                    id="selected-work-title"
-                    variants={
+                    initial={
                         shouldReduceMotion
                             ? undefined
-                            : REVEAL
+                            : "hidden"
                     }
-                >
-                    Projects,
-                    <span> explored in depth.</span>
-                </motion.h1>
-
-                <motion.p
-                    className="selected-work-intro"
-                    variants={
+                    whileInView={
                         shouldReduceMotion
                             ? undefined
-                            : REVEAL
+                            : "visible"
                     }
+                    viewport={REVEAL_VIEWPORT}
                 >
-                    Three featured projects, followed by a working archive across
-                    ML evaluation, audio systems, education, operations and product
-                    tooling, showing what I built, what I chose not to hide and what I learned.
-                </motion.p>
-
-                <motion.a
-                    className="selected-work-primary"
-                    href="#project-details"
-                    variants={
-                        shouldReduceMotion
-                            ? undefined
-                            : REVEAL
-                    }
-                >
-                    Read the case studies
-                    <ArrowRight size={17} aria-hidden="true" />
-                </motion.a>
-            </motion.div>
-
-            <nav className="project-index" aria-label="Project index">
-                <div className="project-index__heading">
-                    <span>Find a project</span>
-                    <span>{String(projects.length).padStart(2, "0")} projects</span>
-                </div>
-
-                {projects.map((project) => (
-                    <a
-                        className="project-index__item"
-                        href={`#project-detail-${project.number}`}
-                        key={`quick-${project.title}`}
+                    <motion.p
+                        className="selected-work-kicker"
+                        variants={
+                            shouldReduceMotion
+                                ? undefined
+                                : REVEAL
+                        }
                     >
-                        <span>{project.number}</span>
-                        <strong>{project.title}</strong>
-                        <small>{project.category}</small>
-                        <ArrowUpRight size={17} aria-hidden="true" />
-                    </a>
-                ))}
-            </nav>
+                        Selected work · 2025–2026
+                    </motion.p>
 
-            <ProjectFolderBrowser />
+                    <motion.h1
+                        id="selected-work-title"
+                        variants={
+                            shouldReduceMotion
+                                ? undefined
+                                : REVEAL
+                        }
+                    >
+                        Projects,
+                        <span> explored in depth.</span>
+                    </motion.h1>
 
-            <div className="project-writing-callout">
-                <div>
-                    <span className="selected-work-kicker">Competition note</span>
-                    <h3>How I approached <em>BirdCLEF 2026.</em></h3>
-                </div>
-                <p>
-                    The Kaggle audio-classification write-up sits alongside the
-                    project archive, with the decisions and limitations left visible.
-                </p>
-                <Link to="/blog?post=birdclef-2026">
-                    Read the write-up
-                    <ArrowUpRight size={17} aria-hidden="true" />
-                </Link>
-            </div>
+                    <motion.p
+                        className="selected-work-intro"
+                        variants={
+                            shouldReduceMotion
+                                ? undefined
+                                : REVEAL
+                        }
+                    >
+                        Three featured projects, followed by a working archive across
+                        ML evaluation, audio systems, education, operations and product
+                        tooling, showing what I built, what I chose not to hide and what I learned.
+                    </motion.p>
 
-            <div className="project-details-heading">
-                <p className="selected-work-kicker">Detailed view</p>
-                <span>Scroll vertically for the full case studies.</span>
-            </div>
+                    <motion.a
+                        className="selected-work-primary"
+                        href="#project-details"
+                        variants={
+                            shouldReduceMotion
+                                ? undefined
+                                : REVEAL
+                        }
+                    >
+                        Read the case studies
+                        <ArrowRight size={17} aria-hidden="true" />
+                    </motion.a>
+                </motion.div>
 
-            <div className="case-study-list" id="project-details">
-                {projects.map((project, index) => (
-                    <Fragment key={project.title}>
-                        {index === 3 && (
-                            <div className="project-archive-divider" role="separator" aria-label="More work in the archive">
-                                <span>More work</span>
-                                <span>{String(projects.length - 3).padStart(2, "0")} projects in the archive</span>
-                            </div>
-                        )}
-                        <ProjectCaseStudy
-                            project={project}
-                            featured={index < 3}
+                <section
+                    className="project-explorer-controls"
+                    aria-labelledby="project-explorer-title"
+                >
+                    <div className="project-explorer-controls__intro">
+                        <p className="selected-work-kicker">Interactive archive</p>
+                        <h2 id="project-explorer-title">Find the right <em>thread.</em></h2>
+                        <p>Search by problem, stack or project type, then open a focused overview without losing your place.</p>
+                    </div>
+
+                    <div className="project-explorer-controls__actions">
+                        <label htmlFor="project-search">Search projects</label>
+                        <input
+                            id="project-search"
+                            type="search"
+                            value={query}
+                            onChange={(event) => writeSearchParams(
+                                { q: event.target.value },
+                                { replace: true, clearProject: true },
+                            )}
+                            placeholder="e.g. React, ML, dashboard"
                         />
-                    </Fragment>
-                ))}
-            </div>
-        </section>
+                        <div className="project-filter-group" aria-label="Filter projects by type">
+                            <button
+                                type="button"
+                                className={`project-filter ${!tag ? "project-filter--active" : ""}`}
+                                aria-pressed={!tag}
+                                onClick={() => writeSearchParams(
+                                    { tag: "" },
+                                    { replace: false, clearProject: true },
+                                )}
+                            >
+                                All
+                            </button>
+                            {projectTags.map((projectTag) => (
+                                <button
+                                    type="button"
+                                    className={`project-filter ${tag === projectTag ? "project-filter--active" : ""}`}
+                                    aria-pressed={tag === projectTag}
+                                    key={projectTag}
+                                    onClick={() => writeSearchParams(
+                                        { tag: projectTag },
+                                        { replace: false, clearProject: true },
+                                    )}
+                                >
+                                    {projectTag}
+                                </button>
+                            ))}
+                        </div>
+                        <p className="project-explorer-results" aria-live="polite">
+                            Showing {visibleProjects.length} of {projects.length} projects
+                        </p>
+                    </div>
+                </section>
+
+                <nav className="project-index" aria-label="Project index">
+                    <div className="project-index__heading">
+                        <span>Find a project</span>
+                        <span>{String(visibleProjects.length).padStart(2, "0")} projects</span>
+                    </div>
+
+                    {visibleProjects.map((project) => (
+                        <ProjectIndexLink
+                            className="project-index__item"
+                            key={`quick-${project.title}`}
+                            onOpenProject={openProject}
+                            project={project}
+                        >
+                            <span>{project.number}</span>
+                            <strong>{project.title}</strong>
+                            <small>{project.category}</small>
+                            <ArrowUpRight size={17} aria-hidden="true" />
+                        </ProjectIndexLink>
+                    ))}
+                </nav>
+
+                {visibleProjects.length > 0 ? (
+                    <ProjectFolderBrowser
+                        visibleProjects={visibleProjects}
+                        onOpenProject={openProject}
+                    />
+                ) : (
+                    <div className="project-explorer-empty" role="status">
+                        <strong>No projects match those filters.</strong>
+                        <button
+                            type="button"
+                            onClick={() => writeSearchParams(
+                                { q: "", tag: "" },
+                                { replace: true, clearProject: true },
+                            )}
+                        >
+                            Clear filters
+                        </button>
+                    </div>
+                )}
+
+                <div className="project-writing-callout">
+                    <div>
+                        <span className="selected-work-kicker">Competition note</span>
+                        <h3>How I approached <em>BirdCLEF 2026.</em></h3>
+                    </div>
+                    <p>
+                        The Kaggle audio-classification write-up sits alongside the
+                        project archive, with the decisions and limitations left visible.
+                    </p>
+                    <Link to="/blog?post=birdclef-2026">
+                        Read the write-up
+                        <ArrowUpRight size={17} aria-hidden="true" />
+                    </Link>
+                </div>
+
+                <div className="project-details-heading">
+                    <p className="selected-work-kicker">Detailed view</p>
+                    <span>Scroll vertically for the full case studies.</span>
+                </div>
+
+                <div className="case-study-list" id="project-details">
+                    {visibleProjects.map((project, index) => (
+                        <Fragment key={project.id}>
+                            {index === 3 && (
+                                <div className="project-archive-divider" role="separator" aria-label="More work in the archive">
+                                    <span>More work</span>
+                                    <span>{String(visibleProjects.length - 3).padStart(2, "0")} projects in the archive</span>
+                                </div>
+                            )}
+                            <ProjectCaseStudy
+                                project={project}
+                                featured={index < 3}
+                                onOpenProject={openProject}
+                            />
+                        </Fragment>
+                    ))}
+                </div>
+            </section>
+
+            {selectedProject ? (
+                <ProjectDetailDialog
+                    project={selectedProject}
+                    onClose={closeProject}
+                    triggerElement={triggerElementRef.current}
+                />
+            ) : null}
+        </>
     );
 }

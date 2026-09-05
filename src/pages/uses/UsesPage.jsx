@@ -313,7 +313,7 @@ export default function UsesPage() {
                                             <article className="uses-tool" key={tool.name}>
                                                 <div className="uses-tool-name-row">
                                                     {tool.link ? (
-                                                        <a href={tool.link} target="_blank" rel="noreferrer">
+                                                        <a href={tool.link} target="_blank" rel="noreferrer" aria-label={`Open ${tool.name} in a new tab`}>
                                                             {tool.name}<ArrowUpRight size={15} aria-hidden="true" />
                                                         </a>
                                                     ) : (

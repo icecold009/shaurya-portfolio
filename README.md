@@ -13,7 +13,7 @@ This site is designed to feel like an editorial archive rather than a list of li
 - Light and dark themes with reduced-motion support.
 - Smooth scrolling and purposeful page/scroll transitions.
 - MDX-powered writing, achievements, certificates, artwork, and contact pages.
-- A generated interactive portrait used as a visual identity element.
+- A static portrait used as a visual identity element.
 - Optional resume synchronisation from a local LaTeX source.
 
 ## Screenshots
@@ -41,7 +41,7 @@ The case-study capture is intentionally long because it documents the full edito
 
 - React 18 and Vite
 - React Router
-- Framer Motion and Lenis
+- Framer Motion for restrained page and interaction transitions
 - MDX
 - Lucide React and React Icons
 - CSS organized into base, component, layout, page, and utility layers
@@ -62,6 +62,14 @@ Open the local URL printed by Vite. To create a production build:
 npm run build
 npm run preview
 ```
+
+The full local quality gate is:
+
+```bash
+npm run verify
+```
+
+It runs the repository's dependency-free source lint, route and static-asset integrity checks, Node test suite, and production build. The gate does not claim hosted, device, or production evidence.
 
 The build is allowed to update `public/resume.pdf` only when a LaTeX source is available. The source can live at `resume/resume.tex` or at the path supplied through `RESUME_TEX`.
 

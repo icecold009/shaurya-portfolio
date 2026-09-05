@@ -38,7 +38,7 @@ export default function AnimatedRoutes() {
     return (
         <AnimatePresence mode="wait" initial={false}>
             <motion.div
-                key={`${location.pathname}${location.search}`}
+                key={location.pathname}
                 {...transitionProps}
             >
                 <Routes location={location}>

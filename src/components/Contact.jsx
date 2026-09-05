@@ -57,7 +57,7 @@ function Contact() {
     }
 
     return (
-        <section className="contact" id="contact">
+        <section className="contact" id="contact" aria-labelledby="contact-title">
             <div className="contact-topline" aria-hidden="true">
                 <span>Direct line</span>
                 <span>Bengaluru, India</span>
@@ -66,7 +66,7 @@ function Contact() {
 
             <div className="section-heading">
                 <p className="section-label">Start a conversation</p>
-                <h1>Let&apos;s <em>work on something real.</em></h1>
+                <h1 id="contact-title">Let&apos;s <em>work on something real.</em></h1>
             </div>
 
             <div className="contact-grid">
@@ -156,6 +156,7 @@ function Contact() {
                                 target={link.external ? "_blank" : undefined}
                                 rel={link.external ? "noreferrer" : undefined}
                                 download={link.download ? true : undefined}
+                                aria-label={link.external ? `${link.label} (opens in a new tab)` : link.label}
                             >
                                 {link.label}
                             </a>

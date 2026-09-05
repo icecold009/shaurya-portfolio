@@ -1,0 +1,189 @@
+.media-detail-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    justify-content: flex-end;
+    background: color-mix(in srgb, var(--bg) 56%, transparent);
+    backdrop-filter: blur(0.35rem);
+}
+
+.media-detail-dialog {
+    width: min(100%, 42rem);
+    max-height: 100dvh;
+    overflow-y: auto;
+    border-left: 1px solid var(--line-bright);
+    background: var(--bg);
+    box-shadow: -1.5rem 0 4rem rgba(0, 0, 0, 0.22);
+    color: var(--text);
+}
+
+.media-detail-dialog__rail,
+.media-detail-dialog__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
+    border-bottom: 1px solid var(--line);
+}
+
+.media-detail-dialog__rail > span,
+.media-detail-dialog__footer,
+.media-detail-dialog__facts dt {
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.media-detail-dialog__close {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--line-bright);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text);
+}
+
+.media-detail-dialog__close:hover,
+.media-detail-dialog__close:focus-visible {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.media-detail-dialog__body {
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 2.25rem);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.media-detail-dialog__media {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.media-detail-dialog__media img {
+    display: block;
+    width: 100%;
+    max-height: 30rem;
+    object-fit: contain;
+}
+
+.media-detail-dialog__media figcaption {
+    padding: 0.7rem 0.85rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.media-detail-dialog__content h2 {
+    max-width: 14ch;
+    margin: 0.55rem 0 1rem;
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: -0.07em;
+    line-height: 0.96;
+}
+
+.media-detail-dialog__description {
+    max-width: 42ch;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.media-detail-dialog__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+}
+
+.media-detail-dialog__facts div {
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+}
+
+.media-detail-dialog__facts dd {
+    margin: 0.45rem 0 0;
+    color: var(--text);
+    line-height: 1.45;
+}
+
+.media-detail-dialog__footer {
+    position: sticky;
+    bottom: 0;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: blur(0.5rem);
+}
+
+.media-detail-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.65rem;
+}
+
+.media-detail-dialog__actions a,
+.media-detail-dialog__actions button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--line-bright);
+    background: transparent;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.media-detail-dialog__actions a:hover,
+.media-detail-dialog__actions button:hover,
+.media-detail-dialog__actions a:focus-visible,
+.media-detail-dialog__actions button:focus-visible {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+@media (max-width: 720px) {
+    .media-detail-dialog-backdrop {
+        align-items: flex-end;
+    }
+
+    .media-detail-dialog {
+        width: 100%;
+        max-height: 90dvh;
+        border-top: 1px solid var(--line-bright);
+        border-left: 0;
+        border-radius: 1.1rem 1.1rem 0 0;
+        box-shadow: 0 -1.5rem 4rem rgba(0, 0, 0, 0.22);
+    }
+
+    .media-detail-dialog__facts {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .media-detail-dialog-backdrop,
+    .media-detail-dialog__footer {
+        backdrop-filter: none;
+    }
+}

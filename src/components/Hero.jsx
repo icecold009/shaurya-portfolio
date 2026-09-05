@@ -52,6 +52,7 @@ export default function Hero() {
                             className="portfolio-button portfolio-button--secondary"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Open résumé PDF in a new tab"
                         >
                             Résumé
                             <ArrowUpRight size={17} aria-hidden="true" />

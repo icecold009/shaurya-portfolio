@@ -2,42 +2,15 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import Hero from "../../components/Hero";
+import { projects } from "../../data/projects";
 import { formatPostDate, posts } from "../../posts";
 
 import "./Home.css";
 
-const featuredProjects = [
-    {
-        number: "01",
-        title: "StadiumPulse AI",
-        category: "AI · Full-stack · Operations",
-        summary: "A simulated operations dashboard that turns venue telemetry into legible zone status, alerts, and next actions.",
-        status: "Prototype · simulated data",
-        image: "/projects/stadiumpulse-live-login.png",
-        imageAlt: "StadiumPulse AI PulseOps command center sign-in screen",
-        hash: "#project-detail-01",
-    },
-    {
-        number: "02",
-        title: "Audio Recognition",
-        category: "Audio · Python · Flask",
-        summary: "A local-first recognition path from microphone or upload to normalized audio and fingerprint matching.",
-        status: "Prototype · source linked",
-        image: "/projects/audio-recognition-fft.png",
-        imageAlt: "Audio Recognition frequency spectrum diagnostic",
-        hash: "#project-detail-02",
-    },
-    {
-        number: "03",
-        title: "F1 Championship Prediction",
-        category: "ML · Evaluation · Research",
-        summary: "A leakage-safe forecasting study that tests pre-season signals against a simple previous-season baseline.",
-        status: "Research study · source linked",
-        image: "/projects/f1-predicted-vs-actual-2023.png",
-        imageAlt: "F1 Championship Prediction chart comparing predicted and actual 2023 standings",
-        hash: "#project-detail-06",
-    },
-];
+const featuredProjectNumbers = ["01", "02", "06"];
+const featuredProjects = projects.filter((project) =>
+    featuredProjectNumbers.includes(project.number)
+);
 
 const writingSlugs = ["30-days-of-ai", "birdclef-2026"];
 
@@ -65,18 +38,18 @@ export default function Home() {
                     {featuredProjects.map((project) => (
                         <article className="home-project-card" key={project.title}>
                             <div className={`home-project-card__visual home-project-card__visual--${project.number}`}>
-                                <img src={project.image} alt={project.imageAlt} loading="lazy" decoding="async" />
+                                <img src={project.thumbnail} alt={project.thumbnailAlt ?? `${project.title} project preview`} loading="lazy" decoding="async" />
                             </div>
                             <div className="home-project-card__body">
                                 <div className="home-project-card__meta">
                                     <span>{project.number}</span>
-                                    <span>{project.category}</span>
+                                    <span>{project.homeCategory ?? project.category}</span>
                                 </div>
                                 <h3>{project.title}</h3>
-                                <p>{project.summary}</p>
+                                <p>{project.summary ?? project.description}</p>
                                 <div className="home-project-card__footer">
                                     <span>{project.status}</span>
-                                    <Link to={`/projects${project.hash}`} aria-label={`Read the ${project.title} case study`}>
+                                    <Link to={`/projects#project-detail-${project.number}`} aria-label={`Read the ${project.title} case study`}>
                                         Read case study <ArrowUpRight size={16} aria-hidden="true" />
                                     </Link>
                                 </div>

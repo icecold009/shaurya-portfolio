@@ -108,12 +108,14 @@
     transition: border-color 160ms ease-out, background 160ms ease-out;
 }
 
-.artwork-card:hover,
-.uses-group:hover,
-.achievement-card:hover,
-.timeline-card:hover {
-    border-color: color-mix(in srgb, var(--green) 38%, var(--line));
-    background: color-mix(in srgb, var(--green) 4%, var(--surface-2));
+@media (hover: hover) and (pointer: fine) {
+    .artwork-card:hover,
+    .uses-group:hover,
+    .achievement-card:hover,
+    .timeline-card:hover {
+        border-color: color-mix(in srgb, var(--green) 38%, var(--line));
+        background: color-mix(in srgb, var(--green) 4%, var(--surface-2));
+    }
 }
 
 .uses-group,
@@ -171,8 +173,10 @@
     filter: saturate(0.78) contrast(1.02);
 }
 
-.artwork-card:hover .artwork-img {
-    filter: saturate(1) contrast(1.04);
+@media (hover: hover) and (pointer: fine) {
+    .artwork-card:hover .artwork-img {
+        filter: saturate(1) contrast(1.04);
+    }
 }
 
 .cert-tabs,
@@ -597,8 +601,8 @@
     line-height: 0.94;
 }
 
-.blog-page-shell .blog-featured-content h3,
-.blog-page-shell .blog-row h3 {
+.blog-page-shell .blog-featured-content h2,
+.blog-page-shell .blog-row h2 {
     font-family: var(--sans);
 }
 

@@ -46,7 +46,7 @@ export default function Footer() {
                 </nav>
                 <div className="contact-ending__social">
                     <p>Connect</p>
-                    {profileLinks.map((link) => <a key={link.key} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} download={link.download ? true : undefined}>{link.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}
+                    {profileLinks.map((link) => <a key={link.key} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} download={link.download ? true : undefined} aria-label={link.external ? `${link.label} (opens in a new tab)` : link.label}>{link.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}
                 </div>
             </div>
 

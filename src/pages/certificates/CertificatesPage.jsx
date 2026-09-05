@@ -1,3 +1,12 @@
+import { useCallback, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
+
+import MediaDetailDialog from "../../components/MediaDetailDialog";
+import {
+    getMediaFromSearchParams,
+    updateMediaSearchParams,
+} from "../../lib/mediaSelection";
+
 const sections = [
     {
         id: "competitions",
@@ -246,78 +255,161 @@ const sections = [
     },
 ];
 
+function getCertificateEntry(section, group, entry, groupIndex, entryIndex) {
+    return {
+        ...entry,
+        id: `${section.id}-${groupIndex + 1}-${entryIndex + 1}`,
+        organization: group.org,
+        section: section.label,
+    };
+}
+
 export default function CertificatesPage() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const certificateEntries = sections.flatMap((section) =>
+        section.groups.flatMap((group, groupIndex) =>
+            group.entries.map((entry, entryIndex) =>
+                getCertificateEntry(section, group, entry, groupIndex, entryIndex),
+            ),
+        ),
+    );
+    const selectedCertificate = getMediaFromSearchParams(
+        searchParams,
+        "certificate",
+        certificateEntries,
+    );
+    const triggerElementRef = useRef(null);
+
+    useEffect(() => {
+        if (!searchParams.has("certificate") || selectedCertificate) {
+            return undefined;
+        }
+
+        setSearchParams(updateMediaSearchParams(searchParams, "certificate"), { replace: true });
+        return undefined;
+    }, [searchParams, selectedCertificate?.id, setSearchParams]);
+
+    const openCertificate = useCallback(
+        (certificate, triggerElement) => {
+            triggerElementRef.current = triggerElement;
+            setSearchParams(
+                updateMediaSearchParams(searchParams, "certificate", certificate.id),
+                { replace: false },
+            );
+        },
+        [searchParams, setSearchParams],
+    );
+
+    const closeCertificate = useCallback(() => {
+        setSearchParams(updateMediaSearchParams(searchParams, "certificate"), {
+            replace: false,
+        });
+    }, [searchParams, setSearchParams]);
+
     return (
-        <div className="page-wrapper">
-            <div className="page-header">
-                <p className="page-breadcrumb">certificates</p>
-            </div>
-
-            <section className="artwork-section">
-                <div className="section-heading">
-                    <p className="section-label">Proof of the work</p>
-                    <h1>Certificates &amp; <em>awards.</em></h1>
+        <>
+            <div className="page-wrapper">
+                <div className="page-header">
+                    <p className="page-breadcrumb">certificates</p>
                 </div>
 
-                {/* Section tabs */}
-                <div className="cert-tabs">
-                    {sections.map((s) => (
-                        <a key={s.id} href={`#${s.id}`} className="tl-filter">
-                            {s.label}
-                        </a>
-                    ))}
-                </div>
+                <section className="artwork-section">
+                    <div className="section-heading">
+                        <p className="section-label">Proof of the work</p>
+                        <h1>Certificates &amp; <em>awards.</em></h1>
+                    </div>
 
-                {sections.map((section) => (
-                    <div key={section.id} id={section.id} className="cert-section">
-                        {/* Section header */}
-                        <div className="cert-section-header">
-                            <span className="section-label">{section.label}</span>
-                        </div>
-
-                        {section.groups.map((group, gi) => (
-                            <div key={gi} className="cert-group">
-                                {/* Org divider */}
-                                <p className="cert-org-label">{group.org}</p>
-
-                                {/* Cards grid: reuses existing artwork-grid */}
-                                <div className="artwork-grid">
-                                    {group.entries.map((entry, ei) => (
-                                        <figure key={ei} className="artwork-card">
-                                            {entry.img && (
-                                                <div className="artwork-img-wrap">
-                                                    <img
-                                                        src={entry.img}
-                                                        alt={entry.title}
-                                                        loading="lazy"
-                                                        className="artwork-img"
-                                                    />
-                                                </div>
-                                            )}
-                                            <figcaption className="artwork-caption">
-                                                <span className="artwork-title">{entry.title}</span>
-                                                <span className="artwork-meta">
-                                                    {group.org} · {entry.year}
-                                                </span>
-                                                {entry.pdf && (
-                                                    <a
-                                                        href={entry.pdf}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="cert-pdf-link"
-                                                    >
-                                                        view pdf ↗
-                                                    </a>
-                                                )}
-                                            </figcaption>
-                                        </figure>
-                                    ))}
-                                </div>
-                            </div>
+                    {/* Section tabs */}
+                    <div className="cert-tabs">
+                        {sections.map((section) => (
+                            <a key={section.id} href={`#${section.id}`} className="tl-filter">
+                                {section.label}
+                            </a>
                         ))}
                     </div>
-                ))}
-            </section>
-        </div>
+
+                    {sections.map((section) => (
+                        <div key={section.id} id={section.id} className="cert-section">
+                            {/* Section header */}
+                            <div className="cert-section-header">
+                                <span className="section-label">{section.label}</span>
+                            </div>
+
+                            {section.groups.map((group, groupIndex) => (
+                                <div key={group.org} className="cert-group">
+                                    {/* Org divider */}
+                                    <p className="cert-org-label">{group.org}</p>
+
+                                    {/* Cards grid: reuses existing artwork-grid */}
+                                    <div className="artwork-grid">
+                                        {group.entries.map((entry, entryIndex) => {
+                                            const certificate = getCertificateEntry(
+                                                section,
+                                                group,
+                                                entry,
+                                                groupIndex,
+                                                entryIndex,
+                                            );
+
+                                            return (
+                                                <figure key={certificate.id} className="artwork-card">
+                                                    {certificate.img && (
+                                                        <button
+                                                            type="button"
+                                                            className="artwork-card-trigger"
+                                                            onClick={(event) => openCertificate(certificate, event.currentTarget)}
+                                                            aria-haspopup="dialog"
+                                                            aria-label={`Open ${certificate.title} certificate`}
+                                                        >
+                                                            <div className="artwork-img-wrap">
+                                                                <img
+                                                                    src={certificate.img}
+                                                                    alt={certificate.title}
+                                                                    loading="lazy"
+                                                                    className="artwork-img"
+                                                                />
+                                                            </div>
+                                                        </button>
+                                                    )}
+                                                    <figcaption className="artwork-caption">
+                                                        <span className="artwork-title">{certificate.title}</span>
+                                                        <span className="artwork-meta">
+                                                            {certificate.organization} · {certificate.year}
+                                                        </span>
+                                                        {certificate.pdf && (
+                                                            <a
+                                                                href={certificate.pdf}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="cert-pdf-link"
+                                                                aria-label={`Open PDF for ${certificate.title} in a new tab`}
+                                                            >
+                                                                view pdf ↗
+                                                            </a>
+                                                        )}
+                                                    </figcaption>
+                                                </figure>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </section>
+            </div>
+
+            {selectedCertificate ? (
+                <MediaDetailDialog
+                    item={{
+                        ...selectedCertificate,
+                        src: selectedCertificate.img,
+                    }}
+                    kind="certificate"
+                    onClose={closeCertificate}
+                    triggerElement={triggerElementRef.current}
+                />
+            ) : null}
+        </>
     );
 }

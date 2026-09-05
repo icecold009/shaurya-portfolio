@@ -19,10 +19,12 @@
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
 }
 
-.artwork-card:hover {
-    border-color: var(--green-faint);
-    box-shadow: 0 8px 32px rgba(var(--accent-rgb), 0.07);
-    transform: translateY(-3px);
+@media (hover: hover) and (pointer: fine) {
+    .artwork-card:hover {
+        border-color: var(--green-faint);
+        box-shadow: 0 8px 32px rgba(var(--accent-rgb), 0.07);
+        transform: translateY(-3px);
+    }
 }
 
 .artwork-img-wrap {
@@ -38,9 +40,11 @@
     transition: filter 0.3s, transform 0.3s;
 }
 
-.artwork-card:hover .artwork-img {
-    filter: saturate(1.1);
-    transform: scale(1.02);
+@media (hover: hover) and (pointer: fine) {
+    .artwork-card:hover .artwork-img {
+        filter: saturate(1.1);
+        transform: scale(1.02);
+    }
 }
 
 .artwork-caption {
@@ -72,9 +76,11 @@
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 
-.project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0, 200, 50, 0.08);
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 200, 50, 0.08);
+    }
 }
 
 @media (hover: none), (pointer: coarse) {
