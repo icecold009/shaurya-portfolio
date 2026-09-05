@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
@@ -443,11 +443,12 @@ function ProjectVisual({ type, shouldReduceMotion, thumbnail, thumbnailAlt, titl
     );
 }
 
-function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
+function ProjectCaseStudy({ project, featured = false, expanded, onOpenProject, onToggle }) {
     const shouldReduceMotion = useReducedMotion();
     const canHover =
         typeof window !== "undefined" &&
         window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const detailsId = `project-content-${project.id}`;
 
     return (
         <motion.article
@@ -463,217 +464,203 @@ function ProjectCaseStudy({ project, featured = false, onOpenProject }) {
                 amount: 0.08,
             }}
         >
-            <div className="case-study-meta">
-                <span>{project.number}</span>
-                <span>{project.category}</span>
-                <span>{project.year}</span>
-            </div>
-
-            <div className="case-study-heading">
-                <h3
-                    className={
-                        ["02", "04", "06"].includes(project.number)
-                            ? "heading-italic"
-                            : undefined
-                    }
-                >
-                    {project.title}
-                </h3>
-
-                {project.github ? (
-                    <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`View ${project.title} on GitHub in a new tab`}
-                    >
-                        Source
-                        <ArrowUpRight size={18} aria-hidden="true" />
-                    </a>
-                ) : (
-                    <span className="case-study-source-note">
-                        CV / Drive record
-                    </span>
-                )}
-
-                <button
-                    type="button"
-                    className="case-study-preview-trigger"
-                    onClick={(event) => onOpenProject(project, event.currentTarget)}
-                    aria-label={`Open a quick view of ${project.title}`}
-                >
-                    Quick view
-                    <ArrowRight size={16} aria-hidden="true" />
-                </button>
-            </div>
-
-            <div className="case-study-lede">
-                <p>{project.outcome}</p>
-                <span>{project.status}</span>
-            </div>
-
-            <ProjectVisual
-                type={project.visual}
-                shouldReduceMotion={shouldReduceMotion}
-                thumbnail={project.thumbnail}
-                thumbnailAlt={project.thumbnailAlt}
-                title={project.title}
-            />
-
-            <div className="case-study-details">
-                <p className="case-study-introduction">
-                    {project.problem}
-                </p>
-
-                <div className="case-study-detail-grid">
-                    <div className="case-study-detail">
-                        <span>What I built</span>
-                        <p>{project.contribution}</p>
-                    </div>
-
-                    <div className="case-study-detail">
-                        <span>Constraints</span>
-                        <p>{project.constraints}</p>
-                    </div>
-
-                    <div className="case-study-detail">
-                        <span>Decisions</span>
-                        <p>{project.decisions}</p>
-                    </div>
-
-                    <div className="case-study-detail">
-                        <span>Result</span>
-                        <p>{project.outcome}</p>
-                    </div>
-
-                    <div className="case-study-detail">
-                        <span>Limitations</span>
-                        <p>{project.limitations}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                className="case-study-proof"
-                id={`project-evidence-${project.number}`}
-                aria-label={`${project.title} proof and status`}
+            <button
+                type="button"
+                className={`case-study-toggle ${expanded ? "case-study-toggle--open" : ""}`}
+                onClick={() => onToggle(project.id)}
+                aria-expanded={expanded}
+                aria-controls={expanded ? detailsId : undefined}
             >
-                <div className="case-study-proof-copy">
-                    <span>Evidence</span>
-                    <p>
-                        {project.github
-                            ? "Linked repository is the current inspectable source for this entry."
-                            : "This entry is a documented project record without a linked public repository."}
-                    </p>
-                </div>
+                <span className="case-study-toggle__meta">
+                    <span>{project.number}</span>
+                    <span>{project.category}</span>
+                    <span>{project.year}</span>
+                </span>
 
-                <div className="case-study-proof-actions">
+                <span className="case-study-toggle__main">
+                    <span className="case-study-toggle__title-row">
+                        <span
+                            className={`case-study-toggle__title ${["02", "04", "06"].includes(project.number) ? "heading-italic" : ""}`}
+                            role="heading"
+                            aria-level="2"
+                        >
+                            {project.title}
+                        </span>
+                        <span className="case-study-toggle__action">
+                            {expanded ? "Collapse" : "Expand"}
+                            <ChevronDown size={17} aria-hidden="true" />
+                        </span>
+                    </span>
+
+                    <span className="case-study-toggle__lede">
+                        <span>{project.outcome}</span>
+                        <span>{project.status}</span>
+                    </span>
+                </span>
+            </button>
+
+            <div className="case-study-expanded" id={detailsId} hidden={!expanded}>
+                <div className="case-study-expanded__toolbar">
                     {project.github ? (
                         <a
+                            className="case-study-source-link"
                             href={project.github}
                             target="_blank"
                             rel="noreferrer"
-                            className="case-study-proof-action"
-                            aria-label={`View ${project.title} source on GitHub in a new tab`}
+                            aria-label={`View ${project.title} on GitHub in a new tab`}
                         >
                             Source
-                            <ArrowUpRight size={15} aria-hidden="true" />
+                            <ArrowUpRight size={18} aria-hidden="true" />
                         </a>
                     ) : (
-                        <span
-                            className="case-study-proof-action case-study-proof-action--disabled"
-                            aria-disabled="true"
-                            title="No public source link has been verified for this project."
-                        >
-                            Source · not linked
-                        </span>
+                        <span className="case-study-source-note">CV / Drive record</span>
                     )}
 
-                    {project.demo ? (
-                        <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="case-study-proof-action"
-                            aria-label={`Try ${project.title} demo in a new tab`}
-                        >
-                            Try it
-                            <ArrowUpRight size={15} aria-hidden="true" />
-                        </a>
-                    ) : (
-                        <span
-                            className="case-study-proof-action case-study-proof-action--disabled"
-                            aria-disabled="true"
-                            title="No hosted demo has been verified for this project."
-                        >
-                            Try it · not verified
+                    <button
+                        type="button"
+                        className="case-study-preview-trigger"
+                        onClick={(event) => onOpenProject(project, event.currentTarget)}
+                        aria-label={`Open a quick view of ${project.title}`}
+                    >
+                        Quick view
+                        <ArrowRight size={16} aria-hidden="true" />
+                    </button>
+                </div>
+
+                <ProjectVisual
+                    type={project.visual}
+                    shouldReduceMotion={shouldReduceMotion}
+                    thumbnail={project.thumbnail}
+                    thumbnailAlt={project.thumbnailAlt}
+                    title={project.title}
+                />
+
+                <div className="case-study-details">
+                    <p className="case-study-introduction">{project.problem}</p>
+
+                    <div className="case-study-detail-grid">
+                        <div className="case-study-detail">
+                            <span>What I built</span>
+                            <p>{project.contribution}</p>
+                        </div>
+
+                        <div className="case-study-detail">
+                            <span>Constraints</span>
+                            <p>{project.constraints}</p>
+                        </div>
+
+                        <div className="case-study-detail">
+                            <span>Decisions</span>
+                            <p>{project.decisions}</p>
+                        </div>
+
+                        <div className="case-study-detail">
+                            <span>Result</span>
+                            <p>{project.outcome}</p>
+                        </div>
+
+                        <div className="case-study-detail">
+                            <span>Limitations</span>
+                            <p>{project.limitations}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    className="case-study-proof"
+                    id={`project-evidence-${project.number}`}
+                    aria-label={`${project.title} proof and status`}
+                >
+                    <div className="case-study-proof-copy">
+                        <span>Evidence</span>
+                        <p>
+                            {project.github
+                                ? "Linked repository is the current inspectable source for this entry."
+                                : "This entry is a documented project record without a linked public repository."}
+                        </p>
+                    </div>
+
+                    <div className="case-study-proof-actions">
+                        {project.github ? (
+                            <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="case-study-proof-action"
+                                aria-label={`View ${project.title} source on GitHub in a new tab`}
+                            >
+                                Source
+                                <ArrowUpRight size={15} aria-hidden="true" />
+                            </a>
+                        ) : (
+                            <span className="case-study-proof-action case-study-proof-action--disabled" aria-disabled="true" title="No public source link has been verified for this project.">
+                                Source · not linked
+                            </span>
+                        )}
+
+                        {project.demo ? (
+                            <a
+                                href={project.demo}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="case-study-proof-action"
+                                aria-label={`Try ${project.title} demo in a new tab`}
+                            >
+                                Try it
+                                <ArrowUpRight size={15} aria-hidden="true" />
+                            </a>
+                        ) : (
+                            <span className="case-study-proof-action case-study-proof-action--disabled" aria-disabled="true" title="No hosted demo has been verified for this project.">
+                                Try it · not verified
+                            </span>
+                        )}
+
+                        {project.github ? (
+                            <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="case-study-proof-action"
+                                title="Open the repository evidence"
+                                aria-label={`View ${project.title} repository evidence in a new tab`}
+                            >
+                                Evidence
+                                <ArrowUpRight size={15} aria-hidden="true" />
+                            </a>
+                        ) : (
+                            <span className="case-study-proof-action case-study-proof-action--disabled" aria-disabled="true">
+                                Evidence · pending
+                            </span>
+                        )}
+
+                        <span className="case-study-proof-status">
+                            <span>Status</span>
+                            {project.status}
                         </span>
-                    )}
+                    </div>
+                </div>
+
+                <div className="case-study-footer">
+                    <div className="case-study-stack">
+                        {project.stack.map((technology) => <span key={technology}>{technology}</span>)}
+                    </div>
 
                     {project.github ? (
-                        <a
+                        <motion.a
                             href={project.github}
                             target="_blank"
                             rel="noreferrer"
-                            className="case-study-proof-action"
-                            title="Open the repository evidence"
-                            aria-label={`View ${project.title} repository evidence in a new tab`}
+                            className="case-study-link"
+                            aria-label={`Open ${project.title} repository in a new tab`}
+                            whileHover={shouldReduceMotion || !canHover ? undefined : { x: 6, transition: { duration: 0.35, ease: EDITORIAL_EASE } }}
                         >
-                            Evidence
-                            <ArrowUpRight size={15} aria-hidden="true" />
-                        </a>
+                            Open repository
+                            <ArrowUpRight size={18} aria-hidden="true" />
+                        </motion.a>
                     ) : (
-                        <span
-                            className="case-study-proof-action case-study-proof-action--disabled"
-                            aria-disabled="true"
-                        >
-                            Evidence · pending
-                        </span>
+                        <span className="case-study-source-note">Project record · repository not linked</span>
                     )}
-
-                    <span className="case-study-proof-status">
-                        <span>Status</span>
-                        {project.status}
-                    </span>
                 </div>
-            </div>
-
-            <div className="case-study-footer">
-                <div className="case-study-stack">
-                    {project.stack.map((technology) => (
-                        <span key={technology}>
-                            {technology}
-                        </span>
-                    ))}
-                </div>
-
-                {project.github ? (
-                    <motion.a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="case-study-link"
-                        aria-label={`Open ${project.title} repository in a new tab`}
-                        whileHover={
-                            shouldReduceMotion || !canHover
-                                ? undefined
-                                : {
-                                    x: 6,
-                                    transition: {
-                                        duration: 0.35,
-                                        ease: EDITORIAL_EASE,
-                                    },
-                                }
-                        }
-                    >
-                        Open repository
-                        <ArrowUpRight size={18} aria-hidden="true" />
-                    </motion.a>
-                ) : (
-                    <span className="case-study-source-note">
-                        Project record · repository not linked
-                    </span>
-                )}
             </div>
         </motion.article>
     );
@@ -750,6 +737,7 @@ export default function Projects() {
     const [hashValue, setHashValue] = useState(() =>
         typeof window === "undefined" ? "" : window.location.hash,
     );
+    const [expandedProjectId, setExpandedProjectId] = useState(null);
     const triggerElementRef = useRef(null);
 
     const query = searchParams.get("q") ?? "";
@@ -774,6 +762,10 @@ export default function Projects() {
         window.addEventListener("hashchange", handleHashChange);
         return () => window.removeEventListener("hashchange", handleHashChange);
     }, []);
+
+    useEffect(() => {
+        setExpandedProjectId(null);
+    }, [query, tag]);
 
     const writeSearchParams = useCallback(
         (updates, { replace = true, clearProject = false } = {}) => {
@@ -1013,8 +1005,8 @@ export default function Projects() {
                 )}
 
                 <div className="project-details-heading">
-                    <p className="selected-work-kicker">Detailed view</p>
-                    <span>Scroll vertically for the full case studies.</span>
+                    <p className="selected-work-kicker">Project details</p>
+                    <span>Click a card to expand its full case study.</span>
                 </div>
 
                 <div className="case-study-list" id="project-details">
@@ -1029,7 +1021,9 @@ export default function Projects() {
                             <ProjectCaseStudy
                                 project={project}
                                 featured={index < 3}
+                                expanded={expandedProjectId === project.id}
                                 onOpenProject={openProject}
+                                onToggle={(projectId) => setExpandedProjectId((currentId) => currentId === projectId ? null : projectId)}
                             />
                         </Fragment>
                     ))}
