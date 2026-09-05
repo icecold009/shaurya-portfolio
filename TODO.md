@@ -135,6 +135,48 @@ and 390px viewport emulation was unavailable in the connected browser surface.
 
 Implementation branch: `codex/content-evidence-first-package`.
 
+## GitHub contributions on home: Package 8
+
+Goal: Add a reference-matched GitHub activity calendar to the homepage that
+shows current public contribution data without inventing or hardcoding counts.
+
+### Scope
+
+- [x] Add a one-year contribution calendar section after homepage writing.
+- [x] Fetch public activity through a bounded, cached contribution endpoint.
+- [x] Add hover, keyboard focus, and click-to-inspect day details.
+- [x] Keep loading and error states honest, with a direct GitHub profile fallback.
+- [x] Match the reference panel's dark surface, labels, green levels, and legend.
+
+### Non-goals
+
+Private contribution disclosure, authenticated GitHub access, contribution
+activity timelines, a new backend, and hosted or physical-device validation.
+
+### Files, tests, acceptance, and evidence
+
+Files: homepage, contribution component and styles, pure calendar data helper,
+focused contribution tests, package scripts, and this backlog record.
+
+Tests: helper tests for week layout, month labels, level normalization, totals,
+and accessible date labels; `npm.cmd run verify`; rendered desktop and mobile
+homepage checks with console/error inspection.
+
+Acceptance: the homepage renders the contribution section with a real one-year
+calendar when public data is available; cells expose date/count labels and can
+be inspected by keyboard or pointer; narrow layouts remain scrollable without
+page overflow; unavailable data is clearly reported and links to GitHub.
+
+Evidence: reference comparison, `npm.cmd run verify` passes with 77 source
+files linted, 16 tests, 79 local assets, 10 routes, 8 projects, and 21
+artwork records. The connected browser at 502x565 loaded 1,666 live public
+contributions, rendered 371 accessible day cells across five levels, showed
+the internal calendar scroll without page overflow, and confirmed click-to-
+inspect detail state. Desktop evidence remains limited by the available
+browser viewport; the reference desktop screenshot was used for visual parity.
+
+Implementation branch: `codex/github-contributions-home`.
+
 ## Shared route coherence cleanup
 
 - [x] Put About, Projects, Writing, Not Found, Uses, Artwork, Certificates, Achievements, and Contact on the same centered page shell.

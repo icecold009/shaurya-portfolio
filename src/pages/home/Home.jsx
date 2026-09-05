@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import Hero from "../../components/Hero";
+import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
 import { formatPostDate, posts } from "../../posts";
 
@@ -102,6 +103,8 @@ export default function Home() {
                     ))}
                 </div>
             </section>
+
+            <GitHubContributions />
         </div>
     );
 }
