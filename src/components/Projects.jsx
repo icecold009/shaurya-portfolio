@@ -443,6 +443,25 @@ function ProjectVisual({ type, shouldReduceMotion, thumbnail, thumbnailAlt, titl
     );
 }
 
+function ProjectCardPreview({ project }) {
+    return (
+        <span className="case-study-toggle__preview" aria-hidden="true">
+            {project.thumbnail ? (
+                <img
+                    src={project.thumbnail}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                />
+            ) : (
+                <span className="case-study-toggle__preview-fallback">
+                    {project.number}
+                </span>
+            )}
+        </span>
+    );
+}
+
 function ProjectCaseStudy({ project, featured = false, expanded, onOpenProject, onToggle }) {
     const shouldReduceMotion = useReducedMotion();
     const canHover =
@@ -453,7 +472,7 @@ function ProjectCaseStudy({ project, featured = false, expanded, onOpenProject, 
     return (
         <motion.article
             id={`project-detail-${project.number}`}
-            className={`case-study case-study-${project.accent} ${featured ? "case-study--featured" : "case-study--archive"}`}
+            className={`case-study case-study-${project.accent} ${featured ? "case-study--featured" : "case-study--archive"} ${expanded ? "case-study--expanded" : ""}`}
             variants={shouldReduceMotion ? undefined : REVEAL}
             initial={shouldReduceMotion ? undefined : "hidden"}
             whileInView={
@@ -471,13 +490,15 @@ function ProjectCaseStudy({ project, featured = false, expanded, onOpenProject, 
                 aria-expanded={expanded}
                 aria-controls={expanded ? detailsId : undefined}
             >
-                <span className="case-study-toggle__meta">
-                    <span>{project.number}</span>
-                    <span>{project.category}</span>
-                    <span>{project.year}</span>
-                </span>
+                <ProjectCardPreview project={project} />
 
                 <span className="case-study-toggle__main">
+                    <span className="case-study-toggle__meta">
+                        <span>{project.number}</span>
+                        <span>{project.category}</span>
+                        <span>{project.year}</span>
+                    </span>
+
                     <span className="case-study-toggle__title-row">
                         <span
                             className={`case-study-toggle__title ${["02", "04", "06"].includes(project.number) ? "heading-italic" : ""}`}

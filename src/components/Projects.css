@@ -3033,8 +3033,14 @@
 
 .case-study-list {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
+    align-items: start;
     border-top: 0;
+}
+
+.case-study-list > .project-archive-divider {
+    grid-column: 1 / -1;
 }
 
 .case-study {
@@ -3049,7 +3055,10 @@
 
 .case-study-toggle {
     width: 100%;
-    display: block;
+    display: grid;
+    grid-template-columns: clamp(4.5rem, 10vw, 7rem) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(0.9rem, 2vw, 1.5rem);
     padding: clamp(1.1rem, 2.4vw, 1.5rem) clamp(1rem, 2.6vw, 1.75rem);
     border: 0;
     background: transparent;
@@ -3058,6 +3067,47 @@
     text-align: left;
     cursor: pointer;
     transition: background 180ms ease-out;
+}
+
+.case-study--expanded {
+    grid-column: 1 / -1;
+}
+
+.case-study-toggle__preview {
+    display: block;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line-bright);
+    background: var(--surface-2);
+}
+
+.case-study-toggle__preview img,
+.case-study-toggle__preview-fallback {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.case-study-toggle__preview img {
+    object-fit: cover;
+}
+
+.case-study-toggle__preview-fallback {
+    display: grid;
+    place-items: center;
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--green) 16%, transparent), transparent 60%),
+        var(--surface-2);
+}
+
+.case-study-toggle__main {
+    min-width: 0;
 }
 
 .case-study-toggle:hover,
@@ -3244,6 +3294,19 @@
 }
 
 @media (max-width: 720px) {
+    .case-study-list {
+        grid-template-columns: 1fr;
+    }
+
+    .case-study--expanded {
+        grid-column: auto;
+    }
+
+    .case-study-toggle {
+        grid-template-columns: 4rem minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+
     .case-study-toggle__meta {
         grid-template-columns: 2.25rem minmax(0, 1fr) auto;
         gap: 0.65rem;
