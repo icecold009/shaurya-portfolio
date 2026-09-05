@@ -1,5 +1,17 @@
 # Final Luna plan: Shaurya Portfolio
 
+## Interactive project disclosure: Package 1
+
+- [x] Centralize project records so the homepage and project archive use one source of truth.
+- [x] Add URL-backed project search and category filters with a clear empty state.
+- [x] Add one accessible quick-view panel per project, rendered as a desktop drawer and mobile bottom sheet.
+- [x] Preserve numbered project hashes and homepage deep links while adding shareable `?project=` state.
+- [x] Add keyboard focus trapping, focus restoration, Escape/backdrop dismissal, body-scroll cleanup, and reduced-motion-safe styling.
+- [x] Add pure filtering/hash-resolution tests and verify the production build.
+- [ ] Independent validation before starting Package 2 blog disclosure.
+
+Implementation branch: `codex/mobile-first-project-disclosure`.
+
 ## Mobile-first redesign: Package 1
 
 - [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.
@@ -11,8 +23,6 @@
 Local evidence: `npm.cmd run build` passes; Browser validation covers 320×568, 390×844, 768×1024, and 1440×900, both themes, menu open/close/focus restoration, CTA routing, and narrow-viewport overflow checks. A real browser 200% zoom pass remains for independent validation. Hosted/deployment evidence is intentionally not claimed.
 
 Implementation commit: `d2ac369` (`feat(portfolio): build mobile-first shell`).
-
-Next package: create `codex/mobile-first-project-disclosure` from this accepted base and implement the single-open expandable project model.
 
 ## Copy and project imagery cleanup
 
