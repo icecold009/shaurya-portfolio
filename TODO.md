@@ -12,6 +12,16 @@
 
 Implementation branch: `codex/mobile-first-project-disclosure`.
 
+## Blog URL state: Package 2
+
+- [x] Make the selected blog post derive from `?post=slug` instead of duplicated local state.
+- [x] Preserve unrelated query parameters and clean invalid post slugs with a history replacement.
+- [x] Support direct links, browser back/forward, keyboard focus into the post, and focus restoration to the archive trigger.
+- [x] Add pure URL-state tests and verify the production build and rendered browser behavior.
+- [ ] Independent validation before starting Package 3 artwork/certificate disclosure.
+
+Implementation branch: `codex/blog-url-state`.
+
 ## Mobile-first redesign: Package 1
 
 - [x] Rebuild the homepage around a static portrait, recruiter-first hero copy, four-link primary navigation, and concise work/profile/writing sections.

@@ -1,34 +1,82 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import {
+    getPostFromSearchParams,
+    updatePostSearchParams,
+} from "../../lib/blogSelection";
 import { formatPostDate, posts } from "../../posts/index.js";
 import BlogPostPage from "./BlogPostPage";
 
 function openOnKeyboard(event, onOpen) {
     if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        onOpen();
+        onOpen(event.currentTarget);
     }
 }
 
 function BlogPage() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const requestedSlug = searchParams.get("post");
-    const [activeSlug, setActiveSlug] = useState(() =>
-        posts.some((post) => post.slug === requestedSlug) ? requestedSlug : null
+    const activePost = getPostFromSearchParams(searchParams, posts);
+    const triggerElementRef = useRef(null);
+    const triggerSlugRef = useRef(null);
+    const postHeadingRef = useRef(null);
+
+    useEffect(() => {
+        if (!searchParams.has("post") || activePost) {
+            return undefined;
+        }
+
+        setSearchParams(updatePostSearchParams(searchParams), { replace: true });
+        return undefined;
+    }, [activePost, searchParams, setSearchParams]);
+
+    useEffect(() => {
+        const focusFrame = window.requestAnimationFrame(() => {
+            if (activePost) {
+                postHeadingRef.current?.focus();
+                return;
+            }
+
+            const restoredTrigger = triggerElementRef.current?.isConnected
+                ? triggerElementRef.current
+                : Array.from(document.querySelectorAll("[data-blog-post-trigger]"))
+                    .find((element) => element.dataset.postSlug === triggerSlugRef.current);
+
+            if (restoredTrigger) {
+                restoredTrigger.focus();
+                triggerElementRef.current = null;
+                triggerSlugRef.current = null;
+            }
+        });
+
+        return () => window.cancelAnimationFrame(focusFrame);
+    }, [activePost]);
+
+    const openPost = useCallback(
+        (slug, triggerElement) => {
+            triggerElementRef.current = triggerElement;
+            triggerSlugRef.current = slug;
+            setSearchParams(updatePostSearchParams(searchParams, slug), {
+                replace: false,
+            });
+        },
+        [searchParams, setSearchParams],
     );
 
-    if (activeSlug) {
-        const post = posts.find((entry) => entry.slug === activeSlug);
+    const closePost = useCallback(() => {
+        setSearchParams(updatePostSearchParams(searchParams), {
+            replace: false,
+        });
+    }, [searchParams, setSearchParams]);
 
+    if (activePost) {
         return (
             <div className="page-wrapper blog-page-shell">
                 <BlogPostPage
-                    post={post}
-                    onBack={() => {
-                        setActiveSlug(null);
-                        setSearchParams({});
-                    }}
+                    post={activePost}
+                    headingRef={postHeadingRef}
+                    onBack={closePost}
                 />
             </div>
         );
@@ -65,9 +113,13 @@ function BlogPage() {
 
                 <article
                     className="blog-featured"
-                    onClick={() => setActiveSlug(featuredPost.slug)}
+                    data-blog-post-trigger="true"
+                    data-post-slug={featuredPost.slug}
+                    onClick={(event) => openPost(featuredPost.slug, event.currentTarget)}
                     onKeyDown={(event) =>
-                        openOnKeyboard(event, () => setActiveSlug(featuredPost.slug))
+                        openOnKeyboard(event, (triggerElement) =>
+                            openPost(featuredPost.slug, triggerElement)
+                        )
                     }
                     role="button"
                     tabIndex={0}
@@ -99,9 +151,13 @@ function BlogPage() {
                         <article
                             key={post.slug}
                             className="blog-row"
-                            onClick={() => setActiveSlug(post.slug)}
+                            data-blog-post-trigger="true"
+                            data-post-slug={post.slug}
+                            onClick={(event) => openPost(post.slug, event.currentTarget)}
                             onKeyDown={(event) =>
-                                openOnKeyboard(event, () => setActiveSlug(post.slug))
+                                openOnKeyboard(event, (triggerElement) =>
+                                    openPost(post.slug, triggerElement)
+                                )
                             }
                             role="button"
                             tabIndex={0}

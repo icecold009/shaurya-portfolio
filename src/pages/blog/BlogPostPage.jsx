@@ -20,13 +20,13 @@ const postModules = {
     ),
 };
 
-export default function BlogPostPage({ post, onBack }) {
+export default function BlogPostPage({ post, headingRef, onBack }) {
     const Content = postModules[post.slug];
 
     return (
         <section className="blog-post" id="blog">
             <div className="blog-post-rail">
-                <button className="blog-back" onClick={onBack}>
+                <button type="button" className="blog-back" onClick={onBack}>
                     <span aria-hidden="true">←</span> All writing
                 </button>
                 <span>Essay / {post.tag}</span>
@@ -38,7 +38,7 @@ export default function BlogPostPage({ post, onBack }) {
                     <span>Writing / 2026</span>
                     <span>{formatPostDate(post.date)}</span>
                 </div>
-                <h1 className="blog-post-title">{post.title}</h1>
+                <h1 ref={headingRef} tabIndex="-1" className="blog-post-title">{post.title}</h1>
                 <p className="blog-post-deck">{post.excerpt}</p>
             </header>
 
