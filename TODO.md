@@ -94,6 +94,47 @@ Evidence: Audio Recognition uses `docs/screenshots/fft-output.png`, F1 uses `doc
 
 Implementation commit: `8d02f53` (`feat(portfolio): use real project imagery and remove em dashes`).
 
+## Content and evidence clarity: Package 7
+
+Goal: Make the recruiter-facing opening concrete, remove the empty BirdCLEF
+stub from published surfaces, and reconcile the audio project and writing
+evidence without inventing measurements.
+
+### Scope
+
+- [x] Replace the abstract hero promise with specific web-tool and ML copy,
+      and keep the headline readable in narrow layouts.
+- [x] Remove the empty BirdCLEF article from the writing index, homepage
+      promotion, project page callout, and lazy route map.
+- [x] Separate the React + Supabase browser prototype from the repository-linked
+      Python + Flask audio-recognition project in the article and project data.
+- [x] Derive displayed reading times from generated MDX source word counts.
+- [x] Add focused reading-time tests and retain the existing quality gate.
+
+### Non-goals
+
+The broader visual redesign, new project screenshots or demos, unverified
+BirdCLEF results, analytics, Core Web Vitals measurement, and hosted/device
+validation remain separate work.
+
+### Files, acceptance, and evidence
+
+Files: hero, project data, blog metadata and MDX, reading-time helper and
+metadata sync script, project styles, tests, and package scripts.
+
+Acceptance: no published BirdCLEF stub or stale link; the audio article names
+both implementations and links the source/project entry; reading time changes
+with source length; the hero has no clipped text at the tested narrow surface.
+
+Evidence: `npm.cmd run verify` passes with 74 source files linted, 13 tests,
+79 local assets, 10 routes, 8 projects, 21 artwork records, and a production
+build. Browser checks at the available 501x564 viewport covered the revised
+hero, primary work CTA, retired BirdCLEF URL cleanup, writing archive, audio
+article, project dialog, screenshots, and final console health. Exact 320px
+and 390px viewport emulation was unavailable in the connected browser surface.
+
+Implementation branch: `codex/content-evidence-first-package`.
+
 ## Shared route coherence cleanup
 
 - [x] Put About, Projects, Writing, Not Found, Uses, Artwork, Certificates, Achievements, and Contact on the same centered page shell.

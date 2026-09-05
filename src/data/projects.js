@@ -36,9 +36,9 @@ export const projects = [
         category: "Audio · Python · Flask",
         title: "Audio Recognition",
         description:
-            "The DIY Shazam-style project where I built a complete path from microphone input or upload to normalized audio and fingerprint matching.",
+            "The repository-linked local-first Shazam-style project, separate from the earlier React + Supabase browser prototype covered in the companion note.",
         summary:
-            "A local-first recognition path from microphone or upload to normalized audio and fingerprint matching.",
+            "A local-first recognition path from microphone or upload to normalized audio and fingerprint matching, with its earlier browser prototype documented separately.",
         problem:
             "Recognition is only useful when inconsistent audio inputs can reach one understandable result path.",
         constraints:
