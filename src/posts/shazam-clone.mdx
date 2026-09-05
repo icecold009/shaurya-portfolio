@@ -1,12 +1,56 @@
-The hardest part wasn't the audio: it was the fingerprinting pipeline...
+# Audio recognition: two implementations, one clear path
 
-## The Stack
+I keep two related audio experiments separate because they answer different
+engineering questions. One is a browser prototype that tested whether a React
+interface could capture audio and send a fingerprinting workflow through a
+React + Supabase + Node.js stack. The repository-linked project is a separate,
+local-first Python and Flask application with FFmpeg normalization and a local
+matcher.
 
-- React frontend with Web Audio API
-- Supabase for storing fingerprint hashes
-- Node.js backend for matching
+That distinction matters. A visitor should not have to infer that one short
+article and one project card describe different versions of the work.
 
-## What I Learned
+## The earlier browser prototype
 
-Audio processing in the browser is surprisingly capable. The `AnalyserNode`
-gives you raw frequency data that you can hash into a spectrogram fingerprint.
+The browser prototype used React and the Web Audio API for the interface,
+Supabase for fingerprint storage, and a Node.js backend for matching. Its job
+was to explore the full-stack shape of a Shazam-like product: capture an input,
+turn it into a representation, and return a useful match.
+
+It was a useful prototype, but it is not the same implementation as the
+current [Audio Recognition project](https://github.com/icecold009/Audio-Recognition).
+
+## The repository-linked project
+
+The current project is local-first. A user can provide microphone input or an
+uploaded file, normalize it with FFmpeg, and pass it through a Python and Flask
+workflow. The application also exposes a CLI path, so the recognition flow is
+not tied to one browser surface.
+
+The matching layer uses a local spectrogram and constellation-hash approach.
+The portfolio's [project entry](/projects?project=audio-recognition) describes
+that implementation and links to the source repository.
+
+## The recognition path
+
+1. Accept a bounded microphone or file input.
+2. Normalize the audio so different input formats reach the same processing
+   path.
+3. Build a spectrogram representation and derive a constellation-style hash.
+4. Compare the fingerprint against the available catalog.
+5. Return a match or an honest no-match state.
+
+The important design choice is the last one. Recognition is not useful if an
+unavailable provider or an unfamiliar recording is presented as certainty.
+
+## What I learned
+
+Audio processing in the browser is surprisingly capable, but the surrounding
+workflow determines whether a result is understandable. Separating the
+prototype history from the current repository makes the technology choices
+inspectable, while keeping the input, normalization, matching, and no-match
+states visible makes the product easier to reason about.
+
+The FFT image in the portfolio is supporting diagnostic evidence, not a claim
+of a hosted song catalog or benchmark. Catalog coverage, noisy-audio accuracy,
+and any public hosted flow still need a separate measurement pass.

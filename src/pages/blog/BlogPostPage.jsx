@@ -4,7 +4,6 @@ import { formatPostDate } from "../../posts/index.js";
 
 const postModules = {
     "shazam-clone": lazy(() => import("../../posts/shazam-clone.mdx")),
-    "birdclef-2026": lazy(() => import("../../posts/birdclef-2026.mdx")),
     "shipping-is-a-design-decision": lazy(() =>
         import("../../posts/shipping-is-a-design-decision.mdx")
     ),

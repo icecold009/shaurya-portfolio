@@ -12,7 +12,7 @@ const featuredProjects = projects.filter((project) =>
     featuredProjectNumbers.includes(project.number)
 );
 
-const writingSlugs = ["30-days-of-ai", "birdclef-2026"];
+const writingSlugs = ["shazam-clone", "shipping-is-a-design-decision"];
 
 export default function Home() {
     const writing = writingSlugs

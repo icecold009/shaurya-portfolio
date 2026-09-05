@@ -24,27 +24,27 @@ export default function Hero() {
                         alt="Portrait of Shaurya Saria"
                     />
                     <span className="portfolio-hero__portrait-note">
-                        AI + product engineering
+                        Audio · ML · web tools
                     </span>
                 </div>
 
                 <p className="portfolio-hero__eyebrow">
-                    AI + product engineer · Bengaluru
+                    Student developer · Bengaluru
                 </p>
 
                 <h1 id="portfolio-hero-title" className="portfolio-hero__title">
-                    I build understandable software for <em>complex problems.</em>
+                    I build web tools and <em>machine-learning experiments.</em>
                 </h1>
 
                 <div className="portfolio-hero__bottom">
                     <p className="portfolio-hero__description">
-                        Student developer working across full-stack products,
-                        machine learning, and interaction design.
+                        I’m Shaurya, a student developer in Bengaluru working on
+                        audio recognition, forecasting, and practical web applications.
                     </p>
 
                     <div className="portfolio-hero__actions">
                         <Link to="/projects" className="portfolio-button portfolio-button--primary">
-                            View selected work
+                            Explore my work
                             <ArrowDownRight size={18} aria-hidden="true" />
                         </Link>
                         <a

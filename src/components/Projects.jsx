@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
     EDITORIAL_EASE,
@@ -1011,21 +1011,6 @@ export default function Projects() {
                         </button>
                     </div>
                 )}
-
-                <div className="project-writing-callout">
-                    <div>
-                        <span className="selected-work-kicker">Competition note</span>
-                        <h3>How I approached <em>BirdCLEF 2026.</em></h3>
-                    </div>
-                    <p>
-                        The Kaggle audio-classification write-up sits alongside the
-                        project archive, with the decisions and limitations left visible.
-                    </p>
-                    <Link to="/blog?post=birdclef-2026">
-                        Read the write-up
-                        <ArrowUpRight size={17} aria-hidden="true" />
-                    </Link>
-                </div>
 
                 <div className="project-details-heading">
                     <p className="selected-work-kicker">Detailed view</p>
