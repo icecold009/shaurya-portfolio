@@ -3043,7 +3043,7 @@
     padding: 0;
     overflow: hidden;
     border: 1px solid var(--line);
-    border-radius: 0.85rem;
+    border-radius: 0;
     background: color-mix(in srgb, var(--surface) 58%, transparent);
 }
 
