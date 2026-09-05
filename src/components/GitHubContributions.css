@@ -47,9 +47,18 @@
 
 .github-contributions__viewport {
     overflow-x: auto;
-    padding: 0.15rem 0.1rem 0.65rem;
-    scrollbar-color: #343a40 #050505;
-    scrollbar-width: thin;
+    padding: 0.15rem 0.1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.github-contributions__viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.github-contributions__viewport:focus-visible {
+    outline: 2px solid #f2f4f5;
+    outline-offset: 0.35rem;
 }
 
 .github-contributions__calendar {

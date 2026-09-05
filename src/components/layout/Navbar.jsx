@@ -131,7 +131,7 @@ function Navbar() {
             <header className={["site-header", scrolled ? "site-header--scrolled" : "", menuOpen ? "site-header--menu-open" : ""].filter(Boolean).join(" ")}>
                 <nav className="navbar" aria-label="Main navigation">
                     <Link to="/" className="nav-brand" aria-label="Shaurya portfolio home">
-                        <span className="nav-brand-mark" aria-hidden="true">S</span>
+                        <span className="nav-brand-mark" aria-hidden="true">↗</span>
                         <span className="nav-brand-copy"><strong>Shaurya</strong><small>AI + product engineer</small></span>
                     </Link>
 
@@ -179,7 +179,7 @@ function Navbar() {
                         <button type="button" className="mobile-nav-backdrop" onClick={closeMenu} aria-label="Dismiss navigation overlay" tabIndex={-1} />
                         <motion.aside id="mobile-navigation" ref={mobilePanelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Navigation menu" onKeyDown={handleMobileKeyDown} initial={reduceMotion ? false : { opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }} transition={{ duration: DRAWER.duration, ease: DRAWER.ease }}>
                             <div className="mobile-nav-header">
-                                <Link to="/" className="mobile-nav-identity" onClick={closeMenu}><span className="nav-brand-mark" aria-hidden="true">S</span><span><strong>Shaurya</strong><small>Portfolio navigation</small></span></Link>
+                                <Link to="/" className="mobile-nav-identity" onClick={closeMenu}><span className="nav-brand-mark" aria-hidden="true">↗</span><span><strong>Shaurya</strong><small>Portfolio navigation</small></span></Link>
                                 <button ref={closeButtonRef} type="button" className="mobile-nav-close" onClick={closeMenu} aria-label="Close navigation menu"><X size={20} aria-hidden="true" /></button>
                             </div>
                             <div className="mobile-nav-scroll">

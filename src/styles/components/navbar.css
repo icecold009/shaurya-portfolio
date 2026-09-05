@@ -43,11 +43,13 @@
     flex: 0 0 auto;
     place-items: center;
     border: 1px solid var(--line-bright);
-    border-radius: 50%;
+    border-radius: 0.35rem;
     background: var(--green-faint);
     color: var(--green);
-    font-size: 0.85rem;
-    font-weight: 750;
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
 }
 
 .nav-brand-copy { min-width: 0; display: flex; flex-direction: column; line-height: 1.15; }

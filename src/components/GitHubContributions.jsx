@@ -107,7 +107,12 @@ export default function GitHubContributions() {
             </div>
 
             <div className="github-contributions__panel">
-                <div className="github-contributions__viewport">
+                <div
+                    className="github-contributions__viewport"
+                    role="region"
+                    aria-label="GitHub contribution calendar"
+                    tabIndex={0}
+                >
                     <div
                         className="github-contributions__calendar"
                         data-state={status}
