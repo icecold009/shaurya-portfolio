@@ -29,7 +29,9 @@ Implementation branch: `codex/blog-url-state`.
 - [x] Preserve direct certificate PDF links and existing section anchors.
 - [x] Add focus trapping/restoration, Escape/backdrop close, body-scroll cleanup, invalid-ID cleanup, and reduced-motion-safe styling.
 - [x] Add media URL-state tests and verify the production build and rendered browser behavior.
-- [ ] Independent validation before starting Package 4 quality and evidence audit.
+- [x] Independent validation before starting Package 4 quality and evidence audit.
+
+Validation evidence: `npm.cmd test` passes 8/8 and `npm.cmd run build` passes. Fresh Browser checks at 502x565 cover archive/detail rendering, direct duplicate-certificate deep links, back/forward history, Escape and focus restoration, invalid-ID cleanup, mobile bottom-sheet geometry, alt-text coverage, safe PDF links, and horizontal-overflow checks. Only the expected dev-tool reduced-motion warning appeared; no app errors were reported.
 
 Implementation branch: `codex/artwork-certificate-disclosure`.
 
