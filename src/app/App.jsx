@@ -15,13 +15,17 @@ export default function App() {
             return undefined;
         }
 
+        if (typeof window.__appLoaderAppReady === "function") {
+            window.__appLoaderAppReady();
+            return undefined;
+        }
+
         const frame = window.requestAnimationFrame(() => {
+            document.getElementById("root")?.classList.add("app-loader__site-visible");
             loader.classList.add("app-loader--hidden");
         });
 
-        const cleanupTimer = window.setTimeout(() => {
-            loader.remove();
-        }, 300);
+        const cleanupTimer = window.setTimeout(() => loader.remove(), 560);
 
         return () => {
             window.cancelAnimationFrame(frame);
@@ -39,7 +43,7 @@ export default function App() {
 
             <Navbar />
 
-            <main id="main-content">
+            <main id="main-content" tabIndex={-1}>
                 <AnimatedRoutes />
             </main>
 

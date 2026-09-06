@@ -145,12 +145,12 @@ export default function MediaDetailDialog({ item, kind, onClose, triggerElement 
                     <div className="media-detail-dialog__actions">
                         {item.pdf ? (
                             <a href={item.pdf} target="_blank" rel="noopener noreferrer" aria-label={`Open PDF for ${item.title} in a new tab`}>
-                                Open PDF
+                                Open full PDF
                                 <ArrowUpRight size={16} aria-hidden="true" />
                             </a>
                         ) : null}
                         <button type="button" onClick={() => closeRef.current()}>
-                            Back to archive
+                            Close details
                         </button>
                     </div>
                 </div>

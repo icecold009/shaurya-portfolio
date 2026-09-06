@@ -513,13 +513,13 @@ export default function AboutPage() {
                             </p>
 
                             <a
-                                className="about-editorial__resume-link"
+                                className="about-editorial__resume-link cta-link"
                                 href="/resume.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Open full résumé PDF in a new tab"
                             >
-                                Open full resume
+                                Open résumé PDF
                                 <ArrowUpRight size={18} aria-hidden="true" />
                             </a>
                         </motion.div>

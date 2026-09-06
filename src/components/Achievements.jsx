@@ -172,8 +172,8 @@ function Achievements() {
                     engineering work that have shaped how I think, build and
                     contribute.
                 </p>
-                <Link className="achievements-intro-action" to="/certificates">
-                    Open certificates <span aria-hidden="true">↗</span>
+                <Link className="achievements-intro-action cta-link" to="/certificates">
+                    Browse certificates <span aria-hidden="true">↗</span>
                 </Link>
             </div>
 

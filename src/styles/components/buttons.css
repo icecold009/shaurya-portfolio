@@ -5,18 +5,25 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.75rem;
     min-height: 52px;
     padding: 0.85rem 1.5rem;
-    border-radius: 4px;
     border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: var(--sans);
     font-size: 0.9rem;
     font-weight: 680;
-    font-family: var(--sans);
     letter-spacing: -0.015em;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease,
-        border-color 0.15s ease, transform 0.12s ease,
-        box-shadow 0.2s var(--ease-editorial);
+    transition:
+        background-color var(--duration-press) var(--ease-out),
+        border-color var(--duration-press) var(--ease-out),
+        box-shadow var(--duration-popover) var(--ease-editorial),
+        color var(--duration-press) var(--ease-out),
+        transform var(--duration-press) var(--ease-out);
 }
 
 .btn-primary {
@@ -32,14 +39,9 @@
 
 .btn-primary::after {
     content: '→';
-    margin-left: 0.75rem;
-}
-
-.btn-primary:hover {
-    background: color-mix(in srgb, var(--green) 88%, white);
-    color: var(--bg);
-    box-shadow: 0 12px 30px rgba(var(--accent-rgb), 0.3);
-    transform: translateY(-2px);
+    display: inline-block;
+    flex: 0 0 auto;
+    transition: transform var(--duration-press) var(--ease-out);
 }
 
 .btn-primary:active {
@@ -54,14 +56,6 @@
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
-.btn-secondary:hover {
-    border-color: var(--green);
-    color: var(--text);
-    background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
-    box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.12);
-    transform: translateY(-2px);
-}
-
 .btn-secondary:active {
     transform: translateY(0) scale(0.97);
 }
@@ -70,13 +64,6 @@
     background: transparent;
     border-color: var(--line-bright);
     color: var(--text);
-}
-
-.btn-ghost:hover {
-    border-color: var(--green);
-    color: var(--text);
-    background: color-mix(in srgb, var(--green) 8%, transparent);
-    transform: translateY(-2px);
 }
 
 .btn-ghost:active {
@@ -91,9 +78,50 @@ a.btn:focus-visible {
 }
 
 .btn:disabled {
-    cursor: wait;
+    cursor: not-allowed;
     opacity: 0.6;
     transform: none;
+}
+
+.btn[aria-busy="true"] {
+    cursor: progress;
+}
+
+.cta-link:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 4px;
+}
+
+.cta-link:active {
+    transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        background: color-mix(in srgb, var(--green) 88%, white);
+        color: var(--bg);
+        box-shadow: 0 12px 30px rgba(var(--accent-rgb), 0.3);
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:hover::after {
+        transform: translateX(0.18rem);
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--green);
+        color: var(--text);
+        background: color-mix(in srgb, var(--green) 12%, var(--surface-2));
+        box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.12);
+        transform: translateY(-2px);
+    }
+
+    .btn-ghost:hover {
+        border-color: var(--green);
+        color: var(--text);
+        background: color-mix(in srgb, var(--green) 8%, transparent);
+        transform: translateY(-2px);
+    }
 }
 
 /* Compact navigation actions */
@@ -132,4 +160,12 @@ a.btn:focus-visible {
 .desktop-more-trigger:focus-visible {
     outline: 2px solid var(--green);
     outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn-primary::after,
+    .cta-link {
+        transition: none;
+    }
 }

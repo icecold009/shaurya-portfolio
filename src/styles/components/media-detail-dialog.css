@@ -143,8 +143,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    min-height: 2.5rem;
-    padding: 0.6rem 0.8rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.9rem;
     border: 1px solid var(--line-bright);
     background: transparent;
     color: var(--text);
@@ -154,12 +154,34 @@
     text-transform: uppercase;
 }
 
-.media-detail-dialog__actions a:hover,
-.media-detail-dialog__actions button:hover,
+.media-detail-dialog__actions a {
+    border-color: var(--green);
+    background: var(--green);
+    color: var(--bg);
+}
+
 .media-detail-dialog__actions a:focus-visible,
 .media-detail-dialog__actions button:focus-visible {
-    border-color: var(--green);
-    color: var(--green);
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
+.media-detail-dialog__actions a:active,
+.media-detail-dialog__actions button:active {
+    transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .media-detail-dialog__actions a:hover {
+        border-color: color-mix(in srgb, var(--green) 88%, white);
+        background: color-mix(in srgb, var(--green) 88%, white);
+        color: var(--bg);
+    }
+
+    .media-detail-dialog__actions button:hover {
+        border-color: var(--green);
+        color: var(--green);
+    }
 }
 
 @media (max-width: 720px) {

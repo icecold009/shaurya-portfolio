@@ -27,7 +27,7 @@ export default function Footer() {
                 <h2 id="contact-ending-title">Have an idea worth <em>building properly?</em></h2>
                 <div className="contact-ending__action">
                     <p>Tell me what you are working on, what problem you are trying to solve, and where I could help.</p>
-                    <Link to="/contact" className="contact-ending__link">Start a conversation <ArrowUpRight size={18} aria-hidden="true" /></Link>
+                    <Link to="/contact" className="contact-ending__link cta-link">Start a conversation <ArrowUpRight size={18} aria-hidden="true" /></Link>
                 </div>
             </section>
 

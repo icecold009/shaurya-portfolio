@@ -248,3 +248,28 @@ Feature branch: `codex/luna-portfolio-performance-proof`
 - [x] Lint, tests, build, routes, and assets are reproducible.
 - [x] Every case study is current, honest, accessible, and privacy-safe within the locally verified portfolio records.
 - [x] Feature branch is committed and locally clean; publication remains intentionally unpushed pending explicit approval, and `main` is untouched and unmerged.
+
+## Clear site-wide CTA system: Package 9
+
+Goal: Make the portfolio's next actions immediately understandable while preserving its restrained editorial design.
+
+### Scope
+
+- [x] Establish a clear primary, secondary, text-link, and utility-control hierarchy.
+- [x] Replace vague action labels with concise verb-and-target language.
+- [x] Add consistent focus, press, hover, loading, and disabled feedback.
+- [x] Keep navigation links semantic and reserve button styling for meaningful actions.
+
+### Non-goals
+
+New routes, content rewrites, form-provider changes, navigation redesign, and hosted deployment.
+
+### Files, tests, acceptance, and evidence
+
+Files: shared button styles plus the hero, home, contact, footer, uses, achievements, about, certificates, not-found, and detail-dialog CTA surfaces.
+
+Tests: `npm.cmd run verify`, `npm.cmd run build`, `git diff --check`, and rendered desktop/mobile checks for key routes, keyboard focus, dialog actions, and console health.
+
+Acceptance: each major section presents one obvious next action; labels describe the destination or result; focus and press states remain visible; loading text does not duplicate affordances; utility controls remain visually secondary.
+
+Evidence: `npm.cmd run verify` passes with 77 source files linted, 16 tests, 78 local assets, 10 routes, 8 projects, and 21 artwork records. At the available 868x614 browser viewport, dark and light contact states show a single readable `Send message` affordance with visible keyboard focus; the homepage shows one filled `View projects` action beside a restrained résumé link; and the project dialog separates the filled `View source code` action from the outlined `Close details` control. The local browser console reported no application errors. Exact phone-width emulation was unavailable in the connected browser surface.
