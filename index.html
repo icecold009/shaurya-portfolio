@@ -30,7 +30,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
 
-    <!-- Critical boot loader: the first visit opens with a slow Hello introduction. -->
+    <!-- Critical boot loader: the first visit in a browser tab opens with a slow Hello introduction. -->
     <style>
         :root {
             color-scheme: dark;
@@ -219,7 +219,7 @@
     <script>
         (() => {
             const loader = document.getElementById("app-loader");
-            const introKey = "shaurya-portfolio:hello-intro-seen-v3";
+            const introKey = "shaurya-portfolio:hello-intro-seen-v4";
             const introMode = new URLSearchParams(window.location.search).get("intro");
             const forceIntro = introMode === "show" || introMode === "animate";
             const forceAnimation = introMode === "animate";
@@ -232,9 +232,16 @@
 
             const helloPath = loader.querySelector(".app-loader__hello-path");
 
+            let introStorage = null;
+            try {
+                introStorage = window.sessionStorage;
+            } catch {
+                // Continue without persistence when storage is unavailable.
+            }
+
             let seen = false;
             try {
-                seen = !forceIntro && window.localStorage.getItem(introKey) === "1";
+                seen = !forceIntro && introStorage?.getItem(introKey) === "1";
             } catch {
                 // Continue without persistence when storage is unavailable.
             }
@@ -247,8 +254,8 @@
 
             const rememberIntro = () => {
                 try {
-                    if (!forceIntro) {
-                        window.localStorage.setItem(introKey, "1");
+                    if (!forceIntro && introStorage) {
+                        introStorage.setItem(introKey, "1");
                     }
                 } catch {
                     // Storage is optional; the current visit can still finish.

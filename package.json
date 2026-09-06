@@ -8,7 +8,7 @@
         "sync:posts": "node scripts/sync-post-metadata.mjs",
         "sync:resume": "node scripts/sync-resume.mjs",
         "lint": "node scripts/lint-source.mjs",
-        "test": "node --test tests/projectSearch.test.mjs tests/blogSelection.test.mjs tests/mediaSelection.test.mjs tests/postContent.test.mjs tests/resumeSync.test.mjs tests/githubContributions.test.mjs",
+        "test": "node --test tests/projectSearch.test.mjs tests/blogSelection.test.mjs tests/mediaSelection.test.mjs tests/postContent.test.mjs tests/resumeSync.test.mjs tests/githubContributions.test.mjs tests/introLoader.test.mjs",
         "verify:assets": "node scripts/verify-static-integrity.mjs",
         "verify": "node scripts/verify-quality.mjs",
         "build": "npm run sync:resume -- --optional && npm run sync:posts && vite build",
