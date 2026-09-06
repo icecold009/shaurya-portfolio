@@ -32,18 +32,18 @@ export default function Hero() {
                     </p>
 
                     <div className="portfolio-hero__actions">
-                        <Link to="/projects" className="portfolio-button portfolio-button--primary">
-                            Explore my work
+                        <Link to="/projects" className="portfolio-button portfolio-button--primary cta-link">
+                            View projects
                             <ArrowDownRight size={18} aria-hidden="true" />
                         </Link>
                         <a
                             href="/resume.pdf"
-                            className="portfolio-button portfolio-button--secondary"
+                            className="portfolio-button portfolio-button--secondary cta-link"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Open résumé PDF in a new tab"
                         >
-                            Résumé
+                            Open résumé
                             <ArrowUpRight size={17} aria-hidden="true" />
                         </a>
                     </div>

@@ -119,8 +119,9 @@ function Contact() {
                             type="submit"
                             className="btn btn-primary"
                             disabled={status === "sending"}
+                            aria-busy={status === "sending"}
                         >
-                            {status === "sending" ? "Sending..." : "Send message ->"}
+                            {status === "sending" ? "Sending message…" : "Send message"}
                         </button>
 
                         {status === "error" && (

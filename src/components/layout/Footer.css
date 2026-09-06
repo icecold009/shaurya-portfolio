@@ -11,9 +11,12 @@
 .contact-ending__hero h2 em { color: var(--green); font-style: italic; font-weight: 470; }
 .contact-ending__action { display: grid; grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.6fr); align-items: end; gap: 2rem; margin-top: 2.5rem; }
 .contact-ending__action p { max-width: 32rem; margin: 0; color: var(--text-dim); font-size: 1rem; line-height: 1.55; }
-.contact-ending__link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 0; border-top: 1px solid var(--line-bright); border-bottom: 1px solid var(--line); color: var(--text); font-family: var(--sans); font-size: 0.92rem; font-weight: 650; transition: color 160ms ease-out, padding 160ms ease-out, border-color 160ms ease-out; }
-.contact-ending__link:hover,
-.contact-ending__link:focus-visible { padding-inline: 0.55rem; border-color: var(--green); color: var(--green); }
+.contact-ending__link { display: flex; min-height: 3.4rem; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1rem; border: 1px solid var(--green); background: color-mix(in srgb, var(--green) 7%, transparent); color: var(--text); font-family: var(--sans); font-size: 0.92rem; font-weight: 650; transition: background-color var(--duration-press) var(--ease-out), color var(--duration-press) var(--ease-out), border-color var(--duration-press) var(--ease-out), transform var(--duration-press) var(--ease-out); }
+.contact-ending__link svg { flex: 0 0 auto; transition: transform var(--duration-press) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+    .contact-ending__link:hover { background: var(--green); border-color: var(--green); color: var(--bg); }
+    .contact-ending__link:hover svg { transform: translate(0.14rem, -0.14rem); }
+}
 .contact-ending__directory { display: grid; grid-template-columns: minmax(14rem, 1.3fr) repeat(3, 1fr); gap: 2rem; padding-block: 1.5rem; border-top: 1px solid var(--line); }
 .contact-ending__identity a { color: var(--text); font-size: 1rem; font-weight: 650; }
 .contact-ending__identity p { max-width: 17rem; margin: 0.75rem 0 0; color: var(--text-faint); font-size: 0.78rem; line-height: 1.5; }
@@ -39,5 +42,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .contact-ending__link { transition: none; }
+    .contact-ending__link,
+    .contact-ending__link svg { transition: none; }
 }

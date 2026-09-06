@@ -30,8 +30,8 @@ export default function Home() {
                         <p className="home-kicker">Selected work / 03</p>
                         <h2 id="home-work-title">Built to make hard things <em>clearer.</em></h2>
                     </div>
-                    <Link className="home-text-link" to="/projects">
-                        See all work <ArrowUpRight size={16} aria-hidden="true" />
+                    <Link className="home-text-link cta-link" to="/projects">
+                        View all projects <ArrowUpRight size={16} aria-hidden="true" />
                     </Link>
                 </div>
 
@@ -50,8 +50,8 @@ export default function Home() {
                                 <p>{project.summary ?? project.description}</p>
                                 <div className="home-project-card__footer">
                                     <span>{project.status}</span>
-                                    <Link to={`/projects#project-detail-${project.number}`} aria-label={`Read the ${project.title} case study`}>
-                                        Read case study <ArrowUpRight size={16} aria-hidden="true" />
+                                    <Link className="cta-link" to={`/projects#project-detail-${project.number}`} aria-label={`Open the ${project.title} project overview`}>
+                                        View project <ArrowUpRight size={16} aria-hidden="true" />
                                     </Link>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@ export default function Home() {
                         <div><span>Open to</span><strong>Internships, research, and thoughtful collaborations</strong></div>
                     </div>
                 </div>
-                <Link className="home-text-link" to="/about">More about me <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                <Link className="home-text-link cta-link" to="/about">Read my story <ArrowUpRight size={16} aria-hidden="true" /></Link>
             </section>
 
             <section className="home-section home-section--writing" aria-labelledby="home-writing-title">
@@ -86,7 +86,7 @@ export default function Home() {
                         <p className="home-kicker">Writing / 02</p>
                         <h2 id="home-writing-title">Notes from the <em>workbench.</em></h2>
                     </div>
-                    <Link className="home-text-link" to="/blog">Read all notes <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                    <Link className="home-text-link cta-link" to="/blog">Read all notes <ArrowUpRight size={16} aria-hidden="true" /></Link>
                 </div>
                 <div className="home-writing-list">
                     {writing.map((post) => (

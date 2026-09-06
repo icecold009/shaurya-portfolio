@@ -195,8 +195,8 @@ export default function UsesPage() {
                         full-stack products and interfaces, from small prototypes to
                         AI systems that need to behave honestly.
                     </p>
-                    <a className="uses-hero-action" href="#uses-workflow">
-                        See the working system
+                    <a className="uses-hero-action cta-link" href="#uses-workflow">
+                        View my workflow
                         <ArrowUpRight size={17} aria-hidden="true" />
                     </a>
                 </div>

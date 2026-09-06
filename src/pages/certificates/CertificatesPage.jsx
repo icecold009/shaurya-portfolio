@@ -384,7 +384,7 @@ export default function CertificatesPage() {
                                                                 className="cert-pdf-link"
                                                                 aria-label={`Open PDF for ${certificate.title} in a new tab`}
                                                             >
-                                                                view pdf ↗
+                                                                Open PDF ↗
                                                             </a>
                                                         )}
                                                     </figcaption>

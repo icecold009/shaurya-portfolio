@@ -39,7 +39,7 @@ export default function NotFound() {
                 <p className="notfound-code">404</p>
                 <pre className="notfound-terminal">{shown}<span className="notfound-cursor">█</span></pre>
                 <Link to="/" className="btn btn-primary" style={{ marginTop: "2rem" }}>
-                    cd ~/home
+                    Return home
                 </Link>
             </div>
         </div>
