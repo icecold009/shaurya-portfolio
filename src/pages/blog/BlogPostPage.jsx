@@ -49,7 +49,17 @@ export default function BlogPostPage({ post, headingRef, onBack }) {
                     <span>{formatPostDate(post.date)}</span>
                 </aside>
                 <div className="blog-post-body">
-                    <Suspense fallback={<p className="blog-loading">Loading essay...</p>}>
+                    <Suspense
+                        fallback={(
+                            <div className="blog-loading" role="status" aria-live="polite">
+                                <span className="blog-loading__label">Loading essay</span>
+                                <span className="blog-loading__line blog-loading__line--long" aria-hidden="true" />
+                                <span className="blog-loading__line blog-loading__line--medium" aria-hidden="true" />
+                                <span className="blog-loading__line blog-loading__line--short" aria-hidden="true" />
+                                <span className="blog-loading__block" aria-hidden="true" />
+                            </div>
+                        )}
+                    >
                         <Content />
                     </Suspense>
                 </div>

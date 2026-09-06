@@ -33,10 +33,12 @@
     <!-- Critical boot loader: visible before the React bundle is ready. -->
     <style>
         :root {
-            --loader-bg: #060a06;
-            --loader-text: #e1f5e1;
-            --loader-muted: #6d8a6d;
-            --loader-accent: #00ff41;
+            --loader-bg: #0b1220;
+            --loader-surface: #121d30;
+            --loader-line: #263650;
+            --loader-text: #e9eef7;
+            --loader-muted: #8d9bb2;
+            --loader-accent: #7da8ff;
         }
 
         body {
@@ -64,7 +66,7 @@
         }
 
         .app-loader__content {
-            width: min(18rem, calc(100% - 3rem));
+            width: min(34rem, calc(100% - 2.5rem));
         }
 
         .app-loader__topline {
@@ -147,6 +149,78 @@
                 animation: none;
             }
         }
+
+        .app-loader__spinner {
+            display: none;
+        }
+
+        .app-loader__label {
+            margin: 1rem 0 1.35rem;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 650;
+            letter-spacing: -0.06em;
+        }
+
+        .app-loader__grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .app-loader__card {
+            display: block;
+            padding: 0.65rem;
+            border: 1px solid var(--loader-line);
+            background: var(--loader-surface);
+        }
+
+        .app-loader__card::before,
+        .app-loader__card::after {
+            display: block;
+            background: linear-gradient(
+                100deg,
+                color-mix(in srgb, var(--loader-muted) 10%, transparent) 20%,
+                color-mix(in srgb, var(--loader-accent) 24%, transparent) 50%,
+                color-mix(in srgb, var(--loader-muted) 10%, transparent) 80%
+            );
+            background-size: 220% 100%;
+            content: "";
+            animation: app-loader-shimmer 1.8s ease-in-out infinite;
+        }
+
+        .app-loader__card::before {
+            aspect-ratio: 16 / 10;
+        }
+
+        .app-loader__card::after {
+            width: 58%;
+            height: 0.65rem;
+            margin-top: 0.75rem;
+        }
+
+        @keyframes app-loader-shimmer {
+            from {
+                background-position: 100% 0;
+            }
+
+            to {
+                background-position: -100% 0;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --loader-surface: #fffdf8;
+                --loader-line: #d8d1c4;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .app-loader__card::before,
+            .app-loader__card::after {
+                animation: none;
+            }
+        }
     </style>
 </head>
 
@@ -176,7 +250,13 @@
                     d="M29.760000000000005 18.72 c0 7.28 -3.9200000000000004 13.600000000000001 -9.840000000000002 16.96 c -2.8800000000000003 1.6800000000000002 -6.24 2.64 -9.840000000000002 2.64 c -3.6 0 -6.88 -0.96 -9.76 -2.64 c0 -7.28 3.9200000000000004 -13.52 9.840000000000002 -16.96 c2.8800000000000003 -1.6800000000000003 6.24 -2.64 9.76 -2.64 S26.880000000000003 17.040000000000003 29.760000000000005 18.72 c5.84 3.3600000000000003 9.76 9.68 9.840000000000002 16.96 c -2.8800000000000003 1.6800000000000002 -6.24 2.64 -9.76 2.64 c -3.6 0 -6.88 -0.96 -9.840000000000002 -2.64 c -5.84 -3.3600000000000003 -9.76 -9.68 -9.76 -16.96 c0 -7.28 3.9200000000000004 -13.600000000000001 9.76 -16.96 C25.84 5.120000000000001 29.760000000000005 11.440000000000001 29.760000000000005 18.72z"
                 />
             </svg>
-            <p class="app-loader__label">Loading selected work</p>
+            <p class="app-loader__label">Loading portfolio</p>
+            <div class="app-loader__grid" aria-hidden="true">
+                <span class="app-loader__card"></span>
+                <span class="app-loader__card"></span>
+                <span class="app-loader__card"></span>
+                <span class="app-loader__card"></span>
+            </div>
         </div>
     </div>
     <div id="root"></div>

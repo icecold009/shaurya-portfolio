@@ -17,17 +17,6 @@ export default function Hero() {
             </div>
 
             <div className="portfolio-hero__content">
-                <div className="portfolio-hero__portrait-wrap">
-                    <img
-                        className="portfolio-hero__portrait"
-                        src="/images/shaurya-portrait.jpeg"
-                        alt="Portrait of Shaurya Saria"
-                    />
-                    <span className="portfolio-hero__portrait-note">
-                        Audio · ML · web tools
-                    </span>
-                </div>
-
                 <p className="portfolio-hero__eyebrow">
                     Student developer · Bengaluru
                 </p>
