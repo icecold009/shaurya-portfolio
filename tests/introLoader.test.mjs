@@ -14,7 +14,7 @@ assert.ok(inlineScript, "index.html should contain the inline intro loader scrip
 const scriptSource = inlineScript
     .replace(/^<script>\s*/, "")
     .replace(/\s*<\/script>$/, "");
-const introKey = "shaurya-portfolio:hello-intro-seen-v4";
+const introKey = "shaurya-portfolio:hello-intro-seen-v5";
 
 function createClassList() {
     const values = new Set();
@@ -184,14 +184,13 @@ test("forced animation replays without changing the session flag", () => {
     assert.equal(harness.storage.get(introKey), "1");
 });
 
-test("reduced motion completes without drawing the animated path", () => {
+test("reduced motion still shows the requested ten-second intro", () => {
     const harness = createHarness({ reducedMotion: true });
 
-    harness.window.__appLoaderAppReady();
-    harness.flushTimers();
+    const halfwayOffset = completeAnimatedIntro(harness);
     harness.flushTimers();
 
-    assert.equal(harness.helloPath.style.strokeDashoffset, undefined);
+    assert.equal(halfwayOffset, "685px");
     assert.equal(harness.storage.get(introKey), "1");
     assert.equal(harness.events.loaderRemoved, true);
 });

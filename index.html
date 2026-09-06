@@ -219,7 +219,7 @@
     <script>
         (() => {
             const loader = document.getElementById("app-loader");
-            const introKey = "shaurya-portfolio:hello-intro-seen-v4";
+            const introKey = "shaurya-portfolio:hello-intro-seen-v5";
             const introMode = new URLSearchParams(window.location.search).get("intro");
             const forceIntro = introMode === "show" || introMode === "animate";
             const forceAnimation = introMode === "animate";
@@ -385,9 +385,6 @@
 
             if (seen) {
                 loader.classList.add("app-loader--hidden");
-            } else if (reducedMotion) {
-                introComplete = true;
-                window.setTimeout(maybeDismiss, 3000);
             } else if (!helloPath) {
                 completeIntro();
             } else {
