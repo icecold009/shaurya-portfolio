@@ -137,6 +137,31 @@
 .github-contributions__calendar[data-state="loading"] .github-contribution-cell {
     border-color: #1f252b;
     background: #111417;
+    animation: github-contribution-skeleton 1.8s ease-in-out infinite alternate;
+}
+
+.github-contributions__calendar[data-state="loading"] .github-contribution-cell:nth-child(3n) {
+    animation-delay: 180ms;
+}
+
+.github-contributions__calendar[data-state="loading"] .github-contribution-cell:nth-child(5n) {
+    animation-delay: 360ms;
+}
+
+@keyframes github-contribution-skeleton {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .github-contributions__calendar[data-state="loading"] .github-contribution-cell {
+        animation: none;
+    }
 }
 
 .github-contribution-cell:focus-visible {
