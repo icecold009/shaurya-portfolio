@@ -86,7 +86,20 @@
     text-wrap: balance;
 }
 
+.portfolio-hero__statement {
+    max-width: 24ch;
+    margin: clamp(1rem, 2vw, 1.35rem) 0 0;
+    color: var(--text-dim);
+    font-family: var(--sans);
+    font-size: clamp(1.65rem, 3.6vw, 3.7rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+    text-wrap: balance;
+}
+
 .portfolio-hero__title em,
+.portfolio-hero__statement em,
 .home-section h2 em {
     color: var(--green);
     font-style: italic;
@@ -203,6 +216,10 @@
         line-height: 0.95;
         overflow-wrap: break-word;
     }
+    .portfolio-hero__statement {
+        max-width: 25ch;
+        font-size: clamp(1.55rem, 8vw, 2.8rem);
+    }
     .portfolio-hero__bottom { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.65rem; }
     .portfolio-hero__description { max-width: 34rem; font-size: 1.02rem; }
 }
@@ -211,3 +228,4 @@
     .portfolio-button,
     .portfolio-button svg { transition: none; }
 }
+
