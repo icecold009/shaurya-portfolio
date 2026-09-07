@@ -22,13 +22,16 @@ export default function Hero() {
                 </p>
 
                 <h1 id="portfolio-hero-title" className="portfolio-hero__title">
-                    I build web tools and <em>machine-learning experiments.</em>
+                    Shaurya Saria
                 </h1>
+                <p className="portfolio-hero__statement">
+                    I build web tools and <em>machine-learning experiments.</em>
+                </p>
 
                 <div className="portfolio-hero__bottom">
                     <p className="portfolio-hero__description">
-                        I’m Shaurya, a student developer in Bengaluru working on
-                        audio recognition, forecasting, and practical web applications.
+                        I’m Shaurya, a student developer in Bengaluru building projects
+                        across data science, machine learning, AI, and full-stack software.
                     </p>
 
                     <div className="portfolio-hero__actions">
@@ -58,3 +61,4 @@ export default function Hero() {
         </section>
     );
 }
+

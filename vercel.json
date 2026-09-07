@@ -1,4 +1,17 @@
 {
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.shauryasaria.me"
+                }
+            ],
+            "destination": "https://shauryasaria.me/:path*",
+            "permanent": true
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",
@@ -6,3 +19,4 @@
         }
     ]
 }
+
