@@ -11,7 +11,10 @@ import {
     REVEAL_CONTAINER,
     REVEAL_VIEWPORT,
 } from "../../lib/motion";
-import { profileLinks as sharedProfileLinks } from "../../lib/profileLinks";
+import {
+    positioningStatement,
+    profileLinks as sharedProfileLinks,
+} from "../../lib/profileLinks";
 
 import "./AboutPage.css";
 
@@ -206,12 +209,7 @@ export default function AboutPage() {
                         variants={itemVariant}
                     >
                         <p className="about-editorial__intro">
-                            I am Shaurya Saria, a student developer
-                            based in Bengaluru. I move between
-                            mathematics, machine learning, full-stack
-                            products and interface design, usually by
-                            building the first version and learning
-                            what the idea actually needs.
+                            {positioningStatement}
                         </p>
 
                         <dl className="about-editorial__facts">

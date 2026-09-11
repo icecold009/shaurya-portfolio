@@ -1,86 +1,23 @@
-import { useCallback, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
-import {
-    getPostFromSearchParams,
-    updatePostSearchParams,
-} from "../../lib/blogSelection";
 import { formatPostDate, posts } from "../../posts/index.js";
-import BlogPostPage from "./BlogPostPage";
-
-function openOnKeyboard(event, onOpen) {
-    if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        onOpen(event.currentTarget);
-    }
-}
 
 function BlogPage() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const activePost = getPostFromSearchParams(searchParams, posts);
-    const triggerElementRef = useRef(null);
-    const triggerSlugRef = useRef(null);
-    const postHeadingRef = useRef(null);
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const legacySlug = searchParams.get("post");
+    const legacyPost = posts.find((post) => post.slug === legacySlug);
 
     useEffect(() => {
-        if (!searchParams.has("post") || activePost) {
-            return undefined;
+        if (!legacySlug) {
+            return;
         }
 
-        setSearchParams(updatePostSearchParams(searchParams), { replace: true });
-        return undefined;
-    }, [activePost, searchParams, setSearchParams]);
-
-    useEffect(() => {
-        const focusFrame = window.requestAnimationFrame(() => {
-            if (activePost) {
-                postHeadingRef.current?.focus();
-                return;
-            }
-
-            const restoredTrigger = triggerElementRef.current?.isConnected
-                ? triggerElementRef.current
-                : Array.from(document.querySelectorAll("[data-blog-post-trigger]"))
-                    .find((element) => element.dataset.postSlug === triggerSlugRef.current);
-
-            if (restoredTrigger) {
-                restoredTrigger.focus();
-                triggerElementRef.current = null;
-                triggerSlugRef.current = null;
-            }
+        navigate(legacyPost ? `/blog/${legacyPost.slug}` : "/blog", {
+            replace: true,
         });
-
-        return () => window.cancelAnimationFrame(focusFrame);
-    }, [activePost]);
-
-    const openPost = useCallback(
-        (slug, triggerElement) => {
-            triggerElementRef.current = triggerElement;
-            triggerSlugRef.current = slug;
-            setSearchParams(updatePostSearchParams(searchParams, slug), {
-                replace: false,
-            });
-        },
-        [searchParams, setSearchParams],
-    );
-
-    const closePost = useCallback(() => {
-        setSearchParams(updatePostSearchParams(searchParams), {
-            replace: false,
-        });
-    }, [searchParams, setSearchParams]);
-
-    if (activePost) {
-        return (
-            <div className="page-wrapper blog-page-shell">
-                <BlogPostPage
-                    post={activePost}
-                    headingRef={postHeadingRef}
-                    onBack={closePost}
-                />
-            </div>
-        );
-    }
+    }, [legacyPost, legacySlug, navigate]);
 
     const [featuredPost, ...archivePosts] = posts;
 
@@ -111,18 +48,10 @@ function BlogPage() {
                     <span>{featuredPost.tag}</span>
                 </div>
 
-                <article
+                <Link
                     className="blog-featured"
-                    data-blog-post-trigger="true"
-                    data-post-slug={featuredPost.slug}
-                    onClick={(event) => openPost(featuredPost.slug, event.currentTarget)}
-                    onKeyDown={(event) =>
-                        openOnKeyboard(event, (triggerElement) =>
-                            openPost(featuredPost.slug, triggerElement)
-                        )
-                    }
-                    role="button"
-                    tabIndex={0}
+                    data-blog-post-link="true"
+                    to={`/blog/${featuredPost.slug}`}
                     aria-label={`Read ${featuredPost.title}`}
                 >
                     <div className="blog-featured-meta">
@@ -139,7 +68,7 @@ function BlogPage() {
                             Read essay <span aria-hidden="true">↗</span>
                         </span>
                     </div>
-                </article>
+                </Link>
 
                 <div className="blog-list-heading">
                     <span>Archive</span>
@@ -148,19 +77,11 @@ function BlogPage() {
 
                 <div className="blog-list">
                     {archivePosts.map((post, index) => (
-                        <article
+                        <Link
                             key={post.slug}
                             className="blog-row"
-                            data-blog-post-trigger="true"
-                            data-post-slug={post.slug}
-                            onClick={(event) => openPost(post.slug, event.currentTarget)}
-                            onKeyDown={(event) =>
-                                openOnKeyboard(event, (triggerElement) =>
-                                    openPost(post.slug, triggerElement)
-                                )
-                            }
-                            role="button"
-                            tabIndex={0}
+                            data-blog-post-link="true"
+                            to={`/blog/${post.slug}`}
                             aria-label={`Read ${post.title}`}
                         >
                             <div className="blog-row-meta">
@@ -182,7 +103,7 @@ function BlogPage() {
                                 <p className="blog-excerpt">{post.excerpt}</p>
                             </div>
                             <span className="blog-row-arrow" aria-hidden="true">↗</span>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             </section>

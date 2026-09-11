@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Hero from "../../components/Hero";
 import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
+import { positioningStatement } from "../../lib/profileLinks";
 import { formatPostDate, posts } from "../../posts";
 
 import "./Home.css";
@@ -69,7 +70,7 @@ export default function Home() {
                 </div>
                 <div className="home-profile-grid">
                     <p className="home-profile-lead">
-                        I like working where engineering, design, and problem-solving overlap, especially when the problem is still a little undefined.
+                        {positioningStatement}
                     </p>
                     <div className="home-profile-facts">
                         <div><span>Based in</span><strong>Bengaluru, India</strong></div>
@@ -90,7 +91,7 @@ export default function Home() {
                 </div>
                 <div className="home-writing-list">
                     {writing.map((post) => (
-                        <Link className="home-writing-item" to={`/blog?post=${post.slug}`} key={post.slug}>
+                        <Link className="home-writing-item" to={`/blog/${post.slug}`} key={post.slug}>
                             <div>
                                 <span>{post.tag}</span>
                                 <h3>{post.title}</h3>

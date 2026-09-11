@@ -1,3 +1,6 @@
+export const positioningStatement =
+    "Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces.";
+
 export const profileLinks = [
     {
         key: "github",

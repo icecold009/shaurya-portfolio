@@ -1,3 +1,7 @@
+import { positioningStatement } from "../lib/profileLinks.js";
+
+export const projectProofIntro = `${positioningStatement} The archive shows the methods, evidence, and limitations behind each build.`;
+
 export const projects = [
     {
         id: "stadium-pulse-ai",

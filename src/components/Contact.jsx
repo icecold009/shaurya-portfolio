@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { profileLinks } from "../lib/profileLinks";
+import { positioningStatement, profileLinks } from "../lib/profileLinks";
 
 function Contact() {
     const [status, setStatus] = useState("idle");
@@ -144,9 +144,7 @@ function Contact() {
                     </div>
 
                     <p className="contact-text">
-                        I am especially interested in internships, research,
-                        AI and data products, and collaborations where the
-                        problem is worth understanding properly.
+                        {positioningStatement}
                     </p>
 
                     <div className="contact-links">

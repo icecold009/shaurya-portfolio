@@ -1,6 +1,8 @@
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { positioningStatement } from "../lib/profileLinks";
+
 import "./Hero.css";
 
 export default function Hero() {
@@ -25,13 +27,12 @@ export default function Hero() {
                     Shaurya Saria
                 </h1>
                 <p className="portfolio-hero__statement">
-                    I build web tools and <em>machine-learning experiments.</em>
+                    I build data-driven AI and full-stack tools with a focus on <em>useful interfaces.</em>
                 </p>
 
                 <div className="portfolio-hero__bottom">
                     <p className="portfolio-hero__description">
-                        I’m Shaurya, a student developer in Bengaluru building projects
-                        across data science, machine learning, AI, and full-stack software.
+                        {positioningStatement}
                     </p>
 
                     <div className="portfolio-hero__actions">

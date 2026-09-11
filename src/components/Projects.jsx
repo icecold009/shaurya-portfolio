@@ -16,7 +16,7 @@ import {
 } from "../lib/projectSearch";
 
 import "./Projects.css";
-import { projects } from "../data/projects";
+import { projectProofIntro, projects } from "../data/projects";
 import ProjectDetailDialog from "./ProjectDetailDialog";
 
 function ProjectIndexLink({ project, className, onOpenProject, children }) {
@@ -719,9 +719,7 @@ export default function Projects() {
                                 : REVEAL
                         }
                     >
-                        Three featured projects, followed by a working archive across
-                        ML evaluation, audio systems, education, operations and product
-                        tooling, showing what I built, what I chose not to hide and what I learned.
+                        {projectProofIntro}
                     </motion.p>
 
                     <motion.a
