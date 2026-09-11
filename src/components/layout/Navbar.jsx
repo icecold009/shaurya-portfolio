@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, Mail, Menu, Moon, Sun, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
@@ -32,21 +32,26 @@ function GithubIcon({ size = 18, ...props }) {
 }
 
 function PointerFollower() {
-    const pointerRef = useRef(null);
+    const pointerX = useMotionValue(-100);
+    const pointerY = useMotionValue(-100);
+    const springX = useSpring(pointerX, { stiffness: 100, damping: 10 });
+    const springY = useSpring(pointerY, { stiffness: 100, damping: 10 });
+    const pointerTransform = useTransform([springX, springY], ([x, y]) => `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const pointer = pointerRef.current;
         const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-        if (!pointer || !supportsFinePointer) return undefined;
+        if (!supportsFinePointer) return undefined;
 
         const handlePointerMove = (event) => {
             if (event.pointerType && event.pointerType !== "mouse") return;
 
-            pointer.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
-            pointer.classList.add("site-pointer-ball--visible");
+            pointerX.set(event.clientX);
+            pointerY.set(event.clientY);
+            setVisible(true);
         };
-        const hidePointer = () => pointer.classList.remove("site-pointer-ball--visible");
+        const hidePointer = () => setVisible(false);
 
         window.addEventListener("pointermove", handlePointerMove, { passive: true });
         window.addEventListener("blur", hidePointer);
@@ -57,9 +62,9 @@ function PointerFollower() {
             window.removeEventListener("blur", hidePointer);
             document.documentElement.removeEventListener("pointerleave", hidePointer);
         };
-    }, []);
+    }, [pointerX, pointerY]);
 
-    return <span ref={pointerRef} className="site-pointer-ball" aria-hidden="true" />;
+    return <motion.span className={["site-pointer-ball", visible ? "site-pointer-ball--visible" : ""].filter(Boolean).join(" ")} style={{ transform: pointerTransform }} aria-hidden="true" />;
 }
 
 function Navbar() {
@@ -109,8 +114,7 @@ function Navbar() {
                 setMenuOpen(false);
                 menuTriggerRef.current?.focus();
             } else if (moreOpen) {
-                setMoreOpen(false);
-                moreTriggerRef.current?.focus();
+                closeMoreMenu();
             }
         };
         document.addEventListener("mousedown", handleOutsideClick);
@@ -137,9 +141,23 @@ function Navbar() {
         };
     }, [menuOpen]);
 
+    useEffect(() => {
+        if (!moreOpen) return undefined;
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [moreOpen]);
+
     const closeMenu = () => {
         setMenuOpen(false);
         menuTriggerRef.current?.focus();
+    };
+
+    const closeMoreMenu = () => {
+        setMoreOpen(false);
+        moreTriggerRef.current?.focus();
     };
 
     const handleMobileKeyDown = (event) => {
@@ -182,8 +200,11 @@ function Navbar() {
                                 <AnimatePresence>
                                     {moreOpen && (
                                         <motion.div id="desktop-more-menu" className="desktop-more-menu" role="menu" initial={reduceMotion ? false : { opacity: 0, transform: "translateY(-4px)" }} animate={{ opacity: 1, transform: "translateY(0)" }} exit={{ opacity: 0, transform: "translateY(-2px)" }} transition={{ duration: POPOVER.duration, ease: POPOVER.ease }}>
+                                            <button type="button" className="desktop-more-menu-close" onClick={closeMoreMenu} aria-label="Close archive menu"><X size={20} aria-hidden="true" /></button>
                                             <p className="desktop-more-label">Archive</p>
-                                            {secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} role="menuitem" className={({ isActive }) => isActive ? "desktop-more-link desktop-more-link--active" : "desktop-more-link"}><span>{label}</span></NavLink>)}
+                                            <div className="desktop-more-links">
+                                                {secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} role="menuitem" className={({ isActive }) => isActive ? "desktop-more-link desktop-more-link--active" : "desktop-more-link"}><span>{label}</span></NavLink>)}
+                                            </div>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
