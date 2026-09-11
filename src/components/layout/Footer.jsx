@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { profileLinks } from "../../lib/profileLinks";
+import { positioningStatement, profileLinks } from "../../lib/profileLinks";
 
 import "./Footer.css";
 
@@ -34,7 +34,7 @@ export default function Footer() {
             <div className="contact-ending__directory">
                 <div className="contact-ending__identity">
                     <Link to="/">Shaurya Saria</Link>
-                    <p>AI and product engineer building understandable software from complex problems.</p>
+                    <p>{positioningStatement}</p>
                 </div>
                 <nav className="contact-ending__nav" aria-label="Footer navigation">
                     <p>Navigate</p>
