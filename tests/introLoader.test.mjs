@@ -145,10 +145,10 @@ function createHarness({ search = "", sessionSeen = false, reducedMotion = false
 function completeAnimatedIntro(harness) {
     harness.window.__appLoaderAppReady();
     harness.flushAnimationFrame(0);
-    harness.flushAnimationFrame(5000);
+    harness.flushAnimationFrame(4000);
     const halfwayOffset = harness.helloPath.style.strokeDashoffset;
-    harness.flushAnimationFrame(10000);
-    harness.flushAnimationFrame(10500);
+    harness.flushAnimationFrame(8000);
+    harness.flushTimers();
     return halfwayOffset;
 }
 
@@ -184,7 +184,22 @@ test("forced animation replays without changing the session flag", () => {
     assert.equal(harness.storage.get(introKey), "1");
 });
 
-test("reduced motion still shows the requested ten-second intro", () => {
+test("the intro completes at exactly eight seconds", () => {
+    const harness = createHarness();
+
+    harness.window.__appLoaderAppReady();
+    harness.flushAnimationFrame(0);
+    harness.flushAnimationFrame(7999);
+
+    assert.equal(harness.events.loaderRemoved, undefined);
+
+    harness.flushAnimationFrame(8000);
+    harness.flushTimers();
+
+    assert.equal(harness.events.loaderRemoved, true);
+});
+
+test("reduced motion still shows the requested eight-second intro", () => {
     const harness = createHarness({ reducedMotion: true });
 
     const halfwayOffset = completeAnimatedIntro(harness);
