@@ -195,3 +195,49 @@
     .mobile-menu-trigger,
     .mobile-nav-close { transition: none; }
 }
+
+/* Balanced desktop navigation */
+
+@media (min-width: 900px) {
+    .navbar {
+        display: grid;
+        grid-template-columns: minmax(10rem, 1fr) auto minmax(10rem, 1fr);
+        gap: clamp(1rem, 2.5vw, 2.5rem);
+        padding-inline: clamp(1rem, 1.8vw, 1.5rem);
+    }
+
+    .desktop-nav {
+        justify-self: center;
+    }
+
+    .desktop-nav-links {
+        gap: clamp(0.75rem, 1.5vw, 1.6rem);
+    }
+
+    .desktop-nav-link,
+    .desktop-more-trigger {
+        padding-inline: 0.25rem;
+    }
+
+    .desktop-nav-link--active::after {
+        right: 0.25rem;
+        left: 0.25rem;
+    }
+
+    .navbar-actions {
+        justify-self: end;
+        gap: clamp(0.6rem, 1vw, 1rem);
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1099px) {
+    .navbar-profile-links {
+        display: none;
+    }
+}
+
+@media (min-width: 1100px) {
+    .navbar-profile-links {
+        gap: clamp(0.75rem, 1.2vw, 1.2rem);
+    }
+}

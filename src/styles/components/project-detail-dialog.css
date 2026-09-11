@@ -169,6 +169,23 @@
     backdrop-filter: blur(0.5rem);
 }
 
+.case-study-proof-status {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    color: var(--text-faint);
+    line-height: 1.4;
+}
+
+.case-study-proof-status > span {
+    color: var(--green);
+}
+
+.case-study-source-note {
+    color: var(--text-faint);
+}
+
 .project-detail-dialog__actions {
     display: flex;
     flex-wrap: wrap;

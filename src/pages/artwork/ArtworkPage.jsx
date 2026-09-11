@@ -47,7 +47,7 @@ function ArtworkPage() {
                 <section className="artwork-section">
                     <div className="section-heading">
                         <p className="section-label">Work away from the terminal</p>
-                        <h1>Drawing taught me to see <em>structure first.</em></h1>
+                        <h1 id="artwork-page-title" tabIndex={-1}>Drawing taught me to see <em>structure first.</em></h1>
                     </div>
                     <div className="artwork-grid">
                         {artworkPieces.map((piece) => (
@@ -84,6 +84,7 @@ function ArtworkPage() {
                     kind="artwork"
                     onClose={closePiece}
                     triggerElement={triggerElementRef.current}
+                    fallbackFocusSelector="#artwork-page-title"
                 />
             ) : null}
         </>
