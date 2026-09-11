@@ -113,6 +113,14 @@
             height: auto;
             margin: 0;
             overflow: visible;
+            transform: translateY(0);
+            transition: transform 700ms cubic-bezier(0.23, 1, 0.32, 1), opacity 420ms ease-out;
+            will-change: transform, opacity;
+        }
+
+        #app-loader.app-loader--hidden .app-loader__hello {
+            transform: translateY(-42vh);
+            opacity: 0;
         }
 
         .app-loader__hello-path {
@@ -178,6 +186,11 @@
                 transform: none;
                 filter: none;
                 transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            #app-loader.app-loader--hidden .app-loader__hello {
+                transform: none;
+                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
             }
 
             .app-loader__skip {
