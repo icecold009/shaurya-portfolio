@@ -90,7 +90,7 @@ export default function Home() {
                 </div>
                 <div className="home-writing-list">
                     {writing.map((post) => (
-                        <Link className="home-writing-item" to={`/blog?post=${post.slug}`} key={post.slug}>
+                        <Link className="home-writing-item" to={`/blog/${post.slug}`} key={post.slug}>
                             <div>
                                 <span>{post.tag}</span>
                                 <h3>{post.title}</h3>

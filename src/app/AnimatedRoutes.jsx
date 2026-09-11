@@ -13,6 +13,7 @@ import Home from "../pages/home/Home";
 import ProjectsPage from "../pages/projects/ProjectsPage";
 import AboutPage from "../pages/about/AboutPage";
 import BlogPage from "../pages/blog/BlogPage";
+import BlogPostPage from "../pages/blog/BlogPostPage";
 import ContactPage from "../pages/contact/ContactPage";
 import UsesPage from "../pages/uses/UsesPage";
 import NotFound from "../pages/not-found/NotFound";
@@ -46,6 +47,7 @@ export default function AnimatedRoutes() {
                     <Route path="/projects" element={<ProjectsPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/blog" element={<BlogPage />} />
+                    <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/uses" element={<UsesPage />} />
                     <Route path="/artwork" element={<ArtworkPage />} />

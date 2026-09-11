@@ -82,6 +82,18 @@ test("only the about route contains ProfilePage structured data", () => {
     });
 });
 
+test("blog URLs appear in the sitemap and carry article metadata", () => {
+    posts.forEach((post) => {
+        const route = `/blog/${post.slug}`;
+        const metadata = getSeoMetadata(route);
+
+        assert.match(sitemap, new RegExp(`<loc>https://shauryasaria\\.me${route}<\\/loc>`));
+        assert.equal(metadata.type, "article");
+        assert.equal(metadata.publishedTime, `${post.date}T00:00:00Z`);
+        assert.equal(metadata.structuredData["@type"], "Article");
+    });
+});
+
 test("robots and sitemap advertise the canonical public site", () => {
     assert.match(robots, /^User-agent: \*\nAllow: \/\n\nSitemap: https:\/\/shauryasaria\.me\/sitemap\.xml\s*$/);
 
@@ -91,6 +103,7 @@ test("robots and sitemap advertise the canonical public site", () => {
         "https://shauryasaria.me/projects",
         "https://shauryasaria.me/about",
         "https://shauryasaria.me/blog",
+        ...articleRoutes.map((route) => `https://shauryasaria.me${route}`),
         "https://shauryasaria.me/contact",
         "https://shauryasaria.me/uses",
         "https://shauryasaria.me/artwork",
