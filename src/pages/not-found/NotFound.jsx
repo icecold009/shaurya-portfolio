@@ -36,7 +36,10 @@ export default function NotFound() {
     return (
         <div className="page-wrapper not-found-page-shell">
             <div className="notfound-wrap">
-                <p className="notfound-code">404</p>
+                <h1 className="notfound-code">
+                    <span aria-hidden="true">404</span>
+                    <span className="sr-only">Page not found</span>
+                </h1>
                 <pre className="notfound-terminal">{shown}<span className="notfound-cursor">█</span></pre>
                 <Link to="/" className="btn btn-primary" style={{ marginTop: "2rem" }}>
                     Return home

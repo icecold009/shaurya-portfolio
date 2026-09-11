@@ -76,7 +76,7 @@
 
         #root.app-loader__site-visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
         }
 
         .app-loader__content {
@@ -336,6 +336,7 @@
                         loader.classList.add("app-loader--hidden");
                         loader.remove();
                         root.style.removeProperty("transition");
+                        root.style.removeProperty("transform");
                     };
 
                     window.requestAnimationFrame(revealFrame);

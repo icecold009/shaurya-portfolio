@@ -5,9 +5,7 @@ import {
     Check,
     Code2,
     Database,
-    Layers3,
     Rocket,
-    Terminal,
     Workflow,
 } from "lucide-react";
 
@@ -153,7 +151,7 @@ const toolGroups = [
 ];
 
 const reveal = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 16 },
     visible: { opacity: 1, y: 0 },
 };
 
@@ -165,15 +163,24 @@ function Reveal({ children, className, delay = 0, reduceMotion, id }) {
             variants={reduceMotion ? undefined : reveal}
             initial={reduceMotion ? undefined : "hidden"}
             whileInView={reduceMotion ? undefined : "visible"}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.16 }}
             transition={
                 reduceMotion
                     ? undefined
-                    : { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }
+                    : { duration: 0.42, delay, ease: [0.23, 1, 0.32, 1] }
             }
         >
             {children}
         </motion.div>
+    );
+}
+
+function SectionMarker({ number, label }) {
+    return (
+        <div className="uses-section-marker" aria-hidden="true">
+            <span>{number}</span>
+            <span>{label}</span>
+        </div>
     );
 }
 
@@ -201,30 +208,31 @@ export default function UsesPage() {
                     </a>
                 </div>
 
-                <div className="uses-status-card" aria-label="Current setup status">
-                    <div className="uses-status-topline">
+                <div className="uses-hero-meta" aria-label="Current setup status">
+                    <div className="uses-hero-meta-topline">
                         <span><i /> current working system</span>
                         <span>2026.08</span>
                     </div>
-                    <div className="uses-status-mark">S</div>
                     <p>
-                        A compact toolchain for turning questions into
-                        working software, then checking what the software
-                        actually proves.
+                        A compact toolchain for turning questions into working software,
+                        then checking what the software actually proves.
                     </p>
-                    <div className="uses-status-footer">
-                        <span>Based in Bengaluru</span>
-                        <span>UTC +05:30</span>
-                    </div>
+                    <dl>
+                        <div>
+                            <dt>Base</dt>
+                            <dd>Bengaluru</dd>
+                        </div>
+                        <div>
+                            <dt>Timezone</dt>
+                            <dd>UTC +05:30</dd>
+                        </div>
+                    </dl>
                 </div>
             </header>
 
             <div className="uses-content">
                 <Reveal className="uses-intro-grid" reduceMotion={reduceMotion}>
-                    <div className="uses-section-marker">
-                        <span>01</span>
-                        <span>Working principles</span>
-                    </div>
+                    <SectionMarker number="01" label="Working principles" />
                     <div>
                         <p className="uses-lead">
                             My setup is intentionally ordinary. The interesting part is
@@ -245,12 +253,9 @@ export default function UsesPage() {
                     </div>
                 </Reveal>
 
-                <Reveal className="uses-workflow-section" reduceMotion={reduceMotion} delay={0.05} id="uses-workflow">
-                    <div className="uses-section-marker">
-                        <span>02</span>
-                        <span>How work moves</span>
-                    </div>
-                    <div className="uses-workflow-panel">
+                <Reveal className="uses-workflow-section" reduceMotion={reduceMotion} delay={0.04} id="uses-workflow">
+                    <SectionMarker number="02" label="How work moves" />
+                    <div className="uses-workflow">
                         <div className="uses-workflow-heading">
                             <div>
                                 <Workflow size={18} aria-hidden="true" />
@@ -259,14 +264,11 @@ export default function UsesPage() {
                             <p>Every project gets a version that can teach me something.</p>
                         </div>
                         <div className="uses-workflow-list">
-                            {workflow.map((step, index) => (
+                            {workflow.map((step) => (
                                 <article key={step.number} className="uses-workflow-step">
                                     <div className="uses-workflow-number">{step.number}</div>
-                                    <div>
-                                        <h2>{step.title}</h2>
-                                        <p>{step.description}</p>
-                                    </div>
-                                    {index < workflow.length - 1 && <ArrowUpRight size={17} aria-hidden="true" />}
+                                    <h2>{step.title}</h2>
+                                    <p>{step.description}</p>
                                 </article>
                             ))}
                         </div>
@@ -274,82 +276,68 @@ export default function UsesPage() {
                 </Reveal>
 
                 <section className="uses-tools-section" aria-labelledby="uses-tools-title">
-                    <div className="uses-section-marker">
-                        <span>03</span>
-                        <span>Tools by job</span>
-                    </div>
-                    <div className="uses-tools-heading">
-                        <div>
-                            <p className="uses-eyebrow">The current kit</p>
-                            <h2 id="uses-tools-title">Tools earn their place by <em>doing a job.</em></h2>
+                    <SectionMarker number="03" label="Tools by job" />
+                    <div>
+                        <div className="uses-tools-heading">
+                            <div>
+                                <p className="uses-eyebrow">The current kit</p>
+                                <h2 id="uses-tools-title">Tools earn their place by <em>doing a job.</em></h2>
+                            </div>
+                            <p>
+                                This is a living list, not a shopping list. React carries the
+                                interfaces, Python carries the experiments, and the boundaries
+                                between them stay visible.
+                            </p>
                         </div>
-                        <p>
-                            This is a living list, not a shopping list. React carries the
-                            interfaces, Python carries the experiments, and the boundaries
-                            between them stay visible.
+
+                        <div className="uses-tool-groups">
+                            {toolGroups.map((group, groupIndex) => {
+                                const Icon = group.icon;
+
+                                return (
+                                    <Reveal
+                                        className="uses-tool-group"
+                                        key={group.category}
+                                        reduceMotion={reduceMotion}
+                                        delay={groupIndex * 0.03}
+                                    >
+                                        <div className="uses-tool-group-header">
+                                            <div className="uses-tool-icon"><Icon size={18} aria-hidden="true" /></div>
+                                            <div>
+                                                <span>{group.number} / {group.category}</span>
+                                                <h3>{group.summary}</h3>
+                                            </div>
+                                        </div>
+                                        <ul className="uses-tool-list">
+                                            {group.tools.map((tool) => (
+                                                <li className="uses-tool" key={tool.name}>
+                                                    <div className="uses-tool-name-row">
+                                                        {tool.link ? (
+                                                            <a href={tool.link} target="_blank" rel="noreferrer" aria-label={`Open ${tool.name} in a new tab`}>
+                                                                {tool.name}<ArrowUpRight size={15} aria-hidden="true" />
+                                                            </a>
+                                                        ) : (
+                                                            <h4>{tool.name}</h4>
+                                                        )}
+                                                        <Check size={15} aria-hidden="true" />
+                                                    </div>
+                                                    <p>{tool.detail}</p>
+                                                    <div className="uses-tool-tags" aria-label={`${tool.name} attributes`}>
+                                                        {tool.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </Reveal>
+                                );
+                            })}
+                        </div>
+
+                        <p className="uses-closing-note">
+                            Tool choices are provisional. Working habits are the durable part.
                         </p>
                     </div>
-
-                    <div className="uses-tool-groups">
-                        {toolGroups.map((group, groupIndex) => {
-                            const Icon = group.icon;
-
-                            return (
-                                <Reveal
-                                    className="uses-tool-group"
-                                    key={group.category}
-                                    reduceMotion={reduceMotion}
-                                    delay={groupIndex * 0.04}
-                                >
-                                    <div className="uses-tool-group-header">
-                                        <div className="uses-tool-icon"><Icon size={19} aria-hidden="true" /></div>
-                                        <div>
-                                            <span>{group.number} / {group.category}</span>
-                                            <h3>{group.summary}</h3>
-                                        </div>
-                                    </div>
-                                    <div className="uses-tool-list">
-                                        {group.tools.map((tool) => (
-                                            <article className="uses-tool" key={tool.name}>
-                                                <div className="uses-tool-name-row">
-                                                    {tool.link ? (
-                                                        <a href={tool.link} target="_blank" rel="noreferrer" aria-label={`Open ${tool.name} in a new tab`}>
-                                                            {tool.name}<ArrowUpRight size={15} aria-hidden="true" />
-                                                        </a>
-                                                    ) : (
-                                                        <h4>{tool.name}</h4>
-                                                    )}
-                                                    <Check size={15} aria-hidden="true" />
-                                                </div>
-                                                <p>{tool.detail}</p>
-                                                <div className="uses-tool-tags">
-                                                    {tool.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                                                </div>
-                                            </article>
-                                        ))}
-                                    </div>
-                                </Reveal>
-                            );
-                        })}
-                    </div>
                 </section>
-
-                <Reveal className="uses-terminal-note" reduceMotion={reduceMotion} delay={0.08}>
-                    <div className="uses-terminal-heading">
-                        <Terminal size={18} aria-hidden="true" />
-                        <span>setup-note.md</span>
-                    </div>
-                    <div className="uses-terminal-body">
-                        <p><span>$</span> git status --short --branch</p>
-                        <p className="uses-terminal-success">working-system · claims kept inspectable</p>
-                        <p><span>$</span> echo $NEXT_STEP</p>
-                        <p>write down what the prototype actually proves.</p>
-                    </div>
-                    <div className="uses-terminal-footer">
-                        <Layers3 size={16} aria-hidden="true" />
-                        <span>Tool choices are provisional. Working habits are the durable part.</span>
-                    </div>
-                </Reveal>
             </div>
         </div>
     );

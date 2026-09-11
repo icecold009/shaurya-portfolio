@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from "react";
 import { ArrowUpRight, X } from "lucide-react";
+import { createPortal } from "react-dom";
 
 import "../styles/components/media-detail-dialog.css";
 
@@ -11,7 +12,13 @@ function getFocusableElements(container) {
     );
 }
 
-export default function MediaDetailDialog({ item, kind, onClose, triggerElement }) {
+export default function MediaDetailDialog({
+    item,
+    kind,
+    onClose,
+    triggerElement,
+    fallbackFocusSelector = "#main-content",
+}) {
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
@@ -21,7 +28,13 @@ export default function MediaDetailDialog({ item, kind, onClose, triggerElement 
     closeRef.current = onClose;
 
     useEffect(() => {
-        const previousActiveElement = triggerElement ?? document.activeElement;
+        const previousActiveElement = triggerElement instanceof HTMLElement
+            ? triggerElement
+            : document.activeElement instanceof HTMLElement
+                && document.activeElement !== document.body
+                && document.activeElement.matches("a[href], button, input, textarea, select, [tabindex]:not([tabindex='-1'])")
+                ? document.activeElement
+                : null;
         const previousOverflow = document.body.style.overflow;
         const previousPaddingRight = document.body.style.paddingRight;
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -74,16 +87,21 @@ export default function MediaDetailDialog({ item, kind, onClose, triggerElement 
 
             if (previousActiveElement instanceof HTMLElement && previousActiveElement.isConnected) {
                 previousActiveElement.focus();
+                return;
             }
+
+            const fallback = document.querySelector(fallbackFocusSelector)
+                ?? document.getElementById("main-content");
+            fallback?.focus({ preventScroll: true });
         };
-    }, [triggerElement]);
+    }, [fallbackFocusSelector, triggerElement]);
 
     const isCertificate = kind === "certificate";
     const itemDescription = isCertificate
         ? `${item.organization} certificate from ${item.year}.`
         : `${item.medium} artwork from ${item.year}.`;
 
-    return (
+    return createPortal(
         <div
             className="media-detail-dialog-backdrop"
             role="presentation"
@@ -94,6 +112,7 @@ export default function MediaDetailDialog({ item, kind, onClose, triggerElement 
             }}
         >
             <section
+                id="media-detail-dialog"
                 ref={dialogRef}
                 className="media-detail-dialog"
                 role="dialog"
@@ -155,6 +174,7 @@ export default function MediaDetailDialog({ item, kind, onClose, triggerElement 
                     </div>
                 </div>
             </section>
-        </div>
+        </div>,
+        document.body,
     );
 }

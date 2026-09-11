@@ -316,7 +316,7 @@ export default function CertificatesPage() {
                 <section className="artwork-section">
                     <div className="section-heading">
                         <p className="section-label">Proof of the work</p>
-                        <h1>Certificates &amp; <em>awards.</em></h1>
+                        <h1 id="certificates-page-title" tabIndex={-1}>Certificates &amp; <em>awards.</em></h1>
                     </div>
 
                     {/* Section tabs */}
@@ -408,6 +408,7 @@ export default function CertificatesPage() {
                     kind="certificate"
                     onClose={closeCertificate}
                     triggerElement={triggerElementRef.current}
+                    fallbackFocusSelector="#certificates-page-title"
                 />
             ) : null}
         </>

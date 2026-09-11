@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from "react";
 import { ArrowUpRight, X } from "lucide-react";
+import { createPortal } from "react-dom";
 
 import "../styles/components/project-detail-dialog.css";
 
@@ -11,7 +12,12 @@ function getFocusableElements(container) {
     );
 }
 
-export default function ProjectDetailDialog({ project, onClose, triggerElement }) {
+export default function ProjectDetailDialog({
+    project,
+    onClose,
+    triggerElement,
+    fallbackFocusSelector = "#main-content",
+}) {
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
@@ -21,7 +27,13 @@ export default function ProjectDetailDialog({ project, onClose, triggerElement }
     closeRef.current = onClose;
 
     useEffect(() => {
-        const previousActiveElement = triggerElement ?? document.activeElement;
+        const previousActiveElement = triggerElement instanceof HTMLElement
+            ? triggerElement
+            : document.activeElement instanceof HTMLElement
+                && document.activeElement !== document.body
+                && document.activeElement.matches("a[href], button, input, textarea, select, [tabindex]:not([tabindex='-1'])")
+                ? document.activeElement
+                : null;
         const previousOverflow = document.body.style.overflow;
         const previousPaddingRight = document.body.style.paddingRight;
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -74,11 +86,16 @@ export default function ProjectDetailDialog({ project, onClose, triggerElement }
 
             if (previousActiveElement instanceof HTMLElement && previousActiveElement.isConnected) {
                 previousActiveElement.focus();
+                return;
             }
-        };
-    }, [triggerElement]);
 
-    return (
+            const fallback = document.querySelector(fallbackFocusSelector)
+                ?? document.getElementById("main-content");
+            fallback?.focus({ preventScroll: true });
+        };
+    }, [fallbackFocusSelector, triggerElement]);
+
+    return createPortal(
         <div
             className="project-detail-dialog-backdrop"
             role="presentation"
@@ -89,6 +106,7 @@ export default function ProjectDetailDialog({ project, onClose, triggerElement }
             }}
         >
             <section
+                id="project-detail-dialog"
                 ref={dialogRef}
                 className="project-detail-dialog"
                 role="dialog"
@@ -179,6 +197,7 @@ export default function ProjectDetailDialog({ project, onClose, triggerElement }
                     </div>
                 </div>
             </section>
-        </div>
+        </div>,
+        document.body,
     );
 }

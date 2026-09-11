@@ -61,6 +61,7 @@ export const projects = [
         visual: "music",
         thumbnail: "/projects/audio-recognition-fft.png",
         thumbnailAlt: "Audio Recognition frequency spectrum diagnostic",
+        thumbnailFit: "contain",
         accent: "02",
     },
     {
@@ -88,6 +89,7 @@ export const projects = [
         github: "https://github.com/icecold009/past-paper-ai",
         visual: "paper",
         thumbnail: "/projects/past-paper-ai.svg",
+        thumbnailFit: "contain",
         accent: "03",
     },
     {
@@ -143,6 +145,7 @@ export const projects = [
         github: "https://github.com/icecold009/face-attendance-opencv-python",
         visual: "attendance",
         thumbnail: "/projects/face-attendance.svg",
+        thumbnailFit: "contain",
         accent: "05",
     },
     {
@@ -174,6 +177,7 @@ export const projects = [
         visual: "f1",
         thumbnail: "/projects/f1-predicted-vs-actual-2023.png",
         thumbnailAlt: "F1 Championship Prediction chart comparing predicted and actual standings",
+        thumbnailFit: "contain",
         accent: "06",
     },
     {
@@ -201,6 +205,7 @@ export const projects = [
         github: "https://github.com/icecold009/token-smart-router",
         visual: "router",
         thumbnail: "/projects/token-router.svg",
+        thumbnailFit: "contain",
         accent: "07",
     },
     {

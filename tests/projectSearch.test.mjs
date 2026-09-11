@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import { filterProjects, getProjectFromHash } from "../src/lib/projectSearch.js";
+import { projects as projectCatalog } from "../src/data/projects.js";
 
 const projects = [
     {
@@ -38,6 +39,32 @@ test("filters projects by tag and case-insensitive search", () => {
 test("an empty query and tag preserve the full project list", () => {
     assert.equal(filterProjects(projects).length, projects.length);
     assert.equal(filterProjects(projects, { query: "  " }).length, projects.length);
+});
+
+test("combines tag and search filters without dropping the query contract", () => {
+    assert.deepEqual(
+        filterProjects(projects, { tag: "AI", query: "dashboard" }).map((project) => project.id),
+        ["stadium-pulse-ai"],
+    );
+    assert.equal(filterProjects(projects, { tag: "AI", query: "flask" }).length, 0);
+});
+
+test("every project card has metadata and an intentional preview fallback", () => {
+    assert.equal(projectCatalog.length, 8);
+
+    for (const project of projectCatalog) {
+        assert.ok(project.number);
+        assert.ok(project.year);
+        assert.ok(project.category);
+        assert.ok(project.title);
+        assert.ok(project.status);
+        assert.ok(project.summary || project.description);
+    }
+
+    assert.equal(
+        projectCatalog.find((project) => project.number === "08")?.thumbnail,
+        null,
+    );
 });
 
 test("legacy numbered hashes resolve to the matching project", () => {
