@@ -31,11 +31,11 @@ function GithubIcon({ size = 18, ...props }) {
     );
 }
 
-function PointerFollower() {
+function PointerFollower({ reduceMotion }) {
     const pointerX = useMotionValue(-100);
     const pointerY = useMotionValue(-100);
-    const springX = useSpring(pointerX, { stiffness: 100, damping: 10 });
-    const springY = useSpring(pointerY, { stiffness: 100, damping: 10 });
+    const springX = useSpring(pointerX, { stiffness: reduceMotion ? 1000 : 100, damping: reduceMotion ? 100 : 10 });
+    const springY = useSpring(pointerY, { stiffness: reduceMotion ? 1000 : 100, damping: reduceMotion ? 100 : 10 });
     const pointerTransform = useTransform([springX, springY], ([x, y]) => `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`);
     const [visible, setVisible] = useState(false);
 
@@ -177,7 +177,7 @@ function Navbar() {
 
     return (
         <>
-            <PointerFollower />
+            <PointerFollower reduceMotion={reduceMotion} />
             <header className={["site-header", scrolled ? "site-header--scrolled" : "", menuOpen ? "site-header--menu-open" : ""].filter(Boolean).join(" ")}>
                 <nav className="navbar" aria-label="Main navigation">
                     <Link to="/" className="nav-brand" aria-label="Shaurya portfolio home">
