@@ -8,7 +8,7 @@
     <!-- Primary meta -->
     <title>Shaurya Saria | Student Developer, AI &amp; Data Science</title>
     <meta name="description"
-        content="Shaurya Saria is a student developer in Bengaluru building projects across data science, machine learning, AI, and full-stack software." />
+        content="Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces." />
     <meta name="author" content="Shaurya Saria" />
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="Ege-zzxtg7pEjdt9lp6cpQFE9qGow1w4_ei6w_5H8Gk" />
@@ -20,7 +20,7 @@
     <meta property="og:url" content="https://shauryasaria.me/" />
     <meta property="og:title" content="Shaurya Saria | Student Developer, AI &amp; Data Science" />
     <meta property="og:description"
-        content="Shaurya Saria is a student developer in Bengaluru building projects across data science, machine learning, AI, and full-stack software." />
+        content="Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces." />
     <meta property="og:image" content="https://shauryasaria.me/images/shaurya-portrait.jpeg" />
     <meta property="og:image:alt" content="Shaurya Saria" />
 
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Shaurya Saria | Student Developer, AI &amp; Data Science" />
     <meta name="twitter:description"
-        content="Shaurya Saria is a student developer in Bengaluru building projects across data science, machine learning, AI, and full-stack software." />
+        content="Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces." />
     <meta name="twitter:image" content="https://shauryasaria.me/images/shaurya-portrait.jpeg" />
     <meta name="twitter:image:alt" content="Shaurya Saria" />
 
@@ -413,31 +413,40 @@
         <main class="app-shell-fallback" aria-labelledby="static-homepage-title">
             <p class="app-shell-fallback__eyebrow">Student developer · Bengaluru</p>
             <h1 id="static-homepage-title">Shaurya Saria</h1>
-            <p>Student developer in Bengaluru building projects across data science, machine learning, AI, and full-stack software.</p>
+            <p>Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces.</p>
             <nav aria-label="Profile links">
                 <a href="https://github.com/icecold009">GitHub profile</a>
                 <a href="https://linkedin.com/in/shaurya-saria009">LinkedIn profile</a>
             </nav>
         </main>
     </div>
-    <script type="application/ld+json">
+    <script id="site-json-ld" type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "ProfilePage",
-            "@id": "https://shauryasaria.me/#profile-page",
-            "url": "https://shauryasaria.me/",
-            "name": "Shaurya Saria | Student Developer, AI & Data Science",
-            "mainEntity": {
-                "@type": "Person",
-                "@id": "https://shauryasaria.me/#person",
-                "name": "Shaurya Saria",
-                "url": "https://shauryasaria.me/",
-                "description": "Shaurya Saria is a student developer in Bengaluru building projects across data science, machine learning, AI, and full-stack software.",
-                "sameAs": [
-                    "https://github.com/icecold009",
-                    "https://linkedin.com/in/shaurya-saria009"
-                ]
-            }
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "@id": "https://shauryasaria.me/#website",
+                    "url": "https://shauryasaria.me/",
+                    "name": "Shaurya Saria | Student Developer, AI & Data Science",
+                    "description": "Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces.",
+                    "publisher": { "@id": "https://shauryasaria.me/#person" }
+                },
+                {
+                    "@type": "Person",
+                    "@id": "https://shauryasaria.me/#person",
+                    "name": "Shaurya Saria",
+                    "alternateName": "icecold009",
+                    "url": "https://shauryasaria.me/",
+                    "image": "https://shauryasaria.me/images/shaurya-portrait.jpeg",
+                    "description": "Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces.",
+                    "sameAs": [
+                        "https://github.com/icecold009",
+                        "https://linkedin.com/in/shaurya-saria009",
+                        "https://www.kaggle.com/icecold009"
+                    ]
+                }
+            ]
         }
     </script>
     <script type="module" src="/src/main.jsx"></script>
