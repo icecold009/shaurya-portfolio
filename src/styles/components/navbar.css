@@ -56,23 +56,25 @@
 .nav-brand-copy strong { color: var(--text); font-size: 0.85rem; letter-spacing: -0.02em; }
 .nav-brand-copy small { margin-top: 0.2rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.05em; text-transform: uppercase; }
 
-.nav-interactive { position: relative; overflow: hidden; --pointer-x: 50%; --pointer-y: 50%; }
-.nav-pointer-ball {
-    position: absolute;
-    top: var(--pointer-y);
-    left: var(--pointer-x);
-    z-index: 2;
-    width: 3.2rem;
-    height: 3.2rem;
+.site-pointer-ball {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    display: none;
+    width: 1.1rem;
+    height: 1.1rem;
     border-radius: 50%;
     background: #fff;
     mix-blend-mode: difference;
     opacity: 0;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.45);
-    transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+    transform: translate3d(0, 0, 0) translate(-50%, -50%);
+    transition: opacity 160ms var(--ease-out);
+    will-change: transform, opacity;
 }
-.nav-interactive > :not(.nav-pointer-ball) { position: relative; z-index: 1; }
+
+.site-pointer-ball--visible { opacity: 1; }
 
 .desktop-nav { display: none; }
 .desktop-nav-links { display: flex; align-items: center; gap: 0.15rem; }
@@ -108,9 +110,29 @@
 .desktop-nav-link--active::after { content: ""; position: absolute; right: 0.7rem; bottom: 0.2rem; left: 0.7rem; height: 1px; background: var(--green); }
 .desktop-more { position: relative; }
 .desktop-more-trigger { padding-inline: 0.6rem; }
-.desktop-more-menu { position: absolute; top: calc(100% + 0.65rem); right: 0; width: 12rem; padding: 0.55rem; border: 1px solid var(--line-bright); background: var(--surface); box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.16); }
-.desktop-more-label { margin: 0.35rem 0.55rem 0.45rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; }
-.desktop-more-link { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.65rem 0.55rem; color: var(--text-dim); font-size: 0.82rem; }
+.desktop-more .desktop-more-trigger {
+    width: 1.75rem;
+    min-width: 1.75rem;
+    min-height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-faint);
+}
+.desktop-more .desktop-more-trigger:hover,
+.desktop-more .desktop-more-trigger:focus-visible,
+.desktop-more .desktop-more-trigger--open,
+.desktop-more .desktop-more-trigger--active {
+    border-color: transparent;
+    background: transparent;
+    color: var(--text);
+}
+.desktop-more .desktop-more-trigger:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+.desktop-more-menu { position: absolute; top: calc(100% + 0.85rem); right: -0.65rem; width: min(14rem, calc(100vw - 2rem)); padding: 0.8rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 96%, transparent); box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.16); }
+.desktop-more-label { margin: 0.2rem 0.5rem 0.45rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.desktop-more-link { display: flex; align-items: center; gap: 0.75rem; min-height: 2.6rem; padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--line); color: var(--text-dim); font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.desktop-more-link:last-child { border-bottom: 0; }
 .desktop-more-link:hover,
 .desktop-more-link:focus-visible,
 .desktop-more-link--active { color: var(--green); }
@@ -155,11 +177,7 @@
 .mobile-menu-trigger { padding-inline: 0.7rem; font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.04em; text-transform: uppercase; }
 
 @media (hover: hover) and (pointer: fine) {
-    .nav-interactive:hover > .nav-pointer-ball,
-    .nav-interactive:focus-visible > .nav-pointer-ball {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
+    .site-pointer-ball { display: block; }
 }
 
 .mobile-nav-layer { position: fixed; inset: 0; z-index: 2000; display: flex; justify-content: flex-end; background: color-mix(in srgb, var(--bg) 42%, transparent); }
@@ -220,7 +238,7 @@
     .nav-icon-button,
     .mobile-menu-trigger,
     .mobile-nav-close,
-    .nav-pointer-ball { transition: none; }
+    .site-pointer-ball { transition: none; }
 }
 
 /* Balanced desktop navigation */
@@ -248,7 +266,7 @@
     }
 
     .desktop-more-trigger {
-        width: 2.75rem;
+        width: 1.75rem;
         padding-inline: 0;
     }
 

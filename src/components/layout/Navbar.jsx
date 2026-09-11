@@ -31,8 +31,35 @@ function GithubIcon({ size = 18, ...props }) {
     );
 }
 
-function PointerBall() {
-    return <span className="nav-pointer-ball" aria-hidden="true" />;
+function PointerFollower() {
+    const pointerRef = useRef(null);
+
+    useEffect(() => {
+        const pointer = pointerRef.current;
+        const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        if (!pointer || !supportsFinePointer) return undefined;
+
+        const handlePointerMove = (event) => {
+            if (event.pointerType && event.pointerType !== "mouse") return;
+
+            pointer.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
+            pointer.classList.add("site-pointer-ball--visible");
+        };
+        const hidePointer = () => pointer.classList.remove("site-pointer-ball--visible");
+
+        window.addEventListener("pointermove", handlePointerMove, { passive: true });
+        window.addEventListener("blur", hidePointer);
+        document.documentElement.addEventListener("pointerleave", hidePointer);
+
+        return () => {
+            window.removeEventListener("pointermove", handlePointerMove);
+            window.removeEventListener("blur", hidePointer);
+            document.documentElement.removeEventListener("pointerleave", hidePointer);
+        };
+    }, []);
+
+    return <span ref={pointerRef} className="site-pointer-ball" aria-hidden="true" />;
 }
 
 function Navbar() {
@@ -130,17 +157,9 @@ function Navbar() {
         }
     };
 
-    const updatePointerPosition = (event) => {
-        if (event.pointerType && event.pointerType !== "mouse") return;
-
-        const target = event.currentTarget;
-        const bounds = target.getBoundingClientRect();
-        target.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
-        target.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
-    };
-
     return (
         <>
+            <PointerFollower />
             <header className={["site-header", scrolled ? "site-header--scrolled" : "", menuOpen ? "site-header--menu-open" : ""].filter(Boolean).join(" ")}>
                 <nav className="navbar" aria-label="Main navigation">
                     <Link to="/" className="nav-brand" aria-label="Shaurya portfolio home">
@@ -151,21 +170,20 @@ function Navbar() {
                     <div className="desktop-nav" aria-label="Primary navigation">
                         <div className="desktop-nav-links">
                             {primaryLinks.map(({ to, label }) => (
-                                <NavLink key={to} to={to} onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} className={({ isActive }) => isActive ? "nav-interactive desktop-nav-link desktop-nav-link--active" : "nav-interactive desktop-nav-link"}>
-                                    {({ isActive }) => <><PointerBall /><span>{label}</span>{isActive && <span className="desktop-active-indicator" aria-hidden="true" />}</>}
+                                <NavLink key={to} to={to} className={({ isActive }) => isActive ? "desktop-nav-link desktop-nav-link--active" : "desktop-nav-link"}>
+                                    {({ isActive }) => <><span>{label}</span>{isActive && <span className="desktop-active-indicator" aria-hidden="true" />}</>}
                                 </NavLink>
                             ))}
                             <div className="desktop-more" ref={moreRef}>
-                                <button ref={moreTriggerRef} type="button" className={["nav-interactive", "desktop-more-trigger", moreOpen ? "desktop-more-trigger--open" : "", secondaryPageActive ? "desktop-more-trigger--active" : ""].filter(Boolean).join(" ")} onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} onClick={() => setMoreOpen((open) => !open)} aria-label={moreOpen ? "Close archive menu" : "Open archive menu"} aria-expanded={moreOpen} aria-controls="desktop-more-menu" aria-haspopup="menu">
-                                    <PointerBall />
+                                <button ref={moreTriggerRef} type="button" className={["desktop-more-trigger", moreOpen ? "desktop-more-trigger--open" : "", secondaryPageActive ? "desktop-more-trigger--active" : ""].filter(Boolean).join(" ")} onClick={() => setMoreOpen((open) => !open)} aria-label={moreOpen ? "Close archive menu" : "Open archive menu"} aria-expanded={moreOpen} aria-controls="desktop-more-menu" aria-haspopup="menu">
                                     <span className="sr-only">Archive</span>
                                     <Menu size={16} aria-hidden="true" />
                                 </button>
                                 <AnimatePresence>
                                     {moreOpen && (
-                                        <motion.div id="desktop-more-menu" className="desktop-more-menu" role="menu" initial={reduceMotion ? false : { opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: POPOVER.duration, ease: POPOVER.ease }}>
-                                            <p className="desktop-more-label">Explore</p>
-                                            {secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} role="menuitem" onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} className={({ isActive }) => isActive ? "nav-interactive desktop-more-link desktop-more-link--active" : "nav-interactive desktop-more-link"}><PointerBall /><span>{label}</span><ArrowUpRight size={14} aria-hidden="true" /></NavLink>)}
+                                        <motion.div id="desktop-more-menu" className="desktop-more-menu" role="menu" initial={reduceMotion ? false : { opacity: 0, transform: "translateY(-4px)" }} animate={{ opacity: 1, transform: "translateY(0)" }} exit={{ opacity: 0, transform: "translateY(-2px)" }} transition={{ duration: POPOVER.duration, ease: POPOVER.ease }}>
+                                            <p className="desktop-more-label">Archive</p>
+                                            {secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} role="menuitem" className={({ isActive }) => isActive ? "desktop-more-link desktop-more-link--active" : "desktop-more-link"}><span>{label}</span></NavLink>)}
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -177,13 +195,11 @@ function Navbar() {
                         <nav className="navbar-profile-links" aria-label="Profile links">
                             {desktopProfileLinks.map((link) => <a key={link.key} href={link.href} target="_blank" rel="noreferrer" aria-label={`${link.label} (opens in a new tab)`}>{link.label}</a>)}
                         </nav>
-                        {resumeLink && <a className="nav-interactive navbar-resume-link" onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} href={resumeLink.href} target="_blank" rel="noopener noreferrer" aria-label="Open résumé PDF in a new tab"><PointerBall /><span>Résumé</span></a>}
-                        <button type="button" className="nav-interactive nav-icon-button" onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
-                            <PointerBall />
+                        {resumeLink && <a className="navbar-resume-link" href={resumeLink.href} target="_blank" rel="noopener noreferrer" aria-label="Open résumé PDF in a new tab"><span>Résumé</span></a>}
+                        <button type="button" className="nav-icon-button" onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
                             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
                         </button>
-                        <button ref={menuTriggerRef} type="button" className={["nav-interactive", "mobile-menu-trigger", menuOpen ? "mobile-menu-trigger--open" : ""].filter(Boolean).join(" ")} onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open navigation menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation">
-                            <PointerBall />
+                        <button ref={menuTriggerRef} type="button" className={["mobile-menu-trigger", menuOpen ? "mobile-menu-trigger--open" : ""].filter(Boolean).join(" ")} onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open navigation menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation">
                             <span>Menu</span>{menuOpen ? <X size={18} aria-hidden="true" /> : <Menu size={18} aria-hidden="true" />}
                         </button>
                     </div>
@@ -202,9 +218,9 @@ function Navbar() {
                             <div className="mobile-nav-scroll">
                                 <p className="mobile-nav-section-label">Navigate</p>
                                 <div className="mobile-primary-links">
-                                    {primaryLinks.map(({ to, label }, index) => <NavLink key={to} to={to} onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} onClick={closeMenu} className={({ isActive }) => isActive ? "nav-interactive mobile-primary-link mobile-primary-link--active" : "nav-interactive mobile-primary-link"}><PointerBall /><span className="mobile-link-index">{String(index + 1).padStart(2, "0")}</span><span className="mobile-link-label">{label}</span><ArrowUpRight className="mobile-link-arrow" size={19} aria-hidden="true" /></NavLink>)}
+                                    {primaryLinks.map(({ to, label }, index) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-primary-link mobile-primary-link--active" : "mobile-primary-link"}><span className="mobile-link-index">{String(index + 1).padStart(2, "0")}</span><span className="mobile-link-label">{label}</span><ArrowUpRight className="mobile-link-arrow" size={19} aria-hidden="true" /></NavLink>)}
                                 </div>
-                                <div className="mobile-secondary-section"><p className="mobile-nav-section-label">Explore</p><div className="mobile-secondary-links">{secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onPointerEnter={updatePointerPosition} onPointerMove={updatePointerPosition} onClick={closeMenu} className={({ isActive }) => isActive ? "nav-interactive mobile-secondary-link mobile-secondary-link--active" : "nav-interactive mobile-secondary-link"}><PointerBall /><span>{label}</span></NavLink>)}</div></div>
+                                <div className="mobile-secondary-section"><p className="mobile-nav-section-label">Explore</p><div className="mobile-secondary-links">{secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-secondary-link mobile-secondary-link--active" : "mobile-secondary-link"}><span>{label}</span></NavLink>)}</div></div>
                             </div>
                             <div className="mobile-nav-footer">
                                 <div className="mobile-status"><span className="mobile-status-dot" /><p>Open to internships, research, and collaborations</p></div>
