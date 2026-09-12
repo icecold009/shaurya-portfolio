@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Mail, Menu, Moon, Sun, X } from "lucide-react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { ArrowUpRight, Mail, Menu, Moon, Sun, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { profileLinks } from "../../lib/profileLinks";
@@ -29,6 +29,42 @@ function GithubIcon({ size = 18, ...props }) {
             <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
         </svg>
     );
+}
+
+function PointerFollower({ reduceMotion }) {
+    const pointerX = useMotionValue(-100);
+    const pointerY = useMotionValue(-100);
+    const springX = useSpring(pointerX, { stiffness: reduceMotion ? 1000 : 100, damping: reduceMotion ? 100 : 10 });
+    const springY = useSpring(pointerY, { stiffness: reduceMotion ? 1000 : 100, damping: reduceMotion ? 100 : 10 });
+    const pointerTransform = useTransform([springX, springY], ([x, y]) => `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        if (!supportsFinePointer) return undefined;
+
+        const handlePointerMove = (event) => {
+            if (event.pointerType && event.pointerType !== "mouse") return;
+
+            pointerX.set(event.clientX);
+            pointerY.set(event.clientY);
+            setVisible(true);
+        };
+        const hidePointer = () => setVisible(false);
+
+        window.addEventListener("pointermove", handlePointerMove, { passive: true });
+        window.addEventListener("blur", hidePointer);
+        document.documentElement.addEventListener("pointerleave", hidePointer);
+
+        return () => {
+            window.removeEventListener("pointermove", handlePointerMove);
+            window.removeEventListener("blur", hidePointer);
+            document.documentElement.removeEventListener("pointerleave", hidePointer);
+        };
+    }, [pointerX, pointerY]);
+
+    return <motion.span className={["site-pointer-ball", visible ? "site-pointer-ball--visible" : ""].filter(Boolean).join(" ")} style={{ transform: pointerTransform }} aria-hidden="true" />;
 }
 
 function Navbar() {
@@ -78,8 +114,7 @@ function Navbar() {
                 setMenuOpen(false);
                 menuTriggerRef.current?.focus();
             } else if (moreOpen) {
-                setMoreOpen(false);
-                moreTriggerRef.current?.focus();
+                closeMoreMenu();
             }
         };
         document.addEventListener("mousedown", handleOutsideClick);
@@ -106,9 +141,23 @@ function Navbar() {
         };
     }, [menuOpen]);
 
+    useEffect(() => {
+        if (!moreOpen) return undefined;
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [moreOpen]);
+
     const closeMenu = () => {
         setMenuOpen(false);
         menuTriggerRef.current?.focus();
+    };
+
+    const closeMoreMenu = () => {
+        setMoreOpen(false);
+        moreTriggerRef.current?.focus();
     };
 
     const handleMobileKeyDown = (event) => {
@@ -128,6 +177,7 @@ function Navbar() {
 
     return (
         <>
+            <PointerFollower reduceMotion={reduceMotion} />
             <header className={["site-header", scrolled ? "site-header--scrolled" : "", menuOpen ? "site-header--menu-open" : ""].filter(Boolean).join(" ")}>
                 <nav className="navbar" aria-label="Main navigation">
                     <Link to="/" className="nav-brand" aria-label="Shaurya portfolio home">
@@ -143,14 +193,18 @@ function Navbar() {
                                 </NavLink>
                             ))}
                             <div className="desktop-more" ref={moreRef}>
-                                <button ref={moreTriggerRef} type="button" className={["desktop-more-trigger", moreOpen ? "desktop-more-trigger--open" : "", secondaryPageActive ? "desktop-more-trigger--active" : ""].filter(Boolean).join(" ")} onClick={() => setMoreOpen((open) => !open)} aria-expanded={moreOpen} aria-controls="desktop-more-menu" aria-haspopup="menu">
-                                    Archive <ChevronDown size={15} aria-hidden="true" />
+                                <button ref={moreTriggerRef} type="button" className={["desktop-more-trigger", moreOpen ? "desktop-more-trigger--open" : "", secondaryPageActive ? "desktop-more-trigger--active" : ""].filter(Boolean).join(" ")} onClick={() => setMoreOpen((open) => !open)} aria-label={moreOpen ? "Close archive menu" : "Open archive menu"} aria-expanded={moreOpen} aria-controls="desktop-more-menu" aria-haspopup="menu">
+                                    <span className="sr-only">Archive</span>
+                                    <Menu size={16} aria-hidden="true" />
                                 </button>
                                 <AnimatePresence>
                                     {moreOpen && (
-                                        <motion.div id="desktop-more-menu" className="desktop-more-menu" role="menu" initial={reduceMotion ? false : { opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: POPOVER.duration, ease: POPOVER.ease }}>
-                                            <p className="desktop-more-label">Explore</p>
-                                            {secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} role="menuitem" className={({ isActive }) => isActive ? "desktop-more-link desktop-more-link--active" : "desktop-more-link"}><span>{label}</span><ArrowUpRight size={14} aria-hidden="true" /></NavLink>)}
+                                        <motion.div id="desktop-more-menu" className="desktop-more-menu" role="menu" initial={reduceMotion ? false : { opacity: 0, transform: "translateY(-4px)" }} animate={{ opacity: 1, transform: "translateY(0)" }} exit={{ opacity: 0, transform: "translateY(-2px)" }} transition={{ duration: POPOVER.duration, ease: POPOVER.ease }}>
+                                            <button type="button" className="desktop-more-menu-close" onClick={closeMoreMenu} aria-label="Close archive menu"><X size={20} aria-hidden="true" /></button>
+                                            <p className="desktop-more-label">Archive</p>
+                                            <div className="desktop-more-links">
+                                                {secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} role="menuitem" className={({ isActive }) => isActive ? "desktop-more-link desktop-more-link--active" : "desktop-more-link"}><span>{label}</span></NavLink>)}
+                                            </div>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -162,7 +216,7 @@ function Navbar() {
                         <nav className="navbar-profile-links" aria-label="Profile links">
                             {desktopProfileLinks.map((link) => <a key={link.key} href={link.href} target="_blank" rel="noreferrer" aria-label={`${link.label} (opens in a new tab)`}>{link.label}</a>)}
                         </nav>
-                        {resumeLink && <a className="navbar-resume-link" href={resumeLink.href} target="_blank" rel="noopener noreferrer" aria-label="Open résumé PDF in a new tab">Résumé</a>}
+                        {resumeLink && <a className="navbar-resume-link" href={resumeLink.href} target="_blank" rel="noopener noreferrer" aria-label="Open résumé PDF in a new tab"><span>Résumé</span></a>}
                         <button type="button" className="nav-icon-button" onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
                             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
                         </button>
@@ -187,7 +241,7 @@ function Navbar() {
                                 <div className="mobile-primary-links">
                                     {primaryLinks.map(({ to, label }, index) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-primary-link mobile-primary-link--active" : "mobile-primary-link"}><span className="mobile-link-index">{String(index + 1).padStart(2, "0")}</span><span className="mobile-link-label">{label}</span><ArrowUpRight className="mobile-link-arrow" size={19} aria-hidden="true" /></NavLink>)}
                                 </div>
-                                <div className="mobile-secondary-section"><p className="mobile-nav-section-label">Explore</p><div className="mobile-secondary-links">{secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-secondary-link mobile-secondary-link--active" : "mobile-secondary-link"}>{label}</NavLink>)}</div></div>
+                                <div className="mobile-secondary-section"><p className="mobile-nav-section-label">Explore</p><div className="mobile-secondary-links">{secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-secondary-link mobile-secondary-link--active" : "mobile-secondary-link"}><span>{label}</span></NavLink>)}</div></div>
                             </div>
                             <div className="mobile-nav-footer">
                                 <div className="mobile-status"><span className="mobile-status-dot" /><p>Open to internships, research, and collaborations</p></div>

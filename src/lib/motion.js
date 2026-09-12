@@ -40,12 +40,12 @@ export const PAGE_REVEAL = {
 export const REVEAL = {
     hidden: {
         opacity: 0,
-        y: 32,
+        transform: "translateY(2rem)",
     },
 
     visible: {
         opacity: 1,
-        y: 0,
+        transform: "translateY(0)",
 
         transition: {
             duration: EDITORIAL_DURATION.reveal,

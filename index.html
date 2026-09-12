@@ -35,7 +35,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
 
-    <!-- Critical boot loader: the first visit in a browser tab opens with a slow Hello introduction. -->
+    <!-- Critical boot loader: the first visit in a browser tab opens with an eight-second Hello introduction. -->
     <style>
         :root {
             color-scheme: dark;
@@ -59,7 +59,7 @@
             color: var(--loader-text);
             font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
             opacity: 1;
-            transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1), visibility 500ms linear;
+            transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 700ms;
         }
 
         #app-loader.app-loader--hidden {
@@ -70,21 +70,31 @@
 
         #root {
             opacity: 0;
-            transform: translateY(0.5rem);
-            transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1), transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateY(0.35rem);
+            filter: blur(2px);
+            transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         #root.app-loader__site-visible {
             opacity: 1;
             transform: none;
+            filter: none;
         }
 
         .app-loader__content {
+            position: relative;
+            display: grid;
+            min-height: 100vh;
+            min-height: 100svh;
             width: min(58rem, calc(100% - 3rem));
+            place-items: center;
             text-align: center;
         }
 
         .app-loader__topline {
+            position: absolute;
+            inset-inline: 0;
+            top: max(1.5rem, env(safe-area-inset-top));
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -101,8 +111,16 @@
             width: 100%;
             max-width: 52rem;
             height: auto;
-            margin: clamp(2.5rem, 10vh, 6rem) auto clamp(2rem, 8vh, 4.5rem);
+            margin: 0;
             overflow: visible;
+            transform: translateY(0);
+            transition: transform 700ms cubic-bezier(0.23, 1, 0.32, 1), opacity 420ms ease-out;
+            will-change: transform, opacity;
+        }
+
+        #app-loader.app-loader--hidden .app-loader__hello {
+            transform: translateY(-42vh);
+            opacity: 0;
         }
 
         .app-loader__hello-path {
@@ -155,7 +173,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             #app-loader {
-                transition: opacity 200ms cubic-bezier(0.23, 1, 0.32, 1), visibility 200ms linear;
+                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 200ms;
             }
 
             .app-loader__hello-path {
@@ -166,7 +184,13 @@
 
             #root {
                 transform: none;
-                transition: opacity 200ms cubic-bezier(0.23, 1, 0.32, 1);
+                filter: none;
+                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            #app-loader.app-loader--hidden .app-loader__hello {
+                transform: none;
+                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
             }
 
             .app-loader__skip {
@@ -183,10 +207,6 @@
                 font-size: 0.5rem;
             }
 
-            .app-loader__hello {
-                margin-top: 24vh;
-                margin-bottom: 22vh;
-            }
         }
     </style>
 </head>
@@ -228,8 +248,8 @@
             const introMode = new URLSearchParams(window.location.search).get("intro");
             const forceIntro = introMode === "show" || introMode === "animate";
             const forceAnimation = introMode === "animate";
-            const introDurationMs = 10000;
-            const handoffDurationMs = 500;
+            const introDurationMs = 8000;
+            const handoffDurationMs = 700;
 
             if (!loader) {
                 return;
@@ -277,9 +297,7 @@
                 dismissed = true;
                 rememberIntro();
 
-                if (root) {
-                    root.classList.add("app-loader__site-visible");
-                }
+                root?.classList.add("app-loader__site-visible");
 
                 if (seen) {
                     loader.remove();
@@ -287,59 +305,8 @@
                     loader.classList.add("app-loader--hidden");
                     window.setTimeout(() => loader.remove(), reducedMotion ? 260 : handoffDurationMs + 60);
                 } else {
-                    const startedAt = window.performance.now();
-                    loader.style.transition = "none";
-                    root.style.transition = "none";
-                    loader.style.opacity = "1";
-                    root.style.opacity = "0";
-                    root.style.transform = "translateY(0.5rem)";
-
-                    const easeOut = (progress) => {
-                        let lower = 0;
-                        let upper = 1;
-                        let time = progress;
-
-                        for (let iteration = 0; iteration < 12; iteration += 1) {
-                            const inverse = 1 - time;
-                            const curveX = (3 * inverse * inverse * time * 0.23)
-                                + (3 * inverse * time * time * 0.32)
-                                + (time * time * time);
-
-                            if (curveX < progress) {
-                                lower = time;
-                            } else {
-                                upper = time;
-                            }
-
-                            time = (lower + upper) / 2;
-                        }
-
-                        const inverse = 1 - time;
-                        return (3 * inverse * inverse * time)
-                            + (3 * inverse * time * time)
-                            + (time * time * time);
-                    };
-
-                    const revealFrame = (now) => {
-                        const progress = Math.min((now - startedAt) / handoffDurationMs, 1);
-                        const easedProgress = easeOut(progress);
-
-                        loader.style.opacity = String(1 - easedProgress);
-                        root.style.opacity = String(easedProgress);
-                        root.style.transform = `translateY(${0.5 * (1 - easedProgress)}rem)`;
-
-                        if (progress < 1) {
-                            window.requestAnimationFrame(revealFrame);
-                            return;
-                        }
-
-                        loader.classList.add("app-loader--hidden");
-                        loader.remove();
-                        root.style.removeProperty("transition");
-                        root.style.removeProperty("transform");
-                    };
-
-                    window.requestAnimationFrame(revealFrame);
+                    loader.classList.add("app-loader--hidden");
+                    window.setTimeout(() => loader.remove(), handoffDurationMs + 60);
                 }
 
                 if (focusPage) {

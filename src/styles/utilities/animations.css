@@ -56,6 +56,62 @@
     :where(.interactive-lift, .pressable):hover {
         transform: translateY(-0.2rem);
     }
+
+    /* Every visible button or button-like CTA should acknowledge a fine-pointer hover. */
+    :where(
+        button:not([disabled]):not(.mobile-nav-backdrop),
+        a.btn,
+        .portfolio-button,
+        .navbar-resume-link,
+        .contact-ending__link,
+        .footer-contact-link,
+        .project-detail-dialog__actions a,
+        .media-detail-dialog__actions a,
+        .modal-close-bottom
+    ):hover {
+        transform: translateY(-0.16rem);
+    }
+
+    :where(
+        button:not([disabled]):not(.mobile-nav-backdrop),
+        a.btn,
+        .portfolio-button,
+        .navbar-resume-link,
+        .contact-ending__link,
+        .footer-contact-link,
+        .project-detail-dialog__actions a,
+        .media-detail-dialog__actions a,
+        .modal-close-bottom
+    ):hover svg {
+        transform: translateY(-0.08rem) scale(1.04);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :where(
+        button:not([disabled]):not(.mobile-nav-backdrop),
+        a.btn,
+        .portfolio-button,
+        .navbar-resume-link,
+        .contact-ending__link,
+        .footer-contact-link,
+        .project-detail-dialog__actions a,
+        .media-detail-dialog__actions a,
+        .modal-close-bottom
+    ):hover,
+    :where(
+        button:not([disabled]):not(.mobile-nav-backdrop),
+        a.btn,
+        .portfolio-button,
+        .navbar-resume-link,
+        .contact-ending__link,
+        .footer-contact-link,
+        .project-detail-dialog__actions a,
+        .media-detail-dialog__actions a,
+        .modal-close-bottom
+    ):hover svg {
+        transform: none;
+    }
 }
 
 @media (hover: none), (pointer: coarse) {
