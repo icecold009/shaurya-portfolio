@@ -401,7 +401,7 @@
 .cert-tabs a,
 .tl-filter,
 .timeline-chip {
-    font-size: 0.72rem;
+    font-size: 0.78rem;
 }
 
 .editorial-hero-topline,
@@ -411,7 +411,7 @@
 .contact-topline,
 .contact-ending__index,
 .footer-eyebrow {
-    font-size: 0.70rem;
+    font-size: 0.76rem;
 }
 
 .about-editorial__facts dt,
@@ -426,7 +426,7 @@
 .blog-row .blog-tag,
 .contact-ending__eyebrow,
 .footer-eyebrow {
-    font-size: 0.68rem;
+    font-size: 0.74rem;
 }
 
 .blog-archive-rail,
@@ -451,7 +451,7 @@
 .case-study-stack span,
 .project-details-heading > span,
 .selected-work-header::before {
-    font-size: 0.71rem;
+    font-size: 0.76rem;
 }
 
 .nav-brand-copy small,
@@ -466,7 +466,7 @@
 .footer-social > p,
 .contact-ending__bottom p,
 .footer-bottom p {
-    font-size: 0.64rem;
+    font-size: 0.7rem;
 }
 
 @media (max-width: 720px) {
@@ -478,7 +478,7 @@
     .contact-ending__index,
     .footer-eyebrow,
     .achievements-rail {
-        font-size: 0.66rem;
+        font-size: 0.72rem;
     }
 
     .about-editorial__facts dt,
@@ -492,11 +492,11 @@
     .contact-availability span,
     .blog-row .blog-tag,
     .contact-ending__eyebrow {
-        font-size: 0.64rem;
+        font-size: 0.7rem;
     }
 
     .achievements-overview span {
-        font-size: 0.62rem;
+        font-size: 0.68rem;
     }
 }
 

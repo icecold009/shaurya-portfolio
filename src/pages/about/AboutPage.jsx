@@ -505,9 +505,9 @@ export default function AboutPage() {
 
                             <p>
                                 Read my current resume here without leaving
-                                the portfolio. The PDF preview is scrollable,
-                                and the full document is available in a new tab
-                                if you want to keep it nearby.
+                                the portfolio. A first-page preview is shown
+                                below, and the full document is available in a
+                                new tab when you want the complete version.
                             </p>
 
                             <a
@@ -522,21 +522,21 @@ export default function AboutPage() {
                             </a>
                         </motion.div>
 
-                        <motion.div
+                        <motion.figure
                             className="about-editorial__resume-preview"
                             variants={itemVariant}
                         >
-                            <iframe
-                                title="Shaurya Saria resume preview"
-                                src="/resume.pdf#view=FitH"
-                                loading="lazy"
-                            >
-                                <p>
-                                    Your browser does not support an embedded
-                                    PDF. <a href="/resume.pdf">Open the resume</a>.
-                                </p>
-                            </iframe>
-                        </motion.div>
+                            <img
+                                src="/resume-preview.png"
+                                alt="First page of Shaurya Saria's résumé"
+                                loading="eager"
+                                decoding="async"
+                            />
+                            <figcaption>
+                                <span>Preview · page 1</span>
+                                <span>Open the full PDF for the complete résumé.</span>
+                            </figcaption>
+                        </motion.figure>
                     </div>
                 </div>
             </motion.section>

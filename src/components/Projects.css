@@ -24,7 +24,7 @@
 .selected-work-kicker {
     color: color-mix(in srgb, var(--green) 68%, var(--text-dim));
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.78rem;
     font-weight: 650;
     letter-spacing: 0.1em;
     line-height: 1.5;
@@ -71,7 +71,7 @@
     border-bottom: 1px solid var(--green);
     color: var(--text);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.74rem;
     font-weight: 650;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -126,7 +126,7 @@
 .project-explorer-controls__actions > label {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.61rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -170,7 +170,7 @@
     background: transparent;
     color: var(--text-dim);
     font-family: var(--mono);
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     cursor: pointer;
@@ -198,7 +198,7 @@
     margin: 0.15rem 0 0;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
 }
 
 .project-details-heading {
@@ -224,7 +224,7 @@
     flex: 0 0 auto;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -315,7 +315,7 @@
 .project-card__preview-fallback small {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.56rem;
+    font-size: 0.65rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -334,7 +334,7 @@
     gap: 0.6rem;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.58rem;
+    font-size: 0.7rem;
     font-weight: 650;
     letter-spacing: 0.06em;
     line-height: 1.4;
@@ -381,7 +381,7 @@
     padding-top: 0.15rem;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.56rem;
+    font-size: 0.68rem;
     font-weight: 650;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -416,7 +416,7 @@
     max-width: 18ch;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.56rem;
+    font-size: 0.68rem;
     letter-spacing: 0.05em;
     line-height: 1.4;
     text-transform: uppercase;
@@ -434,7 +434,7 @@
     border: 1px solid var(--line);
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.52rem;
+    font-size: 0.64rem;
     letter-spacing: 0.05em;
     line-height: 1;
     text-transform: uppercase;
@@ -528,7 +528,7 @@
 
     .project-card { grid-template-columns: 1fr; row-gap: 1.25rem; }
 
-    .project-card__meta { font-size: 0.55rem; }
+    .project-card__meta { font-size: 0.66rem; }
 
     .project-card__title-row {
         gap: 0.65rem;
@@ -536,7 +536,7 @@
     }
 
     .project-card__action {
-        font-size: 0.52rem;
+        font-size: 0.64rem;
     }
 
     .project-card__footer {
