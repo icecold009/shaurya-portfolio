@@ -1,9 +1,15 @@
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import Hero from "../../components/Hero";
 import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
+import {
+    REVEAL,
+    REVEAL_CONTAINER,
+    REVEAL_VIEWPORT,
+} from "../../lib/motion";
 import { positioningStatement } from "../../lib/profileLinks";
 import { formatPostDate, posts } from "../../posts";
 
@@ -17,6 +23,7 @@ const featuredProjects = projects.filter((project) =>
 const writingSlugs = ["shazam-clone", "shipping-is-a-design-decision"];
 
 export default function Home() {
+    const shouldReduceMotion = useReducedMotion();
     const writing = writingSlugs
         .map((slug) => posts.find((post) => post.slug === slug))
         .filter(Boolean);
@@ -25,8 +32,18 @@ export default function Home() {
         <div className="home-page">
             <Hero />
 
-            <section className="home-section home-section--work" aria-labelledby="home-work-title">
-                <div className="home-section__heading">
+            <motion.section
+                className="home-section home-section--work"
+                aria-labelledby="home-work-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div
+                    className="home-section__heading"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
+                >
                     <div>
                         <p className="home-kicker">Selected work / 03</p>
                         <h2 id="home-work-title">Built to make hard things <em>clearer.</em></h2>
@@ -34,11 +51,18 @@ export default function Home() {
                     <Link className="home-text-link cta-link" to="/projects">
                         View all projects <ArrowUpRight size={16} aria-hidden="true" />
                     </Link>
-                </div>
+                </motion.div>
 
-                <div className="home-project-list">
+                <motion.div
+                    className="home-project-list"
+                    variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                >
                     {featuredProjects.map((project) => (
-                        <article className="home-project-card" key={project.title}>
+                        <motion.article
+                            className="home-project-card"
+                            key={project.title}
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
                             <div className={`home-project-card__visual home-project-card__visual--${project.number}`}>
                                 <img src={project.thumbnail} alt={project.thumbnailAlt ?? `${project.title} project preview`} loading="lazy" decoding="async" />
                             </div>
@@ -56,19 +80,32 @@ export default function Home() {
                                     </Link>
                                 </div>
                             </div>
-                        </article>
+                        </motion.article>
                     ))}
-                </div>
-            </section>
+                </motion.div>
+            </motion.section>
 
-            <section className="home-section home-section--profile" aria-labelledby="home-profile-title">
-                <div className="home-section__heading">
+            <motion.section
+                className="home-section home-section--profile"
+                aria-labelledby="home-profile-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div
+                    className="home-section__heading"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
+                >
                     <div>
                         <p className="home-kicker">A little context</p>
                         <h2 id="home-profile-title">Technical range, <em>human scale.</em></h2>
                     </div>
-                </div>
-                <div className="home-profile-grid">
+                </motion.div>
+                <motion.div
+                    className="home-profile-grid"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
+                >
                     <p className="home-profile-lead">
                         {positioningStatement}
                     </p>
@@ -77,33 +114,53 @@ export default function Home() {
                         <div><span>Working across</span><strong>ML experiments, full-stack products, and interfaces</strong></div>
                         <div><span>Open to</span><strong>Internships, research, and thoughtful collaborations</strong></div>
                     </div>
-                </div>
-                <Link className="home-text-link cta-link" to="/about">Read my story <ArrowUpRight size={16} aria-hidden="true" /></Link>
-            </section>
+                </motion.div>
+                <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <Link className="home-text-link cta-link" to="/about">Read my story <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                </motion.div>
+            </motion.section>
 
-            <section className="home-section home-section--writing" aria-labelledby="home-writing-title">
-                <div className="home-section__heading">
+            <motion.section
+                className="home-section home-section--writing"
+                aria-labelledby="home-writing-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div
+                    className="home-section__heading"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
+                >
                     <div>
                         <p className="home-kicker">Writing / 02</p>
                         <h2 id="home-writing-title">Notes from the <em>workbench.</em></h2>
                     </div>
                     <Link className="home-text-link cta-link" to="/blog">Read all notes <ArrowUpRight size={16} aria-hidden="true" /></Link>
-                </div>
-                <div className="home-writing-list">
+                </motion.div>
+                <motion.div
+                    className="home-writing-list"
+                    variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                >
                     {writing.map((post) => (
-                        <Link className="home-writing-item" to={`/blog/${post.slug}`} key={post.slug}>
-                            <div>
-                                <span>{post.tag}</span>
-                                <h3>{post.title}</h3>
-                            </div>
-                            <div className="home-writing-meta">
-                                <span>{formatPostDate(post.date)}</span>
-                                <ArrowUpRight size={17} aria-hidden="true" />
-                            </div>
-                        </Link>
+                        <motion.div
+                            key={post.slug}
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
+                            <Link className="home-writing-item" to={`/blog/${post.slug}`}>
+                                <div>
+                                    <span>{post.tag}</span>
+                                    <h3>{post.title}</h3>
+                                </div>
+                                <div className="home-writing-meta">
+                                    <span>{formatPostDate(post.date)}</span>
+                                    <ArrowUpRight size={17} aria-hidden="true" />
+                                </div>
+                            </Link>
+                        </motion.div>
                     ))}
-                </div>
-            </section>
+                </motion.div>
+            </motion.section>
 
             <GitHubContributions />
         </div>
