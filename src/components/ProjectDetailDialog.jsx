@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -21,6 +21,7 @@ export default function ProjectDetailDialog({
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
+    const [mediaFailed, setMediaFailed] = useState(false);
     const titleId = `project-dialog-title-${useId().replace(/:/g, "")}`;
     const descriptionId = `project-dialog-description-${useId().replace(/:/g, "")}`;
 
@@ -131,13 +132,17 @@ export default function ProjectDetailDialog({
 
                 <div className="project-detail-dialog__body">
                     <div className="project-detail-dialog__media">
-                        {project.thumbnail ? (
+                        {project.thumbnail && !mediaFailed ? (
                             <img
                                 src={project.thumbnail}
                                 alt={project.thumbnailAlt ?? `${project.title} project preview`}
+                                onError={() => setMediaFailed(true)}
                             />
                         ) : (
-                            <span aria-hidden="true">{project.number}</span>
+                            <span className="project-detail-dialog__media-fallback" aria-hidden="true">
+                                <strong>{project.number}</strong>
+                                <small>{project.thumbnail ? "Cover unavailable" : "Archive record"}</small>
+                            </span>
                         )}
                     </div>
 

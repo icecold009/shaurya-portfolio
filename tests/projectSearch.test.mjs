@@ -50,7 +50,7 @@ test("combines tag and search filters without dropping the query contract", () =
 });
 
 test("every project card has metadata and an intentional preview fallback", () => {
-    assert.equal(projectCatalog.length, 8);
+    assert.equal(projectCatalog.length, 13);
 
     for (const project of projectCatalog) {
         assert.ok(project.number);
@@ -65,6 +65,12 @@ test("every project card has metadata and an intentional preview fallback", () =
         projectCatalog.find((project) => project.number === "08")?.thumbnail,
         null,
     );
+
+    assert.deepEqual(
+        projectCatalog.slice(-5).map((project) => project.id),
+        ["icecold-sprint", "nextsound", "car-price-predictor", "code-racer", "open-source-practice"],
+    );
+    assert.ok(projectCatalog.slice(-5).every((project) => project.github && project.thumbnail));
 });
 
 test("legacy numbered hashes resolve to the matching project", () => {

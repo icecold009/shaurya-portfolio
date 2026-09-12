@@ -19,20 +19,24 @@ import { projectProofIntro, projects } from "../data/projects";
 import ProjectDetailDialog from "./ProjectDetailDialog";
 
 function ProjectCardPreview({ project }) {
+    const [imageFailed, setImageFailed] = useState(false);
+    const hasThumbnail = project.thumbnail && !imageFailed;
+
     return (
-        <span className="case-study-toggle__preview" aria-hidden="true">
-            {project.thumbnail ? (
+        <span className="project-card__preview" aria-hidden="true">
+            {hasThumbnail ? (
                 <img
-                    className={project.thumbnailFit === "contain" ? "case-study-toggle__preview-image--contain" : undefined}
+                    className={project.thumbnailFit === "contain" ? "project-card__preview-image--contain" : undefined}
                     src={project.thumbnail}
                     alt=""
                     loading={project.number === "01" ? "eager" : "lazy"}
                     decoding="async"
+                    onError={() => setImageFailed(true)}
                 />
             ) : (
-                <span className="case-study-toggle__preview-fallback">
+                <span className="project-card__preview-fallback">
                     <strong>{project.number}</strong>
-                    <small>Archive record</small>
+                    <small>{project.thumbnail ? "Cover unavailable" : "Archive record"}</small>
                 </span>
             )}
         </span>
@@ -53,7 +57,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen }) {
         >
             <button
                 type="button"
-                className={`case-study-toggle${isOpen ? " case-study-toggle--open" : ""}`}
+                className={`project-card${isOpen ? " project-card--open" : ""}`}
                 onClick={(event) => onOpenProject(project, event.currentTarget)}
                 aria-haspopup="dialog"
                 aria-expanded={isOpen}
@@ -61,23 +65,29 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen }) {
             >
                 <ProjectCardPreview project={project} />
 
-                <span className="case-study-toggle__main">
-                    <span className="case-study-toggle__meta">
-                        <span>{project.number}</span>
+                <span className="project-card__main">
+                    <span className="project-card__meta">
+                        <span className="project-card__number">{project.number}</span>
                         <span>{project.year}</span>
-                        <span>{project.category}</span>
+                        <span className="project-card__category">{project.category}</span>
                     </span>
-                    <span className="case-study-toggle__title-row">
-                        <h2 className="case-study-toggle__title">{project.title}</h2>
-                        <span className="case-study-toggle__action">
+                    <span className="project-card__title-row">
+                        <h2 className="project-card__title">{project.title}</h2>
+                        <span className="project-card__action">
                             View details
                             <ArrowUpRight size={15} aria-hidden="true" />
                         </span>
                     </span>
-                    <span className="case-study-toggle__lede">
+                    <span className="project-card__lede">
                         {project.summary ?? project.description}
                     </span>
-                    <span className="case-study-toggle__status">{project.status}</span>
+                    <span className="project-card__footer">
+                        <span className="project-card__status">{project.status}</span>
+                        <span className="project-card__stack" aria-label={`${project.title} technology stack`}>
+                            {project.stack.slice(0, 3).map((technology) => <span key={technology}>{technology}</span>)}
+                            {project.stack.length > 3 ? <span>+{project.stack.length - 3}</span> : null}
+                        </span>
+                    </span>
                 </span>
             </button>
         </motion.article>
@@ -195,45 +205,49 @@ export default function Projects() {
                 id="selected-work"
                 aria-labelledby="selected-work-title"
             >
-                <motion.div
+                <motion.header
                     className="selected-work-header"
                     variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
                     initial={shouldReduceMotion ? undefined : "hidden"}
                     whileInView={shouldReduceMotion ? undefined : "visible"}
                     viewport={REVEAL_VIEWPORT}
                 >
-                    <motion.p
-                        className="selected-work-kicker"
-                        variants={shouldReduceMotion ? undefined : REVEAL}
-                    >
-                        Selected work · 2025–2026
-                    </motion.p>
+                    <div className="selected-work-header__copy">
+                        <motion.p
+                            className="selected-work-kicker"
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
+                            Selected work · 2025–2026
+                        </motion.p>
 
-                    <motion.h1
-                        id="selected-work-title"
-                        tabIndex={-1}
-                        variants={shouldReduceMotion ? undefined : REVEAL}
-                    >
-                        Projects,
-                        <span> explored in depth.</span>
-                    </motion.h1>
+                        <motion.h1
+                            id="selected-work-title"
+                            tabIndex={-1}
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
+                            Projects,
+                            <span> explored in depth.</span>
+                        </motion.h1>
+                    </div>
 
-                    <motion.p
-                        className="selected-work-intro"
-                        variants={shouldReduceMotion ? undefined : REVEAL}
-                    >
-                        {projectProofIntro}
-                    </motion.p>
+                    <div className="selected-work-header__aside">
+                        <motion.p
+                            className="selected-work-intro"
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
+                            {projectProofIntro}
+                        </motion.p>
 
-                    <motion.a
-                        className="selected-work-primary"
-                        href="#project-details"
-                        variants={shouldReduceMotion ? undefined : REVEAL}
-                    >
-                        Read the case studies
-                        <ArrowRight size={17} aria-hidden="true" />
-                    </motion.a>
-                </motion.div>
+                        <motion.a
+                            className="selected-work-primary"
+                            href="#project-details"
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
+                            Read the case studies
+                            <ArrowRight size={17} aria-hidden="true" />
+                        </motion.a>
+                    </div>
+                </motion.header>
 
                 <section
                     className="project-explorer-controls"
@@ -290,7 +304,7 @@ export default function Projects() {
                     </div>
                 </section>
 
-                <div className="project-details-heading">
+                <div className="project-details-heading" id="project-details" tabIndex={-1}>
                     <div>
                         <p className="selected-work-kicker">Project details</p>
                         <h2>Open a project to see the full case study.</h2>
@@ -299,7 +313,7 @@ export default function Projects() {
                 </div>
 
                 {visibleProjects.length > 0 ? (
-                    <div className="case-study-list" id="project-details">
+                    <div className="case-study-list" id="project-cards">
                         {visibleProjects.map((project) => (
                             <ProjectCaseStudy
                                 key={project.id}
@@ -327,6 +341,7 @@ export default function Projects() {
 
             {selectedProject ? (
                 <ProjectDetailDialog
+                    key={selectedProject.id}
                     project={selectedProject}
                     onClose={closeProject}
                     triggerElement={triggerElementRef.current}

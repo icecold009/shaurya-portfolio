@@ -235,4 +235,159 @@ export const projects = [
         thumbnail: null,
         accent: "08",
     },
+    {
+        id: "icecold-sprint",
+        number: "09",
+        year: "2026",
+        category: "AI · Study tools · Hackathon",
+        title: "IceCold Sprint",
+        description:
+            "An AI-assisted study sprint planner for students preparing under time pressure.",
+        summary:
+            "An AI-assisted study planner that turns a looming deadline into a focused next sprint.",
+        problem:
+            "Students need to turn a large revision goal into a realistic sequence of work they can start now.",
+        constraints:
+            "The core source workflow is validated, while public release synchronization remains a separate boundary.",
+        contribution:
+            "I shaped the planning flow around short, achievable study sprints and an AI-assisted prioritization step.",
+        decisions:
+            "I kept the sprint itself visible and actionable instead of burying the next step inside a generic chat experience.",
+        outcome:
+            "A focused hackathon prototype for making study planning feel concrete under time pressure.",
+        limitations:
+            "The public release, planner quality and real student outcomes need a separate live evaluation.",
+        status: "Hackathon · source linked",
+        stack: ["React", "Vite", "Fireworks AI"],
+        github: "https://github.com/icecold009/lablab-hackathon-study-app",
+        visual: "sprint",
+        thumbnail: "/projects/icecold-sprint.svg",
+        thumbnailAlt: "IceCold Sprint study planning interface",
+        thumbnailFit: "contain",
+        accent: "09",
+    },
+    {
+        id: "nextsound",
+        number: "10",
+        year: "2026",
+        category: "Music · React · Discovery",
+        title: "NextSound",
+        description:
+            "A music discovery app with a demo mode and an optional Spotify API search path.",
+        summary:
+            "A music discovery interface that stays useful in demo mode while leaving room for live search.",
+        problem:
+            "A discovery surface should still demonstrate its browsing experience when a third-party API is unavailable.",
+        constraints:
+            "The Spotify integration is optional, so the interface needs a clear boundary between demo content and live search.",
+        contribution:
+            "I built the browsing surface around discovery, playback context and a demo-first path that does not depend on credentials.",
+        decisions:
+            "I treated the fallback catalog as a product mode rather than presenting a failed API request as an empty application.",
+        outcome:
+            "A clear music discovery prototype with an honest live-integration boundary.",
+        limitations:
+            "Spotify authentication, API quotas and production playback behavior remain outside the local preview.",
+        status: "Prototype · source linked",
+        stack: ["React", "TypeScript", "Vite", "Spotify API"],
+        github: "https://github.com/icecold009/Spotify-clone-mini-project",
+        visual: "nextsound",
+        thumbnail: "/projects/nextsound.svg",
+        thumbnailAlt: "NextSound music discovery interface",
+        thumbnailFit: "contain",
+        accent: "10",
+    },
+    {
+        id: "car-price-predictor",
+        number: "11",
+        year: "2026",
+        category: "ML · Regression · Python",
+        title: "Car Price Predictor",
+        description:
+            "A regression pipeline comparing models and supporting both batch and single predictions.",
+        summary:
+            "A regression workflow that compares models, documents its features and exposes a practical prediction path.",
+        problem:
+            "A prediction tool is easier to trust when the model comparison and input assumptions remain visible.",
+        constraints:
+            "The dataset and evaluation setup bound the result; a model score is not a guarantee for an individual listing.",
+        contribution:
+            "I organized the preprocessing, model comparison and prediction interface around a reproducible input path.",
+        decisions:
+            "I kept the comparison and feature context near the prediction so the output is not presented as a mysterious number.",
+        outcome:
+            "A compact ML project showing the path from structured vehicle features to a usable price estimate.",
+        limitations:
+            "Dataset age, market drift and broader validation limit what the model can claim outside its evaluation sample.",
+        status: "Prototype · source linked",
+        stack: ["Python", "Pandas", "scikit-learn", "Flask"],
+        github: "https://github.com/icecold009/car-price-predictor",
+        visual: "car-price",
+        thumbnail: "/projects/car-price-predictor.svg",
+        thumbnailAlt: "Car Price Predictor regression comparison chart",
+        thumbnailFit: "contain",
+        accent: "11",
+    },
+    {
+        id: "code-racer",
+        number: "12",
+        year: "2026",
+        category: "Community · Full-stack · Learning",
+        title: "Code Racer",
+        description:
+            "A community multiplayer coding game for real-time programming challenges.",
+        summary:
+            "A multiplayer coding challenge built around shared pressure, short rounds and visible progress.",
+        problem:
+            "Practice becomes more motivating when a challenge has a clear rhythm and a sense of other people learning alongside you.",
+        constraints:
+            "Real-time rooms, challenge state and multiplayer feedback need a dependable shared contract before they scale.",
+        contribution:
+            "I shaped the challenge flow and full-stack surface around starting a round quickly and making progress legible.",
+        decisions:
+            "I kept the game loop small enough to understand before adding more social or competitive complexity.",
+        outcome:
+            "A public learning project that turns coding practice into a lightweight shared activity.",
+        limitations:
+            "Room reliability, moderation and broader multiplayer testing need a separate production pass.",
+        status: "Community project · source linked",
+        stack: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
+        github: "https://github.com/icecold009/code-racer",
+        visual: "code-racer",
+        thumbnail: "/projects/code-racer.svg",
+        thumbnailAlt: "Code Racer multiplayer coding challenge interface",
+        thumbnailFit: "contain",
+        accent: "12",
+    },
+    {
+        id: "open-source-practice",
+        number: "13",
+        year: "2026",
+        category: "Open source · GitHub · Learning",
+        title: "Open Source Practice",
+        description:
+            "An interactive set of workflows for learning GitHub contributions, pull requests and repository habits.",
+        summary:
+            "Interactive practice flows for learning how to contribute thoughtfully to open source.",
+        problem:
+            "The first open-source contribution is easier when the repository, branch and review workflow are visible before the first change.",
+        constraints:
+            "Practice should teach the contribution loop without pretending a simulated exercise is a real upstream merge.",
+        contribution:
+            "I turned the contribution process into guided, repeatable steps for finding work, making a branch and preparing a reviewable change.",
+        decisions:
+            "I emphasized small, inspectable changes and the habits around them rather than treating GitHub as only a place to upload code.",
+        outcome:
+            "A practical learning surface for building confidence around real contribution workflows.",
+        limitations:
+            "The exercises do not replace project-specific contribution rules or maintainer review.",
+        status: "Learning project · source linked",
+        stack: ["Git", "GitHub", "Pull requests"],
+        github: "https://github.com/icecold009/contribute-to-open-source",
+        visual: "open-source",
+        thumbnail: "/projects/open-source-practice.svg",
+        thumbnailAlt: "Open Source Practice contribution workflow interface",
+        thumbnailFit: "contain",
+        accent: "13",
+    },
 ];
