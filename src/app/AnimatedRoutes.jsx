@@ -16,6 +16,7 @@ import BlogPage from "../pages/blog/BlogPage";
 import BlogPostPage from "../pages/blog/BlogPostPage";
 import ContactPage from "../pages/contact/ContactPage";
 import PrivacyPage from "../pages/privacy/PrivacyPage";
+import TermsPage from "../pages/terms/TermsPage";
 import ThankYouPage from "../pages/contact/ThankYouPage";
 import UsesPage from "../pages/uses/UsesPage";
 import NotFound from "../pages/not-found/NotFound";
@@ -53,6 +54,7 @@ export default function AnimatedRoutes() {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/contact/thanks" element={<ThankYouPage />} />
                     <Route path="/privacy" element={<PrivacyPage />} />
+                    <Route path="/terms" element={<TermsPage />} />
                     <Route path="/uses" element={<UsesPage />} />
                     <Route path="/artwork" element={<ArtworkPage />} />
                     <Route

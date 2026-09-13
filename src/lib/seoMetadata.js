@@ -49,6 +49,11 @@ const pageMetadata = {
         description: "How Shaurya Saria's portfolio handles contact messages, local browser storage, analytics, and external links.",
         type: "website",
     },
+    "/terms": {
+        title: "Terms | Shaurya Saria",
+        description: "The basic terms for browsing Shaurya Saria's personal portfolio and sending a contact message.",
+        type: "website",
+    },
     "/uses": {
         title: "Uses | Shaurya Saria",
         description: "The tools, software, and working habits Shaurya Saria uses to build, study, evaluate models, and make useful interfaces.",

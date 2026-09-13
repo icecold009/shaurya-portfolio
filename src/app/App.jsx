@@ -4,6 +4,7 @@ import { BrowserRouter, Link, useLocation } from "react-router-dom";
 
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import CookieBanner from "../components/CookieBanner";
 
 import AnimatedRoutes from "./AnimatedRoutes";
 import RouteMetadata from "../components/RouteMetadata";
@@ -12,7 +13,7 @@ import ScrollToTop from "./ScrollToTop";
 function MobileContactCta() {
     const { pathname } = useLocation();
 
-    if (["/contact", "/contact/thanks", "/privacy"].includes(pathname)) {
+    if (["/contact", "/contact/thanks", "/privacy", "/terms"].includes(pathname)) {
         return null;
     }
 
@@ -67,6 +68,7 @@ export default function App() {
 
             <Footer />
             <MobileContactCta />
+            <CookieBanner />
             <Analytics />
         </BrowserRouter>
     );

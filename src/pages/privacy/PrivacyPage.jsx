@@ -38,7 +38,7 @@ export default function PrivacyPage() {
                         <p className="section-label">03 / Your browser</p>
                         <h2 id="privacy-storage-title">Small pieces of local preference data</h2>
                         <p>
-                            The site uses your browser&apos;s local storage to remember your light or dark theme and session storage to remember whether the introduction animation has already been shown. The site does not set its own advertising cookies.
+                            The site uses your browser&apos;s local storage to remember your light or dark theme, whether this privacy notice was dismissed, and session storage to remember whether the introduction animation has already been shown. The site does not set its own advertising cookies.
                         </p>
                     </section>
 
