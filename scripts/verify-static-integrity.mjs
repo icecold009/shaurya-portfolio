@@ -72,6 +72,8 @@ const expectedRoutes = [
     "/about",
     "/blog",
     "/contact",
+    "/contact/thanks",
+    "/privacy",
     "/uses",
     "/artwork",
     "/certificates",

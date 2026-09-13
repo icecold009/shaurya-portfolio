@@ -6,6 +6,7 @@ import test from "node:test";
 
 import {
     getSeoMetadata,
+    OG_IMAGE_URL,
     seoRoutes,
 } from "../src/lib/seoMetadata.js";
 import { positioningStatement } from "../src/lib/profileLinks.js";
@@ -42,6 +43,12 @@ test("every public route has a unique title, description, and canonical", () => 
     metadata.forEach((entry, index) => {
         assert.equal(entry.canonical, `https://shauryasaria.me${allRoutes[index] === "/" ? "/" : allRoutes[index]}`);
     });
+});
+
+test("privacy and thank-you routes carry the intended crawl directives", () => {
+    assert.equal(getSeoMetadata("/privacy").robots, "index, follow");
+    assert.equal(getSeoMetadata("/contact/thanks").robots, "noindex, nofollow");
+    assert.equal(getSeoMetadata("/").image, OG_IMAGE_URL);
 });
 
 test("homepage fallback HTML contains crawlable identity and homepage metadata", () => {
@@ -105,6 +112,7 @@ test("robots and sitemap advertise the canonical public site", () => {
         "https://shauryasaria.me/blog",
         ...articleRoutes.map((route) => `https://shauryasaria.me${route}`),
         "https://shauryasaria.me/contact",
+        "https://shauryasaria.me/privacy",
         "https://shauryasaria.me/uses",
         "https://shauryasaria.me/artwork",
         "https://shauryasaria.me/certificates",
