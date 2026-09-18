@@ -23,6 +23,9 @@ export const projects = [
             "I made the operator's questions the primary information architecture and kept alert context beside the action it supports.",
         outcome:
             "A focused prototype for making operational decisions legible during a crowded event without presenting simulated telemetry as live production data.",
+        architectureNote:
+            "Read this diagram from the operator UI through server-only API routes, risk and grounding logic, and Supabase persistence to Realtime updates and human-controlled alert outcomes. It separates simulated/demo behavior from hosted and provider-backed boundaries, so the prototype is not presented as live stadium monitoring.",
+        architectureLink: "https://github.com/icecold009/stadiumpulse-ai/blob/main/docs/architecture/pulseops.png",
         limitations:
             "It still needs real operator feedback, authorized data sources and a hosted verification pass before any deployment claim.",
         status: "Prototype · simulated data",
