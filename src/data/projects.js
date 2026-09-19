@@ -390,4 +390,36 @@ export const projects = [
         thumbnailFit: "contain",
         accent: "13",
     },
+    {
+        id: "touchscreen-launchpad",
+        number: "14",
+        year: "2026",
+        category: "Music · Browser · Local-first",
+        title: "Touchscreen Launchpad",
+        description:
+            "A local-first browser instrument for triggering samples and loops from a responsive 16-pad surface.",
+        summary:
+            "A browser instrument that keeps pad layouts, kit records, sample blobs and offline recovery on the current device.",
+        problem:
+            "A performance surface should feel immediate without requiring an account or sending a user's audio to a hosted service.",
+        constraints:
+            "Browser storage quotas, codec support, service-worker scope and missing cross-device sync must remain visible product boundaries.",
+        contribution:
+            "I built the static browser runtime, 16-pad interaction model, Web Audio playback, five-kit library, local sample import/export and PWA shell.",
+        decisions:
+            "I separated active-pad layout, kit metadata and shared IndexedDB audio blobs, then added explicit memory-only and repair paths for browser storage failures.",
+        outcome:
+            "A portable browser instrument that can be reloaded and used offline on the same device while keeping audio local and the persistence model inspectable.",
+        architectureNote:
+            "Read the diagram from the 16-pad browser UI through input and audio/sample services into IndexedDB and localStorage, then across layout/audio backup paths and the offline PWA shell. It intentionally does not imply server storage or cross-device sync.",
+        architectureLink: "https://github.com/icecold009/touchscreen-launchpad/blob/main/docs/architecture/touchscreen-launchpad.png",
+        limitations:
+            "Persistence is browser-profile local; codec support, physical touchscreen behavior, hosted offline behavior and cross-device transfer still need separate evidence.",
+        status: "Prototype · local-first",
+        stack: ["HTML", "JavaScript", "Web Audio", "IndexedDB", "PWA"],
+        github: "https://github.com/icecold009/touchscreen-launchpad",
+        visual: "launchpad",
+        thumbnail: null,
+        accent: "14",
+    },
 ];

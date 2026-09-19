@@ -145,6 +145,33 @@
     line-height: 1.55;
 }
 
+.project-detail-dialog__architecture {
+    border-left-color: var(--line-bright);
+}
+
+.project-detail-dialog__architecture > span {
+    color: var(--text);
+}
+
+.project-detail-dialog__architecture-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.75rem;
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.project-detail-dialog__architecture-link:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
 .project-detail-dialog__facts {
     display: grid;
     gap: 1rem;

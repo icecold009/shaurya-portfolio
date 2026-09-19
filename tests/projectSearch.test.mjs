@@ -50,7 +50,7 @@ test("combines tag and search filters without dropping the query contract", () =
 });
 
 test("every project card has metadata and an intentional preview fallback", () => {
-    assert.equal(projectCatalog.length, 13);
+    assert.equal(projectCatalog.length, 14);
 
     for (const project of projectCatalog) {
         assert.ok(project.number);
@@ -68,9 +68,11 @@ test("every project card has metadata and an intentional preview fallback", () =
 
     assert.deepEqual(
         projectCatalog.slice(-5).map((project) => project.id),
-        ["icecold-sprint", "nextsound", "car-price-predictor", "code-racer", "open-source-practice"],
+        ["nextsound", "car-price-predictor", "code-racer", "open-source-practice", "touchscreen-launchpad"],
     );
-    assert.ok(projectCatalog.slice(-5).every((project) => project.github && project.thumbnail));
+    assert.ok(projectCatalog.slice(-5).every((project) => project.github));
+    assert.equal(projectCatalog.find((project) => project.id === "touchscreen-launchpad")?.thumbnail, null);
+    assert.match(projectCatalog.find((project) => project.id === "touchscreen-launchpad")?.architectureLink ?? "", /touchscreen-launchpad\/blob\/main\/docs\/architecture\/touchscreen-launchpad\.png$/);
 });
 
 test("legacy numbered hashes resolve to the matching project", () => {
