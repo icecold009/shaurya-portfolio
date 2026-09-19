@@ -4,7 +4,7 @@ The personal portfolio of Shaurya Saria, a Bengaluru-based student developer wor
 
 This site is designed to feel like an editorial archive rather than a list of links. Projects are explained through case studies, the interface stays quiet enough for the work to lead, and the site makes room for experiments, writing, certificates, artwork, and contact.
 
-**Live site:** <https://shaurya-portfolio-sooty.vercel.app/>
+**Live site:** <https://shauryasaria.me/>
 
 ## What you will find
 

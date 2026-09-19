@@ -17,6 +17,8 @@ const footerExplore = [
     { to: "/certificates", label: "Certificates" },
     { to: "/uses", label: "Uses" },
     { to: "/artwork", label: "Artwork" },
+    { to: "/privacy", label: "Privacy" },
+    { to: "/terms", label: "Terms" },
 ];
 
 export default function Footer() {
