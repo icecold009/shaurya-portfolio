@@ -1,12 +1,29 @@
+import { Analytics } from "@vercel/analytics/react";
 import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Link, useLocation } from "react-router-dom";
 
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import CookieBanner from "../components/CookieBanner";
 
 import AnimatedRoutes from "./AnimatedRoutes";
 import RouteMetadata from "../components/RouteMetadata";
 import ScrollToTop from "./ScrollToTop";
+
+function MobileContactCta() {
+    const { pathname } = useLocation();
+
+    if (["/contact", "/contact/thanks", "/privacy", "/terms"].includes(pathname)) {
+        return null;
+    }
+
+    return (
+        <Link className="mobile-contact-cta" to="/contact">
+            <span>Have a project in mind?</span>
+            <strong>Let&apos;s talk <span aria-hidden="true">↗</span></strong>
+        </Link>
+    );
+}
 
 export default function App() {
     useEffect(() => {
@@ -50,6 +67,9 @@ export default function App() {
             </main>
 
             <Footer />
+            <MobileContactCta />
+            <CookieBanner />
+            <Analytics />
         </BrowserRouter>
     );
 }

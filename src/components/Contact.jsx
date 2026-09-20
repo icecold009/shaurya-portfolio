@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import { positioningStatement, profileLinks } from "../lib/profileLinks";
+import { CONTACT_LIMITS, validateContactForm } from "../lib/contactValidation";
 
 function Contact() {
+    const navigate = useNavigate();
     const [status, setStatus] = useState("idle");
+    const [fieldErrors, setFieldErrors] = useState({});
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -12,16 +16,37 @@ function Contact() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const trimmedName = form.name.trim();
+        const trimmedEmail = form.email.trim();
+        const trimmedMessage = form.message.trim();
+        const nextErrors = validateContactForm(form);
+
+        setFieldErrors(nextErrors);
+
+        if (Object.keys(nextErrors).length > 0) {
+            document.getElementById(Object.keys(nextErrors)[0])?.focus();
+            return;
+        }
+
         setStatus("sending");
 
         try {
             const response = await fetch("https://formspree.io/f/mwvdyllv", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
+                body: JSON.stringify({
+                    name: trimmedName,
+                    email: trimmedEmail,
+                    message: trimmedMessage,
+                }),
             });
 
-            setStatus(response.ok ? "sent" : "error");
+            if (!response.ok) {
+                throw new Error("Contact submission failed");
+            }
+
+            navigate("/contact/thanks");
         } catch {
             setStatus("error");
         }
@@ -33,28 +58,20 @@ function Contact() {
             [field]: event.target.value,
         }));
 
+        setFieldErrors((currentErrors) => {
+            if (!currentErrors[field]) {
+                return currentErrors;
+            }
+
+            const nextErrors = { ...currentErrors };
+            delete nextErrors[field];
+            return nextErrors;
+        });
+
         if (status === "error") {
             setStatus("idle");
         }
     };
-
-    if (status === "sent") {
-        return (
-            <section
-                className="contact"
-                id="contact"
-                role="status"
-                aria-live="polite"
-            >
-                <div className="contact-success">
-                    <span className="contact-success-icon" aria-hidden="true">
-                        +
-                    </span>
-                    <p>Message received. I&apos;ll get back to you soon.</p>
-                </div>
-            </section>
-        );
-    }
 
     return (
         <section className="contact" id="contact" aria-labelledby="contact-title">
@@ -80,6 +97,7 @@ function Contact() {
                         className="contact-form"
                         onSubmit={handleSubmit}
                         aria-busy={status === "sending"}
+                        noValidate
                     >
                         <div className="form-group">
                             <label htmlFor="name">Your name</label>
@@ -88,8 +106,11 @@ function Contact() {
                                 autoComplete="name"
                                 value={form.name}
                                 onChange={handleFieldChange("name")}
-                                required
+                                maxLength={CONTACT_LIMITS.name}
+                                aria-invalid={Boolean(fieldErrors.name)}
+                                aria-describedby={fieldErrors.name ? "name-error" : undefined}
                             />
+                            {fieldErrors.name && <p className="form-field-error" id="name-error" role="alert">{fieldErrors.name}</p>}
                         </div>
 
                         <div className="form-group">
@@ -100,8 +121,12 @@ function Contact() {
                                 autoComplete="email"
                                 value={form.email}
                                 onChange={handleFieldChange("email")}
-                                required
+                                maxLength={CONTACT_LIMITS.email}
+                                inputMode="email"
+                                aria-invalid={Boolean(fieldErrors.email)}
+                                aria-describedby={fieldErrors.email ? "email-error" : undefined}
                             />
+                            {fieldErrors.email && <p className="form-field-error" id="email-error" role="alert">{fieldErrors.email}</p>}
                         </div>
 
                         <div className="form-group">
@@ -111,8 +136,11 @@ function Contact() {
                                 rows="5"
                                 value={form.message}
                                 onChange={handleFieldChange("message")}
-                                required
+                                maxLength={CONTACT_LIMITS.message}
+                                aria-invalid={Boolean(fieldErrors.message)}
+                                aria-describedby={fieldErrors.message ? "message-error" : undefined}
                             />
+                            {fieldErrors.message && <p className="form-field-error" id="message-error" role="alert">{fieldErrors.message}</p>}
                         </div>
 
                         <button
@@ -123,6 +151,10 @@ function Contact() {
                         >
                             {status === "sending" ? "Sending message…" : "Send message"}
                         </button>
+
+                        <p className="contact-form-privacy">
+                            By sending this message, you agree that I can use the details you provide to reply. Read the <Link to="/privacy">privacy note</Link>.
+                        </p>
 
                         {status === "error" && (
                             <p className="contact-form-feedback" role="alert">

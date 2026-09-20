@@ -1,0 +1,277 @@
+.legal-page-shell {
+    padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+
+.legal-page,
+.thank-you-page {
+    width: min(100%, 58rem);
+    margin-inline: auto;
+}
+
+.legal-page__header {
+    padding-block: 0 4rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.legal-page__header .page-breadcrumb,
+.thank-you-page .page-breadcrumb {
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.legal-page__header h1,
+.thank-you-page h1 {
+    max-width: 12ch;
+    margin-top: 1rem;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    letter-spacing: -0.075em;
+    line-height: 0.94;
+}
+
+.legal-page__header h1 em,
+.thank-you-page h1 em {
+    color: var(--green);
+    font-style: italic;
+    font-weight: 470;
+}
+
+.legal-page__lede {
+    max-width: 37rem;
+    margin-top: 2rem;
+    color: var(--text-dim);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.5;
+}
+
+.legal-page__updated {
+    margin-top: 1.5rem;
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.legal-page__body {
+    display: grid;
+    gap: 0;
+}
+
+.legal-page__body section {
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr);
+    gap: 2rem;
+    padding-block: 2.5rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.legal-page__body .section-label {
+    align-self: start;
+    margin-top: 0.35rem;
+}
+
+.legal-page__body h2 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.45rem, 3vw, 2.1rem);
+    letter-spacing: -0.05em;
+    line-height: 1.05;
+}
+
+.legal-page__body p:not(.section-label) {
+    max-width: 37rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+}
+
+.legal-page__body p + p {
+    margin-top: 1rem;
+}
+
+.legal-page__body a,
+.legal-page__footer a {
+    color: var(--green);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.legal-page__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    padding-top: 2rem;
+}
+
+.thank-you-page-shell {
+    min-height: 60vh;
+}
+
+.thank-you-page {
+    padding-bottom: clamp(5rem, 12vw, 10rem);
+}
+
+.thank-you-page__icon {
+    display: grid;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 2rem;
+    place-items: center;
+    border: 1px solid var(--green-dim);
+    border-radius: 50%;
+    color: var(--green);
+}
+
+.thank-you-page > p:not(.page-breadcrumb):not(.section-label) {
+    max-width: 30rem;
+    margin-top: 2rem;
+    color: var(--text-dim);
+    font-size: 1.15rem;
+    line-height: 1.55;
+}
+
+.thank-you-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    margin-top: 2.5rem;
+}
+
+.mobile-contact-cta {
+    display: none;
+}
+
+.cookie-banner {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    display: flex;
+    max-width: 52rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-inline: auto;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line-bright);
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25);
+    color: var(--text);
+    backdrop-filter: blur(16px);
+}
+
+.cookie-banner strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.cookie-banner p {
+    max-width: 36rem;
+    margin: 0.45rem 0 0;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.cookie-banner__actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cookie-banner__actions a,
+.cookie-banner__actions button {
+    color: var(--green);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+.cookie-banner__actions a { text-decoration: underline; text-underline-offset: 0.2em; }
+.cookie-banner__actions button { padding: 0.6rem 0.8rem; border: 1px solid var(--green); }
+.cookie-banner__actions button:hover,
+.cookie-banner__actions button:focus-visible { background: var(--green); color: var(--bg); }
+
+@media (max-width: 720px) {
+    .legal-page__header h1,
+    .thank-you-page h1 {
+        font-size: clamp(2.8rem, 13vw, 4.8rem);
+    }
+
+    .legal-page__body section {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding-block: 2rem;
+    }
+
+    .legal-page__body .section-label {
+        margin-top: 0;
+    }
+
+    .legal-page__footer,
+    .thank-you-page__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    main#main-content {
+        padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+    }
+
+    .mobile-contact-cta {
+        position: fixed;
+        right: 0.75rem;
+        bottom: calc(0.75rem + env(safe-area-inset-bottom));
+        left: 0.75rem;
+        z-index: 950;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: 3.5rem;
+        padding: 0.75rem 0.9rem 0.75rem 1rem;
+        border: 1px solid var(--green);
+        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
+        color: var(--text);
+        backdrop-filter: blur(16px);
+    }
+
+    .mobile-contact-cta span {
+        overflow: hidden;
+        color: var(--text-dim);
+        font-size: 0.78rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .mobile-contact-cta strong {
+        flex: 0 0 auto;
+        color: var(--green);
+        font-size: 0.86rem;
+    }
+
+    .cookie-banner {
+        right: 0.75rem;
+        bottom: calc(5.1rem + env(safe-area-inset-bottom));
+        left: 0.75rem;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0.9rem;
+        padding: 0.9rem;
+    }
+
+    .cookie-banner__actions { justify-content: space-between; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mobile-contact-cta {
+        backdrop-filter: none;
+    }
+}

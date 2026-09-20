@@ -3,6 +3,7 @@ import { positioningStatement, profileLinks } from "./profileLinks.js";
 
 export const SITE_URL = "https://shauryasaria.me";
 export const PROFILE_IMAGE_URL = `${SITE_URL}/images/shaurya-portrait.jpeg`;
+export const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
 export const STRUCTURED_DATA_ID = "site-json-ld";
 
 const personId = `${SITE_URL}/#person`;
@@ -35,6 +36,22 @@ const pageMetadata = {
     "/contact": {
         title: "Contact Shaurya Saria | Student Developer",
         description: "Contact Shaurya Saria in Bengaluru about internships, research, AI and data products, or thoughtful full-stack collaborations.",
+        type: "website",
+    },
+    "/contact/thanks": {
+        title: "Message received | Shaurya Saria",
+        description: "Your message reached Shaurya Saria. Thank you for starting the conversation.",
+        type: "website",
+        robots: "noindex, nofollow",
+    },
+    "/privacy": {
+        title: "Privacy | Shaurya Saria",
+        description: "How Shaurya Saria's portfolio handles contact messages, local browser storage, analytics, and external links.",
+        type: "website",
+    },
+    "/terms": {
+        title: "Terms | Shaurya Saria",
+        description: "The basic terms for browsing Shaurya Saria's personal portfolio and sending a contact message.",
         type: "website",
     },
     "/uses": {
@@ -171,14 +188,16 @@ export function getSeoMetadata(pathname = "/") {
             title: "Page not found | Shaurya Saria",
             description: "The requested page could not be found on Shaurya Saria's portfolio.",
             type: "website",
+            robots: "noindex, nofollow",
         };
 
     const completeMetadata = {
         ...metadata,
         pathname: normalizedPathname,
         canonical: getCanonicalUrl(normalizedPathname),
-        image: PROFILE_IMAGE_URL,
-        imageAlt: "Shaurya Saria",
+        image: OG_IMAGE_URL,
+        imageAlt: "Shaurya Saria | AI and product engineering portfolio",
+        robots: metadata.robots ?? "index, follow",
     };
 
     return {
