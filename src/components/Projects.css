@@ -241,6 +241,10 @@
     border-bottom: 1px solid var(--line);
 }
 
+.project-card-shell {
+    position: relative;
+}
+
 .project-card {
     width: 100%;
     display: grid;
@@ -256,6 +260,34 @@
     cursor: pointer;
     transition: color 160ms ease-out, background-color 160ms ease-out, transform 140ms ease-out;
 }
+
+.project-card__save {
+    position: absolute;
+    top: 0.75rem;
+    right: 0;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.2rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.project-card__save:hover,
+.project-card__save:focus-visible,
+.project-card__save--active { border-color: var(--green); color: var(--green); outline: none; }
+.project-card__save:focus-visible { box-shadow: 0 0 0 2px color-mix(in srgb, var(--green) 22%, transparent); }
+.project-card__save:active { transform: scale(0.97); }
 
 .project-card:active {
     transform: scale(0.97);
@@ -535,6 +567,8 @@
         margin-top: 1.35rem;
     }
 
+    .project-card__save { top: 0.65rem; }
+
     .project-card__action {
         font-size: 0.64rem;
     }
@@ -558,6 +592,7 @@
     .project-filter,
     .project-explorer-empty button,
     .project-card,
+    .project-card__save,
     .project-card__preview img,
     .project-card__action svg,
     .selected-work-primary svg {

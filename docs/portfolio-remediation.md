@@ -73,6 +73,15 @@ This document records the implementation of the customer and admissions critique
 - Acceptance: all repository quality gates pass and the local development server remains available for user verification.
 - Evidence: the final command results and the running Vite session documented in the task response.
 
+## Package 8: interactive exploration
+
+- Goal: turn the portfolio from a passive sequence of pages into a visitor-controlled exploration.
+- Scope: audience lenses on the homepage, a persistent project reading list, and service/process selectors that carry the selected project type into Contact.
+- Non-goals: gamification, fake live data, account creation, backend storage, or adding motion for its own sake.
+- Main files: `src/data/profile.js`, `src/lib/audienceLens.js`, `src/lib/projectShortlist.js`, `src/pages/home/Home.jsx`, `src/components/Projects.jsx`, `src/components/ProjectDetailDialog.jsx`, `src/pages/work-with-me/WorkWithMePage.jsx`, `src/components/Contact.jsx`, `src/pages/privacy/PrivacyPage.jsx`.
+- Acceptance: a visitor can choose a homepage lens, open a tailored project trail, save projects across visits, filter the archive to saved work, choose a service/process step, and arrive at Contact with the service context preselected.
+- Evidence: unit tests for lens and shortlist utilities, browser interaction checks for lens switching, saved filtering, service/process selection, and Contact prefill.
+
 ## Final validation gate
 
 The change is ready for independent review when the branch is clean except for task-owned files, all P0 and P1 issues are addressed, the local browser smoke paths pass, and hosted deployment is separately verified after explicit approval.

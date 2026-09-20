@@ -1,5 +1,5 @@
 import { ArrowUpRight, Check, MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { availability, serviceOffers, workProcess } from "../../data/profile";
 import { projects } from "../../data/projects";
@@ -11,6 +11,16 @@ const proofProjects = projects.filter((project) =>
 );
 
 export default function WorkWithMePage() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const selectedOffer = serviceOffers.find((offer) => offer.id === searchParams.get("service")) ?? serviceOffers[0];
+    const selectedStep = workProcess.find((step) => step.number === searchParams.get("step")) ?? workProcess[0];
+
+    const selectWorkOption = (key, value) => {
+        const next = new URLSearchParams(searchParams);
+        next.set(key, value);
+        setSearchParams(next, { replace: true });
+    };
+
     return (
         <div className="page-wrapper work-with-me-page">
             <header className="work-with-me-hero">
@@ -51,18 +61,39 @@ export default function WorkWithMePage() {
                     <p>Every offer is intentionally bounded so the first version can be reviewed, tested, and improved.</p>
                 </div>
 
-                <div className="work-offer-grid">
+                <div className="work-offer-selector" role="group" aria-label="Choose a service focus">
                     {serviceOffers.map((offer) => (
-                        <article className="work-offer-card" key={offer.number}>
-                            <div className="work-offer-card__topline"><span>{offer.number}</span><span>Focused build</span></div>
-                            <h3>{offer.title}</h3>
-                            <p>{offer.summary}</p>
-                            <ul>
-                                {offer.deliverables.map((deliverable) => <li key={deliverable}><Check size={15} aria-hidden="true" />{deliverable}</li>)}
-                            </ul>
-                            <small>{offer.fit}</small>
-                        </article>
+                        <button
+                            type="button"
+                            key={offer.id}
+                            className={`work-offer-option ${selectedOffer.id === offer.id ? "work-offer-option--active" : ""}`}
+                            aria-pressed={selectedOffer.id === offer.id}
+                            aria-controls="work-offer-panel"
+                            onClick={() => selectWorkOption("service", offer.id)}
+                        >
+                            <span>{offer.number}</span>
+                            <strong>{offer.title}</strong>
+                            <ArrowUpRight size={16} aria-hidden="true" />
+                        </button>
                     ))}
+                </div>
+
+                <div className="work-offer-panel" id="work-offer-panel" aria-live="polite">
+                    <div className="work-offer-panel__heading">
+                        <div className="work-offer-card__topline"><span>{selectedOffer.number}</span><span>Focused build</span></div>
+                        <h3>{selectedOffer.title}</h3>
+                        <p>{selectedOffer.summary}</p>
+                    </div>
+                    <div className="work-offer-panel__details">
+                        <span className="section-label">What the first version includes</span>
+                        <ul>
+                            {selectedOffer.deliverables.map((deliverable) => <li key={deliverable}><Check size={15} aria-hidden="true" />{deliverable}</li>)}
+                        </ul>
+                        <small>{selectedOffer.fit}</small>
+                        <Link className="btn btn-primary" to={`/contact?projectType=${selectedOffer.id}`}>
+                            Start with this scope <ArrowUpRight size={17} aria-hidden="true" />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -75,13 +106,28 @@ export default function WorkWithMePage() {
                     <p>Scope first, then build enough to learn something real. The exact timeline depends on the pages, integrations, and review depth.</p>
                 </div>
 
-                <div className="work-process-list">
+                <div className="work-process-selector" role="group" aria-label="Explore the project process">
                     {workProcess.map((step) => (
-                        <article className="work-process-step" key={step.number}>
+                        <button
+                            type="button"
+                            key={step.number}
+                            className={`work-process-option ${selectedStep.number === step.number ? "work-process-option--active" : ""}`}
+                            aria-pressed={selectedStep.number === step.number}
+                            aria-controls="work-process-panel"
+                            onClick={() => selectWorkOption("step", step.number)}
+                        >
                             <span>{step.number}</span>
-                            <div><h3>{step.title}</h3><p>{step.detail}</p></div>
-                        </article>
+                            <strong>{step.title}</strong>
+                        </button>
                     ))}
+                </div>
+
+                <div className="work-process-panel" id="work-process-panel" aria-live="polite">
+                    <span>{selectedStep.number}</span>
+                    <div>
+                        <h3>{selectedStep.title}</h3>
+                        <p>{selectedStep.detail}</p>
+                    </div>
                 </div>
             </section>
 

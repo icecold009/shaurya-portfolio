@@ -277,6 +277,11 @@
     text-transform: uppercase;
 }
 
+.project-detail-dialog__save[aria-pressed="true"] {
+    border-color: var(--green);
+    color: var(--green);
+}
+
 .project-detail-dialog__actions a {
     border-color: var(--green);
     background: var(--green);

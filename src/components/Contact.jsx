@@ -1,17 +1,22 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { positioningStatement, profileLinks } from "../lib/profileLinks";
 import { CONTACT_LIMITS, validateContactForm } from "../lib/contactValidation";
 
 function Contact() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const requestedProjectType = searchParams.get("projectType");
+    const initialProjectType = ["portfolio-site", "product-site", "dashboard", "ai-prototype", "other"].includes(requestedProjectType)
+        ? requestedProjectType
+        : "";
     const [status, setStatus] = useState("idle");
     const [fieldErrors, setFieldErrors] = useState({});
     const [form, setForm] = useState({
         name: "",
         email: "",
-        projectType: "",
+        projectType: initialProjectType,
         timeline: "",
         budget: "",
         message: "",
