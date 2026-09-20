@@ -313,8 +313,8 @@
             const introMode = new URLSearchParams(window.location.search).get("intro");
             const forceIntro = introMode === "show" || introMode === "animate";
             const forceAnimation = introMode === "animate";
-            // 2.5s hello draw + 1s split-curtain handoff = a 3.5s entrance.
-            const introDurationMs = 2500;
+            // 3.5s hello draw + 1s split-curtain handoff = a 4.5s entrance.
+            const introDurationMs = 3500;
             const handoffDurationMs = 1000;
 
             if (!loader) {

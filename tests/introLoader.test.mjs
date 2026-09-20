@@ -15,11 +15,11 @@ const scriptSource = inlineScript
     .replace(/^<script>\s*/, "")
     .replace(/\s*<\/script>$/, "");
 const introKey = "shaurya-portfolio:hello-intro-seen-v6";
-const introDurationMs = 2500;
+const introDurationMs = 3500;
 
 assert.match(html, /class="app-loader__curtain app-loader__curtain--left"/);
 assert.match(html, /class="app-loader__curtain app-loader__curtain--right"/);
-assert.match(html, /const introDurationMs = 2500/);
+assert.match(html, /const introDurationMs = 3500/);
 assert.match(html, /transform: translateX\(-100%\)/);
 assert.match(html, /transform: translateX\(100%\)/);
 
@@ -194,7 +194,7 @@ test("forced animation replays without changing the session flag", () => {
     assert.equal(harness.storage.get(introKey), "1");
 });
 
-test("the intro stays visible until the 2500 millisecond draw completes before the curtain handoff", () => {
+test("the intro stays visible until the 3500 millisecond draw completes before the curtain handoff", () => {
     const harness = createHarness();
 
     harness.window.__appLoaderAppReady();
