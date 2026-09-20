@@ -38,6 +38,11 @@ const pageMetadata = {
         description: "Contact Shaurya Saria in Bengaluru about internships, research, AI and data products, or thoughtful full-stack collaborations.",
         type: "website",
     },
+    "/work-with-me": {
+        title: "Work with Shaurya Saria | Focused Websites, Data Interfaces, and AI Prototypes",
+        description: "Work with Shaurya Saria on focused portfolio sites, data interfaces, and bounded AI or machine-learning prototypes from Bengaluru.",
+        type: "website",
+    },
     "/contact/thanks": {
         title: "Message received | Shaurya Saria",
         description: "Your message reached Shaurya Saria. Thank you for starting the conversation.",

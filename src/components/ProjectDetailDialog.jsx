@@ -1,8 +1,9 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, Bookmark, BookmarkCheck, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
 import "../styles/components/project-detail-dialog.css";
+import { getProjectEvidenceSummary } from "../lib/projectEvidence";
 
 function getFocusableElements(container) {
     return Array.from(
@@ -17,7 +18,10 @@ export default function ProjectDetailDialog({
     onClose,
     triggerElement,
     fallbackFocusSelector = "#main-content",
+    isSaved = false,
+    onToggleSave,
 }) {
+    const evidence = getProjectEvidenceSummary(project);
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
@@ -153,6 +157,12 @@ export default function ProjectDetailDialog({
                             {project.description}
                         </p>
 
+                        <div className="project-detail-dialog__evidence" role="note">
+                            <span>Evidence level</span>
+                            <strong>{evidence.label}</strong>
+                            <small>{evidence.hasSource ? "Repository linked" : "No repository linked"} · {evidence.hasVisual ? "Visual included" : "Visual pending"}</small>
+                        </div>
+
                         <div className="project-detail-dialog__outcome">
                             <span>Outcome</span>
                             <p>{project.outcome}</p>
@@ -201,6 +211,17 @@ export default function ProjectDetailDialog({
                     </span>
 
                     <div className="project-detail-dialog__actions">
+                        {onToggleSave ? (
+                            <button
+                                type="button"
+                                className="project-detail-dialog__save"
+                                onClick={() => onToggleSave(project.id)}
+                                aria-pressed={isSaved}
+                            >
+                                {isSaved ? <BookmarkCheck size={16} aria-hidden="true" /> : <Bookmark size={16} aria-hidden="true" />}
+                                {isSaved ? "Saved to reading list" : "Save to reading list"}
+                            </button>
+                        ) : null}
                         {project.github ? (
                             <a href={project.github} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} repository in a new tab`}>
                                 View source code

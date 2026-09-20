@@ -1,6 +1,7 @@
+import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import Hero from "../../components/Hero";
 import GitHubContributions from "../../components/GitHubContributions";
@@ -11,22 +12,52 @@ import {
     REVEAL_VIEWPORT,
 } from "../../lib/motion";
 import { positioningStatement } from "../../lib/profileLinks";
+import { academicProfile, audienceLenses, availability } from "../../data/profile";
+import { getAudienceLens, getLensProjects } from "../../lib/audienceLens";
+import { getProjectProofLabel } from "../../lib/projectEvidence";
 import { formatPostDate, posts } from "../../posts";
 
 import "./Home.css";
-
-const featuredProjectNumbers = ["01", "02", "06"];
-const featuredProjects = projects.filter((project) =>
-    featuredProjectNumbers.includes(project.number)
-);
 
 const writingSlugs = ["shazam-clone", "shipping-is-a-design-decision"];
 
 export default function Home() {
     const shouldReduceMotion = useReducedMotion();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const lensTabRefs = useRef({});
+    const requestedLens = searchParams.get("lens");
+    const activeLens = getAudienceLens(audienceLenses, requestedLens, "admissions");
+    const lensProjects = getLensProjects(activeLens, projects);
     const writing = writingSlugs
         .map((slug) => posts.find((post) => post.slug === slug))
         .filter(Boolean);
+
+    const setActiveLens = (lensId, shouldFocus = false) => {
+        const next = new URLSearchParams(searchParams);
+        next.set("lens", lensId);
+        setSearchParams(next, { replace: true });
+
+        if (shouldFocus) {
+            window.requestAnimationFrame(() => lensTabRefs.current[lensId]?.focus());
+        }
+    };
+
+    const handleLensKeyDown = (event) => {
+        const currentIndex = audienceLenses.findIndex((lens) => lens.id === activeLens?.id);
+
+        if (currentIndex < 0 || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+            return;
+        }
+
+        event.preventDefault();
+        const nextIndex = event.key === "Home"
+            ? 0
+            : event.key === "End"
+                ? audienceLenses.length - 1
+                : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + audienceLenses.length) % audienceLenses.length;
+
+        setActiveLens(audienceLenses[nextIndex].id, true);
+    };
 
     return (
         <div className="home-page">
@@ -45,8 +76,8 @@ export default function Home() {
                     variants={shouldReduceMotion ? undefined : REVEAL}
                 >
                     <div>
-                        <p className="home-kicker">Selected work / 03</p>
-                        <h2 id="home-work-title">Built to make hard things <em>clearer.</em></h2>
+                        <p className="home-kicker">Selected work / choose a lens</p>
+                        <h2 id="home-work-title">Explore the work <em>your way.</em></h2>
                     </div>
                     <Link className="home-text-link cta-link" to="/projects">
                         View all projects <ArrowUpRight size={16} aria-hidden="true" />
@@ -54,34 +85,62 @@ export default function Home() {
                 </motion.div>
 
                 <motion.div
-                    className="home-project-list"
-                    variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                    className="home-lens-explorer"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
                 >
-                    {featuredProjects.map((project) => (
-                        <motion.article
-                            className="home-project-card"
-                            key={project.title}
-                            variants={shouldReduceMotion ? undefined : REVEAL}
-                        >
-                            <div className={`home-project-card__visual home-project-card__visual--${project.number}`}>
-                                <img src={project.thumbnail} alt={project.thumbnailAlt ?? `${project.title} project preview`} loading="lazy" decoding="async" />
-                            </div>
-                            <div className="home-project-card__body">
-                                <div className="home-project-card__meta">
-                                    <span>{project.number}</span>
-                                    <span>{project.homeCategory ?? project.category}</span>
-                                </div>
-                                <h3>{project.title}</h3>
-                                <p>{project.summary ?? project.description}</p>
-                                <div className="home-project-card__footer">
-                                    <span>{project.status}</span>
-                                    <Link className="cta-link" to={`/projects#project-detail-${project.number}`} aria-label={`Open the ${project.title} project overview`}>
-                                        View project <ArrowUpRight size={16} aria-hidden="true" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </motion.article>
-                    ))}
+                    <div className="home-lens-tabs" role="tablist" aria-label="Choose how to explore the portfolio" onKeyDown={handleLensKeyDown}>
+                        {audienceLenses.map((lens) => (
+                            <button
+                                key={lens.id}
+                                ref={(element) => {
+                                    if (element) {
+                                        lensTabRefs.current[lens.id] = element;
+                                    }
+                                }}
+                                type="button"
+                                className={`home-lens-tab ${activeLens?.id === lens.id ? "home-lens-tab--active" : ""}`}
+                                id={`home-lens-tab-${lens.id}`}
+                                role="tab"
+                                aria-selected={activeLens?.id === lens.id}
+                                aria-controls="home-lens-panel"
+                                tabIndex={activeLens?.id === lens.id ? 0 : -1}
+                                onClick={() => setActiveLens(lens.id)}
+                            >
+                                <span>{lens.label}</span>
+                                <ArrowUpRight size={15} aria-hidden="true" />
+                            </button>
+                        ))}
+                    </div>
+
+                    <div
+                        className="home-lens-panel"
+                        id="home-lens-panel"
+                        role="tabpanel"
+                        aria-labelledby={`home-lens-tab-${activeLens?.id}`}
+                        aria-live="polite"
+                    >
+                        <div className="home-lens-panel__copy">
+                            <p className="home-kicker">{activeLens?.kicker}</p>
+                            <h3>{activeLens?.title}</h3>
+                            <p>{activeLens?.description}</p>
+                            <Link className="home-text-link cta-link" to={activeLens?.actionTo ?? "/projects"}>
+                                {activeLens?.actionLabel} <ArrowUpRight size={16} aria-hidden="true" />
+                            </Link>
+                        </div>
+
+                        <div className="home-lens-projects" aria-label={`${activeLens?.label} project trail`}>
+                            {lensProjects.map((project) => (
+                                <Link className="home-lens-project" to={`/projects?project=${project.id}`} key={project.id}>
+                                    <span className="home-lens-project__number">{project.number}</span>
+                                    <span className="home-lens-project__body">
+                                        <strong>{project.title}</strong>
+                                        <small>{getProjectProofLabel(project)}</small>
+                                    </span>
+                                    <ArrowUpRight size={17} aria-hidden="true" />
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </motion.div>
             </motion.section>
 
@@ -110,14 +169,43 @@ export default function Home() {
                         {positioningStatement}
                     </p>
                     <div className="home-profile-facts">
-                        <div><span>Based in</span><strong>Bengaluru, India</strong></div>
+                        <div><span>School and stage</span><strong>{academicProfile.school} · {academicProfile.expectedGraduation}</strong></div>
+                        <div><span>Based in</span><strong>{academicProfile.location}</strong></div>
                         <div><span>Working across</span><strong>ML experiments, full-stack products, and interfaces</strong></div>
-                        <div><span>Open to</span><strong>Internships, research, and thoughtful collaborations</strong></div>
+                        <div><span>Open to</span><strong>{availability.detail}</strong></div>
                     </div>
                 </motion.div>
                 <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
                     <Link className="home-text-link cta-link" to="/about">Read my story <ArrowUpRight size={16} aria-hidden="true" /></Link>
                 </motion.div>
+            </motion.section>
+
+            <motion.section
+                className="home-section home-section--paths"
+                aria-labelledby="home-paths-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div className="home-section__heading" variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <div>
+                        <p className="home-kicker">Choose a path</p>
+                        <h2 id="home-paths-title">Start with the <em>right context.</em></h2>
+                    </div>
+                </motion.div>
+                <div className="home-path-grid">
+                    <motion.div className="home-path-card" variants={shouldReduceMotion ? undefined : REVEAL}>
+                        <span>For admissions and research</span>
+                        <h3>See the academic profile, selected evidence, and the thinking behind the work.</h3>
+                        <Link className="home-text-link cta-link" to="/achievements">View the admissions snapshot <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                    </motion.div>
+                    <motion.div className="home-path-card" variants={shouldReduceMotion ? undefined : REVEAL}>
+                        <span>For founders and collaborators</span>
+                        <h3>See what a focused website, data interface, or AI prototype can become.</h3>
+                        <Link className="home-text-link cta-link" to="/work-with-me">Explore working together <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                    </motion.div>
+                </div>
             </motion.section>
 
             <motion.section
@@ -133,7 +221,7 @@ export default function Home() {
                     variants={shouldReduceMotion ? undefined : REVEAL}
                 >
                     <div>
-                        <p className="home-kicker">Writing / 02</p>
+                        <p className="home-kicker">Writing / 02 selected notes</p>
                         <h2 id="home-writing-title">Notes from the <em>workbench.</em></h2>
                     </div>
                     <Link className="home-text-link cta-link" to="/blog">Read all notes <ArrowUpRight size={16} aria-hidden="true" /></Link>

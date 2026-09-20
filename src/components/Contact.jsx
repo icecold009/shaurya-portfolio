@@ -1,16 +1,24 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { positioningStatement, profileLinks } from "../lib/profileLinks";
 import { CONTACT_LIMITS, validateContactForm } from "../lib/contactValidation";
 
 function Contact() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const requestedProjectType = searchParams.get("projectType");
+    const initialProjectType = ["portfolio-site", "product-site", "dashboard", "ai-prototype", "other"].includes(requestedProjectType)
+        ? requestedProjectType
+        : "";
     const [status, setStatus] = useState("idle");
     const [fieldErrors, setFieldErrors] = useState({});
     const [form, setForm] = useState({
         name: "",
         email: "",
+        projectType: initialProjectType,
+        timeline: "",
+        budget: "",
         message: "",
     });
 
@@ -21,11 +29,17 @@ function Contact() {
         const trimmedEmail = form.email.trim();
         const trimmedMessage = form.message.trim();
         const nextErrors = validateContactForm(form);
+        const honeypot = event.currentTarget.elements.website?.value ?? "";
 
         setFieldErrors(nextErrors);
 
         if (Object.keys(nextErrors).length > 0) {
             document.getElementById(Object.keys(nextErrors)[0])?.focus();
+            return;
+        }
+
+        if (honeypot) {
+            setStatus("error");
             return;
         }
 
@@ -38,6 +52,9 @@ function Contact() {
                 body: JSON.stringify({
                     name: trimmedName,
                     email: trimmedEmail,
+                    projectType: form.projectType,
+                    timeline: form.timeline,
+                    budget: form.budget,
                     message: trimmedMessage,
                 }),
             });
@@ -95,6 +112,8 @@ function Contact() {
 
                     <form
                         className="contact-form"
+                        action="https://formspree.io/f/mwvdyllv"
+                        method="post"
                         onSubmit={handleSubmit}
                         aria-busy={status === "sending"}
                         noValidate
@@ -103,6 +122,8 @@ function Contact() {
                             <label htmlFor="name">Your name</label>
                             <input
                                 id="name"
+                                name="name"
+                                required
                                 autoComplete="name"
                                 value={form.name}
                                 onChange={handleFieldChange("name")}
@@ -117,7 +138,9 @@ function Contact() {
                             <label htmlFor="email">Email address</label>
                             <input
                                 id="email"
+                                name="email"
                                 type="email"
+                                required
                                 autoComplete="email"
                                 value={form.email}
                                 onChange={handleFieldChange("email")}
@@ -129,11 +152,42 @@ function Contact() {
                             {fieldErrors.email && <p className="form-field-error" id="email-error" role="alert">{fieldErrors.email}</p>}
                         </div>
 
+                        <div className="contact-form-grid">
+                            <div className="form-group">
+                                <label htmlFor="projectType">What do you need?</label>
+                                <select id="projectType" name="projectType" value={form.projectType} onChange={handleFieldChange("projectType")}>
+                                    <option value="">Choose a project type</option>
+                                    <option value="portfolio-site">Portfolio or personal site</option>
+                                    <option value="product-site">Product or landing page</option>
+                                    <option value="dashboard">Dashboard or data interface</option>
+                                    <option value="ai-prototype">AI or ML prototype</option>
+                                    <option value="other">Something else</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="timeline">When are you thinking?</label>
+                                <select id="timeline" name="timeline" value={form.timeline} onChange={handleFieldChange("timeline")}>
+                                    <option value="">Choose a timeline</option>
+                                    <option value="exploring">Just exploring</option>
+                                    <option value="this-month">This month</option>
+                                    <option value="next-quarter">Next quarter</option>
+                                    <option value="flexible">I am flexible</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="budget">Budget or scope note <span>(optional)</span></label>
+                            <input id="budget" name="budget" value={form.budget} onChange={handleFieldChange("budget")} maxLength="160" placeholder="A range, constraint, or not sure yet" />
+                        </div>
+
                         <div className="form-group">
                             <label htmlFor="message">What are you building or trying to understand?</label>
                             <textarea
                                 id="message"
+                                name="message"
                                 rows="5"
+                                required
                                 value={form.message}
                                 onChange={handleFieldChange("message")}
                                 maxLength={CONTACT_LIMITS.message}
@@ -141,6 +195,11 @@ function Contact() {
                                 aria-describedby={fieldErrors.message ? "message-error" : undefined}
                             />
                             {fieldErrors.message && <p className="form-field-error" id="message-error" role="alert">{fieldErrors.message}</p>}
+                        </div>
+
+                        <div className="contact-form-honeypot" aria-hidden="true">
+                            <label htmlFor="website">Website</label>
+                            <input id="website" name="website" tabIndex="-1" autoComplete="off" />
                         </div>
 
                         <button

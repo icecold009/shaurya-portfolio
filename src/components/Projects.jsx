@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck } from "lucide-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
@@ -13,10 +13,24 @@ import {
     getProjectFromHash,
     getProjectTag,
 } from "../lib/projectSearch";
+import { getProjectProofLabel } from "../lib/projectEvidence";
+import {
+    readProjectShortlist,
+    toggleProjectShortlist,
+    writeProjectShortlist,
+} from "../lib/projectShortlist";
 
 import "./Projects.css";
 import { projectProofIntro, projects } from "../data/projects";
 import ProjectDetailDialog from "./ProjectDetailDialog";
+
+function getPortfolioStorage() {
+    try {
+        return typeof window === "undefined" ? null : window.localStorage;
+    } catch {
+        return null;
+    }
+}
 
 function ProjectCardPreview({ project }) {
     const [imageFailed, setImageFailed] = useState(false);
@@ -43,7 +57,7 @@ function ProjectCardPreview({ project }) {
     );
 }
 
-function ProjectCaseStudy({ project, onOpenProject, isOpen }) {
+function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSave }) {
     const shouldReduceMotion = useReducedMotion();
 
     return (
@@ -55,41 +69,54 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen }) {
             whileInView={shouldReduceMotion ? undefined : "visible"}
             viewport={{ once: true, amount: 0.08 }}
         >
-            <button
-                type="button"
-                className={`project-card${isOpen ? " project-card--open" : ""}`}
-                onClick={(event) => onOpenProject(project, event.currentTarget)}
-                aria-haspopup="dialog"
-                aria-expanded={isOpen}
-                aria-controls={isOpen ? "project-detail-dialog" : undefined}
-            >
-                <ProjectCardPreview project={project} />
+            <div className="project-card-shell">
+                <button
+                    type="button"
+                    className={`project-card${isOpen ? " project-card--open" : ""}`}
+                    onClick={(event) => onOpenProject(project, event.currentTarget)}
+                    aria-haspopup="dialog"
+                    aria-expanded={isOpen}
+                    aria-controls={isOpen ? "project-detail-dialog" : undefined}
+                >
+                    <ProjectCardPreview project={project} />
 
-                <span className="project-card__main">
-                    <span className="project-card__meta">
-                        <span className="project-card__number">{project.number}</span>
-                        <span>{project.year}</span>
-                        <span className="project-card__category">{project.category}</span>
-                    </span>
-                    <span className="project-card__title-row">
-                        <h2 className="project-card__title">{project.title}</h2>
-                        <span className="project-card__action">
-                            View details
-                            <ArrowUpRight size={15} aria-hidden="true" />
+                    <span className="project-card__main">
+                        <span className="project-card__meta">
+                            <span className="project-card__number">{project.number}</span>
+                            <span>{project.year}</span>
+                            <span className="project-card__category">{project.category}</span>
+                        </span>
+                        <span className="project-card__title-row">
+                            <h2 className="project-card__title">{project.title}</h2>
+                            <span className="project-card__action">
+                                View details
+                                <ArrowUpRight size={15} aria-hidden="true" />
+                            </span>
+                        </span>
+                        <span className="project-card__lede">
+                            {project.summary ?? project.description}
+                        </span>
+                        <span className="project-card__footer">
+                            <span className="project-card__status">{getProjectProofLabel(project)}</span>
+                            <span className="project-card__stack" aria-label={`${project.title} technology stack`}>
+                                {project.stack.slice(0, 3).map((technology) => <span key={technology}>{technology}</span>)}
+                                {project.stack.length > 3 ? <span>+{project.stack.length - 3}</span> : null}
+                            </span>
                         </span>
                     </span>
-                    <span className="project-card__lede">
-                        {project.summary ?? project.description}
-                    </span>
-                    <span className="project-card__footer">
-                        <span className="project-card__status">{project.status}</span>
-                        <span className="project-card__stack" aria-label={`${project.title} technology stack`}>
-                            {project.stack.slice(0, 3).map((technology) => <span key={technology}>{technology}</span>)}
-                            {project.stack.length > 3 ? <span>+{project.stack.length - 3}</span> : null}
-                        </span>
-                    </span>
-                </span>
-            </button>
+                </button>
+                <button
+                    type="button"
+                    className={`project-card__save${isSaved ? " project-card__save--active" : ""}`}
+                    onClick={() => onToggleSave(project.id)}
+                    aria-pressed={isSaved}
+                    aria-label={isSaved ? `Remove ${project.title} from reading list` : `Save ${project.title} to reading list`}
+                    title={isSaved ? "Remove from reading list" : "Save to reading list"}
+                >
+                    {isSaved ? <BookmarkCheck size={16} aria-hidden="true" /> : <Bookmark size={16} aria-hidden="true" />}
+                    <span>{isSaved ? "Saved" : "Save"}</span>
+                </button>
+            </div>
         </motion.article>
     );
 }
@@ -99,6 +126,9 @@ export default function Projects() {
     const location = useLocation();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const [shortlistIds, setShortlistIds] = useState(() => (
+        readProjectShortlist(getPortfolioStorage(), projects)
+    ));
     const [hashValue, setHashValue] = useState(() =>
         typeof window === "undefined" ? "" : window.location.hash,
     );
@@ -106,10 +136,12 @@ export default function Projects() {
 
     const query = searchParams.get("q") ?? "";
     const tag = searchParams.get("tag") ?? "";
+    const savedOnly = searchParams.get("saved") === "1";
     const visibleProjects = useMemo(
-        () => filterProjects(projects, { query, tag }),
-        [query, tag],
+        () => filterProjects(projects, { query, tag }).filter((project) => !savedOnly || shortlistIds.includes(project.id)),
+        [query, savedOnly, shortlistIds, tag],
     );
+    const isFiltered = Boolean(query.trim() || tag || savedOnly);
     const projectTags = useMemo(
         () => Array.from(new Set(projects.map(getProjectTag))),
         [],
@@ -119,6 +151,10 @@ export default function Projects() {
     );
     const hashProject = getProjectFromHash(hashValue, projects);
     const selectedProject = queryProject ?? hashProject;
+
+    useEffect(() => {
+        writeProjectShortlist(getPortfolioStorage(), shortlistIds, projects);
+    }, [shortlistIds]);
 
     useEffect(() => {
         const handleHashChange = () => setHashValue(window.location.hash);
@@ -197,6 +233,10 @@ export default function Projects() {
         );
         setHashValue("");
     }, [location.pathname, navigate, searchParams]);
+
+    const toggleShortlist = useCallback((projectId) => {
+        setShortlistIds((currentIds) => toggleProjectShortlist(currentIds, projectId));
+    }, []);
 
     return (
         <>
@@ -297,9 +337,23 @@ export default function Projects() {
                                     {projectTag}
                                 </button>
                             ))}
+                            <button
+                                type="button"
+                                className={`project-filter ${savedOnly ? "project-filter--active" : ""}`}
+                                aria-pressed={savedOnly}
+                                onClick={() => writeSearchParams(
+                                    { saved: savedOnly ? "" : "1" },
+                                    { replace: false, clearProject: true },
+                                )}
+                            >
+                                <Bookmark size={13} aria-hidden="true" />
+                                Saved ({shortlistIds.length})
+                            </button>
                         </div>
                         <p className="project-explorer-results" aria-live="polite">
-                            Showing {visibleProjects.length} of {projects.length} projects
+                            {isFiltered
+                                ? `Showing ${visibleProjects.length} matching projects${savedOnly ? " in your reading list" : ""}`
+                                : `${projects.length} projects in the archive`}
                         </p>
                     </div>
                 </section>
@@ -320,6 +374,8 @@ export default function Projects() {
                                 project={project}
                                 onOpenProject={openProject}
                                 isOpen={selectedProject?.id === project.id}
+                                isSaved={shortlistIds.includes(project.id)}
+                                onToggleSave={toggleShortlist}
                             />
                         ))}
                     </div>
@@ -346,6 +402,8 @@ export default function Projects() {
                     onClose={closeProject}
                     triggerElement={triggerElementRef.current}
                     fallbackFocusSelector="#selected-work-title"
+                    isSaved={shortlistIds.includes(selectedProject.id)}
+                    onToggleSave={toggleShortlist}
                 />
             ) : null}
         </>

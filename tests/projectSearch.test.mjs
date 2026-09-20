@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import { filterProjects, getProjectFromHash } from "../src/lib/projectSearch.js";
 import { projects as projectCatalog } from "../src/data/projects.js";
+import { getProjectProofLabel } from "../src/lib/projectEvidence.js";
 
 const projects = [
     {
@@ -59,6 +60,7 @@ test("every project card has metadata and an intentional preview fallback", () =
         assert.ok(project.title);
         assert.ok(project.status);
         assert.ok(project.summary || project.description);
+        assert.ok(getProjectProofLabel(project));
     }
 
     assert.equal(

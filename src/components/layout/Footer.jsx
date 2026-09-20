@@ -9,6 +9,7 @@ const footerNavigation = [
     { to: "/projects", label: "Work" },
     { to: "/about", label: "About" },
     { to: "/blog", label: "Writing" },
+    { to: "/work-with-me", label: "Work with me" },
     { to: "/contact", label: "Contact" },
 ];
 

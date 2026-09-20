@@ -127,6 +127,30 @@
     line-height: 1.65;
 }
 
+.project-detail-dialog__evidence {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 1.25rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--line-bright);
+    background: var(--surface-2);
+}
+
+.project-detail-dialog__evidence span,
+.project-detail-dialog__evidence small {
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.61rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.project-detail-dialog__evidence strong {
+    color: var(--green);
+    font-family: var(--sans);
+    font-size: 1rem;
+}
+
 .project-detail-dialog__outcome {
     margin-top: 1.75rem;
     padding: 1rem;
@@ -251,6 +275,11 @@
     font-size: 0.62rem;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+}
+
+.project-detail-dialog__save[aria-pressed="true"] {
+    border-color: var(--green);
+    color: var(--green);
 }
 
 .project-detail-dialog__actions a {

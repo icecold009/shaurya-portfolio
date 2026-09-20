@@ -13,7 +13,7 @@ import ScrollToTop from "./ScrollToTop";
 function MobileContactCta() {
     const { pathname } = useLocation();
 
-    if (["/contact", "/contact/thanks", "/privacy", "/terms"].includes(pathname)) {
+    if (["/contact", "/contact/thanks", "/privacy", "/terms", "/work-with-me"].includes(pathname)) {
         return null;
     }
 

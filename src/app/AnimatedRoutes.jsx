@@ -23,6 +23,7 @@ import NotFound from "../pages/not-found/NotFound";
 import ArtworkPage from "../pages/artwork/ArtworkPage";
 import CertificatesPage from "../pages/certificates/CertificatesPage";
 import AchievementsPage from "../pages/achievements/AchievementsPage";
+import WorkWithMePage from "../pages/work-with-me/WorkWithMePage";
 
 import { PAGE_REVEAL } from "../lib/motion";
 
@@ -52,6 +53,7 @@ export default function AnimatedRoutes() {
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/work-with-me" element={<WorkWithMePage />} />
                     <Route path="/contact/thanks" element={<ThankYouPage />} />
                     <Route path="/privacy" element={<PrivacyPage />} />
                     <Route path="/terms" element={<TermsPage />} />
