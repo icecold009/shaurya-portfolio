@@ -18,6 +18,8 @@ export function projectMatches(project, query = "", tag = "") {
         project.description,
         project.category,
         project.status,
+        project.outcome,
+        project.limitations,
         ...project.stack,
     ]
         .join(" ")

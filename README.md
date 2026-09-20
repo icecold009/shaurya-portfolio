@@ -12,8 +12,8 @@ This site is designed to feel like an editorial archive rather than a list of li
 - A responsive navigation system with desktop menus and a mobile focus-managed panel.
 - Light and dark themes with reduced-motion support.
 - Smooth scrolling and purposeful page/scroll transitions.
-- MDX-powered writing, achievements, certificates, artwork, and contact pages.
-- A static portrait used as a visual identity element.
+- MDX-powered writing, a focused academic snapshot, certificates, artwork, and contact pages.
+- A customer-facing work-with-me route for focused websites, data interfaces, and AI prototypes.
 - Optional resume synchronisation from a local LaTeX source.
 
 ## Screenshots
@@ -96,6 +96,8 @@ artifacts/               Local visual captures used in this README
 ## A note on the work
 
 The portfolio is intentionally opinionated about clarity: motion should explain a relationship, controls should remain usable with a keyboard, and the visual system should support the project stories rather than compete with them.
+
+Project records distinguish source-linked prototypes, simulated data, local-first work, research studies, and archive entries. A label describes the available evidence, not a promise of production readiness.
 
 ## Contact
 

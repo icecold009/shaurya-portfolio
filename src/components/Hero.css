@@ -142,6 +142,19 @@
     border-top: 1px solid var(--line-bright);
 }
 
+.portfolio-button--tertiary {
+    border-color: transparent;
+    background: transparent;
+    color: var(--text-dim);
+}
+
+.portfolio-button--tertiary:hover,
+.portfolio-button--tertiary:focus-visible {
+    border-color: var(--line-bright);
+    background: var(--surface-2);
+    color: var(--text);
+}
+
 .portfolio-button {
     min-height: 3.25rem;
     display: flex;

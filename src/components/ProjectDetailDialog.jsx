@@ -3,6 +3,7 @@ import { ArrowUpRight, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
 import "../styles/components/project-detail-dialog.css";
+import { getProjectEvidenceSummary } from "../lib/projectEvidence";
 
 function getFocusableElements(container) {
     return Array.from(
@@ -18,6 +19,7 @@ export default function ProjectDetailDialog({
     triggerElement,
     fallbackFocusSelector = "#main-content",
 }) {
+    const evidence = getProjectEvidenceSummary(project);
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
@@ -152,6 +154,12 @@ export default function ProjectDetailDialog({
                         <p id={descriptionId} className="project-detail-dialog__description">
                             {project.description}
                         </p>
+
+                        <div className="project-detail-dialog__evidence" role="note">
+                            <span>Evidence level</span>
+                            <strong>{evidence.label}</strong>
+                            <small>{evidence.hasSource ? "Repository linked" : "No repository linked"} · {evidence.hasVisual ? "Visual included" : "Visual pending"}</small>
+                        </div>
 
                         <div className="project-detail-dialog__outcome">
                             <span>Outcome</span>

@@ -7,11 +7,19 @@ export default function CookieBanner() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        setIsVisible(window.localStorage.getItem(DISMISS_KEY) !== "true");
+        try {
+            setIsVisible(window.localStorage.getItem(DISMISS_KEY) !== "true");
+        } catch {
+            setIsVisible(true);
+        }
     }, []);
 
     function dismissBanner() {
-        window.localStorage.setItem(DISMISS_KEY, "true");
+        try {
+            window.localStorage.setItem(DISMISS_KEY, "true");
+        } catch {
+            // The notice can still be dismissed for the current render.
+        }
         setIsVisible(false);
     }
 

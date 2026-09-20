@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { academicProfile } from "../data/profile";
+
 const achievements = [
     {
         category: 'Academic',
@@ -153,6 +155,20 @@ const totalAchievements = achievements.reduce(
     0
 );
 
+const highlightTitles = new Set([
+    "Cambridge A-Level Predicted Grades",
+    "SAT Score",
+    "IYMC Silver Prize & Outstanding Submission",
+    "Climate Science Olympiad - Top 100 Worldwide",
+    "MIT Engineers Without Borders - Team Honor Award & Individual Merit Award",
+    "President & Co-founder - Mathematics Club, Vidyashilp Academy",
+    "Node.js UTF-8 Fast Paths",
+]);
+
+const highlights = achievements.flatMap((group) => group.items
+    .filter((item) => highlightTitles.has(item.title))
+    .map((item) => ({ ...item, category: group.category })));
+
 function Achievements() {
     return (
         <section className="achievements" id="achievements">
@@ -164,13 +180,11 @@ function Achievements() {
 
             <div className="achievements-intro">
                 <div>
-                    <p className="section-label">Selected record</p>
+                    <p className="section-label">Admissions snapshot</p>
                     <h1>The work behind the <em>work.</em></h1>
                 </div>
                 <p className="achievements-intro-copy">
-                    Academic milestones, competitions, leadership and
-                    engineering work that have shaped how I think, build and
-                    contribute.
+                    A compact view of the academic preparation, competitions, leadership and engineering work that have shaped how I think, build and contribute.
                 </p>
                 <Link className="achievements-intro-action cta-link" to="/certificates">
                     Browse certificates <span aria-hidden="true">↗</span>
@@ -191,6 +205,40 @@ function Achievements() {
                     <span>ongoing chapter</span>
                 </div>
             </div>
+
+            <section className="achievements-profile" aria-labelledby="achievements-profile-title">
+                <div className="achievements-profile__heading">
+                    <p className="section-label">Context first</p>
+                    <h2 id="achievements-profile-title">A student developer with a <em>technical centre.</em></h2>
+                </div>
+                <dl className="achievements-profile__facts">
+                    <div><dt>School</dt><dd>{academicProfile.school}</dd></div>
+                    <div><dt>Curriculum</dt><dd>{academicProfile.curriculum}</dd></div>
+                    <div><dt>Expected graduation</dt><dd>{academicProfile.expectedGraduation}</dd></div>
+                    <div><dt>Focus</dt><dd>{academicProfile.focus.join(" · ")}</dd></div>
+                    <div><dt>Interests</dt><dd>{academicProfile.interests}</dd></div>
+                </dl>
+            </section>
+
+            <section className="achievements-highlights" aria-labelledby="achievements-highlights-title">
+                <div className="achievements-highlights__heading">
+                    <div>
+                        <p className="section-label">Selected evidence</p>
+                        <h2 id="achievements-highlights-title">Start with the <em>high-signal work.</em></h2>
+                    </div>
+                    <p>Predicted, achieved, finalist, and ongoing records are labelled so the context stays visible.</p>
+                </div>
+                <div className="achievements-highlights__grid">
+                    {highlights.map((item) => (
+                        <article className="achievement-highlight" key={item.title}>
+                            <span>{item.category}</span>
+                            <h3>{item.title}</h3>
+                            <p>{item.detail}</p>
+                            <small>{item.meta}</small>
+                        </article>
+                    ))}
+                </div>
+            </section>
 
             <div className="achievements-body">
                 {achievements.map((group, groupIndex) => (

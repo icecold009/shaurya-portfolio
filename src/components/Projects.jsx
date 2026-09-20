@@ -13,6 +13,7 @@ import {
     getProjectFromHash,
     getProjectTag,
 } from "../lib/projectSearch";
+import { getProjectProofLabel } from "../lib/projectEvidence";
 
 import "./Projects.css";
 import { projectProofIntro, projects } from "../data/projects";
@@ -82,7 +83,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen }) {
                         {project.summary ?? project.description}
                     </span>
                     <span className="project-card__footer">
-                        <span className="project-card__status">{project.status}</span>
+                        <span className="project-card__status">{getProjectProofLabel(project)}</span>
                         <span className="project-card__stack" aria-label={`${project.title} technology stack`}>
                             {project.stack.slice(0, 3).map((technology) => <span key={technology}>{technology}</span>)}
                             {project.stack.length > 3 ? <span>+{project.stack.length - 3}</span> : null}
@@ -110,6 +111,7 @@ export default function Projects() {
         () => filterProjects(projects, { query, tag }),
         [query, tag],
     );
+    const isFiltered = Boolean(query.trim() || tag);
     const projectTags = useMemo(
         () => Array.from(new Set(projects.map(getProjectTag))),
         [],
@@ -299,7 +301,9 @@ export default function Projects() {
                             ))}
                         </div>
                         <p className="project-explorer-results" aria-live="polite">
-                            Showing {visibleProjects.length} of {projects.length} projects
+                            {isFiltered
+                                ? `Showing ${visibleProjects.length} matching projects`
+                                : `${projects.length} projects in the archive`}
                         </p>
                     </div>
                 </section>

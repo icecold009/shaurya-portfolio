@@ -11,6 +11,8 @@ import {
     REVEAL_VIEWPORT,
 } from "../../lib/motion";
 import { positioningStatement } from "../../lib/profileLinks";
+import { academicProfile, availability } from "../../data/profile";
+import { getProjectProofLabel } from "../../lib/projectEvidence";
 import { formatPostDate, posts } from "../../posts";
 
 import "./Home.css";
@@ -74,7 +76,7 @@ export default function Home() {
                                 <h3>{project.title}</h3>
                                 <p>{project.summary ?? project.description}</p>
                                 <div className="home-project-card__footer">
-                                    <span>{project.status}</span>
+                                    <span>{getProjectProofLabel(project)}</span>
                                     <Link className="cta-link" to={`/projects#project-detail-${project.number}`} aria-label={`Open the ${project.title} project overview`}>
                                         View project <ArrowUpRight size={16} aria-hidden="true" />
                                     </Link>
@@ -110,14 +112,43 @@ export default function Home() {
                         {positioningStatement}
                     </p>
                     <div className="home-profile-facts">
-                        <div><span>Based in</span><strong>Bengaluru, India</strong></div>
+                        <div><span>School and stage</span><strong>{academicProfile.school} · {academicProfile.expectedGraduation}</strong></div>
+                        <div><span>Based in</span><strong>{academicProfile.location}</strong></div>
                         <div><span>Working across</span><strong>ML experiments, full-stack products, and interfaces</strong></div>
-                        <div><span>Open to</span><strong>Internships, research, and thoughtful collaborations</strong></div>
+                        <div><span>Open to</span><strong>{availability.detail}</strong></div>
                     </div>
                 </motion.div>
                 <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
                     <Link className="home-text-link cta-link" to="/about">Read my story <ArrowUpRight size={16} aria-hidden="true" /></Link>
                 </motion.div>
+            </motion.section>
+
+            <motion.section
+                className="home-section home-section--paths"
+                aria-labelledby="home-paths-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div className="home-section__heading" variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <div>
+                        <p className="home-kicker">Choose a path</p>
+                        <h2 id="home-paths-title">Start with the <em>right context.</em></h2>
+                    </div>
+                </motion.div>
+                <div className="home-path-grid">
+                    <motion.div className="home-path-card" variants={shouldReduceMotion ? undefined : REVEAL}>
+                        <span>For admissions and research</span>
+                        <h3>See the academic profile, selected evidence, and the thinking behind the work.</h3>
+                        <Link className="home-text-link cta-link" to="/achievements">View the admissions snapshot <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                    </motion.div>
+                    <motion.div className="home-path-card" variants={shouldReduceMotion ? undefined : REVEAL}>
+                        <span>For founders and collaborators</span>
+                        <h3>See what a focused website, data interface, or AI prototype can become.</h3>
+                        <Link className="home-text-link cta-link" to="/work-with-me">Explore working together <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                    </motion.div>
+                </div>
             </motion.section>
 
             <motion.section
@@ -133,7 +164,7 @@ export default function Home() {
                     variants={shouldReduceMotion ? undefined : REVEAL}
                 >
                     <div>
-                        <p className="home-kicker">Writing / 02</p>
+                        <p className="home-kicker">Writing / 02 selected notes</p>
                         <h2 id="home-writing-title">Notes from the <em>workbench.</em></h2>
                     </div>
                     <Link className="home-text-link cta-link" to="/blog">Read all notes <ArrowUpRight size={16} aria-hidden="true" /></Link>

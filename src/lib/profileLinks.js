@@ -1,5 +1,5 @@
 export const positioningStatement =
-    "Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces.";
+    "Student developer in Bengaluru building data-driven AI, full-stack tools, and useful interfaces with a focus on making technical work understandable.";
 
 export const profileLinks = [
     {

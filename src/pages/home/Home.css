@@ -130,6 +130,12 @@
 .home-profile-facts strong { color: var(--text-dim); font-size: 0.94rem; font-weight: 500; line-height: 1.45; }
 .home-section--profile > .home-text-link { margin-top: 2.5rem; }
 
+.home-path-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.home-path-card { display: flex; min-height: 16rem; flex-direction: column; justify-content: space-between; padding: 1.25rem; border: 1px solid var(--line); background: var(--surface); }
+.home-path-card > span { color: var(--green); font-family: var(--mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+.home-path-card h3 { max-width: 24rem; margin: 2rem 0; color: var(--text); font-family: var(--sans); font-size: clamp(1.45rem, 2.5vw, 2.25rem); font-weight: 580; letter-spacing: -0.055em; line-height: 1.02; }
+.home-path-card .home-text-link { align-self: flex-start; }
+
 .home-writing-list { border-top: 1px solid var(--line); }
 .home-writing-item { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); color: var(--text); transition: color 160ms ease-out, padding 160ms ease-out; }
 .home-writing-item:hover,
@@ -153,6 +159,7 @@
     .home-profile-lead { font-size: 1.35rem; }
     .home-writing-item { align-items: start; flex-direction: column; }
     .home-writing-meta { justify-content: space-between; width: 100%; }
+    .home-path-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

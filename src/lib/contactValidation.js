@@ -1,6 +1,7 @@
 export const CONTACT_LIMITS = {
     name: 100,
     email: 254,
+    budget: 160,
     message: 4000,
 };
 

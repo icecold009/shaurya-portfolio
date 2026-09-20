@@ -112,6 +112,7 @@ test("robots and sitemap advertise the canonical public site", () => {
         "https://shauryasaria.me/blog",
         ...articleRoutes.map((route) => `https://shauryasaria.me${route}`),
         "https://shauryasaria.me/contact",
+        "https://shauryasaria.me/work-with-me",
         "https://shauryasaria.me/privacy",
         "https://shauryasaria.me/terms",
         "https://shauryasaria.me/uses",
