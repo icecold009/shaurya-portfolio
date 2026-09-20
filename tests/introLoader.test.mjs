@@ -15,6 +15,13 @@ const scriptSource = inlineScript
     .replace(/^<script>\s*/, "")
     .replace(/\s*<\/script>$/, "");
 const introKey = "shaurya-portfolio:hello-intro-seen-v6";
+const introDurationMs = 3500;
+
+assert.match(html, /class="app-loader__curtain app-loader__curtain--left"/);
+assert.match(html, /class="app-loader__curtain app-loader__curtain--right"/);
+assert.match(html, /const introDurationMs = 3500/);
+assert.match(html, /transform: translateX\(-100%\)/);
+assert.match(html, /transform: translateX\(100%\)/);
 
 function createClassList() {
     const values = new Set();
@@ -145,9 +152,10 @@ function createHarness({ search = "", sessionSeen = false, reducedMotion = false
 function completeAnimatedIntro(harness) {
     harness.window.__appLoaderAppReady();
     harness.flushAnimationFrame(0);
-    harness.flushAnimationFrame(325);
+    harness.flushAnimationFrame(introDurationMs / 2);
     const halfwayOffset = harness.helloPath.style.strokeDashoffset;
-    harness.flushAnimationFrame(650);
+    harness.flushAnimationFrame(introDurationMs);
+    harness.flushAnimationFrame(introDurationMs + 1);
     harness.flushTimers();
     return halfwayOffset;
 }
@@ -162,6 +170,8 @@ test("plays the intro in a fresh session and remembers it in sessionStorage", ()
     assert.equal(harness.setCalls(), 1);
     assert.equal(harness.events.loaderRemoved, true);
     assert.equal(harness.rootElement.classList.contains("app-loader__site-visible"), true);
+    assert.equal(harness.loader.classList.contains("app-loader--handoff"), true);
+    assert.equal(harness.loader.classList.contains("app-loader--hidden"), true);
 });
 
 test("skips the intro when the current session has already seen it", () => {
@@ -184,28 +194,31 @@ test("forced animation replays without changing the session flag", () => {
     assert.equal(harness.storage.get(introKey), "1");
 });
 
-test("the intro completes at exactly 650 milliseconds", () => {
+test("the intro stays visible until the 3500 millisecond draw completes before the curtain handoff", () => {
     const harness = createHarness();
 
     harness.window.__appLoaderAppReady();
     harness.flushAnimationFrame(0);
-    harness.flushAnimationFrame(649);
+    harness.flushAnimationFrame(introDurationMs - 1);
 
     assert.equal(harness.events.loaderRemoved, undefined);
 
-    harness.flushAnimationFrame(650);
+    harness.flushAnimationFrame(introDurationMs);
+    harness.flushAnimationFrame(introDurationMs + 1);
     harness.flushTimers();
 
     assert.equal(harness.events.loaderRemoved, true);
 });
 
-test("reduced motion still completes the short intro", () => {
+test("reduced motion skips the draw and still completes the handoff", () => {
     const harness = createHarness({ reducedMotion: true });
 
-    const halfwayOffset = completeAnimatedIntro(harness);
+    harness.window.__appLoaderAppReady();
+    harness.flushAnimationFrame(0);
     harness.flushTimers();
 
-    assert.equal(halfwayOffset, "685px");
+    assert.equal(harness.helloPath.style.strokeDasharray, "none");
+    assert.equal(harness.helloPath.style.strokeDashoffset, "0px");
     assert.equal(harness.storage.get(introKey), "1");
     assert.equal(harness.events.loaderRemoved, true);
 });
