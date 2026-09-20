@@ -65,7 +65,8 @@
             color: var(--loader-text);
             font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
             opacity: 1;
-            transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 700ms;
+            background-color: rgb(5 7 6 / 1);
+            transition: opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1), background-color 1000ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 1000ms;
         }
 
         #app-loader.app-loader--hidden {
@@ -74,11 +75,16 @@
             pointer-events: none;
         }
 
+        #app-loader.app-loader--handoff {
+            background-color: rgb(5 7 6 / 0);
+            pointer-events: none;
+        }
+
         #root {
             opacity: 0;
-            transform: translateY(0.35rem);
-            filter: blur(2px);
-            transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(0.65rem);
+            filter: blur(4px);
+            transition: opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1), transform 1000ms cubic-bezier(0.23, 1, 0.32, 1), filter 1000ms cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         #root.app-loader__site-visible {
@@ -120,12 +126,17 @@
             margin: 0;
             overflow: visible;
             transform: translateY(0);
-            transition: transform 700ms cubic-bezier(0.23, 1, 0.32, 1), opacity 420ms ease-out;
+            transition: transform 1000ms cubic-bezier(0.23, 1, 0.32, 1), opacity 1000ms cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform, opacity;
         }
 
+        #app-loader.app-loader--handoff .app-loader__hello {
+            transform: translateY(-12vh) scale(0.96);
+            opacity: 0.7;
+        }
+
         #app-loader.app-loader--hidden .app-loader__hello {
-            transform: translateY(-42vh);
+            transform: translateY(-42vh) scale(0.88);
             opacity: 0;
         }
 
@@ -179,7 +190,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             #app-loader {
-                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 200ms;
+                transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 220ms;
             }
 
             .app-loader__hello-path {
@@ -191,12 +202,16 @@
             #root {
                 transform: none;
                 filter: none;
-                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms cubic-bezier(0.22, 1, 0.36, 1);
+                transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            #app-loader.app-loader--handoff {
+                background-color: rgb(5 7 6 / 0);
             }
 
             #app-loader.app-loader--hidden .app-loader__hello {
                 transform: none;
-                transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+                transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
             }
 
             .app-loader__skip {
@@ -254,8 +269,8 @@
             const introMode = new URLSearchParams(window.location.search).get("intro");
             const forceIntro = introMode === "show" || introMode === "animate";
             const forceAnimation = introMode === "animate";
-            const introDurationMs = 650;
-            const handoffDurationMs = 260;
+            const introDurationMs = 1600;
+            const handoffDurationMs = 1000;
 
             if (!loader) {
                 return;
@@ -309,10 +324,11 @@
                     loader.remove();
                 } else if (reducedMotion || !root) {
                     loader.classList.add("app-loader--hidden");
-                    window.setTimeout(() => loader.remove(), reducedMotion ? 260 : handoffDurationMs + 60);
+                    window.setTimeout(() => loader.remove(), reducedMotion ? 280 : handoffDurationMs + 80);
                 } else {
-                    loader.classList.add("app-loader--hidden");
-                    window.setTimeout(() => loader.remove(), handoffDurationMs + 60);
+                    loader.classList.add("app-loader--handoff");
+                    window.requestAnimationFrame(() => loader.classList.add("app-loader--hidden"));
+                    window.setTimeout(() => loader.remove(), handoffDurationMs + 80);
                 }
 
                 if (focusPage) {
@@ -334,6 +350,14 @@
             const drawHello = () => {
                 const pathLength = 1370;
                 const startedAt = window.performance.now();
+
+                if (reducedMotion) {
+                    helloPath.style.strokeDasharray = "none";
+                    helloPath.style.strokeDashoffset = "0px";
+                    helloPath.style.opacity = "1";
+                    completeIntro();
+                    return;
+                }
 
                 helloPath.style.strokeDasharray = `${pathLength}px`;
                 helloPath.style.strokeDashoffset = `${pathLength}px`;
