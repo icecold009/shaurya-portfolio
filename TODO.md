@@ -1,5 +1,42 @@
 # Final Luna plan: Shaurya Portfolio
 
+## Semantic runtime cleanup: Package 10
+
+Goal: remove the confirmed duplicate article heading and make the live
+contribution calendar expose its interactive cells as actionable controls.
+
+### Scope
+
+- [x] Remove the redundant level-one heading from the audio article body so
+      the page shell owns the article title.
+- [x] Keep the contribution calendar's visual grid while nesting native
+      buttons inside semantic grid cells.
+- [x] Add a regression test preventing MDX posts from adding another `h1`.
+
+### Non-goals
+
+No copy rewrite, redesign, API change, deployment, hosted publication, or
+change to the contribution data source.
+
+### Files, tests, and acceptance
+
+Files: `src/posts/shazam-clone.mdx`, `src/components/GitHubContributions.jsx`,
+`src/components/GitHubContributions.css`, `tests/postContent.test.mjs`, and
+this backlog record.
+
+Tests: `npm.cmd run verify`, rendered route checks for the audio article and
+homepage calendar, and console/overflow checks in the local browser.
+
+Acceptance: every blog article has one page-level `h1`; contribution cells
+remain clickable and keyboard-focusable while their accessible role is
+button; published routes keep their existing layout and URLs.
+
+Evidence: the deployed `/blog/shazam-clone` currently renders two identical
+`h1` elements; the local and deployed homepages otherwise load without app
+errors or horizontal overflow at the available browser viewport.
+
+Implementation branch: `codex/website-codebase-audit-20260921`.
+
 ## Interactive project disclosure: Package 1
 
 - [x] Centralize project records so the homepage and project archive use one source of truth.
