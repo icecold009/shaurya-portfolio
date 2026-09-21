@@ -63,7 +63,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
     return (
         <motion.article
             id={`project-detail-${project.number}`}
-            className={`case-study case-study-${project.accent}`}
+            className={`case-study case-study-${project.accent}${project.number === "01" ? " case-study--featured" : ""}`}
             variants={shouldReduceMotion ? undefined : REVEAL}
             initial={shouldReduceMotion ? undefined : "hidden"}
             whileInView={shouldReduceMotion ? undefined : "visible"}
@@ -146,6 +146,8 @@ export default function Projects() {
         () => Array.from(new Set(projects.map(getProjectTag))),
         [],
     );
+    const linkedProjectCount = projects.filter((project) => project.github).length;
+    const categoryCount = new Set(projects.map(getProjectTag)).size;
     const queryProject = projects.find(
         (project) => project.id === searchParams.get("project"),
     );
@@ -286,6 +288,21 @@ export default function Projects() {
                             Read the case studies
                             <ArrowRight size={17} aria-hidden="true" />
                         </motion.a>
+
+                        <div className="selected-work-facts" aria-label="Project archive overview">
+                            <div>
+                                <strong>{String(projects.length).padStart(2, "0")}</strong>
+                                <span>Projects</span>
+                            </div>
+                            <div>
+                                <strong>{String(linkedProjectCount).padStart(2, "0")}</strong>
+                                <span>Source linked</span>
+                            </div>
+                            <div>
+                                <strong>{String(categoryCount).padStart(2, "0")}</strong>
+                                <span>Project lenses</span>
+                            </div>
+                        </div>
                     </div>
                 </motion.header>
 
