@@ -6,6 +6,7 @@ import { REVEAL, REVEAL_CONTAINER } from "../lib/motion";
 import { academicProfile, availability } from "../data/profile";
 import { positioningStatement } from "../lib/profileLinks";
 
+import BubbleField from "./BubbleField";
 import "./Hero.css";
 
 export default function Hero() {
@@ -20,6 +21,8 @@ export default function Hero() {
             initial={shouldReduceMotion ? undefined : "hidden"}
             animate={shouldReduceMotion ? undefined : "visible"}
         >
+            <BubbleField />
+
             <motion.div
                 className="portfolio-hero__rail"
                 aria-hidden="true"
