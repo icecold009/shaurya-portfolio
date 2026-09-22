@@ -26,16 +26,17 @@ function ContributionCell({ day, interactive, onSelect }) {
     }
 
     return (
-        <button
-            className="github-contribution-cell"
-            data-level={day.level}
-            data-tooltip={label}
-            type="button"
-            role="gridcell"
-            aria-label={label}
-            title={label}
-            onClick={() => onSelect(day)}
-        />
+        <div role="gridcell">
+            <button
+                className="github-contribution-cell"
+                data-level={day.level}
+                data-tooltip={label}
+                type="button"
+                aria-label={label}
+                title={label}
+                onClick={() => onSelect(day)}
+            />
+        </div>
     );
 }
 

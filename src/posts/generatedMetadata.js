@@ -3,7 +3,7 @@ export const postWordCounts = {
     "30-days-of-ai": 877,
     "data-products-need-honesty": 181,
     "designing-for-the-fallback": 192,
-    "shazam-clone": 392,
+    "shazam-clone": 385,
     "shipping-is-a-design-decision": 187,
     "smallest-useful-version": 167,
 };
