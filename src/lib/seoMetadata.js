@@ -14,18 +14,18 @@ const sameAs = profileLinks
 
 const pageMetadata = {
     "/": {
-        title: "Shaurya Saria | Student Developer, AI & Data Science",
+        title: "Shaurya Saria | Student Software & Web Developer",
         description: positioningStatement,
         type: "website",
     },
     "/about": {
-        title: "About Shaurya Saria | Student Developer in Bengaluru",
+        title: "About Shaurya Saria | Student Software Developer",
         description: "Learn how Shaurya Saria approaches machine-learning evaluation, full-stack products, and useful interfaces from Bengaluru.",
         type: "website",
     },
     "/projects": {
-        title: "Projects | Shaurya Saria",
-        description: "Explore Shaurya Saria's data-driven AI, machine-learning evaluation, audio, education, operations, and full-stack projects.",
+        title: "Software, Web, AI & ML Projects | Shaurya Saria",
+        description: "Explore Shaurya Saria’s web development, applied AI, machine-learning, data science, and full-stack projects, with methods, source links, and limitations.",
         type: "website",
     },
     "/blog": {

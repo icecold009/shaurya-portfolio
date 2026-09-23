@@ -55,7 +55,7 @@ export default function Hero() {
                     className="portfolio-hero__statement"
                     variants={shouldReduceMotion ? undefined : REVEAL}
                 >
-                    I build data-driven AI and full-stack tools with a focus on <em>useful interfaces.</em>
+                    I build web applications, full-stack software, and applied AI and machine-learning projects.
                 </motion.p>
 
                 <motion.div

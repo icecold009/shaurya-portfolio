@@ -57,11 +57,11 @@ test("homepage fallback HTML contains crawlable identity and homepage metadata",
 
     assert.match(initialHtml, /<h1 id="static-homepage-title">Shaurya Saria<\/h1>/);
     assert.match(initialHtml, new RegExp(positioningStatement.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-    assert.match(html, /<title>Shaurya Saria \| Student Developer, AI &amp; Data Science<\/title>/);
+    assert.match(html, /<title>Shaurya Saria \| Student Software &amp; Web Developer<\/title>/);
     assert.match(html, new RegExp(`meta name="description"[\\s\\S]*?content="${positioningStatement.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
     assert.match(html, new RegExp(`link rel="canonical" href="${canonicalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
     assert.match(initialHtml, /<a href="https:\/\/github\.com\/icecold009">GitHub profile<\/a>/);
-    assert.match(initialHtml, /<a href="https:\/\/linkedin\.com\/in\/shaurya-saria009">LinkedIn profile<\/a>/);
+    assert.match(initialHtml, /<a href="https:\/\/www\.linkedin\.com\/in\/shaurya-saria\/">LinkedIn profile<\/a>/);
 });
 
 test("static JSON-LD uses homepage-safe WebSite and Person data", () => {
@@ -75,8 +75,8 @@ test("static JSON-LD uses homepage-safe WebSite and Person data", () => {
     assert.equal(person.image, "https://shauryasaria.me/images/shaurya-portrait.jpeg");
     assert.deepEqual(person.sameAs, [
         "https://github.com/icecold009",
-        "https://linkedin.com/in/shaurya-saria009",
-        "https://www.kaggle.com/icecold009",
+        "https://www.linkedin.com/in/shaurya-saria/",
+        "https://www.kaggle.com/shauryasaria",
     ]);
 });
 
