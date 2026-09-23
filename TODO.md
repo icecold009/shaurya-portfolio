@@ -1,5 +1,47 @@
 # Final Luna plan: Shaurya Portfolio
 
+## Professional-field SEO and profile alignment: Package 11
+
+Goal: make the portfolio and its public identity clearly relevant to software
+development, web development, full-stack work, applied AI, machine learning,
+and data science while keeping descriptions tied to verified project evidence.
+
+### Scope
+
+- [x] Update the home title, description, visible hero copy, and Projects page metadata.
+- [x] Align canonical LinkedIn and Kaggle links in profile data, fallback HTML, and `Person.sameAs` structured data.
+- [x] Link Token Smart Router to its public hackathon submission from the project detail.
+- [x] Align metadata regression expectations with the verified URLs and title.
+
+### Non-goals
+
+No new SEO-only or thin keyword pages, unsupported expertise or performance
+claims, route/canonical changes, Search Console configuration, ranking promises,
+or production deployment in this package.
+
+### Files, tests, and acceptance
+
+Files: `src/lib/profileLinks.js`, `src/lib/seoMetadata.js`,
+`src/components/Hero.jsx`, `src/data/projects.js`,
+`src/components/ProjectDetailDialog.jsx`, `index.html`,
+`public/site.webmanifest`, `tests/seoMetadata.test.mjs`, and this backlog
+record.
+
+Tests: existing SEO metadata regression coverage and the repository quality
+gate (`npm.cmd run verify`); execution remains subject to the current task's
+test instruction.
+
+Acceptance: initial HTML and route metadata describe a student software and
+web developer whose project archive covers AI/ML and data work; visible
+profile links and structured data use the verified LinkedIn and Kaggle URLs;
+Token Smart Router exposes a descriptive source submission link; no measured
+quality, savings, or ranking claim is introduced.
+
+Evidence: authenticated Jev recommendation, live public profile review, the
+user-supplied Kaggle profile URL, and the public Token Smart Router submission.
+
+Implementation branch: `codex/seo-field-expansion`.
+
 ## Semantic runtime cleanup: Package 10
 
 Goal: remove the confirmed duplicate article heading and make the live

@@ -206,6 +206,7 @@ export const projects = [
         status: "Prototype · hosted path unverified",
         stack: ["React", "Express", "Docker", "Fireworks AI"],
         github: "https://github.com/icecold009/token-smart-router",
+        submission: "https://lablab.ai/submissions/hbq8u2w0pokj9wcxpulv72qy",
         visual: "router",
         thumbnail: "/projects/token-router.svg",
         thumbnailFit: "contain",

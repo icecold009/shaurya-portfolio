@@ -230,6 +230,12 @@ export default function ProjectDetailDialog({
                         ) : (
                             <span className="case-study-source-note">Repository not linked</span>
                         )}
+                        {project.submission ? (
+                            <a href={project.submission} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} hackathon submission in a new tab`}>
+                                View hackathon submission
+                                <ArrowUpRight size={16} aria-hidden="true" />
+                            </a>
+                        ) : null}
                         <button type="button" onClick={() => closeRef.current()}>
                             Close details
                         </button>
