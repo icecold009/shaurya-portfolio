@@ -1,0 +1,17 @@
+A car-price estimate is only as useful as the context around it. The number depends on the features supplied, the examples used for training, and the market those examples describe.
+
+The [Car Price Predictor](https://github.com/icecold009/car-price-predictor) is a compact regression project with preprocessing, model comparison, and both single and batch prediction paths. Its portfolio entry describes the estimate as bounded by the dataset and evaluation sample; that is a more accurate promise than calling an output the car's true value.
+
+## Bring the input story with the number
+
+Vehicle features have different meanings and scales. Preprocessing is therefore part of the model, not a hidden warm-up step. A usable prediction flow should keep the input assumptions visible enough for someone to notice a missing or implausible value.
+
+Comparing models is useful for the same reason. The project can show which candidates were considered, while the dataset and validation setup explain what that comparison can support. Without those details, a neat estimate risks looking more certain than the underlying evidence.
+
+## A historical fit is not today's market
+
+Prices drift. A dataset can age, listings can differ from completed sale prices, and an evaluation score describes a sample rather than an individual vehicle. The repository does not establish a live-market feed or a production valuation service, so I treat this as a learning prototype.
+
+That framing still leaves room for a useful product. The prototype demonstrates a path from structured inputs to an estimate and makes model comparison part of the story. The next step would be a separately validated data and evaluation plan, not a stronger headline.
+
+The useful question is not only “What price did the model return?” It is “What information shaped this estimate, and how far can I trust it?”

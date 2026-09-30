@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck, Search } from "lucide-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
@@ -23,6 +23,7 @@ import {
 import "./Projects.css";
 import { projectProofIntro, projects } from "../data/projects";
 import ProjectDetailDialog from "./ProjectDetailDialog";
+import ProjectTechnologyTag from "./ProjectTechnologyTag";
 
 function getPortfolioStorage() {
     try {
@@ -57,6 +58,26 @@ function ProjectCardPreview({ project }) {
     );
 }
 
+function getProjectVisualLabel(project) {
+    if (!project.thumbnail) {
+        return "Archive record";
+    }
+
+    if (project.thumbnailKind === "editorial") {
+        return "Original cover art";
+    }
+
+    if (project.thumbnailKind === "research") {
+        return "Research visual";
+    }
+
+    if (project.thumbnailKind === "brand") {
+        return "Project mark";
+    }
+
+    return "Product screen";
+}
+
 function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSave }) {
     const shouldReduceMotion = useReducedMotion();
 
@@ -69,14 +90,15 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
             whileInView={shouldReduceMotion ? undefined : "visible"}
             viewport={{ once: true, amount: 0.08 }}
         >
-            <div className="project-card-shell">
+            <div className={`project-card-shell${isOpen ? " project-card-shell--open" : ""}`}>
                 <button
                     type="button"
-                    className={`project-card${isOpen ? " project-card--open" : ""}`}
+                    className={`project-card__open${isOpen ? " project-card__open--active" : ""}`}
                     onClick={(event) => onOpenProject(project, event.currentTarget)}
                     aria-haspopup="dialog"
                     aria-expanded={isOpen}
                     aria-controls={isOpen ? "project-detail-dialog" : undefined}
+                    aria-label={`Open ${project.title} project details`}
                 >
                     <span className="project-card__visual">
                         <ProjectCardPreview project={project} />
@@ -85,7 +107,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
                             <span>{project.year}</span>
                         </span>
                         <span className="project-card__visual-label" aria-hidden="true">
-                            {project.number === "01" ? "Featured study" : getProjectTag(project)}
+                            {project.number === "01" ? "Featured project" : getProjectVisualLabel(project)}
                         </span>
                     </span>
 
@@ -105,24 +127,46 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
                         </span>
                         <span className="project-card__footer">
                             <span className="project-card__status">{getProjectProofLabel(project)}</span>
-                            <span className="project-card__stack" aria-label={`${project.title} technology stack`}>
-                                {project.stack.slice(0, 3).map((technology) => <span key={technology}>{technology}</span>)}
-                                {project.stack.length > 3 ? <span>+{project.stack.length - 3}</span> : null}
+                            <span className="project-card__stack" aria-label={`${project.title} technology stack: ${project.stack.join(", ")}`}>
+                                {project.stack.slice(0, 3).map((technology) => (
+                                    <ProjectTechnologyTag key={technology} technology={technology} compact />
+                                ))}
+                                {project.stack.length > 3 ? (
+                                    <span className="project-card__stack-more" aria-hidden="true">
+                                        +{project.stack.length - 3}
+                                    </span>
+                                ) : null}
                             </span>
                         </span>
                     </span>
                 </button>
-                <button
-                    type="button"
-                    className={`project-card__save${isSaved ? " project-card__save--active" : ""}`}
-                    onClick={() => onToggleSave(project.id)}
-                    aria-pressed={isSaved}
-                    aria-label={isSaved ? `Remove ${project.title} from reading list` : `Save ${project.title} to reading list`}
-                    title={isSaved ? "Remove from reading list" : "Save to reading list"}
-                >
-                    {isSaved ? <BookmarkCheck size={16} aria-hidden="true" /> : <Bookmark size={16} aria-hidden="true" />}
-                    <span>{isSaved ? "Saved" : "Save"}</span>
-                </button>
+                <div className="project-card__utilities">
+                    <div className="project-card__links">
+                        {project.github ? (
+                            <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                Source code <ArrowUpRight size={14} aria-hidden="true" />
+                            </a>
+                        ) : (
+                            <span>Source link pending</span>
+                        )}
+                        {project.submission ? (
+                            <a href={project.submission} target="_blank" rel="noopener noreferrer">
+                                Submission <ArrowUpRight size={14} aria-hidden="true" />
+                            </a>
+                        ) : null}
+                    </div>
+                    <button
+                        type="button"
+                        className={`project-card__save${isSaved ? " project-card__save--active" : ""}`}
+                        onClick={() => onToggleSave(project.id)}
+                        aria-pressed={isSaved}
+                        aria-label={isSaved ? `Remove ${project.title} from reading list` : `Save ${project.title} to reading list`}
+                        title={isSaved ? "Remove from reading list" : "Save to reading list"}
+                    >
+                        {isSaved ? <BookmarkCheck size={16} aria-hidden="true" /> : <Bookmark size={16} aria-hidden="true" />}
+                        <span>{isSaved ? "Saved" : "Save"}</span>
+                    </button>
+                </div>
             </div>
         </motion.article>
     );
@@ -141,13 +185,14 @@ export default function Projects() {
     );
     const triggerElementRef = useRef(null);
 
+    const query = searchParams.get("q") ?? "";
     const tag = searchParams.get("tag") ?? "";
     const savedOnly = searchParams.get("saved") === "1";
     const visibleProjects = useMemo(
-        () => filterProjects(projects, { tag }).filter((project) => !savedOnly || shortlistIds.includes(project.id)),
-        [savedOnly, shortlistIds, tag],
+        () => filterProjects(projects, { query, tag }).filter((project) => !savedOnly || shortlistIds.includes(project.id)),
+        [query, savedOnly, shortlistIds, tag],
     );
-    const isFiltered = Boolean(tag || savedOnly);
+    const isFiltered = Boolean(query || tag || savedOnly);
     const projectTags = useMemo(
         () => Array.from(new Set(projects.map(getProjectTag))),
         [],
@@ -319,81 +364,99 @@ export default function Projects() {
                     </div>
                 </motion.header>
 
-                <section
-                    className="project-lens-browser"
-                    aria-labelledby="project-lens-title"
-                >
-                    <div className="project-lens-browser__intro">
-                        <p className="selected-work-kicker">Project archive</p>
-                        <h2 id="project-lens-title">Follow a <em>signal.</em></h2>
-                        <p>Choose a floating lens to move through the archive by discipline, not by noise.</p>
+                <section className="project-archive-tools" aria-labelledby="project-archive-title">
+                    <div className="project-archive-tools__heading">
+                        <div>
+                            <p className="selected-work-kicker">Project archive</p>
+                            <h2 id="project-archive-title">Find the work that <em>fits.</em></h2>
+                        </div>
+                        <label className="project-search">
+                            <Search size={18} aria-hidden="true" />
+                            <span>Search projects</span>
+                            <input
+                                type="search"
+                                value={query}
+                                onChange={(event) => writeSearchParams(
+                                    { q: event.currentTarget.value },
+                                    { replace: true, clearProject: true },
+                                )}
+                                placeholder="Name, technology, or topic"
+                                aria-label="Search projects by name, technology, or topic"
+                                aria-controls="project-cards"
+                            />
+                        </label>
                     </div>
 
-                    <div className="project-lens-grid" role="group" aria-label="Filter projects by type">
-                        <button
-                            type="button"
-                            className={`project-lens ${!tag && !savedOnly ? "project-lens--active" : ""}`}
-                            aria-pressed={!tag && !savedOnly}
-                            onClick={() => writeSearchParams(
-                                { q: "", tag: "", saved: "" },
-                                { replace: false, clearProject: true },
-                            )}
-                        >
-                            <span className="project-lens__index">00</span>
-                            <span className="project-lens__body">
-                                <strong>All projects</strong>
-                                <small>{projects.length} projects</small>
-                            </span>
-                            <ArrowUpRight size={17} aria-hidden="true" />
-                        </button>
-                        {projectTagCounts.map(({ tag: projectTag, count }, index) => (
+                    <div className="project-archive-tools__filters">
+                        <div className="project-filter-chips" role="group" aria-label="Filter projects by area">
                             <button
                                 type="button"
-                                className={`project-lens ${tag === projectTag ? "project-lens--active" : ""}`}
-                                aria-pressed={tag === projectTag}
-                                key={projectTag}
+                                className={`project-filter-chip${!tag && !savedOnly ? " project-filter-chip--active" : ""}`}
+                                aria-pressed={!tag && !savedOnly}
                                 onClick={() => writeSearchParams(
-                                    { q: "", tag: projectTag, saved: "" },
+                                    { tag: "", saved: "" },
                                     { replace: false, clearProject: true },
                                 )}
                             >
-                                <span className="project-lens__index">{String(index + 1).padStart(2, "0")}</span>
-                                <span className="project-lens__body">
-                                    <strong>{projectTag}</strong>
-                                    <small>{count} {count === 1 ? "project" : "projects"}</small>
-                                </span>
-                                <ArrowUpRight size={17} aria-hidden="true" />
+                                <span>All projects</span>
+                                <small>{projects.length}</small>
                             </button>
-                        ))}
+                            {projectTagCounts.map(({ tag: projectTag, count }) => (
+                                <button
+                                    type="button"
+                                    className={`project-filter-chip${tag === projectTag ? " project-filter-chip--active" : ""}`}
+                                    aria-pressed={tag === projectTag}
+                                    key={projectTag}
+                                    onClick={() => writeSearchParams(
+                                        { tag: projectTag, saved: "" },
+                                        { replace: false, clearProject: true },
+                                    )}
+                                >
+                                    <span>{projectTag}</span>
+                                    <small>{count}</small>
+                                </button>
+                            ))}
+                        </div>
                         <button
                             type="button"
-                            className={`project-lens project-lens--saved ${savedOnly ? "project-lens--active" : ""}`}
+                            className={`project-filter-chip project-filter-chip--saved${savedOnly ? " project-filter-chip--active" : ""}`}
                             aria-pressed={savedOnly}
                             onClick={() => writeSearchParams(
-                                { q: "", tag: "", saved: savedOnly ? "" : "1" },
+                                { tag: "", saved: savedOnly ? "" : "1" },
                                 { replace: false, clearProject: true },
                             )}
                         >
-                            <span className="project-lens__index"><Bookmark size={15} aria-hidden="true" /></span>
-                            <span className="project-lens__body">
-                                <strong>Reading list</strong>
-                                <small>{shortlistIds.length} saved</small>
-                            </span>
-                            <ArrowUpRight size={17} aria-hidden="true" />
+                            <Bookmark size={15} aria-hidden="true" />
+                            <span>Reading list</span>
+                            <small>{shortlistIds.length}</small>
                         </button>
                     </div>
 
-                    <p className="project-explorer-results" aria-live="polite">
-                        {isFiltered
-                            ? `Showing ${visibleProjects.length} matching projects${savedOnly ? " in your reading list" : ""}`
-                            : `${projects.length} projects in the archive`}
-                    </p>
+                    <div className="project-archive-tools__status">
+                        <p className="project-explorer-results" aria-live="polite">
+                            {isFiltered
+                                ? `${visibleProjects.length} matching ${visibleProjects.length === 1 ? "project" : "projects"}${savedOnly ? " in your reading list" : ""}`
+                                : `${projects.length} projects in the archive`}
+                        </p>
+                        {isFiltered ? (
+                            <button
+                                type="button"
+                                className="project-filter-clear"
+                                onClick={() => writeSearchParams(
+                                    { q: "", tag: "", saved: "" },
+                                    { replace: false, clearProject: true },
+                                )}
+                            >
+                                Clear filters
+                            </button>
+                        ) : null}
+                    </div>
                 </section>
 
                 <div className="project-details-heading" id="project-details" tabIndex={-1}>
                     <div>
                         <p className="selected-work-kicker">Project details</p>
-                        <h2>Open a project to see the full case study.</h2>
+                        <h2>Choose a project to see the details.</h2>
                     </div>
                     <span>{String(visibleProjects.length).padStart(2, "0")} results</span>
                 </div>
@@ -417,7 +480,7 @@ export default function Projects() {
                         <button
                             type="button"
                             onClick={() => writeSearchParams(
-                                { q: "", tag: "" },
+                                { q: "", tag: "", saved: "" },
                                 { replace: true, clearProject: true },
                             )}
                         >
