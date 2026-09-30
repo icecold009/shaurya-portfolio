@@ -1,8 +1,10 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, Bookmark, BookmarkCheck, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
 import "../styles/components/project-detail-dialog.css";
+import { getProjectEvidenceSummary } from "../lib/projectEvidence";
+import ProjectTechnologyTag from "./ProjectTechnologyTag";
 
 function getFocusableElements(container) {
     return Array.from(
@@ -17,7 +19,10 @@ export default function ProjectDetailDialog({
     onClose,
     triggerElement,
     fallbackFocusSelector = "#main-content",
+    isSaved = false,
+    onToggleSave,
 }) {
+    const evidence = getProjectEvidenceSummary(project);
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
@@ -116,8 +121,9 @@ export default function ProjectDetailDialog({
                 aria-describedby={descriptionId}
             >
                 <div className="project-detail-dialog__rail">
-                    <span>
-                        Project {project.number} / {project.category}
+                    <span className="project-detail-dialog__identity">
+                        <strong>{project.number}</strong>
+                        <span>Project archive / {project.category}</span>
                     </span>
                     <button
                         ref={closeButtonRef}
@@ -131,32 +137,65 @@ export default function ProjectDetailDialog({
                 </div>
 
                 <div className="project-detail-dialog__body">
-                    <div className="project-detail-dialog__media">
-                        {project.thumbnail && !mediaFailed ? (
-                            <img
-                                src={project.thumbnail}
-                                alt={project.thumbnailAlt ?? `${project.title} project preview`}
-                                onError={() => setMediaFailed(true)}
-                            />
-                        ) : (
-                            <span className="project-detail-dialog__media-fallback" aria-hidden="true">
-                                <strong>{project.number}</strong>
-                                <small>{project.thumbnail ? "Cover unavailable" : "Archive record"}</small>
-                            </span>
-                        )}
+                    <div className="project-detail-dialog__hero">
+                        <div className="project-detail-dialog__media">
+                            {project.thumbnail && !mediaFailed ? (
+                                <img
+                                    src={project.thumbnail}
+                                    alt={project.thumbnailAlt ?? `${project.title} project preview`}
+                                    onError={() => setMediaFailed(true)}
+                                />
+                            ) : (
+                                <span className="project-detail-dialog__media-fallback" aria-hidden="true">
+                                    <strong>{project.number}</strong>
+                                    <small>{project.thumbnail ? "Cover unavailable" : "Archive record"}</small>
+                                </span>
+                            )}
+                        </div>
+
+                        <div className="project-detail-dialog__content">
+                            <p className="selected-work-kicker">Detailed view · {project.year}</p>
+                            <h2 id={titleId}>{project.title}</h2>
+                            <p id={descriptionId} className="project-detail-dialog__description">
+                                {project.description}
+                            </p>
+
+                            <div className="project-detail-dialog__evidence" role="note">
+                                <div className="project-detail-dialog__evidence-level">
+                                    <span>Evidence level</span>
+                                    <strong>{evidence.label}</strong>
+                                </div>
+                                <div className="project-detail-dialog__evidence-meta">
+                                    <small>{evidence.hasSource ? "Repository linked" : "No repository linked"} · {evidence.hasVisual ? "Visual included" : "Visual pending"}</small>
+                                    <span className="case-study-proof-status">
+                                        <span>Status</span>
+                                        {project.status}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="project-detail-dialog__content">
-                        <p className="selected-work-kicker">Detailed view · {project.year}</p>
-                        <h2 id={titleId}>{project.title}</h2>
-                        <p id={descriptionId} className="project-detail-dialog__description">
-                            {project.description}
-                        </p>
-
-                        <div className="project-detail-dialog__outcome">
-                            <span>Outcome</span>
+                    <div className="project-detail-dialog__details">
+                        <section className="project-detail-dialog__outcome">
+                            <h3>Outcome</h3>
                             <p>{project.outcome}</p>
-                        </div>
+                        </section>
+
+                        {project.architectureNote && (
+                            <section className="project-detail-dialog__architecture">
+                                <div>
+                                    <h3>Read this diagram</h3>
+                                    <p>{project.architectureNote}</p>
+                                </div>
+                                {project.architectureLink && (
+                                    <a className="project-detail-dialog__architecture-link" href={project.architectureLink} target="_blank" rel="noreferrer">
+                                        Open architecture diagram
+                                        <ArrowUpRight size={15} aria-hidden="true" />
+                                    </a>
+                                )}
+                            </section>
+                        )}
 
                         {project.architectureNote && (
                             <div className="project-detail-dialog__outcome project-detail-dialog__architecture">
@@ -187,28 +226,41 @@ export default function ProjectDetailDialog({
                         </dl>
 
                         <div className="project-detail-dialog__stack" aria-label="Technology stack">
+                            <span className="project-detail-dialog__stack-label" aria-hidden="true">Technology stack</span>
                             {project.stack.map((technology) => (
-                                <span key={technology}>{technology}</span>
+                                <ProjectTechnologyTag key={technology} technology={technology} />
                             ))}
                         </div>
                     </div>
                 </div>
 
                 <div className="project-detail-dialog__footer">
-                    <span className="case-study-proof-status">
-                        <span>Status</span>
-                        {project.status}
-                    </span>
-
                     <div className="project-detail-dialog__actions">
+                        {onToggleSave ? (
+                            <button
+                                type="button"
+                                className="project-detail-dialog__save"
+                                onClick={() => onToggleSave(project.id)}
+                                aria-pressed={isSaved}
+                            >
+                                {isSaved ? <BookmarkCheck size={16} aria-hidden="true" /> : <Bookmark size={16} aria-hidden="true" />}
+                                {isSaved ? "Saved to reading list" : "Save to reading list"}
+                            </button>
+                        ) : null}
                         {project.github ? (
-                            <a href={project.github} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} repository in a new tab`}>
+                            <a className="project-detail-dialog__source-link" href={project.github} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} repository in a new tab`}>
                                 View source code
                                 <ArrowUpRight size={16} aria-hidden="true" />
                             </a>
                         ) : (
                             <span className="case-study-source-note">Repository not linked</span>
                         )}
+                        {project.submission ? (
+                            <a className="project-detail-dialog__submission-link" href={project.submission} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} hackathon submission in a new tab`}>
+                                View hackathon submission
+                                <ArrowUpRight size={16} aria-hidden="true" />
+                            </a>
+                        ) : null}
                         <button type="button" onClick={() => closeRef.current()}>
                             Close details
                         </button>

@@ -3,6 +3,7 @@ import { positioningStatement, profileLinks } from "./profileLinks.js";
 
 export const SITE_URL = "https://shauryasaria.me";
 export const PROFILE_IMAGE_URL = `${SITE_URL}/images/shaurya-portrait.jpeg`;
+export const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
 export const STRUCTURED_DATA_ID = "site-json-ld";
 
 const personId = `${SITE_URL}/#person`;
@@ -13,18 +14,18 @@ const sameAs = profileLinks
 
 const pageMetadata = {
     "/": {
-        title: "Shaurya Saria | Student Developer, AI & Data Science",
+        title: "Shaurya Saria | Student Software & Web Developer",
         description: positioningStatement,
         type: "website",
     },
     "/about": {
-        title: "About Shaurya Saria | Student Developer in Bengaluru",
-        description: "Learn how Shaurya Saria approaches machine-learning evaluation, full-stack products, and useful interfaces from Bengaluru.",
+        title: "About Shaurya Saria | Student Software Developer",
+        description: "Meet Shaurya Saria, a Bengaluru student developer building web products and applied machine-learning projects while studying Cambridge International A Levels.",
         type: "website",
     },
     "/projects": {
-        title: "Projects | Shaurya Saria",
-        description: "Explore Shaurya Saria's data-driven AI, machine-learning evaluation, audio, education, operations, and full-stack projects.",
+        title: "Software, Web, AI & ML Projects | Shaurya Saria",
+        description: "Explore Shaurya Saria’s web development, applied AI, machine-learning, data science, and full-stack projects, with methods, source links, and limitations.",
         type: "website",
     },
     "/blog": {
@@ -35,6 +36,27 @@ const pageMetadata = {
     "/contact": {
         title: "Contact Shaurya Saria | Student Developer",
         description: "Contact Shaurya Saria in Bengaluru about internships, research, AI and data products, or thoughtful full-stack collaborations.",
+        type: "website",
+    },
+    "/work-with-me": {
+        title: "Work with Shaurya Saria | Focused Websites, Data Interfaces, and AI Prototypes",
+        description: "Work with Shaurya Saria on focused portfolio sites, data interfaces, and bounded AI or machine-learning prototypes from Bengaluru.",
+        type: "website",
+    },
+    "/contact/thanks": {
+        title: "Message received | Shaurya Saria",
+        description: "Your message reached Shaurya Saria. Thank you for starting the conversation.",
+        type: "website",
+        robots: "noindex, nofollow",
+    },
+    "/privacy": {
+        title: "Privacy | Shaurya Saria",
+        description: "How Shaurya Saria's portfolio handles contact messages, local browser storage, analytics, and external links.",
+        type: "website",
+    },
+    "/terms": {
+        title: "Terms | Shaurya Saria",
+        description: "The basic terms for browsing Shaurya Saria's personal portfolio and sending a contact message.",
         type: "website",
     },
     "/uses": {
@@ -171,14 +193,16 @@ export function getSeoMetadata(pathname = "/") {
             title: "Page not found | Shaurya Saria",
             description: "The requested page could not be found on Shaurya Saria's portfolio.",
             type: "website",
+            robots: "noindex, nofollow",
         };
 
     const completeMetadata = {
         ...metadata,
         pathname: normalizedPathname,
         canonical: getCanonicalUrl(normalizedPathname),
-        image: PROFILE_IMAGE_URL,
-        imageAlt: "Shaurya Saria",
+        image: OG_IMAGE_URL,
+        imageAlt: "Shaurya Saria | AI and product engineering portfolio",
+        robots: metadata.robots ?? "index, follow",
     };
 
     return {

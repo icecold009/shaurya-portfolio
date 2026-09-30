@@ -8,6 +8,7 @@ import {
 
 const metaDefinitions = [
     ["name", "description", (metadata) => metadata.description],
+    ["name", "robots", (metadata) => metadata.robots],
     ["property", "og:type", (metadata) => metadata.type],
     ["property", "og:url", (metadata) => metadata.canonical],
     ["property", "og:title", (metadata) => metadata.title],

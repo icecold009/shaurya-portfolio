@@ -1,5 +1,305 @@
 # Final Luna plan: Shaurya Portfolio
 
+## Project archive access and card revamp: Package 12
+
+Goal: make the 13-project archive easier to search, filter, scan, and inspect,
+while giving every visual an honest source: a real product/research image or
+clearly presented editorial cover art. Give opened project details a cleaner,
+responsive reading order without changing their case-study copy. Extend the
+refresh through the Writing archive with source-grounded retrospective notes
+from 2025 through the current 2026 work, while distinguishing period covered
+from the actual article publication date.
+
+### Scope
+
+- [x] Replace the large floating category controls with a compact search field,
+      responsive filter chips, project counts, and a clear empty state.
+- [x] Wire the existing URL-backed `q` state to `filterProjects` and preserve
+      category, saved-list, and direct project-detail URLs.
+- [x] Refine the project-card grid, image framing, information hierarchy, and
+      keyboard, pointer, touch, and reduced-motion feedback.
+- [x] Keep verified product screenshots/research visuals; use authentic
+      project-repository imagery when it is available.
+- [x] Replace mock interface illustrations with original editorial covers
+      that contain no invented app screens, text, logos, or metrics. Keep the
+      source-pending archive record text-only.
+- [x] Preserve quick-view dialog focus management and saved-project behavior.
+- [x] Add branded or custom technology marks to card previews and the opened
+      detail stack while keeping every technology name readable and accessible.
+- [x] Redesign the opened project detail as a responsive feature sheet with a
+      clear overview, evidence, outcome, build notes, technology stack, and
+      action area while preserving its current copy and behavior.
+- [x] Add a brighter theme-aware frame around project covers and a separated
+      accent tile behind each technology mark so dark screenshots and icons do
+      not disappear into the archive surfaces.
+- [x] Add five retrospective writing pieces spanning Jan 2025 through Sep
+      2026, grounded in portfolio and first-party repository evidence; keep
+      publication dates current and show the work period separately.
+
+### Non-goals
+
+No unsupported project claims or URLs, homepage audience-lens redesign,
+project-detail copy changes, invented personal milestones, backdated article
+publication metadata, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/Projects.jsx`, `src/components/Projects.css`,
+`src/components/ProjectDetailDialog.jsx`,
+`src/components/ProjectTechnologyTag.jsx`,
+`src/styles/components/project-detail-dialog.css`, `src/data/projects.js`,
+`src/lib/projectSearch.js`, `public/projects/`, `src/posts/`,
+`src/pages/blog/`, `src/styles/pages/blog.css`, and this backlog entry.
+
+Tests: existing `tests/projectSearch.test.mjs` and
+`tests/projectShortlist.test.mjs` remain the relevant logic coverage; no test
+files will be added or tests run in this task. Run `npm.cmd run lint`,
+`npm.cmd run verify:assets`, and `npm.cmd run build`; inspect desktop layout and
+interaction in a browser, then review mobile and reduced-motion CSS behavior.
+
+Acceptance: project search and category chips work with shareable URL state;
+all cards remain operable by keyboard and touch; source access and evidence
+labels remain clear; every active project uses either an authentic product/
+research image or visibly editorial cover art; the unlinked archive record
+does not receive fabricated imagery; opened project details retain their
+content, links, saved state, focus handling, and keyboard dismissal while
+presenting the evidence, outcome, build notes, technologies, and actions in a
+clear layout at desktop and narrow widths; covers and technology marks remain
+visibly separated from card and dialog surfaces in both themes; retrospective
+periods are distinct from true publication dates, with new writing tied to
+verified work; local lint, asset integrity, and build checks pass.
+
+Completion evidence: Jev plan reviews after repository and image-source
+inventory; two Jev text-diff review batches covering all 13 changed text
+files; seven binary assets were excluded from Jev's text payload and checked
+with asset verification and browser rendering. The archive uses four existing
+product/research PNGs, two repository images, and six original optimized
+editorial covers. Focused browser checks covered search, category filtering,
+saved-project state restoration, keyboard quick view, Escape close, and
+URL-backed details. `npm.cmd run lint`, `npm.cmd run verify:assets`, and
+`npm.cmd run build` all passed. The archive was inspected at desktop and
+narrow/mobile widths; reduced-motion behavior was checked against responsive
+CSS and existing reduced-motion handling. Automated tests, external checks,
+deployment, and merge were not run and remain out of scope.
+
+The detail-view continuation passed a fresh lint, asset-integrity, and
+production build run. Jev reviewed the dialog JSX/CSS and this backlog entry as
+the continuation diff; earlier archive-card sources had already received
+separate diff review. Browser review covered desktop and narrow layouts, the
+honest source-pending fallback, Escape dismissal, focus restoration, and a save
+toggle that was returned to its original state.
+
+The cover and technology follow-up checked all 13 project records, visually
+reviewed all 11 local cover files, and compared linked repository image notes.
+NextSound now points to the current browse screenshot documented in its
+repository README. The F1 visual matches the current report; Face Attendance
+still has no repository screenshot, and the Car Price Predictor's documented
+feature-importance image is absent from its default branch, so neither received
+a fabricated product screen. Existing product/research images, editorial
+covers, and the source-pending record remain correctly identified. The complete
+technology stack now shows a brand mark or custom tool glyph in cards and
+details, with readable names retained.
+
+A fresh source pass inspected all 13 card records and the current default-branch
+visuals in every linked repository. The local Movie Tracker screenshot, Audio
+Recognition FFT figure, earlier F1 plot, and Code Racer logo match their current
+repository blobs; NextSound still uses its current browse screenshot. The F1
+card now uses the current season-by-season model-versus-baseline figure from its
+repository. Six projects without a published product screenshot retain clearly
+labelled original cover art with descriptive alternative text, and Student
+Dropout Risk Prediction keeps its honest no-image archive fallback. Technology
+marks cover every current stack label, including Python, Flask, FFmpeg and the
+`ffmeg` spelling alias.
+
+Follow-up verification: `npm.cmd run lint`, `npm.cmd run verify:assets`, and
+`npm.cmd run build` passed. The build emitted a main-chunk size advisory and
+skipped optional resume sync because `resume/resume.tex` is not present. Jev
+reviewed all 16 changed text files in four non-overlapping batches; the first
+three returned `incomplete_context` with a `resolve_findings_or_human_review`
+gate, and the last returned `no_clear_issue`. Seven binary cover assets were
+excluded from the text payload and checked through asset integrity and visual
+review.
+
+The visual-separation and Writing continuation adds theme-aware media frames,
+accent-backed technology marks, and five retrospective notes dated as written
+in Sep 2026 with separate coverage labels from Jan 2025 through Sep 2026. The
+2025 retrospective explicitly distinguishes the Jan–Jun coverage window from
+the first precisely dated public record in April. Writing claims link to the
+portfolio's dated experience and first-party project repositories. Jev reviewed
+the bounded image/icon plan and the card-only source diff in four batches. The
+full diff exceeded Jev's 45,000-character limit without sending a partial
+payload; the four batches returned generic `incomplete_context` or
+`verification_gap` gates without concrete findings. Independent lint, asset,
+build, and browser checks passed. Writing/archive sources and this mixed-scope
+backlog file stayed excluded; automatic review had rejected an earlier broad
+request because it exceeded the project-card authorization. No writing source
+was sent to Jev.
+
+Implementation branch: `codex/project-card-revamp-20260928`.
+
+## About and Writing experience refresh: Package 13
+
+Goal: make Shaurya's story and writing easier to understand, explore, and
+return to, while giving the remaining editorial project covers distinct,
+project-specific visual languages.
+
+### Scope
+
+- [x] Rebuild About around the existing portrait, concise introduction,
+      authentic selected work, verified study and experience, working approach,
+      and direct profile and résumé actions.
+- [x] Add URL-backed Writing search and topic filters, a live result count,
+      and a clear empty state while keeping each existing article and legacy
+      `?post=` route intact.
+- [x] Improve article reading with heading-derived contents links, a quiet
+      progress indicator, and links to neighboring essays; preserve dates,
+      slugs, and article copy.
+- [x] Replace the six repetitive photographic editorial covers with six
+      distinct commissioned-style illustrations; preserve authentic product
+      and research imagery and the text-only archive record.
+- [x] Keep technology marks, image alternatives, theme contrast, keyboard
+      access, reduced-motion behavior, and responsive layouts intact.
+- [x] Reuse the accessible technology marks on About's selected-work cards.
+
+### Non-goals
+
+No unsupported profile facts, new article publication dates, case-study copy
+changes, unrelated route redesign, extra localhost ports, merge, publication,
+or deployment.
+
+### Files, verification, and acceptance
+
+Files: `src/pages/about/AboutPage.jsx`, `src/pages/about/AboutPage.css`,
+`src/lib/seoMetadata.js`, `src/components/Projects.jsx`,
+`src/data/projects.js`, `src/pages/blog/BlogPage.jsx`,
+`src/pages/blog/BlogPostPage.jsx`, `src/styles/pages/blog.css`,
+`src/components/ProjectTechnologyTag.jsx`,
+`src/styles/components/project-technology-tag.css`,
+`public/projects/*-cover-v2.webp`, and this backlog entry.
+
+Verification: `npm.cmd run lint`, `npm.cmd run verify:assets`,
+`npm.cmd run build`, `git diff --check`, and browser review on the existing
+5174 preview. Check About and Writing at wide and narrow widths, both themes,
+keyboard navigation, article anchors, query state, and image loading. No new
+automated tests are added for this visual package.
+
+Acceptance: the About page introduces Shaurya with his real portrait and
+verified facts, presents selected work and experience clearly, and links to
+existing destinations; Writing search and topics remain shareable in the URL,
+all eleven posts and the legacy route work, article contents links reach real
+headings, progress tracks reading, and adjacent essays are reachable; all six
+new covers are visibly distinct and optimized, current product/research images
+remain authentic, the source-pending project stays text-only, and all checks
+pass on the existing single port.
+
+Evidence: lint checked 100 source files; asset integrity checked 85 local assets,
+15 routes, 13 projects, and 21 artwork records; the production build generated
+24 route documents. The build skipped optional resume sync because
+`resume/resume.tex` is absent and reported the existing 525 KB main-chunk size
+advisory. `git diff --check` completed successfully; Git emitted CRLF-to-LF
+notices for the About files.
+On the existing 5174 preview at a 584 px viewport, all 12 project images
+loaded, including all six distinct optimized covers and the linked product and
+research images; the source-pending project remained image-free. All 39 rendered
+technology tags rendered an icon, including Python, Flask, and FFmpeg. The
+About portrait and its three selected-work images loaded. Writing showed all 11
+essays; URL-backed research filtering, empty-state reset, legacy `?post=`
+redirect, contents navigation, reading progress, adjacent essays, and the
+filtered return path were verified. Desktop and narrow screenshots were
+reviewed for About, Writing, and the project archive; both themes were checked
+across the updated surfaces. About selected-work technology marks are shared
+with the project cards and wrap cleanly on mobile. Dark mode was restored.
+Port 5174 returns HTTP 200 and is the only Node development server listening.
+Ports 4173 and 5173–5177 are closed. The separate Touchscreen Launchpad
+preview on 4173 was stopped as requested earlier; its branch and working-tree
+files were left untouched.
+Other localhost listeners belong to Windows or desktop application services
+and were left alone. No new server was started. The earlier auto-review
+rejection for transmitting the broader About/Writing source was not retried;
+no Jev source review was claimed for this package. No automated tests,
+deployment, publication, merge, commit, or push were performed.
+
+Implementation branch: `codex/project-card-revamp-20260928`.
+
+## Professional-field SEO and profile alignment: Package 11
+
+Goal: make the portfolio and its public identity clearly relevant to software
+development, web development, full-stack work, applied AI, machine learning,
+and data science while keeping descriptions tied to verified project evidence.
+
+### Scope
+
+- [x] Update the home title, description, visible hero copy, and Projects page metadata.
+- [x] Align canonical LinkedIn and Kaggle links in profile data, fallback HTML, and `Person.sameAs` structured data.
+- [x] Link Token Smart Router to its public hackathon submission from the project detail.
+- [x] Align metadata regression expectations with the verified URLs and title.
+
+### Non-goals
+
+No new SEO-only or thin keyword pages, unsupported expertise or performance
+claims, route/canonical changes, Search Console configuration, ranking promises,
+or production deployment in this package.
+
+### Files, tests, and acceptance
+
+Files: `src/lib/profileLinks.js`, `src/lib/seoMetadata.js`,
+`src/components/Hero.jsx`, `src/data/projects.js`,
+`src/components/ProjectDetailDialog.jsx`, `index.html`,
+`public/site.webmanifest`, `tests/seoMetadata.test.mjs`, and this backlog
+record.
+
+Tests: existing SEO metadata regression coverage and the repository quality
+gate (`npm.cmd run verify`); execution remains subject to the current task's
+test instruction.
+
+Acceptance: initial HTML and route metadata describe a student software and
+web developer whose project archive covers AI/ML and data work; visible
+profile links and structured data use the verified LinkedIn and Kaggle URLs;
+Token Smart Router exposes a descriptive source submission link; no measured
+quality, savings, or ranking claim is introduced.
+
+Evidence: authenticated Jev recommendation, live public profile review, the
+user-supplied Kaggle profile URL, and the public Token Smart Router submission.
+
+Implementation branch: `codex/seo-field-expansion`.
+
+## Semantic runtime cleanup: Package 10
+
+Goal: remove the confirmed duplicate article heading and make the live
+contribution calendar expose its interactive cells as actionable controls.
+
+### Scope
+
+- [x] Remove the redundant level-one heading from the audio article body so
+      the page shell owns the article title.
+- [x] Keep the contribution calendar's visual grid while nesting native
+      buttons inside semantic grid cells.
+- [x] Add a regression test preventing MDX posts from adding another `h1`.
+
+### Non-goals
+
+No copy rewrite, redesign, API change, deployment, hosted publication, or
+change to the contribution data source.
+
+### Files, tests, and acceptance
+
+Files: `src/posts/shazam-clone.mdx`, `src/components/GitHubContributions.jsx`,
+`src/components/GitHubContributions.css`, `tests/postContent.test.mjs`, and
+this backlog record.
+
+Tests: `npm.cmd run verify`, rendered route checks for the audio article and
+homepage calendar, and console/overflow checks in the local browser.
+
+Acceptance: every blog article has one page-level `h1`; contribution cells
+remain clickable and keyboard-focusable while their accessible role is
+button; published routes keep their existing layout and URLs.
+
+Evidence: the deployed `/blog/shazam-clone` currently renders two identical
+`h1` elements; the local and deployed homepages otherwise load without app
+errors or horizontal overflow at the available browser viewport.
+
+Implementation branch: `codex/website-codebase-audit-20260921`.
+
 ## Interactive project disclosure: Package 1
 
 - [x] Centralize project records so the homepage and project archive use one source of truth.

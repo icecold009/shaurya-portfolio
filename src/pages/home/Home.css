@@ -48,6 +48,104 @@
 .home-text-link:hover,
 .home-text-link:focus-visible { border-color: var(--green); color: var(--green); }
 
+.home-lens-explorer {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.home-lens-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid var(--line);
+}
+
+.home-lens-tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 3.5rem;
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-right: 1px solid var(--line);
+    background: transparent;
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.home-lens-tab:last-child { border-right: 0; }
+.home-lens-tab svg { color: var(--text-faint); transition: transform var(--transition-fast), color var(--transition-fast); }
+.home-lens-tab:hover,
+.home-lens-tab:focus-visible,
+.home-lens-tab--active { background: color-mix(in srgb, var(--green) 8%, transparent); color: var(--green); outline: none; }
+.home-lens-tab:hover svg,
+.home-lens-tab:focus-visible svg,
+.home-lens-tab--active svg { color: var(--green); transform: translate(2px, -2px); }
+.home-lens-tab:focus-visible { box-shadow: inset 0 0 0 2px var(--green); }
+
+.home-lens-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(17rem, 0.95fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    padding: clamp(1.5rem, 4vw, 3rem) 1.1rem;
+}
+
+.home-lens-panel__copy h3 {
+    max-width: 12ch;
+    margin: 0.55rem 0 1.1rem;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: clamp(1.8rem, 4vw, 3.8rem);
+    font-weight: 620;
+    letter-spacing: -0.065em;
+    line-height: 0.96;
+}
+
+.home-lens-panel__copy > p:not(.home-kicker) {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.home-lens-panel__copy .home-text-link { margin-top: 1.75rem; }
+
+.home-lens-projects {
+    display: grid;
+    align-content: start;
+    border-top: 1px solid var(--line);
+}
+
+.home-lens-project {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+    transition: color var(--transition-fast), padding-inline var(--transition-fast), background-color var(--transition-fast);
+}
+
+.home-lens-project:hover,
+.home-lens-project:focus-visible { padding-inline: 0.55rem; background: color-mix(in srgb, var(--green) 6%, transparent); color: var(--green); outline: none; }
+.home-lens-project:focus-visible { box-shadow: inset 0 0 0 2px var(--green); }
+.home-lens-project > svg { color: var(--text-faint); transition: transform var(--transition-fast), color var(--transition-fast); }
+.home-lens-project:hover > svg,
+.home-lens-project:focus-visible > svg { color: var(--green); transform: translate(2px, -2px); }
+.home-lens-project__number { align-self: start; padding-top: 0.1rem; color: var(--green); font-family: var(--mono); font-size: 0.68rem; }
+.home-lens-project__body { display: grid; gap: 0.3rem; min-width: 0; }
+.home-lens-project__body strong { color: inherit; font-family: var(--sans); font-size: 1.02rem; font-weight: 650; }
+.home-lens-project__body small { color: var(--text-faint); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em; line-height: 1.4; text-transform: uppercase; }
+
 .home-project-list { display: grid; gap: 1.25rem; }
 
 .home-project-card {
@@ -130,6 +228,12 @@
 .home-profile-facts strong { color: var(--text-dim); font-size: 0.94rem; font-weight: 500; line-height: 1.45; }
 .home-section--profile > .home-text-link { margin-top: 2.5rem; }
 
+.home-path-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.home-path-card { display: flex; min-height: 16rem; flex-direction: column; justify-content: space-between; padding: 1.25rem; border: 1px solid var(--line); background: var(--surface); }
+.home-path-card > span { color: var(--green); font-family: var(--mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+.home-path-card h3 { max-width: 24rem; margin: 2rem 0; color: var(--text); font-family: var(--sans); font-size: clamp(1.45rem, 2.5vw, 2.25rem); font-weight: 580; letter-spacing: -0.055em; line-height: 1.02; }
+.home-path-card .home-text-link { align-self: flex-start; }
+
 .home-writing-list { border-top: 1px solid var(--line); }
 .home-writing-item { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); color: var(--text); transition: color 160ms ease-out, padding 160ms ease-out; }
 .home-writing-item:hover,
@@ -142,6 +246,10 @@
     .home-section { padding-block: 3.5rem; }
     .home-section__heading { align-items: start; flex-direction: column; gap: 1.25rem; margin-bottom: 2.25rem; }
     .home-section h2 { max-width: 11ch; font-size: clamp(2.35rem, 12vw, 4rem); }
+    .home-lens-tabs { grid-template-columns: 1fr; }
+    .home-lens-tab { border-right: 0; border-bottom: 1px solid var(--line); }
+    .home-lens-tab:last-child { border-bottom: 0; }
+    .home-lens-panel { grid-template-columns: 1fr; gap: 2.5rem; padding-inline: 0.85rem; }
     .home-project-card { grid-template-columns: 1fr; gap: 1.25rem; }
     .home-project-card__visual,
     .home-project-card__visual img,
@@ -153,10 +261,15 @@
     .home-profile-lead { font-size: 1.35rem; }
     .home-writing-item { align-items: start; flex-direction: column; }
     .home-writing-meta { justify-content: space-between; width: 100%; }
+    .home-path-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .home-text-link,
     .home-project-card__footer a,
     .home-writing-item { transition: none; }
+    .home-lens-tab,
+    .home-lens-tab svg,
+    .home-lens-project,
+    .home-lens-project > svg { transition: none; }
 }

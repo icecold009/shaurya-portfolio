@@ -3,6 +3,51 @@ import { postWordCounts } from "./generatedMetadata.js";
 
 const postMetadata = [
     {
+        slug: 'study-progress-that-survives-refresh',
+        title: 'A study plan has to survive the refresh',
+        date: '2026-09-29',
+        periodLabel: 'Aug–Sep 2026 · retrospective',
+        tag: 'Product',
+        excerpt: 'A useful study sprint keeps the next step clear, then brings a learner back to the same place after a break.',
+        description: 'What a local-first study planner taught me about clear next steps, visible scoring, and keeping progress after a refresh.',
+    },
+    {
+        slug: 'baseline-can-be-the-result',
+        title: 'When the baseline is the result',
+        date: '2026-09-29',
+        periodLabel: 'Nov 2025–Sep 2026 · retrospective',
+        tag: 'Research',
+        excerpt: 'My F1 forecasting study became more interesting when the previous season order beat every fitted regressor overall.',
+        description: 'A retrospective on leakage-safe F1 forecasting, chronological backtests, and learning to report a simple baseline honestly.',
+    },
+    {
+        slug: 'past-papers-need-a-pipeline',
+        title: 'Past papers need a pipeline, not a prompt',
+        date: '2026-09-29',
+        periodLabel: '2025–Apr 2026 · retrospective',
+        tag: 'Learning',
+        excerpt: 'A revision tool becomes easier to inspect when PDFs pass through clear extraction, segmentation, analysis, and generation steps.',
+        description: 'How a CAIE practice-paper project grew from PDF extraction into a staged workflow with explicit corpus and generation boundaries.',
+    },
+    {
+        slug: 'prediction-needs-context',
+        title: 'A prediction needs its assumptions beside it',
+        date: '2026-09-29',
+        periodLabel: 'Dec 2025 · retrospective',
+        tag: 'ML',
+        excerpt: 'A price estimate is easier to question when the inputs, model comparison, and market limits stay visible.',
+        description: 'A retrospective on presenting car-price predictions as estimates bounded by their data and evaluation, not as facts.',
+    },
+    {
+        slug: 'patterns-to-practice-2025',
+        title: 'From noticing patterns to sharing them',
+        date: '2026-09-29',
+        periodLabel: 'Jan–Jun 2025 · retrospective',
+        tag: 'Field notes',
+        excerpt: 'Two different settings made the same question useful: what should someone be able to do with what they have learned?',
+        description: 'A retrospective on turning sales patterns into a planning conversation and making mathematics a shared activity in 2025.',
+    },
+    {
         slug: 'shipping-is-a-design-decision',
         title: 'Shipping is a design decision',
         date: '2026-07-29',
@@ -56,6 +101,13 @@ export const posts = postMetadata.map((post) => ({
     ...post,
     readingTime: getReadingTimeFromWordCount(postWordCounts[post.slug]),
 }));
+
+const archiveYears = posts.flatMap((post) => [
+    Number(post.date.slice(0, 4)),
+    ...(post.periodLabel?.match(/20\d{2}/g) ?? []).map(Number),
+]).filter(Number.isFinite);
+
+export const writingPeriodLabel = `${Math.min(...archiveYears)}–${Math.max(...archiveYears)}`;
 
 export function formatPostDate(date) {
     return new Intl.DateTimeFormat('en', {

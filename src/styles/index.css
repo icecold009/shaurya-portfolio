@@ -21,6 +21,7 @@
 @import "./pages/projects.css";
 @import "./pages/about.css";
 @import "./pages/contact.css";
+@import "../pages/work-with-me/WorkWithMePage.css";
 @import "./pages/artwork.css";
 @import "./pages/certificates.css";
 @import "./pages/achievements.css";

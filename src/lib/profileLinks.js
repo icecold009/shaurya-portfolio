@@ -1,5 +1,5 @@
 export const positioningStatement =
-    "Student developer in Bengaluru building data-driven AI and full-stack tools, with a focus on machine-learning evaluation and useful interfaces.";
+    "Student software developer in Bengaluru building web applications, full-stack products, and data-driven AI and machine-learning projects.";
 
 export const profileLinks = [
     {
@@ -11,13 +11,13 @@ export const profileLinks = [
     {
         key: "kaggle",
         label: "Kaggle",
-        href: "https://www.kaggle.com/icecold009",
+        href: "https://www.kaggle.com/shauryasaria",
         external: true,
     },
     {
         key: "linkedin",
         label: "LinkedIn",
-        href: "https://linkedin.com/in/shaurya-saria009",
+        href: "https://www.linkedin.com/in/shaurya-saria/",
         external: true,
     },
     {

@@ -22,6 +22,18 @@
     opacity: 0.22;
 }
 
+.portfolio-hero::after {
+    content: "";
+    position: absolute;
+    inset: 12% 18% 18% 36%;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 25% 20%, color-mix(in srgb, var(--green) 20%, transparent), transparent 42%),
+        radial-gradient(circle at 72% 68%, color-mix(in srgb, var(--green-dim) 13%, transparent), transparent 45%);
+    filter: blur(35px);
+    opacity: 0.52;
+}
+
 .portfolio-hero__rail,
 .portfolio-hero__footer {
     position: relative;
@@ -130,6 +142,19 @@
     border-top: 1px solid var(--line-bright);
 }
 
+.portfolio-button--tertiary {
+    border-color: transparent;
+    background: transparent;
+    color: var(--text-dim);
+}
+
+.portfolio-button--tertiary:hover,
+.portfolio-button--tertiary:focus-visible {
+    border-color: var(--line-bright);
+    background: var(--surface-2);
+    color: var(--text);
+}
+
 .portfolio-button {
     min-height: 3.25rem;
     display: flex;
@@ -200,6 +225,7 @@
     }
 
     .portfolio-hero::before { background-size: 50% 100%; }
+    .portfolio-hero::after { inset: 18% -20% 25% 25%; opacity: 0.4; }
 
     .portfolio-hero__rail,
     .portfolio-hero__footer { grid-template-columns: 1fr auto; font-size: 0.58rem; }

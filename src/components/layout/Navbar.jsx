@@ -10,6 +10,7 @@ const primaryLinks = [
     { to: "/projects", label: "Work" },
     { to: "/about", label: "About" },
     { to: "/blog", label: "Writing" },
+    { to: "/work-with-me", label: "Work with me" },
     { to: "/contact", label: "Contact" },
 ];
 
@@ -74,7 +75,12 @@ function Navbar() {
     const [moreOpen, setMoreOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [theme, setTheme] = useState(() => {
-        const savedTheme = localStorage.getItem("portfolio-theme");
+        let savedTheme = null;
+        try {
+            savedTheme = localStorage.getItem("portfolio-theme");
+        } catch {
+            // Use the system preference when storage is unavailable.
+        }
         if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
         return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
     });
@@ -89,7 +95,11 @@ function Navbar() {
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("portfolio-theme", theme);
+        try {
+            localStorage.setItem("portfolio-theme", theme);
+        } catch {
+            // Theme persistence is optional.
+        }
     }, [theme]);
 
     useEffect(() => {

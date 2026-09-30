@@ -9,6 +9,7 @@ const footerNavigation = [
     { to: "/projects", label: "Work" },
     { to: "/about", label: "About" },
     { to: "/blog", label: "Writing" },
+    { to: "/work-with-me", label: "Work with me" },
     { to: "/contact", label: "Contact" },
 ];
 
@@ -17,6 +18,8 @@ const footerExplore = [
     { to: "/certificates", label: "Certificates" },
     { to: "/uses", label: "Uses" },
     { to: "/artwork", label: "Artwork" },
+    { to: "/privacy", label: "Privacy" },
+    { to: "/terms", label: "Terms" },
 ];
 
 export default function Footer() {
