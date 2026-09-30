@@ -7,4 +7,12 @@ export default defineConfig({
         { enforce: 'pre', ...mdx() },
         react(),
     ],
+    server: {
+        port: 5174,
+        strictPort: true,
+    },
+    preview: {
+        port: 5174,
+        strictPort: true,
+    },
 });
