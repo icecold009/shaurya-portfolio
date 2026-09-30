@@ -73,7 +73,10 @@ test("every project card has metadata and an intentional preview fallback", () =
         ["nextsound", "car-price-predictor", "code-racer", "open-source-practice", "touchscreen-launchpad"],
     );
     assert.ok(projectCatalog.slice(-5).every((project) => project.github));
-    assert.equal(projectCatalog.find((project) => project.id === "touchscreen-launchpad")?.thumbnail, null);
+    const launchpadProject = projectCatalog.find((project) => project.id === "touchscreen-launchpad");
+    assert.equal(launchpadProject?.thumbnail, "/projects/touchscreen-launchpad.svg");
+    assert.equal(launchpadProject?.thumbnailFit, "contain");
+    assert.equal(launchpadProject?.thumbnailKind, "brand");
     assert.match(projectCatalog.find((project) => project.id === "touchscreen-launchpad")?.architectureLink ?? "", /touchscreen-launchpad\/blob\/main\/docs\/architecture\/touchscreen-launchpad\.png$/);
 });
 

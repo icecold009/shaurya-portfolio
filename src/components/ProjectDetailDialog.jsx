@@ -197,19 +197,6 @@ export default function ProjectDetailDialog({
                             </section>
                         )}
 
-                        {project.architectureNote && (
-                            <div className="project-detail-dialog__outcome project-detail-dialog__architecture">
-                                <span>Read this diagram</span>
-                                <p>{project.architectureNote}</p>
-                                {project.architectureLink && (
-                                    <a className="project-detail-dialog__architecture-link" href={project.architectureLink} target="_blank" rel="noreferrer">
-                                        Open architecture diagram
-                                        <ArrowUpRight size={15} aria-hidden="true" />
-                                    </a>
-                                )}
-                            </div>
-                        )}
-
                         <dl className="project-detail-dialog__facts">
                             <div>
                                 <dt>What I built</dt>

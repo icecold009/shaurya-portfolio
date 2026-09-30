@@ -431,7 +431,9 @@ export const projects = [
         stack: ["HTML", "JavaScript", "Web Audio", "IndexedDB", "PWA"],
         github: "https://github.com/icecold009/touchscreen-launchpad",
         visual: "launchpad",
-        thumbnail: null,
+        thumbnail: "/projects/touchscreen-launchpad.svg",
+        thumbnailFit: "contain",
+        thumbnailKind: "brand",
         accent: "14",
     },
 ];
