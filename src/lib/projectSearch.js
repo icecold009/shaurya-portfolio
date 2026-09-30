@@ -14,10 +14,15 @@ export function projectMatches(project, query = "", tag = "") {
     }
 
     return [
+        project.id,
         project.title,
+        project.summary,
         project.description,
         project.category,
         project.status,
+        project.problem,
+        project.contribution,
+        project.decisions,
         project.outcome,
         project.limitations,
         ...project.stack,

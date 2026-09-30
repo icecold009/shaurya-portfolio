@@ -1,0 +1,21 @@
+A past-paper PDF is not a structured study resource yet. Before a student can practise a particular subject or paper, the source needs to be named, extracted, checked, and turned into a useful question set.
+
+That is the shape of [Past Paper AI](https://github.com/icecold009/past-paper-ai): a local CAIE workflow that stores papers, extracts text, segments questions, builds analysis artifacts, and creates a prompt scaffold before any practice-paper draft is generated.
+
+## Separate the stages
+
+The pipeline makes the path visible: validate filenames and folders, extract pages, segment questions, analyse the resulting rows, build a prompt, and optionally generate a draft. Each stage leaves an artifact that can be inspected before the next one runs.
+
+This is a more useful boundary than sending an entire PDF to a model and hoping the right questions emerge. If extraction fails, the result should be fixed at extraction. If segmentation is poor, prompt wording cannot repair the missing structure.
+
+## Make the supported set explicit
+
+The project keeps its subject and paper plan in configuration. Its documented CAIE set includes Computer Science, Mathematics, Further Mathematics, and Physics papers, with an explicit variant scope. That boundary is part of the product: a clear supported corpus is more trustworthy than an interface that implies every uploaded file is understood.
+
+The workflow is still a local project. Its README distinguishes extraction and analysis scaffolding from generation, and the mock mode gives downstream stages sample inputs without pretending they came from real papers.
+
+## Keep the draft a draft
+
+Generated practice is a starting point for revision, not an official paper or a guarantee about an upcoming exam. Mark schemes, syllabus coverage, and paper structure all constrain what a useful draft can claim.
+
+The project taught me to put those constraints in the pipeline itself. A good study product does not only ask a model for content; it makes the sources and transformations legible enough that a student can decide whether the output is worth using.

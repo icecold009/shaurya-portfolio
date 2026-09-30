@@ -20,7 +20,7 @@ const pageMetadata = {
     },
     "/about": {
         title: "About Shaurya Saria | Student Software Developer",
-        description: "Learn how Shaurya Saria approaches machine-learning evaluation, full-stack products, and useful interfaces from Bengaluru.",
+        description: "Meet Shaurya Saria, a Bengaluru student developer building web products and applied machine-learning projects while studying Cambridge International A Levels.",
         type: "website",
     },
     "/projects": {

@@ -1,0 +1,21 @@
+The useful part of a study plan is not the moment it is generated. It is the next session: can a student return, remember what they were doing, and make a sensible next choice?
+
+That question shaped [IceCold Sprint](https://github.com/icecold009/lablab-hackathon-study-app). The current MVP asks a learner to set up an exam, rate confidence and importance across topics, and turn those inputs into a short, prioritised sprint. A five-question quiz then feeds a score, explanations, progress, and a next recommendation.
+
+## Keep the plan explainable
+
+The current planner uses deterministic scoring rules. That makes the ranking easier to inspect: a topic moves because of its importance and the learner's stated confidence, not because a model returned an unexplained label. It also keeps the first version usable without waiting for an API.
+
+The distinction matters for study tools. A suggested plan should be something a student can question and adjust. If the input feels wrong, the interface should make it easy to correct the input instead of asking the student to trust a mysterious score.
+
+## A refresh is a real user action
+
+The project keeps progress locally so a learner can refresh and return to the sprint. That small detail changes the shape of the product: progress is not just a temporary screen state, and a break does not have to erase the work that came before it.
+
+The repository also separates the core flow from future model assistance. The model can become an optional aid later, but the checked-in quiz content and local scoring keep the basic study loop available on their own.
+
+## Make the next step visible
+
+I like this kind of narrow workflow because it is easy to inspect from beginning to end: choose topics, make a plan, practise, review, and decide what to do next. The current app is still an MVP, and real student outcomes have not been measured. Its useful design question is smaller: can a learner understand the plan and pick up where they left off?
+
+That is a good question for a first version to answer before it grows into something harder to verify.

@@ -1,0 +1,21 @@
+.project-tech-tag {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.project-tech-tag__icon {
+    display: block;
+    flex: 0 0 auto;
+    box-sizing: content-box;
+    padding: 0.16rem;
+    border: 1px solid color-mix(in srgb, var(--project-tech-mark-color, currentColor) 56%, var(--line-bright));
+    border-radius: 0.32rem;
+    background: color-mix(in srgb, var(--project-tech-mark-color, currentColor) 22%, var(--surface));
+    color: color-mix(in srgb, var(--project-tech-mark-color, currentColor) 78%, var(--text));
+}
+
+.project-tech-tag__label {
+    min-width: 0;
+}

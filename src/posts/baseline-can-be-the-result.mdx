@@ -1,0 +1,17 @@
+I expected the interesting part of an F1 forecasting project to be the model. The most useful result so far has been the comparison that asks whether a fitted model beats a much simpler rule at all.
+
+The [forecasting study](https://github.com/icecold009/f1-championship-prediction) builds pre-season signals from earlier driver and constructor performance, holds out each test season in full, and trains only on earlier seasons. That chronological boundary matters: a forecast should not quietly see the season it is supposed to predict.
+
+## Start with the boring comparison
+
+The repository compares fitted regressors with the previous season's final order. Across ten untouched test seasons from 2016 to 2025, that baseline has a mean RMSE of 3.728 and mean Spearman rank correlation of 0.821. The history-only random forest with cold-start flags has a higher mean RMSE of 5.982 and a slightly lower mean rank correlation of 0.811.
+
+The conclusion is not that machine learning is pointless. It is that this evidence does not support saying the fitted models are better overall. A simple baseline is a real result when it survives the same test boundary.
+
+## Keep uncertainty in the same frame
+
+The project also reports where the model struggles. New regulations, rookies, and returning drivers can be hard to place from historical performance alone. Its bootstrap intervals are model-sensitivity measures, not calibrated odds or guarantees.
+
+I find that distinction useful beyond racing. A chart can make an estimate look finished long before the evidence is. Showing the baseline, the held-out seasons, and the limits together gives a reader a better way to judge the forecast than a single headline score.
+
+The project is still a research-oriented study, not a live race service. That boundary belongs beside the result because it changes how the result should be used.
