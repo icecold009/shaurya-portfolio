@@ -464,6 +464,64 @@ Audio Recognition, the two selectors contained only StadiumPulse AI and Audio
   one-project reading list restored. The local server remains available for
   user review.
 
+## Expressive project transitions: Package 18
+
+Goal: make project archive interactions feel connected and responsive through
+a cover-to-detail transition, measured filter reflow, and immediate press
+feedback.
+
+### Scope
+
+- [x] Share the selected project's cover frame between its archive card and
+      detail dialog, including a matching return transition on close.
+- [x] Animate only the position of remaining project cards when search or area
+      filters change; preserve canonical order and existing URL state.
+- [x] Give archive and dialog buttons short press feedback that works for touch
+      as well as pointer input; keep hover-only styling for fine pointers.
+- [x] Preserve the existing category palettes, focus handling, Escape close,
+      direct project URLs, touch/keyboard operation, and ordinary scrolling.
+- [x] Under reduced motion, remove shared and positional movement while keeping
+      immediate state changes and a brief dialog opacity transition.
+
+### Non-goals
+
+No site-wide animation redesign, new animation dependency, content or data
+changes, route/storage changes, deployment, publication, or merge. Existing
+first-view project reveals remain unchanged.
+
+### Files, tests, and acceptance
+
+Files: `src/components/Projects.jsx`, `src/components/Projects.css`,
+`src/components/ProjectDetailDialog.jsx`,
+`src/styles/components/project-detail-dialog.css`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, and local browser checks for
+card-to-dialog open/close, direct URL fallback, keyboard and Escape/focus,
+filter reflow and URL preservation, touch press feedback, fine-pointer hover
+gating, reduced motion, and responsive overflow.
+
+Acceptance: selecting a project connects its cover to the dialog's media frame
+and closing it returns the frame to its card; a project opened from a direct
+URL gets a short fallback transition. Filters move remaining cards using a
+position-only transition under 300 ms without changing result order or URL
+state. Press feedback is immediate and subtle, hover effects remain fine-pointer
+only, and reduced motion removes spatial movement while preserving semantic
+dialog/focus behavior and readable state feedback.
+
+Evidence: `npm.cmd run verify` passed: 112 source files linted, 48 tests passed,
+86 assets, 15 routes, 14 projects, and 21 artwork records checked, and 24 static
+route documents generated. The optional resume sync skipped because
+`resume/resume.tex` is absent; the production build retains the existing
+552.51 kB main-chunk warning. `git diff --check` passed. Browser checks covered
+card open/close, keyboard open and Escape focus restoration, direct project URL
+fallback, and AI filtering (`?tag=AI`, three matching projects). At the 569 px
+viewport, the filter chips wrapped without visible horizontal overflow. Source
+inspection confirms positional/shared motion is disabled under reduced motion,
+press feedback uses the existing 140 ms token, and hover styles are gated to
+fine pointers; touch and reduced-motion preferences were not separately
+emulated. The original one-project reading list was restored, the archive is
+back at `/projects`, and the local server remains available for user review.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software

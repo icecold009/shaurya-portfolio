@@ -1,8 +1,10 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Bookmark, BookmarkCheck, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
 import "../styles/components/project-detail-dialog.css";
+import { EDITORIAL_DURATION, EDITORIAL_EASE, PRESS } from "../lib/motion";
 import { getProjectEvidenceSummary } from "../lib/projectEvidence";
 import ProjectTechnologyTag from "./ProjectTechnologyTag";
 import ProjectStory from "./ProjectStory";
@@ -22,14 +24,30 @@ export default function ProjectDetailDialog({
     fallbackFocusSelector = "#main-content",
     isSaved = false,
     onToggleSave,
+    sharedTransition = false,
 }) {
     const evidence = getProjectEvidenceSummary(project);
+    const shouldReduceMotion = useReducedMotion();
     const dialogRef = useRef(null);
     const closeButtonRef = useRef(null);
     const closeRef = useRef(onClose);
     const [mediaFailed, setMediaFailed] = useState(false);
     const titleId = `project-dialog-title-${useId().replace(/:/g, "")}`;
     const descriptionId = `project-dialog-description-${useId().replace(/:/g, "")}`;
+    const pressFeedback = shouldReduceMotion ? undefined : PRESS;
+    const sharedLayoutId = sharedTransition && !shouldReduceMotion
+        ? `project-cover-${project.id}`
+        : undefined;
+    const dialogTransition = {
+        duration: shouldReduceMotion ? EDITORIAL_DURATION.fast : EDITORIAL_DURATION.popover,
+        ease: EDITORIAL_EASE,
+    };
+    const dialogInitial = shouldReduceMotion
+        ? { opacity: 0 }
+        : { opacity: 0, transform: "translateY(0.75rem) scale(0.985)" };
+    const dialogExit = shouldReduceMotion
+        ? { opacity: 0 }
+        : { opacity: 0, transform: "translateY(0.45rem) scale(0.99)" };
 
     closeRef.current = onClose;
 
@@ -103,19 +121,27 @@ export default function ProjectDetailDialog({
     }, [fallbackFocusSelector, triggerElement]);
 
     return createPortal(
-        <div
+        <motion.div
             className="project-detail-dialog-backdrop"
             role="presentation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={dialogTransition}
             onMouseDown={(event) => {
                 if (event.target === event.currentTarget) {
                     closeRef.current();
                 }
             }}
         >
-            <section
+            <motion.section
                 id="project-detail-dialog"
                 ref={dialogRef}
                 className="project-detail-dialog"
+                initial={dialogInitial}
+                animate={{ opacity: 1, transform: "translateY(0) scale(1)" }}
+                exit={dialogExit}
+                transition={dialogTransition}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={titleId}
@@ -126,20 +152,27 @@ export default function ProjectDetailDialog({
                         <strong>{project.number}</strong>
                         <span>Project archive / {project.category}</span>
                     </span>
-                    <button
+                    <motion.button
                         ref={closeButtonRef}
                         type="button"
                         className="project-detail-dialog__close"
+                        whileTap={pressFeedback}
                         onClick={() => closeRef.current()}
                         aria-label={`Close ${project.title} details`}
                     >
                         <X size={19} aria-hidden="true" />
-                    </button>
+                    </motion.button>
                 </div>
 
                 <div className="project-detail-dialog__body">
                     <div className="project-detail-dialog__hero">
-                        <div className="project-detail-dialog__media">
+                        <motion.div
+                            className="project-detail-dialog__media"
+                            layoutId={sharedLayoutId}
+                            transition={shouldReduceMotion ? undefined : {
+                                layout: { duration: EDITORIAL_DURATION.normal, ease: EDITORIAL_EASE },
+                            }}
+                        >
                             {project.thumbnail && !mediaFailed ? (
                                 <img
                                     src={project.thumbnail}
@@ -152,7 +185,7 @@ export default function ProjectDetailDialog({
                                     <small>{project.thumbnail ? "Cover unavailable" : "Archive record"}</small>
                                 </span>
                             )}
-                        </div>
+                        </motion.div>
 
                         <div className="project-detail-dialog__content">
                             <p className="selected-work-kicker">Detailed view · {project.year}</p>
@@ -256,8 +289,8 @@ export default function ProjectDetailDialog({
                         </button>
                     </div>
                 </div>
-            </section>
-        </div>,
+            </motion.section>
+        </motion.div>,
         document.body,
     );
 }
