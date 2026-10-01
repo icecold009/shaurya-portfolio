@@ -27,6 +27,7 @@ import "./Projects.css";
 import { projectProofIntro, projects } from "../data/projects";
 import ProjectComparison from "./ProjectComparison";
 import ProjectDetailDialog from "./ProjectDetailDialog";
+import ProjectFinder from "./ProjectFinder";
 import ProjectTechnologyTag from "./ProjectTechnologyTag";
 
 function getPortfolioStorage() {
@@ -396,6 +397,8 @@ export default function Projects() {
                         </div>
                     </div>
                 </motion.header>
+
+                <ProjectFinder projects={projects} onOpenProject={openProject} />
 
                 <section className="project-archive-tools" aria-labelledby="project-archive-title">
                     <div className="project-archive-tools__heading">

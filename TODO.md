@@ -583,6 +583,36 @@ lock with a disabled `Starting...` control prevents repeated activation while
 the browser resumes audio. A light-theme screenshot confirmed the harmonic
 palette remains distinct and readable.
 
+## Guided project finder: Package 20
+
+Goal: Let a visitor describe a topic in plain language, select relevant existing projects through TypeSafe Jev, and read only the canonical project descriptions already recorded in this site.
+
+### Scope
+
+- [x] Add an explicit-submit prompt bounded to 240 characters and a short disclosure before sending it.
+- [x] Send only the visitor prompt and bounded public project fields to a server-side TypeSafe endpoint; keep the API key off the browser.
+- [x] Bound provider request volume and concurrent work per running endpoint instance.
+- [x] Validate typed Noul responses, threshold and rank matches, cap results at three, and return canonical IDs only.
+- [x] Show canonical project summaries with links into the existing project detail dialog.
+- [x] Provide deterministic local keyword matching when TypeSafe is unavailable; do not store the prompt or put it in the URL.
+- [x] Document TypeSafe as a third-party processor and advise visitors not to enter personal or private information.
+
+### Non-goals
+
+Generated project copy, automatic prompt submission, prompt history, analytics, account state, new project retrieval, dependency additions, secret setup, deployment, publication, or merging.
+
+### Files, tests, and acceptance
+
+Files: `api/project-picker.js`, `vite.config.js`, `src/lib/projectFinder.js`, `src/components/ProjectFinder.jsx`, `src/components/ProjectFinder.css`, `src/components/Projects.jsx`, `src/pages/privacy/PrivacyPage.jsx`, `tests/projectFinder.test.mjs`, `package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, focused finder handler and selection tests, `git diff --check`, local API behavior, and browser inspection of the finder form and privacy copy.
+
+Acceptance: query length, request body, and provider request volume are bounded; only the server contacts TypeSafe; provider output is validated and mapped to known IDs; fallback uses site records; results do not change archive URL state; submitted text is not written to browser storage, the URL, or application logs; local preview remains available.
+
+Evidence: `npm.cmd run verify` passed: 118 source files linted, all 61 tests passed, 86 assets, 15 routes, 14 projects, and 21 artwork records checked, and 24 static route documents generated. The optional resume sync skipped because `resume/resume.tex` is absent; the production build retains a 567.19 kB main-chunk warning. `git diff --check` passed. Local `/projects` returned HTTP 200; the browser accessibility snapshot showed the labeled prompt, 240-character counter, disabled empty-submit control, pre-submit provider-data/privacy notice, and existing 14-project archive. A local POST returned `503 PROVIDER_UNAVAILABLE` because no local key is configured, with no upstream call. Automated tests verify deterministic local ranking, typed ID-only provider output, request limits, fallback paths, and archive mapping. The browser form was not manually submitted in this verification session. Jev reviewed all 10 changed text files with no exclusions or sensitive files; its generic privacy/test-risk gate contained no concrete finding. Independent review found no code findings. The request/concurrency limiter is best-effort per running endpoint instance, not a global provider spend ceiling.
+
+Implementation branch: `codex/portfolio-project-finder`.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software

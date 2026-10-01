@@ -11,7 +11,7 @@ export default function PrivacyPage() {
                     <p className="legal-page__lede">
                         This page explains what this portfolio collects, why it is collected, and which services receive it.
                     </p>
-                    <p className="legal-page__updated">Last updated: 20 September 2026</p>
+                    <p className="legal-page__updated">Last updated: 2 October 2026</p>
                 </header>
 
                 <div className="legal-page__body">
@@ -39,6 +39,9 @@ export default function PrivacyPage() {
                         <h2 id="privacy-integrations-title">A few features use public services</h2>
                         <p>
                             The GitHub activity panel requests a public contribution calendar from github-contributions-api.jogruber.de and links back to GitHub. The site also requests the Archivo and IBM Plex Mono fonts from Google Fonts unless your browser blocks that request. These services can receive technical request information under their own policies.
+                        </p>
+                        <p>
+                            If you submit a request to the project finder while TypeSafe is available, your prompt and public project descriptions plus selected metadata, including titles, categories, technologies, skills, and outcomes, are sent to TypeSafe over HTTPS to select relevant project records. This feature does not save the prompt in browser storage or add it to the page URL. Avoid entering personal or private information. TypeSafe handles the request under its own policies.
                         </p>
                     </section>
 
