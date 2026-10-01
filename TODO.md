@@ -522,6 +522,67 @@ fine pointers; touch and reduced-motion preferences were not separately
 emulated. The original one-project reading list was restored, the archive is
 back at `/projects`, and the local server remains available for user review.
 
+## Audio signal explorer: Package 19
+
+Goal: give visitors a small, hands-on explanation of how generated audio
+signals change across a waveform and frequency spectrum, alongside the
+Audio Recognition case study.
+
+### Scope
+
+- [x] Add three clearly named synthetic signal presets with frequency and noise
+      controls that update a deterministic waveform and DFT spectrum.
+- [x] Add keyboard- and touch-operable controls and explicit, short local audio
+      playback with a stop control and cleanup.
+- [x] Label the widget as an educational synthetic example, separate from any
+      recording, catalog comparison, or recognition result.
+- [x] Keep the explorer inside the Audio Recognition detail view; preserve
+      existing project facts, dialog navigation, reduced motion, and scrolling.
+
+### Non-goals
+
+No microphone or upload access, external samples or network calls, claims that
+the widget reproduces the project's recognition pipeline, new route, storage,
+provider integration, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/AudioSignalExplorer.jsx`,
+`src/components/AudioSignalExplorer.css`, `src/lib/audioSignalModel.js`,
+`tests/audioSignal.test.mjs`, `src/components/ProjectDetailDialog.jsx`,
+`package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, deterministic signal-model unit
+tests, and browser checks for project-only rendering, control-to-plot updates,
+explicit playback with no autoplay, keyboard operation, responsive overflow,
+dialog scrolling, direct URLs, and runtime errors.
+
+Acceptance: visitors can change the generated signal's shape, frequency, and
+noise and see both plots update. Playback starts only after activation, stays
+local and brief, and can be stopped. Accessible native controls work by
+keyboard and touch. Clear copy explains that the visualization is synthetic
+and is not a recognition result. Other project dialogs and existing evidence
+remain unchanged.
+
+Evidence: `npm.cmd run verify` passed: 115 source files linted, 52 tests passed
+(including four signal-model tests), 86 assets, 15 routes, 14 projects, and 21
+artwork records checked, and 24 static route documents generated. The optional
+resume sync skipped because `resume/resume.tex` is absent; the production build
+retains the >500 kB main-chunk warning (562.20 kB). `git diff --check` passed.
+Browser checks covered the direct Audio Recognition URL, no explorer on a
+different project's detail, preset/frequency/noise updates to both plots,
+keyboard frequency adjustment, explicit play/stop status, and dialog scrolling.
+At the 584 px viewport the plot and controls fit the dialog without visible
+horizontal overflow. No audio played until Play was activated. Native controls
+provide touch operation; the browser session did not emulate a touch device or
+reduced-motion preference. The plot has no animated transitions, and the local
+server remains available at `/projects?project=audio-recognition` for review.
+Independent review found and drove two fixes: light-theme preset accents now
+contrast at 5.60:1 or better against the cream surface, and an in-flight start
+lock with a disabled `Starting...` control prevents repeated activation while
+the browser resumes audio. A light-theme screenshot confirmed the harmonic
+palette remains distinct and readable.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software

@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import "../styles/components/project-detail-dialog.css";
 import { EDITORIAL_DURATION, EDITORIAL_EASE, PRESS } from "../lib/motion";
 import { getProjectEvidenceSummary } from "../lib/projectEvidence";
+import AudioSignalExplorer from "./AudioSignalExplorer";
 import ProjectTechnologyTag from "./ProjectTechnologyTag";
 import ProjectStory from "./ProjectStory";
 
@@ -210,6 +211,7 @@ export default function ProjectDetailDialog({
                         </div>
                     </div>
 
+                    {project.id === "audio-recognition" ? <AudioSignalExplorer /> : null}
                     {project.id === "touchscreen-launchpad" ? <ProjectStory project={project} /> : null}
 
                     <div className="project-detail-dialog__details">
