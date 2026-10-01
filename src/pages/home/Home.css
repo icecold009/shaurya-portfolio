@@ -29,6 +29,14 @@
 
 .home-section h2 em { color: var(--green); font-style: italic; font-weight: 470; }
 
+.home-section__intro {
+    max-width: 27rem;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
 .home-text-link {
     display: inline-flex;
     align-items: center;
@@ -246,6 +254,7 @@
     .home-section { padding-block: 3.5rem; }
     .home-section__heading { align-items: start; flex-direction: column; gap: 1.25rem; margin-bottom: 2.25rem; }
     .home-section h2 { max-width: 11ch; font-size: clamp(2.35rem, 12vw, 4rem); }
+    .home-section__intro { max-width: 34rem; }
     .home-lens-tabs { grid-template-columns: 1fr; }
     .home-lens-tab { border-right: 0; border-bottom: 1px solid var(--line); }
     .home-lens-tab:last-child { border-bottom: 0; }

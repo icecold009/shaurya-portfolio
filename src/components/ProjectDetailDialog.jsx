@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import "../styles/components/project-detail-dialog.css";
 import { getProjectEvidenceSummary } from "../lib/projectEvidence";
 import ProjectTechnologyTag from "./ProjectTechnologyTag";
+import ProjectStory from "./ProjectStory";
 
 function getFocusableElements(container) {
     return Array.from(
@@ -175,6 +176,8 @@ export default function ProjectDetailDialog({
                             </div>
                         </div>
                     </div>
+
+                    {project.id === "touchscreen-launchpad" ? <ProjectStory project={project} /> : null}
 
                     <div className="project-detail-dialog__details">
                         <section className="project-detail-dialog__outcome">

@@ -221,6 +221,75 @@ deployment, publication, merge, commit, or push were performed.
 
 Implementation branch: `codex/project-card-revamp-20260928`.
 
+## Interactive project playground: Package 14
+
+Goal: give visitors a small, accessible way to play with an idea from the
+Touchscreen Launchpad project and then explore how that project is structured.
+
+### Scope
+
+- [x] Add a four-pad synthesized-tone playground to the homepage with touch,
+      click, and Q/W/E/R keyboard input, layered notes, active feedback, and a
+      reset control that stops current notes. Do not fire pad shortcuts while
+      an unrelated interactive control has focus.
+- [x] Start audio only after a visitor activates a pad. Keep all audio
+      generation in the current browser and label the four-tone demo as a
+      separate sketch, not the full sample-based Launchpad.
+- [x] Add a five-stage Problem → Input → System → Output → Lessons story to
+      the Touchscreen Launchpad project detail, sourced from the existing
+      project record.
+- [x] Let visitors select a documented architecture component in the System
+      stage to inspect its role and boundary.
+- [x] Link the playground to the project story through the existing
+      URL-backed project detail flow.
+- [x] Preserve keyboard focus, readable color contrast, responsive layout,
+      theme support, and reduced-motion behavior.
+
+### Non-goals
+
+No external audio assets or requests, backend, changes to the Launchpad
+repository, full audio-recognition explorer, audience tour, skills explorer,
+project comparison, AI project selector, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/pages/home/Home.jsx`, `src/pages/home/Home.css`,
+`src/components/AudioPlayground.jsx`,
+`src/components/AudioPlayground.css`,
+`src/components/ProjectDetailDialog.jsx`,
+`src/components/ProjectStory.jsx`, `src/components/ProjectStory.css`, and this
+backlog entry.
+
+Tests: `npm.cmd run verify` (including lint, automated tests, asset integrity,
+production build, and static route generation), `git diff --check`, and rendered
+browser checks for pad click/keyboard playback, shortcut suppression while
+Reset or another unrelated control has focus, layering, reset, project-story
+stage switching and architecture selection, responsive layout, reduced motion,
+and console health. No new automated test file was needed for this
+interaction-only package.
+
+Acceptance: visitors can play and reset four distinct synthesized tones with
+keyboard or touch; playback never starts without an explicit action; the demo
+makes its separation from the full Launchpad clear; the project story exposes
+all five stages using documented project details and its System stage exposes
+the role and boundary for each architecture component; existing project detail
+URLs and dialog focus behavior remain intact; and the local quality and browser
+checks pass.
+
+Evidence: `npm.cmd run verify` passed: lint checked 104 source files, all 38
+tests passed, integrity checked 86 assets / 15 routes / 14 projects / 21 artwork
+records, Vite built the production app, and 24 static route documents were
+generated. `git diff --check` passed. Local browser checks at `http://127.0.0.1:5173/`
+verified four pads, keyboard and click playback, layered notes, reset, all five
+story stages, selectable architecture nodes, existing URL-backed detail and
+Escape close behavior, two-column pads/story on mobile, four-column pads on
+desktop, and no horizontal overflow. Pressing R while Reset had focus left the
+status unchanged with no active pads; pressing R with a pad focused played
+Bright C5, and Reset stopped it. With reduced motion enabled, pad and story
+transitions compute to `0s`; the browser reported no app errors. The optional
+resume sync skipped because `resume/resume.tex` is absent. The build emitted the
+large-chunk advisory for the 536.81 kB main bundle.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software

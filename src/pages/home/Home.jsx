@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import Hero from "../../components/Hero";
+import AudioPlayground from "../../components/AudioPlayground";
 import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
 import {
@@ -141,6 +142,31 @@ export default function Home() {
                             ))}
                         </div>
                     </div>
+                </motion.div>
+            </motion.section>
+
+            <motion.section
+                className="home-section home-section--playground"
+                aria-labelledby="home-playground-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div
+                    className="home-section__heading"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
+                >
+                    <div>
+                        <p className="home-kicker">Try a few notes / Touchscreen Launchpad</p>
+                        <h2 id="home-playground-title">Make a small <em>sound.</em></h2>
+                    </div>
+                    <p className="home-section__intro">
+                        Tap or press Q, W, E, R to layer four short tones. Audio starts only when you play a pad.
+                    </p>
+                </motion.div>
+                <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <AudioPlayground />
                 </motion.div>
             </motion.section>
 
