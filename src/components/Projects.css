@@ -280,6 +280,29 @@
     color: var(--green);
 }
 
+.project-filter-chip:disabled {
+    cursor: not-allowed;
+    opacity: 0.52;
+}
+
+.project-comparison-toggle {
+    display: grid;
+    justify-items: start;
+    gap: 0.35rem;
+}
+
+.project-comparison-toggle > p {
+    margin: 0;
+    color: var(--text-faint);
+    font-size: 0.65rem;
+    line-height: 1.4;
+}
+
+.project-comparison-toggle__button:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
 .project-archive-tools__status {
     display: flex;
     align-items: center;
@@ -840,6 +863,10 @@
     }
 
     .project-filter-chip--saved {
+        align-self: flex-start;
+    }
+
+    .project-comparison-toggle {
         align-self: flex-start;
     }
 

@@ -399,6 +399,71 @@ the controls used 100 ms color/background/shadow transitions without spatial
 movement. A fresh reload produced no new browser console errors. The local
 server remains running for user review.
 
+## Saved-project comparison: Package 17
+
+Goal: give visitors a second use for the existing reading list by comparing
+two saved projects against their recorded goals, architecture, technologies,
+and limitations.
+
+### Scope
+
+- [x] Add an accessible comparison toggle beside the existing reading-list
+      control; require at least two saved projects.
+- [x] Limit both project selectors to distinct, current reading-list entries.
+- [x] Compare each project's problem statement, recorded architecture note,
+      key decision, technology stack, and limitations; label missing
+      architecture notes clearly.
+- [x] Link to existing project details and architecture diagrams where
+      canonical links exist.
+- [x] Preserve the existing reading-list storage and URL filter contracts;
+      support keyboard use, small viewports, and reduced motion.
+
+### Non-goals
+
+No AI/provider calls, new project claims or architecture metadata, unsaved
+comparison choices, new routes, persistent comparison state, deployment,
+publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/Projects.jsx`, `src/components/Projects.css`,
+`src/components/ProjectComparison.jsx`,
+`src/components/ProjectComparison.css`, `src/lib/projectComparison.js`,
+`tests/projectComparison.test.mjs`,
+`tests/projectComparisonComponent.test.mjs`, `package.json`, and this backlog
+entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, unit tests for distinct saved
+IDs and stale/unsaved choices, a component render regression for saved-only
+options and source fields, and browser checks for saving, selecting, comparing,
+detail and diagram links, responsive layout, reduced motion, and unchanged URL
+state.
+
+Acceptance: visitors can compare exactly two distinct projects from their
+  current reading list. The comparison uses each canonical problem statement,
+  technology stack, and limitation; it shows an architecture note only when one
+  is recorded, identifies missing notes, and keeps the recorded key decision
+  separate. Existing detail links and available diagram links work; opening
+  project details preserves existing search, tag, saved, and audience query
+  parameters while adding the selected project. Comparison controls are
+  keyboard accessible.
+
+Evidence: `npm.cmd run verify` passed (112 source files linted, 48 tests passed,
+86 assets/15 routes/14 projects/21 artwork records checked, production build,
+and 24 static route documents generated); `git diff --check` passed. Browser
+checks at `http://127.0.0.1:5173/projects` confirmed the comparison control is
+disabled and its panel hidden with one saved project. After temporarily saving
+Audio Recognition, the two selectors contained only StadiumPulse AI and Audio
+  Recognition; the comparison showed goal/problem, architecture note, key
+  decision, technologies, and limitations, plus the existing diagram and detail
+  links. The missing architecture note was labeled explicitly, the URL stayed
+  `/projects`, and a 584 × 585 viewport displayed the comparison dimensions in a
+  single-column layout without visible horizontal overflow. Component coverage
+  confirms detail links preserve `q`, `tag`, `saved`, and `lens` while adding
+  the selected project. The temporary save was removed and the original
+  one-project reading list restored. The local server remains available for
+  user review.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software

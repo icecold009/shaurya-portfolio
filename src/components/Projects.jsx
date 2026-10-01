@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck, Search } from "lucide-react";
+import { ArrowLeftRight, ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck, Search } from "lucide-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
@@ -22,6 +22,7 @@ import {
 
 import "./Projects.css";
 import { projectProofIntro, projects } from "../data/projects";
+import ProjectComparison from "./ProjectComparison";
 import ProjectDetailDialog from "./ProjectDetailDialog";
 import ProjectTechnologyTag from "./ProjectTechnologyTag";
 
@@ -180,6 +181,7 @@ export default function Projects() {
     const [shortlistIds, setShortlistIds] = useState(() => (
         readProjectShortlist(getPortfolioStorage(), projects)
     ));
+    const [comparisonOpen, setComparisonOpen] = useState(false);
     const [hashValue, setHashValue] = useState(() =>
         typeof window === "undefined" ? "" : window.location.hash,
     );
@@ -188,6 +190,8 @@ export default function Projects() {
     const query = searchParams.get("q") ?? "";
     const tag = searchParams.get("tag") ?? "";
     const savedOnly = searchParams.get("saved") === "1";
+    const canCompareProjects = shortlistIds.length >= 2;
+    const showComparison = canCompareProjects && comparisonOpen;
     const visibleProjects = useMemo(
         () => filterProjects(projects, { query, tag }).filter((project) => !savedOnly || shortlistIds.includes(project.id)),
         [query, savedOnly, shortlistIds, tag],
@@ -215,6 +219,12 @@ export default function Projects() {
     useEffect(() => {
         writeProjectShortlist(getPortfolioStorage(), shortlistIds, projects);
     }, [shortlistIds]);
+
+    useEffect(() => {
+        if (!canCompareProjects) {
+            setComparisonOpen(false);
+        }
+    }, [canCompareProjects]);
 
     useEffect(() => {
         const handleHashChange = () => setHashValue(window.location.hash);
@@ -430,6 +440,23 @@ export default function Projects() {
                             <span>Reading list</span>
                             <small>{shortlistIds.length}</small>
                         </button>
+                        <div className="project-comparison-toggle">
+                            <button
+                                type="button"
+                                className={`project-filter-chip project-comparison-toggle__button${showComparison ? " project-filter-chip--active" : ""}`}
+                                disabled={!canCompareProjects}
+                                aria-expanded={showComparison}
+                                aria-controls="project-comparison"
+                                onClick={() => setComparisonOpen((open) => !open)}
+                            >
+                                <ArrowLeftRight size={15} aria-hidden="true" />
+                                <span>{showComparison ? "Close comparison" : "Compare saved projects"}</span>
+                                <small>{shortlistIds.length}</small>
+                            </button>
+                            {!canCompareProjects ? (
+                                <p>Save two projects to compare their recorded details.</p>
+                            ) : null}
+                        </div>
                     </div>
 
                     <div className="project-archive-tools__status">
@@ -451,6 +478,11 @@ export default function Projects() {
                             </button>
                         ) : null}
                     </div>
+                    <ProjectComparison
+                        isOpen={showComparison}
+                        shortlistIds={shortlistIds}
+                        projectRecords={projects}
+                    />
                 </section>
 
                 <div className="project-details-heading" id="project-details" tabIndex={-1}>
