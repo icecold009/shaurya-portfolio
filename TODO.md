@@ -290,6 +290,56 @@ transitions compute to `0s`; the browser reported no app errors. The optional
 resume sync skipped because `resume/resume.tex` is absent. The build emitted the
 large-chunk advisory for the 536.81 kB main bundle.
 
+## Optional 60-second audience tour: Package 15
+
+Goal: turn the existing Admissions, Collaboration, and Curious audience lenses
+into a short, visitor-controlled route through one relevant project per lens.
+
+### Scope
+
+- [x] Add exactly three stops from the existing lens data: Admissions → Past
+      Paper AI, Collaboration → StadiumPulse AI, Curious → Audio Recognition.
+- [x] Explain why each project matters to that audience with text grounded in
+      its problem and outcome; link to the existing project-detail URL.
+- [x] Provide an explicit start, Back, Next, Finish, Close, and accessible
+      progress; never advance automatically or change the URL-backed lens.
+- [x] Preserve keyboard and touch operation, focus, responsive layout, theme
+      support, and reduced-motion behavior.
+
+### Non-goals
+
+No skills explorer, project comparison, expanded transition system, audio
+signal explorer, AI project selector, provider calls, autoplay, deployment,
+publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/PortfolioTour.jsx`,
+`src/components/PortfolioTour.css`, `src/data/profile.js`,
+`src/lib/audienceLens.js`, `src/pages/home/Home.jsx`,
+`src/pages/home/Home.css`, `tests/portfolioTour.test.mjs`, `package.json`, and
+this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, data-reference unit tests, and
+rendered browser checks for all three stops, progress and Back/Next/Finish,
+keyboard focus, unchanged lens URL, project-detail links, responsive layout,
+and reduced motion.
+
+Acceptance: visitors can choose to open a three-stop, roughly 60-second tour;
+each stop maps to one of the existing audience lenses and one verified project,
+shows audience-specific relevance without new unverified claims, and links to
+the project's existing detail. Controls work by touch and keyboard, progress
+is announced accessibly, and tour use leaves audience URL state intact.
+
+Evidence: `npm.cmd run verify` passed (106 source files linted, 40 tests passed,
+86 assets/15 routes/14 projects/21 artwork records checked, production build
+and 24 static route documents generated). Browser verification on
+`http://127.0.0.1:5173/` covered all three stops, Back/Next/Finish, accessible
+progress, project links, stop-heading focus, focus restoration on close, and
+unchanged homepage URL. On a 584 × 585 browser viewport, opening and advancing
+the tour scrolled each focused stop heading into view. The local server remains
+running for user review.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software

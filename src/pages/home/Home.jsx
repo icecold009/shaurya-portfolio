@@ -5,6 +5,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import Hero from "../../components/Hero";
 import AudioPlayground from "../../components/AudioPlayground";
+import PortfolioTour from "../../components/PortfolioTour";
 import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
 import {
@@ -143,6 +144,7 @@ export default function Home() {
                         </div>
                     </div>
                 </motion.div>
+                <PortfolioTour />
             </motion.section>
 
             <motion.section
