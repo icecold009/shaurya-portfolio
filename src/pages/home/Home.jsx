@@ -6,6 +6,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Hero from "../../components/Hero";
 import AudioPlayground from "../../components/AudioPlayground";
 import PortfolioTour from "../../components/PortfolioTour";
+import SkillsProjectExplorer from "../../components/SkillsProjectExplorer";
 import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
 import {
@@ -169,6 +170,28 @@ export default function Home() {
                 </motion.div>
                 <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
                     <AudioPlayground />
+                </motion.div>
+            </motion.section>
+
+            <motion.section
+                className="home-section home-section--skills"
+                aria-labelledby="home-skills-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div className="home-section__heading" variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <div>
+                        <p className="home-kicker">Skills / linked to project evidence</p>
+                        <h2 id="home-skills-title">Follow a skill into the work.</h2>
+                    </div>
+                    <p className="home-section__intro">
+                        Choose a topic to surface the projects, outcomes, and boundaries behind it.
+                    </p>
+                </motion.div>
+                <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <SkillsProjectExplorer />
                 </motion.div>
             </motion.section>
 

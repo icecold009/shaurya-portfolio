@@ -340,6 +340,65 @@ unchanged homepage URL. On a 584 × 585 browser viewport, opening and advancing
 the tour scrolled each focused stop heading into view. The local server remains
 running for user review.
 
+## Skills-to-project explorer: Package 16
+
+Goal: let visitors select Audio, Python, or Local-first and see the projects,
+evidence, and limitations that support each skill relationship.
+
+### Scope
+
+- [x] Add explicit, source-grounded skill tags to canonical project records;
+      do not infer matches from free text or duplicate project IDs in a second
+      catalog.
+- [x] Build a deterministic selector that returns tagged projects with their
+      existing outcomes, limitations, proof labels, and relevant technologies.
+- [x] Add an accessible homepage explorer with Audio, Python, and Local-first
+      controls and links into each project's existing detail view.
+- [x] Show an accessible cover-unavailable fallback when a project image fails
+      to load, matching the existing project-card behavior.
+- [x] Preserve keyboard and touch operation, current URL state, responsive
+      layout, distinct topic palettes, theme support, and reduced motion.
+
+### Non-goals
+
+No constellation visualization, new claims or evidence, AI/provider calls,
+interactive project-story changes, comparison tool, animation package, audio
+signal explorer, AI project selector, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/data/projects.js`, `src/lib/projectSkills.js`,
+`src/components/SkillsProjectExplorer.jsx`,
+`src/components/SkillsProjectExplorer.css`, `src/pages/home/Home.jsx`,
+`tests/projectSkills.test.mjs`, `tests/skillsProjectExplorer.test.mjs`,
+`package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, deterministic match/evidence
+unit tests, a component render regression for a missing thumbnail, and rendered
+browser checks for every skill selection, project detail links, keyboard
+operation, unchanged URL state, responsive layout, and reduced motion.
+
+Acceptance: selecting Audio, Python, or Local-first shows only projects whose
+canonical records carry that skill, pairs each project with its existing
+outcome and proof context, keeps its limitations visible, and links to its
+existing detail. Failed and missing images show accessible fallbacks. Controls
+work by keyboard and touch, announce their selected state, and do not change
+URL-backed audience or search state.
+
+Evidence: `npm.cmd run verify` passed (109 source files linted, 45 tests passed,
+86 assets/15 routes/14 projects/21 artwork records checked, production build
+and 24 static route documents generated). Browser checks on
+`http://127.0.0.1:5173/` returned Audio → 2 projects, Python → 6, and
+Local-first → 3; all cards showed existing outcomes, limitations, proof labels,
+and detail links. Enter selected Audio, and the homepage URL remained unchanged.
+The Python view rendered a labeled missing-preview fallback for the archive-only
+Student Dropout record, with its repository-pending proof label intact. The
+explorer also switches a failed remote cover to its accessible fallback. At
+584 × 585, the page had no horizontal overflow; reduced motion was active and
+the controls used 100 ms color/background/shadow transitions without spatial
+movement. A fresh reload produced no new browser console errors. The local
+server remains running for user review.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software
