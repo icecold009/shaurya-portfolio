@@ -1040,7 +1040,13 @@ available; its system map expanded, collapsed to an inert subtree, and rapid
 node changes left one selection and one live detail. Mobile project controls
 fit without horizontal overflow. The in-app browser reported
 `prefers-reduced-motion: reduce`; keyboard and reduced-motion changes were
-immediate. A separate normal-motion browser session could not be established
-because the browser exposes no motion-preference override and native settings
-controls are unavailable in this session; the normal-motion rendering path
-remains unverified. Console error query returned no errors on the homepage.
+immediate. Supplemental touch-enabled Chromium viewport emulation passed at
+390 × 844, 768 × 1024, and 1024 × 768 in both reduced-motion and
+`no-preference` sessions. Lens URL updates, tour Next/Back/Close and focus
+return, all skill filters, project-story stages and nodes, and saved-project
+comparison worked without horizontal overflow or page errors. The normal-motion
+run also verified the intro's touch-operated Skip control. The first-visit
+privacy note was dismissed before feature checks; at 1024 × 768 its fixed
+overlay can cover the tour's bottom control until dismissed. These are emulated
+viewports, not physical-device tests. The isolated runner denied several
+external resource requests, while page error collection remained empty.
