@@ -69,6 +69,7 @@
 
 .home-lens-tab {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
@@ -77,6 +78,7 @@
     border: 0;
     border-right: 1px solid var(--line);
     background: transparent;
+    isolation: isolate;
     color: var(--text-faint);
     font-family: var(--mono);
     font-size: 0.68rem;
@@ -89,14 +91,27 @@
 }
 
 .home-lens-tab:last-child { border-right: 0; }
+.home-lens-tab > *:not(.home-lens-tab-indicator) { position: relative; z-index: 1; }
+.home-lens-tab-indicator {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: 0.2rem;
+    background: color-mix(in srgb, var(--green) 8%, transparent);
+    pointer-events: none;
+}
 .home-lens-tab svg { color: var(--text-faint); transition: transform var(--transition-fast), color var(--transition-fast); }
 .home-lens-tab:hover,
 .home-lens-tab:focus-visible,
-.home-lens-tab--active { background: color-mix(in srgb, var(--green) 8%, transparent); color: var(--green); outline: none; }
+.home-lens-tab--active { color: var(--green); outline: none; }
+.home-lens-tab:hover:not(.home-lens-tab--active),
+.home-lens-tab:focus-visible:not(.home-lens-tab--active) { background: color-mix(in srgb, var(--green) 8%, transparent); }
 .home-lens-tab:hover svg,
 .home-lens-tab:focus-visible svg,
 .home-lens-tab--active svg { color: var(--green); transform: translate(2px, -2px); }
 .home-lens-tab:focus-visible { box-shadow: inset 0 0 0 2px var(--green); }
+.home-lens-tab:focus-visible,
+.home-lens-tab:focus-visible svg { transition-duration: 0ms; }
 
 .home-lens-panel {
     display: grid;

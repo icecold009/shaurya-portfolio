@@ -75,7 +75,7 @@
 [data-theme="light"] .skills-project-explorer__choice[data-skill="python"] { --choice-accent: #2156a4; --choice-wash: rgba(33, 86, 164, 0.08); }
 [data-theme="light"] .skills-project-explorer__choice[data-skill="local-first"] { --choice-accent: #176543; --choice-wash: rgba(23, 101, 67, 0.08); }
 .skills-project-explorer__choice[aria-pressed="true"] { background: var(--choice-wash); color: var(--choice-accent); box-shadow: inset 0 -3px 0 var(--choice-accent); }
-.skills-project-explorer__choice:focus-visible { position: relative; z-index: 1; outline: 3px solid var(--choice-accent, var(--green)); outline-offset: -4px; }
+.skills-project-explorer__choice:focus-visible { position: relative; z-index: 1; outline: 3px solid var(--choice-accent, var(--green)); outline-offset: -4px; transition-duration: 0ms; }
 
 @media (hover: hover) and (pointer: fine) {
     .skills-project-explorer__choice:hover:not([aria-pressed="true"]) { background: var(--bg-2); color: var(--choice-accent); }
@@ -186,5 +186,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .skills-project-explorer__choice { transition-duration: 100ms; }
+    .skills-project-explorer__choice { transition-duration: 0ms; }
 }

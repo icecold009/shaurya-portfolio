@@ -997,3 +997,50 @@ PATH shim for the installed Vite CLI because this worktree lacks
 the selected-work and skills sections without the four-pad group; Touchscreen
 Launchpad remains discoverable through its project link. The existing large
 JavaScript chunk warning remains.
+
+## Smoother interactive panels: Package 22
+
+Goal: make the existing homepage and project-story interactions feel connected and responsive while preserving their content, URLs, keyboard access, and current visual system.
+
+### Scope
+
+- [x] Add a shared audience-lens selection indicator and a brief transition for pointer-driven content changes.
+- [x] Add direction-aware guided-tour step changes and smooth opening/closing while preserving Next, Back, Restart, Close, and focus restoration.
+- [x] Reposition surviving skill cards without scaling their text; fade in newly added cards.
+- [x] Smooth project-story stage changes, architecture expansion/collapse, and selected-node feedback.
+- [x] Remove the stale sentence about the deleted homepage audio demo.
+
+### Non-goals
+
+New features, restored audio pads, provider or project-data changes, URL or saved-project behavior changes, global scrolling effects, deployment, publication, or merge.
+
+### Files, tests, acceptance, and evidence
+
+Files: `src/pages/home/Home.jsx` and `Home.css`; `src/components/PortfolioTour.jsx` and `.css`; `src/components/SkillsProjectExplorer.jsx` and `.css`; `src/components/ProjectStory.jsx` and `.css`; `src/lib/motion.js`; `tests/interactivePanels.test.mjs`; `package.json`; and this backlog entry.
+
+Tests: `node --test tests/interactivePanels.test.mjs` during incremental work; one final `npm.cmd run verify`; `git diff --check`; and browser checks at `http://127.0.0.1:5174/` in desktop/mobile layouts, both themes, and separate normal/reduced-motion sessions. Exercise rapid reversals, focus restoration, overflow, and console health.
+
+Acceptance: rapid changes always settle on the latest selection with no blank wait, duplicate accessible links or announcements, clipped controls, or text scaling. The tour controls and focus behavior remain intact. Lens URLs, saved projects, comparisons, and detail dialogs continue to work. Keyboard and reduced-motion changes remain immediate. Desktop/mobile content remains readable and palettes stay distinct.
+
+Evidence: `npm.cmd run verify` passed: 118 source files linted, 64 tests passed,
+86 local assets/15 routes/14 projects/21 artwork records checked, production
+build passed, and 24 static route documents generated. Resume sync skipped
+because `resume/resume.tex` is absent. A temporary PATH shim exposed the
+installed Vite CLI because this worktree lacks `node_modules/.bin/vite.cmd`.
+The existing large JavaScript chunk warning remains.
+
+Browser checks at `http://127.0.0.1:5174/` passed in a visible desktop
+viewport (1280 × 900) and mobile viewport (390 × 844), with light and dark
+themes. The homepage showed no pads and retained the audience, project, skills,
+and tour content. Lens click and arrow-key changes updated the selected lens and
+URL. Rapid tour Next/Back changes settled on the latest stop, kept one project
+link, and Close restored focus to the tour button. Rapid skill changes settled
+on Audio with two cards and links. The Touchscreen Launchpad story remained
+available; its system map expanded, collapsed to an inert subtree, and rapid
+node changes left one selection and one live detail. Mobile project controls
+fit without horizontal overflow. The in-app browser reported
+`prefers-reduced-motion: reduce`; keyboard and reduced-motion changes were
+immediate. A separate normal-motion browser session could not be established
+because the browser exposes no motion-preference override and native settings
+controls are unavailable in this session; the normal-motion rendering path
+remains unverified. Console error query returned no errors on the homepage.

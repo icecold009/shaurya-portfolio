@@ -1,4 +1,11 @@
 import { useId, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+
+import {
+    getInteractionTransition,
+    INTERACTION_OFFSET,
+    shouldAnimatePointerInteraction,
+} from "../lib/motion";
 
 import "./ProjectStory.css";
 
@@ -66,11 +73,16 @@ function getStorySteps(project) {
 }
 
 export default function ProjectStory({ project }) {
+    const shouldReduceMotion = useReducedMotion();
     const storySteps = getStorySteps(project);
     const [activeIndex, setActiveIndex] = useState(0);
     const [activeComponentId, setActiveComponentId] = useState(SYSTEM_COMPONENTS[0].id);
+    const [animateStoryChange, setAnimateStoryChange] = useState(false);
+    const [animateArchitectureChange, setAnimateArchitectureChange] = useState(false);
+    const [animateComponentChange, setAnimateComponentChange] = useState(false);
     const panelId = `project-story-panel-${useId().replace(/:/g, "")}`;
     const activeStep = storySteps[activeIndex];
+    const isSystemStage = activeIndex === 2;
     const activeComponent = SYSTEM_COMPONENTS.find((component) => component.id === activeComponentId)
         ?? SYSTEM_COMPONENTS[0];
 
@@ -89,7 +101,11 @@ export default function ProjectStory({ project }) {
                         className={`project-story__step${index === activeIndex ? " project-story__step--active" : ""}`}
                         aria-pressed={index === activeIndex}
                         aria-controls={panelId}
-                        onClick={() => setActiveIndex(index)}
+                        onClick={(event) => {
+                            setAnimateStoryChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+                            setAnimateArchitectureChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+                            setActiveIndex(index);
+                        }}
                     >
                         <span className="project-story__step-number">{String(index + 1).padStart(2, "0")}</span>
                         <span>{step.label}</span>
@@ -98,14 +114,34 @@ export default function ProjectStory({ project }) {
             </div>
 
             <div className="project-story__panel" id={panelId} aria-live="polite" aria-atomic="true">
-                <span className="project-story__panel-number">{String(activeIndex + 1).padStart(2, "0")}</span>
-                <div>
-                    <h4>{activeStep.heading}</h4>
-                    <p>{activeStep.body}</p>
-                </div>
+                <motion.div
+                    key={activeIndex}
+                    className="project-story__panel-content"
+                    initial={animateStoryChange ? {
+                        opacity: 0,
+                        transform: `translateY(${INTERACTION_OFFSET}px)`,
+                    } : false}
+                    animate={{ opacity: 1, transform: "translateY(0px)" }}
+                    transition={getInteractionTransition(animateStoryChange)}
+                >
+                    <span className="project-story__panel-number">{String(activeIndex + 1).padStart(2, "0")}</span>
+                    <div>
+                        <h4>{activeStep.heading}</h4>
+                        <p>{activeStep.body}</p>
+                    </div>
+                </motion.div>
             </div>
 
-            {activeIndex === 2 ? (
+            <motion.div
+                className="project-story__map-wrap"
+                aria-hidden={!isSystemStage}
+                inert={isSystemStage ? undefined : ""}
+                initial={false}
+                animate={isSystemStage
+                    ? { height: "auto", opacity: 1, marginTop: 0 }
+                    : { height: 0, opacity: 0, marginTop: "-1rem" }}
+                transition={getInteractionTransition(animateArchitectureChange)}
+            >
                 <div className="project-story__map">
                     <div className="project-story__map-heading">
                         <h4>Inspect a system component</h4>
@@ -119,28 +155,50 @@ export default function ProjectStory({ project }) {
                                 className={`project-story__component${component.id === activeComponentId ? " project-story__component--active" : ""}`}
                                 aria-pressed={component.id === activeComponentId}
                                 aria-controls={`${panelId}-component-detail`}
-                                onClick={() => setActiveComponentId(component.id)}
+                                onClick={(event) => {
+                                    setAnimateComponentChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+                                    setActiveComponentId(component.id);
+                                }}
                             >
+                                {component.id === activeComponentId ? (
+                                    <motion.span
+                                        className="project-story__component-indicator"
+                                        aria-hidden="true"
+                                        layoutId="project-story-component-indicator"
+                                        transition={getInteractionTransition(animateComponentChange)}
+                                    />
+                                ) : null}
                                 <span>{String(index + 1).padStart(2, "0")}</span>
                                 <strong>{component.name}</strong>
                             </button>
                         ))}
                     </div>
                     <div className="project-story__component-detail" id={`${panelId}-component-detail`} aria-live="polite" aria-atomic="true">
-                        <div>
-                            <span>Role</span>
-                            <p>{activeComponent.purpose}</p>
-                        </div>
-                        <div>
-                            <span>Boundary</span>
-                            <p>{activeComponent.boundary}</p>
-                        </div>
+                        <motion.div
+                            key={activeComponent.id}
+                            className="project-story__component-detail-content"
+                            initial={animateComponentChange ? {
+                                opacity: 0,
+                                transform: `translateY(${INTERACTION_OFFSET}px)`,
+                            } : false}
+                            animate={{ opacity: 1, transform: "translateY(0px)" }}
+                            transition={getInteractionTransition(animateComponentChange)}
+                        >
+                            <div>
+                                <span>Role</span>
+                                <p>{activeComponent.purpose}</p>
+                            </div>
+                            <div>
+                                <span>Boundary</span>
+                                <p>{activeComponent.boundary}</p>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
-            ) : null}
+            </motion.div>
 
             <p className="project-story__source-note">
-                Story details use the project record and documented architecture. The four-tone homepage demo is a separate synthesized sketch.
+                Story details use the project record and documented architecture.
             </p>
         </section>
     );

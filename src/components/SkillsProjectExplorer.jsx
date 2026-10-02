@@ -1,14 +1,22 @@
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { projects } from "../data/projects";
 import { getSkillProjects, SKILL_TOPICS } from "../lib/projectSkills";
+import {
+    getInteractionTransition,
+    INTERACTION_OFFSET,
+    shouldAnimatePointerInteraction,
+} from "../lib/motion";
 
 import "./SkillsProjectExplorer.css";
 
 export default function SkillsProjectExplorer({ initialSkillId = "audio" } = {}) {
+    const shouldReduceMotion = useReducedMotion();
     const [activeSkillId, setActiveSkillId] = useState(initialSkillId);
+    const [animateSkillChange, setAnimateSkillChange] = useState(false);
     const [failedThumbnails, setFailedThumbnails] = useState({});
     const activeSkill = SKILL_TOPICS.find((skill) => skill.id === activeSkillId) ?? SKILL_TOPICS[0];
     const matches = getSkillProjects(activeSkill.id, projects);
@@ -24,7 +32,10 @@ export default function SkillsProjectExplorer({ initialSkillId = "audio" } = {})
                         type="button"
                         aria-pressed={activeSkill.id === skill.id}
                         aria-controls="skills-project-results"
-                        onClick={() => setActiveSkillId(skill.id)}
+                        onClick={(event) => {
+                            setAnimateSkillChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+                            setActiveSkillId(skill.id);
+                        }}
                     >
                         <span>{skill.label}</span>
                         <ArrowUpRight size={16} aria-hidden="true" />
@@ -45,7 +56,18 @@ export default function SkillsProjectExplorer({ initialSkillId = "audio" } = {})
 
                 <div className="skills-project-explorer__grid" role="list" aria-label={`${activeSkill.label} projects`}>
                     {matches.map(({ project, evidence }) => (
-                        <article className="skills-project-card" key={project.id} role="listitem">
+                        <motion.article
+                            className="skills-project-card"
+                            key={project.id}
+                            role="listitem"
+                            layout="position"
+                            initial={animateSkillChange ? {
+                                opacity: 0,
+                                transform: `translateY(${INTERACTION_OFFSET}px)`,
+                            } : false}
+                            animate={{ opacity: 1, transform: "translateY(0px)" }}
+                            transition={getInteractionTransition(animateSkillChange)}
+                        >
                             <div className="skills-project-card__cover">
                                 {project.thumbnail && !failedThumbnails[project.id] ? (
                                     <img
@@ -111,7 +133,7 @@ export default function SkillsProjectExplorer({ initialSkillId = "audio" } = {})
                                     View project evidence <ArrowUpRight size={15} aria-hidden="true" />
                                 </Link>
                             </div>
-                        </article>
+                        </motion.article>
                     ))}
                 </div>
             </div>

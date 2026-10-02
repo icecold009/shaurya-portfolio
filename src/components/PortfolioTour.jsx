@@ -1,18 +1,28 @@
 import { useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { audienceLenses } from "../data/profile";
 import { projects } from "../data/projects";
 import { getAudienceTourStops } from "../lib/audienceLens";
+import {
+    getInteractionTransition,
+    INTERACTION_OFFSET,
+    shouldAnimatePointerInteraction,
+} from "../lib/motion";
 
 import "./PortfolioTour.css";
 
 const tourStops = getAudienceTourStops(audienceLenses, projects);
 
 export default function PortfolioTour() {
+    const shouldReduceMotion = useReducedMotion();
     const [isOpen, setIsOpen] = useState(false);
     const [activeStop, setActiveStop] = useState(0);
+    const [animateTourChange, setAnimateTourChange] = useState(false);
+    const [animateStopChange, setAnimateStopChange] = useState(false);
+    const [stopDirection, setStopDirection] = useState(1);
     const startButtonRef = useRef(null);
     const stopHeadingRef = useRef(null);
     const stop = tourStops[activeStop];
@@ -21,19 +31,26 @@ export default function PortfolioTour() {
         window.requestAnimationFrame(() => stopHeadingRef.current?.focus());
     };
 
-    const startTour = () => {
+    const startTour = (event) => {
+        const shouldAnimate = shouldAnimatePointerInteraction(event, shouldReduceMotion);
+        setAnimateTourChange(shouldAnimate);
+        setAnimateStopChange(shouldAnimate && isOpen && activeStop !== 0);
+        setStopDirection(-1);
         setActiveStop(0);
         setIsOpen(true);
         focusStopHeading();
     };
 
-    const closeTour = () => {
+    const closeTour = (event) => {
+        setAnimateTourChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+        startButtonRef.current?.focus({ preventScroll: true });
         setIsOpen(false);
         setActiveStop(0);
-        window.requestAnimationFrame(() => startButtonRef.current?.focus({ preventScroll: true }));
     };
 
-    const moveToStop = (nextStop) => {
+    const moveToStop = (nextStop, event) => {
+        setAnimateStopChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+        setStopDirection(nextStop > activeStop ? 1 : -1);
         setActiveStop(nextStop);
         window.requestAnimationFrame(() => stopHeadingRef.current?.focus());
     };
@@ -65,9 +82,28 @@ export default function PortfolioTour() {
                 </button>
             </div>
 
-            <div id="portfolio-tour-panel" className="portfolio-tour__panel" hidden={!isOpen}>
-                {isOpen && (
-                    <div className="portfolio-tour__stop" data-audience={stop.lens.id}>
+            <motion.div
+                id="portfolio-tour-panel"
+                className="portfolio-tour__panel"
+                aria-hidden={!isOpen}
+                inert={isOpen ? undefined : ""}
+                initial={false}
+                animate={isOpen
+                    ? { height: "auto", opacity: 1, marginTop: "1.25rem" }
+                    : { height: 0, opacity: 0, marginTop: 0 }}
+                transition={getInteractionTransition(animateTourChange)}
+            >
+                    <motion.div
+                        key={activeStop}
+                        className="portfolio-tour__stop"
+                        data-audience={stop.lens.id}
+                        initial={animateStopChange ? {
+                            opacity: 0,
+                            transform: `translateX(${stopDirection * INTERACTION_OFFSET}px)`,
+                        } : false}
+                        animate={{ opacity: 1, transform: "translateX(0px)" }}
+                        transition={getInteractionTransition(animateStopChange)}
+                    >
                         <div className="portfolio-tour__progress-row">
                             <p role="status" aria-live="polite" aria-atomic="true">
                                 Stop {activeStop + 1} of {tourStops.length}: {stop.lens.label} · {stop.project.title}
@@ -116,7 +152,7 @@ export default function PortfolioTour() {
                                 className="portfolio-tour__control portfolio-tour__control--back"
                                 type="button"
                                 disabled={activeStop === 0}
-                                onClick={() => moveToStop(Math.max(0, activeStop - 1))}
+                                onClick={(event) => moveToStop(Math.max(0, activeStop - 1), event)}
                             >
                                 <ArrowLeft size={16} aria-hidden="true" /> Back
                             </button>
@@ -127,13 +163,13 @@ export default function PortfolioTour() {
                                 <button
                                     className="portfolio-tour__control portfolio-tour__control--next"
                                     type="button"
-                                    onClick={() => {
+                                    onClick={(event) => {
                                         if (isLastStop) {
-                                            closeTour();
+                                            closeTour(event);
                                             return;
                                         }
 
-                                        moveToStop(Math.min(tourStops.length - 1, activeStop + 1));
+                                        moveToStop(Math.min(tourStops.length - 1, activeStop + 1), event);
                                     }}
                                 >
                                     {isLastStop ? "Finish tour" : "Next stop"}
@@ -141,9 +177,8 @@ export default function PortfolioTour() {
                                 </button>
                             </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    </motion.div>
+            </motion.div>
         </section>
     );
 }
