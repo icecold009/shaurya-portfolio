@@ -965,3 +965,35 @@ Tests: `npm.cmd run verify`, `npm.cmd run build`, `git diff --check`, and render
 Acceptance: each major section presents one obvious next action; labels describe the destination or result; focus and press states remain visible; loading text does not duplicate affordances; utility controls remain visually secondary.
 
 Evidence: `npm.cmd run verify` passes with 77 source files linted, 16 tests, 78 local assets, 10 routes, 8 projects, and 21 artwork records. At the available 868x614 browser viewport, dark and light contact states show a single readable `Send message` affordance with visible keyboard focus; the homepage shows one filled `View projects` action beside a restrained résumé link; and the project dialog separates the filled `View source code` action from the outlined `Close details` control. The local browser console reported no application errors. Exact phone-width emulation was unavailable in the connected browser surface.
+
+## Homepage pad removal: Package 21
+
+Goal: remove the Touchscreen Launchpad four-pad demo from the main homepage.
+
+### Scope
+
+- [x] Remove the audio-pad section and its import from the homepage.
+- [x] Keep the Touchscreen Launchpad project record and project detail story intact.
+- [x] Add homepage render regression coverage for the removed pad group.
+
+### Non-goals
+
+Delete the Touchscreen Launchpad project, its project-story experience, or the reusable audio-playground source files; add replacement homepage content; publish or deploy.
+
+### Files, tests, acceptance, and evidence
+
+Files: `src/pages/home/Home.jsx`, `tests/homePage.test.mjs`, `package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, and a rendered homepage browser check at the repository's local development URL.
+
+Acceptance: the homepage no longer renders the four musical note pads or their invitation section. The selected-work and skills sections remain available, and the Touchscreen Launchpad project remains in the archive with its detail story.
+
+Evidence: `npm.cmd run verify` passed (118 source files linted, 62 tests passed,
+86 local assets/15 routes/14 projects/21 artwork records checked, production
+build passed, and 24 static route documents generated). The optional resume
+sync skipped because `resume/resume.tex` is absent. The build used a temporary
+PATH shim for the installed Vite CLI because this worktree lacks
+`node_modules/.bin/vite.cmd`. Browser check at `http://127.0.0.1:5174/` showed
+the selected-work and skills sections without the four-pad group; Touchscreen
+Launchpad remains discoverable through its project link. The existing large
+JavaScript chunk warning remains.
