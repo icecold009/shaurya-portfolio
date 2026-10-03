@@ -81,7 +81,6 @@
     transition: border-color var(--transition-fast), color var(--transition-fast);
 }
 
-.project-detail-dialog__close:hover,
 .project-detail-dialog__close:focus-visible {
     border-color: var(--green);
     color: var(--green);
@@ -575,5 +574,11 @@
     .project-detail-dialog__actions a,
     .project-detail-dialog__actions button {
         transition: none;
+    }
+
+    .project-detail-dialog__close:active,
+    .project-detail-dialog__actions a:active,
+    .project-detail-dialog__actions button:active {
+        transform: none;
     }
 }

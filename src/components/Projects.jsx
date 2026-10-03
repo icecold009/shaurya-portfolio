@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck, Search } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowLeftRight, ArrowRight, ArrowUpRight, Bookmark, BookmarkCheck, Search } from "lucide-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
+    EDITORIAL_DURATION,
+    EDITORIAL_EASE,
+    PRESS,
     REVEAL,
     REVEAL_CONTAINER,
     REVEAL_VIEWPORT,
@@ -22,7 +25,9 @@ import {
 
 import "./Projects.css";
 import { projectProofIntro, projects } from "../data/projects";
+import ProjectComparison from "./ProjectComparison";
 import ProjectDetailDialog from "./ProjectDetailDialog";
+import ProjectFinder from "./ProjectFinder";
 import ProjectTechnologyTag from "./ProjectTechnologyTag";
 
 function getPortfolioStorage() {
@@ -33,12 +38,20 @@ function getPortfolioStorage() {
     }
 }
 
-function ProjectCardPreview({ project }) {
+function ProjectCardPreview({ project, layoutEnabled }) {
     const [imageFailed, setImageFailed] = useState(false);
     const hasThumbnail = project.thumbnail && !imageFailed;
+    const sharedLayoutId = layoutEnabled ? `project-cover-${project.id}` : undefined;
 
     return (
-        <span className="project-card__preview" aria-hidden="true">
+        <motion.span
+            className="project-card__preview"
+            aria-hidden="true"
+            layoutId={sharedLayoutId}
+            transition={layoutEnabled ? {
+                layout: { duration: EDITORIAL_DURATION.normal, ease: EDITORIAL_EASE },
+            } : undefined}
+        >
             {hasThumbnail ? (
                 <img
                     className={project.thumbnailFit === "contain" ? "project-card__preview-image--contain" : undefined}
@@ -54,7 +67,7 @@ function ProjectCardPreview({ project }) {
                     <small>{project.thumbnail ? "Cover unavailable" : "Archive record"}</small>
                 </span>
             )}
-        </span>
+        </motion.span>
     );
 }
 
@@ -78,22 +91,29 @@ function getProjectVisualLabel(project) {
     return "Product screen";
 }
 
-function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSave }) {
+function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSave, sharedTransition }) {
     const shouldReduceMotion = useReducedMotion();
+    const pressFeedback = shouldReduceMotion ? undefined : PRESS;
+    const layoutEnabled = !shouldReduceMotion && (!isOpen || sharedTransition);
 
     return (
         <motion.article
             id={`project-detail-${project.number}`}
             className={`case-study case-study-${project.accent}${project.number === "01" ? " case-study--featured" : ""}`}
+            layout={shouldReduceMotion ? false : "position"}
+            transition={shouldReduceMotion ? undefined : {
+                layout: { duration: EDITORIAL_DURATION.normal, ease: EDITORIAL_EASE },
+            }}
             variants={shouldReduceMotion ? undefined : REVEAL}
             initial={shouldReduceMotion ? undefined : "hidden"}
             whileInView={shouldReduceMotion ? undefined : "visible"}
             viewport={{ once: true, amount: 0.08 }}
         >
             <div className={`project-card-shell${isOpen ? " project-card-shell--open" : ""}`}>
-                <button
+                <motion.button
                     type="button"
                     className={`project-card__open${isOpen ? " project-card__open--active" : ""}`}
+                    whileTap={pressFeedback}
                     onClick={(event) => onOpenProject(project, event.currentTarget)}
                     aria-haspopup="dialog"
                     aria-expanded={isOpen}
@@ -101,7 +121,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
                     aria-label={`Open ${project.title} project details`}
                 >
                     <span className="project-card__visual">
-                        <ProjectCardPreview project={project} />
+                        <ProjectCardPreview project={project} layoutEnabled={layoutEnabled} />
                         <span className="project-card__visual-meta" aria-hidden="true">
                             <span>{project.number}</span>
                             <span>{project.year}</span>
@@ -139,7 +159,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
                             </span>
                         </span>
                     </span>
-                </button>
+                </motion.button>
                 <div className="project-card__utilities">
                     <div className="project-card__links">
                         {project.github ? (
@@ -155,9 +175,10 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
                             </a>
                         ) : null}
                     </div>
-                    <button
+                    <motion.button
                         type="button"
                         className={`project-card__save${isSaved ? " project-card__save--active" : ""}`}
+                        whileTap={pressFeedback}
                         onClick={() => onToggleSave(project.id)}
                         aria-pressed={isSaved}
                         aria-label={isSaved ? `Remove ${project.title} from reading list` : `Save ${project.title} to reading list`}
@@ -165,7 +186,7 @@ function ProjectCaseStudy({ project, onOpenProject, isOpen, isSaved, onToggleSav
                     >
                         {isSaved ? <BookmarkCheck size={16} aria-hidden="true" /> : <Bookmark size={16} aria-hidden="true" />}
                         <span>{isSaved ? "Saved" : "Save"}</span>
-                    </button>
+                    </motion.button>
                 </div>
             </div>
         </motion.article>
@@ -180,14 +201,19 @@ export default function Projects() {
     const [shortlistIds, setShortlistIds] = useState(() => (
         readProjectShortlist(getPortfolioStorage(), projects)
     ));
+    const [comparisonOpen, setComparisonOpen] = useState(false);
     const [hashValue, setHashValue] = useState(() =>
         typeof window === "undefined" ? "" : window.location.hash,
     );
     const triggerElementRef = useRef(null);
+    const triggerProjectIdRef = useRef(null);
 
     const query = searchParams.get("q") ?? "";
     const tag = searchParams.get("tag") ?? "";
     const savedOnly = searchParams.get("saved") === "1";
+    const canCompareProjects = shortlistIds.length >= 2;
+    const showComparison = canCompareProjects && comparisonOpen;
+    const pressFeedback = shouldReduceMotion ? undefined : PRESS;
     const visibleProjects = useMemo(
         () => filterProjects(projects, { query, tag }).filter((project) => !savedOnly || shortlistIds.includes(project.id)),
         [query, savedOnly, shortlistIds, tag],
@@ -217,6 +243,12 @@ export default function Projects() {
     }, [shortlistIds]);
 
     useEffect(() => {
+        if (!canCompareProjects) {
+            setComparisonOpen(false);
+        }
+    }, [canCompareProjects]);
+
+    useEffect(() => {
         const handleHashChange = () => setHashValue(window.location.hash);
 
         window.addEventListener("hashchange", handleHashChange);
@@ -224,8 +256,9 @@ export default function Projects() {
     }, []);
 
     useEffect(() => {
-        if (!selectedProject) {
+        if (!selectedProject || triggerProjectIdRef.current !== selectedProject.id) {
             triggerElementRef.current = null;
+            triggerProjectIdRef.current = null;
         }
     }, [selectedProject]);
 
@@ -262,6 +295,7 @@ export default function Projects() {
     const openProject = useCallback(
         (project, triggerElement) => {
             triggerElementRef.current = triggerElement;
+            triggerProjectIdRef.current = project.id;
             const next = new URLSearchParams(searchParams);
             next.set("project", project.id);
 
@@ -364,6 +398,8 @@ export default function Projects() {
                     </div>
                 </motion.header>
 
+                <ProjectFinder projects={projects} onOpenProject={openProject} />
+
                 <section className="project-archive-tools" aria-labelledby="project-archive-title">
                     <div className="project-archive-tools__heading">
                         <div>
@@ -389,9 +425,10 @@ export default function Projects() {
 
                     <div className="project-archive-tools__filters">
                         <div className="project-filter-chips" role="group" aria-label="Filter projects by area">
-                            <button
+                            <motion.button
                                 type="button"
                                 className={`project-filter-chip${!tag && !savedOnly ? " project-filter-chip--active" : ""}`}
+                                whileTap={pressFeedback}
                                 aria-pressed={!tag && !savedOnly}
                                 onClick={() => writeSearchParams(
                                     { tag: "", saved: "" },
@@ -400,11 +437,12 @@ export default function Projects() {
                             >
                                 <span>All projects</span>
                                 <small>{projects.length}</small>
-                            </button>
+                            </motion.button>
                             {projectTagCounts.map(({ tag: projectTag, count }) => (
-                                <button
+                                <motion.button
                                     type="button"
                                     className={`project-filter-chip${tag === projectTag ? " project-filter-chip--active" : ""}`}
+                                    whileTap={pressFeedback}
                                     aria-pressed={tag === projectTag}
                                     key={projectTag}
                                     onClick={() => writeSearchParams(
@@ -414,12 +452,13 @@ export default function Projects() {
                                 >
                                     <span>{projectTag}</span>
                                     <small>{count}</small>
-                                </button>
+                                </motion.button>
                             ))}
                         </div>
-                        <button
+                        <motion.button
                             type="button"
                             className={`project-filter-chip project-filter-chip--saved${savedOnly ? " project-filter-chip--active" : ""}`}
+                            whileTap={pressFeedback}
                             aria-pressed={savedOnly}
                             onClick={() => writeSearchParams(
                                 { tag: "", saved: savedOnly ? "" : "1" },
@@ -429,7 +468,25 @@ export default function Projects() {
                             <Bookmark size={15} aria-hidden="true" />
                             <span>Reading list</span>
                             <small>{shortlistIds.length}</small>
-                        </button>
+                        </motion.button>
+                        <div className="project-comparison-toggle">
+                            <motion.button
+                                type="button"
+                                className={`project-filter-chip project-comparison-toggle__button${showComparison ? " project-filter-chip--active" : ""}`}
+                                whileTap={pressFeedback}
+                                disabled={!canCompareProjects}
+                                aria-expanded={showComparison}
+                                aria-controls="project-comparison"
+                                onClick={() => setComparisonOpen((open) => !open)}
+                            >
+                                <ArrowLeftRight size={15} aria-hidden="true" />
+                                <span>{showComparison ? "Close comparison" : "Compare saved projects"}</span>
+                                <small>{shortlistIds.length}</small>
+                            </motion.button>
+                            {!canCompareProjects ? (
+                                <p>Save two projects to compare their recorded details.</p>
+                            ) : null}
+                        </div>
                     </div>
 
                     <div className="project-archive-tools__status">
@@ -439,18 +496,24 @@ export default function Projects() {
                                 : `${projects.length} projects in the archive`}
                         </p>
                         {isFiltered ? (
-                            <button
+                            <motion.button
                                 type="button"
                                 className="project-filter-clear"
+                                whileTap={pressFeedback}
                                 onClick={() => writeSearchParams(
                                     { q: "", tag: "", saved: "" },
                                     { replace: false, clearProject: true },
                                 )}
                             >
                                 Clear filters
-                            </button>
+                            </motion.button>
                         ) : null}
                     </div>
+                    <ProjectComparison
+                        isOpen={showComparison}
+                        shortlistIds={shortlistIds}
+                        projectRecords={projects}
+                    />
                 </section>
 
                 <div className="project-details-heading" id="project-details" tabIndex={-1}>
@@ -471,36 +534,41 @@ export default function Projects() {
                                 isOpen={selectedProject?.id === project.id}
                                 isSaved={shortlistIds.includes(project.id)}
                                 onToggleSave={toggleShortlist}
+                                sharedTransition={triggerProjectIdRef.current === project.id}
                             />
                         ))}
                     </div>
                 ) : (
                     <div className="project-explorer-empty" role="status">
                         <strong>No projects match those filters.</strong>
-                        <button
+                        <motion.button
                             type="button"
                             onClick={() => writeSearchParams(
                                 { q: "", tag: "", saved: "" },
                                 { replace: true, clearProject: true },
                             )}
+                            whileTap={pressFeedback}
                         >
                             Clear filters
-                        </button>
+                        </motion.button>
                     </div>
                 )}
             </section>
 
-            {selectedProject ? (
-                <ProjectDetailDialog
-                    key={selectedProject.id}
-                    project={selectedProject}
-                    onClose={closeProject}
-                    triggerElement={triggerElementRef.current}
-                    fallbackFocusSelector="#selected-work-title"
-                    isSaved={shortlistIds.includes(selectedProject.id)}
-                    onToggleSave={toggleShortlist}
-                />
-            ) : null}
+            <AnimatePresence>
+                {selectedProject ? (
+                    <ProjectDetailDialog
+                        key={selectedProject.id}
+                        project={selectedProject}
+                        onClose={closeProject}
+                        triggerElement={triggerElementRef.current}
+                        fallbackFocusSelector="#selected-work-title"
+                        isSaved={shortlistIds.includes(selectedProject.id)}
+                        onToggleSave={toggleShortlist}
+                        sharedTransition={triggerProjectIdRef.current === selectedProject.id}
+                    />
+                ) : null}
+            </AnimatePresence>
         </>
     );
 }

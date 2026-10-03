@@ -232,7 +232,10 @@
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
-    transition: color 160ms ease-out, border-color 160ms ease-out, background-color 160ms ease-out;
+    transition:
+        color var(--duration-press) var(--ease-out),
+        border-color var(--duration-press) var(--ease-out),
+        background-color var(--duration-press) var(--ease-out);
 }
 
 .project-filter-chip small {
@@ -249,7 +252,6 @@
     line-height: 1;
 }
 
-.project-filter-chip:hover,
 .project-filter-chip--active {
     border-color: color-mix(in srgb, var(--green) 58%, var(--line));
     background: color-mix(in srgb, var(--green) 8%, var(--surface));
@@ -280,6 +282,29 @@
     color: var(--green);
 }
 
+.project-filter-chip:disabled {
+    cursor: not-allowed;
+    opacity: 0.52;
+}
+
+.project-comparison-toggle {
+    display: grid;
+    justify-items: start;
+    gap: 0.35rem;
+}
+
+.project-comparison-toggle > p {
+    margin: 0;
+    color: var(--text-faint);
+    font-size: 0.65rem;
+    line-height: 1.4;
+}
+
+.project-comparison-toggle__button:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
 .project-archive-tools__status {
     display: flex;
     align-items: center;
@@ -308,11 +333,6 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     cursor: pointer;
-}
-
-.project-filter-clear:hover {
-    color: var(--green);
-    border-color: var(--green);
 }
 
 .project-details-heading {
@@ -659,10 +679,6 @@
     text-decoration: none;
 }
 
-.project-card__links a:hover {
-    color: var(--green);
-}
-
 .project-card__links > span {
     color: var(--text-faint);
 }
@@ -686,7 +702,6 @@
     transition: color 160ms ease-out, border-color 160ms ease-out, background-color 160ms ease-out;
 }
 
-.project-card__save:hover,
 .project-card__save--active {
     border-color: color-mix(in srgb, var(--green) 60%, var(--line));
     color: var(--green);
@@ -737,11 +752,6 @@
     transition: color 160ms ease-out, border-color 160ms ease-out, background-color 160ms ease-out;
 }
 
-.project-explorer-empty button:hover {
-    border-color: var(--green);
-    color: var(--green);
-}
-
 .project-explorer-empty button:focus-visible {
     outline: 2px solid var(--green);
     outline-offset: 3px;
@@ -754,6 +764,31 @@
 
     .selected-work-primary:hover svg {
         transform: translateX(0.2rem);
+    }
+
+    .project-filter-chip:hover:not(:disabled) {
+        border-color: color-mix(in srgb, var(--green) 58%, var(--line));
+        background: color-mix(in srgb, var(--green) 8%, var(--surface));
+        color: var(--text);
+    }
+
+    .project-filter-clear:hover {
+        border-color: var(--green);
+        color: var(--green);
+    }
+
+    .project-card__links a:hover {
+        color: var(--green);
+    }
+
+    .project-card__save:hover {
+        border-color: color-mix(in srgb, var(--green) 60%, var(--line));
+        color: var(--green);
+    }
+
+    .project-explorer-empty button:hover {
+        border-color: var(--green);
+        color: var(--green);
     }
 
     .project-card-shell:hover {
@@ -843,6 +878,10 @@
         align-self: flex-start;
     }
 
+    .project-comparison-toggle {
+        align-self: flex-start;
+    }
+
     .case-study-list {
         grid-template-columns: 1fr;
         gap: 0.8rem;
@@ -925,5 +964,12 @@
     .project-card__save,
     .project-explorer-empty button {
         transition: none;
+    }
+
+    .selected-work-primary:hover svg,
+    .project-card-shell:hover,
+    .project-card-shell:hover .project-card__action svg,
+    .project-card-shell:hover .project-card__preview img {
+        transform: none;
     }
 }

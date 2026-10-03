@@ -1,15 +1,20 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import Hero from "../../components/Hero";
+import PortfolioTour from "../../components/PortfolioTour";
+import SkillsProjectExplorer from "../../components/SkillsProjectExplorer";
 import GitHubContributions from "../../components/GitHubContributions";
 import { projects } from "../../data/projects";
 import {
+    getInteractionTransition,
+    INTERACTION_OFFSET,
     REVEAL,
     REVEAL_CONTAINER,
     REVEAL_VIEWPORT,
+    shouldAnimatePointerInteraction,
 } from "../../lib/motion";
 import { positioningStatement } from "../../lib/profileLinks";
 import { academicProfile, audienceLenses, availability } from "../../data/profile";
@@ -24,6 +29,7 @@ const writingSlugs = ["shazam-clone", "shipping-is-a-design-decision"];
 export default function Home() {
     const shouldReduceMotion = useReducedMotion();
     const [searchParams, setSearchParams] = useSearchParams();
+    const [animateLensChange, setAnimateLensChange] = useState(false);
     const lensTabRefs = useRef({});
     const requestedLens = searchParams.get("lens");
     const activeLens = getAudienceLens(audienceLenses, requestedLens, "admissions");
@@ -56,6 +62,7 @@ export default function Home() {
                 ? audienceLenses.length - 1
                 : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + audienceLenses.length) % audienceLenses.length;
 
+        setAnimateLensChange(false);
         setActiveLens(audienceLenses[nextIndex].id, true);
     };
 
@@ -104,20 +111,38 @@ export default function Home() {
                                 aria-selected={activeLens?.id === lens.id}
                                 aria-controls="home-lens-panel"
                                 tabIndex={activeLens?.id === lens.id ? 0 : -1}
-                                onClick={() => setActiveLens(lens.id)}
+                                onClick={(event) => {
+                                    setAnimateLensChange(shouldAnimatePointerInteraction(event, shouldReduceMotion));
+                                    setActiveLens(lens.id);
+                                }}
                             >
+                                {activeLens?.id === lens.id ? (
+                                    <motion.span
+                                        className="home-lens-tab-indicator"
+                                        aria-hidden="true"
+                                        layoutId="home-lens-tab-indicator"
+                                        transition={getInteractionTransition(animateLensChange)}
+                                    />
+                                ) : null}
                                 <span>{lens.label}</span>
                                 <ArrowUpRight size={15} aria-hidden="true" />
                             </button>
                         ))}
                     </div>
 
-                    <div
+                    <motion.div
+                        key={activeLens?.id}
                         className="home-lens-panel"
                         id="home-lens-panel"
                         role="tabpanel"
                         aria-labelledby={`home-lens-tab-${activeLens?.id}`}
                         aria-live="polite"
+                        initial={animateLensChange ? {
+                            opacity: 0,
+                            transform: `translateY(${INTERACTION_OFFSET}px)`,
+                        } : false}
+                        animate={{ opacity: 1, transform: "translateY(0px)" }}
+                        transition={getInteractionTransition(animateLensChange)}
                     >
                         <div className="home-lens-panel__copy">
                             <p className="home-kicker">{activeLens?.kicker}</p>
@@ -140,7 +165,30 @@ export default function Home() {
                                 </Link>
                             ))}
                         </div>
+                    </motion.div>
+                </motion.div>
+                <PortfolioTour />
+            </motion.section>
+
+            <motion.section
+                className="home-section home-section--skills"
+                aria-labelledby="home-skills-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div className="home-section__heading" variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <div>
+                        <p className="home-kicker">Skills / linked to project evidence</p>
+                        <h2 id="home-skills-title">Follow a skill into the work.</h2>
                     </div>
+                    <p className="home-section__intro">
+                        Choose a topic to surface the projects, outcomes, and boundaries behind it.
+                    </p>
+                </motion.div>
+                <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <SkillsProjectExplorer />
                 </motion.div>
             </motion.section>
 

@@ -221,6 +221,398 @@ deployment, publication, merge, commit, or push were performed.
 
 Implementation branch: `codex/project-card-revamp-20260928`.
 
+## Interactive project playground: Package 14
+
+Goal: give visitors a small, accessible way to play with an idea from the
+Touchscreen Launchpad project and then explore how that project is structured.
+
+### Scope
+
+- [x] Add a four-pad synthesized-tone playground to the homepage with touch,
+      click, and Q/W/E/R keyboard input, layered notes, active feedback, and a
+      reset control that stops current notes. Do not fire pad shortcuts while
+      an unrelated interactive control has focus.
+- [x] Start audio only after a visitor activates a pad. Keep all audio
+      generation in the current browser and label the four-tone demo as a
+      separate sketch, not the full sample-based Launchpad.
+- [x] Add a five-stage Problem → Input → System → Output → Lessons story to
+      the Touchscreen Launchpad project detail, sourced from the existing
+      project record.
+- [x] Let visitors select a documented architecture component in the System
+      stage to inspect its role and boundary.
+- [x] Link the playground to the project story through the existing
+      URL-backed project detail flow.
+- [x] Preserve keyboard focus, readable color contrast, responsive layout,
+      theme support, and reduced-motion behavior.
+
+### Non-goals
+
+No external audio assets or requests, backend, changes to the Launchpad
+repository, full audio-recognition explorer, audience tour, skills explorer,
+project comparison, AI project selector, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/pages/home/Home.jsx`, `src/pages/home/Home.css`,
+`src/components/AudioPlayground.jsx`,
+`src/components/AudioPlayground.css`,
+`src/components/ProjectDetailDialog.jsx`,
+`src/components/ProjectStory.jsx`, `src/components/ProjectStory.css`, and this
+backlog entry.
+
+Tests: `npm.cmd run verify` (including lint, automated tests, asset integrity,
+production build, and static route generation), `git diff --check`, and rendered
+browser checks for pad click/keyboard playback, shortcut suppression while
+Reset or another unrelated control has focus, layering, reset, project-story
+stage switching and architecture selection, responsive layout, reduced motion,
+and console health. No new automated test file was needed for this
+interaction-only package.
+
+Acceptance: visitors can play and reset four distinct synthesized tones with
+keyboard or touch; playback never starts without an explicit action; the demo
+makes its separation from the full Launchpad clear; the project story exposes
+all five stages using documented project details and its System stage exposes
+the role and boundary for each architecture component; existing project detail
+URLs and dialog focus behavior remain intact; and the local quality and browser
+checks pass.
+
+Evidence: `npm.cmd run verify` passed: lint checked 104 source files, all 38
+tests passed, integrity checked 86 assets / 15 routes / 14 projects / 21 artwork
+records, Vite built the production app, and 24 static route documents were
+generated. `git diff --check` passed. Local browser checks at `http://127.0.0.1:5173/`
+verified four pads, keyboard and click playback, layered notes, reset, all five
+story stages, selectable architecture nodes, existing URL-backed detail and
+Escape close behavior, two-column pads/story on mobile, four-column pads on
+desktop, and no horizontal overflow. Pressing R while Reset had focus left the
+status unchanged with no active pads; pressing R with a pad focused played
+Bright C5, and Reset stopped it. With reduced motion enabled, pad and story
+transitions compute to `0s`; the browser reported no app errors. The optional
+resume sync skipped because `resume/resume.tex` is absent. The build emitted the
+large-chunk advisory for the 536.81 kB main bundle.
+
+## Optional 60-second audience tour: Package 15
+
+Goal: turn the existing Admissions, Collaboration, and Curious audience lenses
+into a short, visitor-controlled route through one relevant project per lens.
+
+### Scope
+
+- [x] Add exactly three stops from the existing lens data: Admissions → Past
+      Paper AI, Collaboration → StadiumPulse AI, Curious → Audio Recognition.
+- [x] Explain why each project matters to that audience with text grounded in
+      its problem and outcome; link to the existing project-detail URL.
+- [x] Provide an explicit start, Back, Next, Finish, Close, and accessible
+      progress; never advance automatically or change the URL-backed lens.
+- [x] Preserve keyboard and touch operation, focus, responsive layout, theme
+      support, and reduced-motion behavior.
+
+### Non-goals
+
+No skills explorer, project comparison, expanded transition system, audio
+signal explorer, AI project selector, provider calls, autoplay, deployment,
+publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/PortfolioTour.jsx`,
+`src/components/PortfolioTour.css`, `src/data/profile.js`,
+`src/lib/audienceLens.js`, `src/pages/home/Home.jsx`,
+`src/pages/home/Home.css`, `tests/portfolioTour.test.mjs`, `package.json`, and
+this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, data-reference unit tests, and
+rendered browser checks for all three stops, progress and Back/Next/Finish,
+keyboard focus, unchanged lens URL, project-detail links, responsive layout,
+and reduced motion.
+
+Acceptance: visitors can choose to open a three-stop, roughly 60-second tour;
+each stop maps to one of the existing audience lenses and one verified project,
+shows audience-specific relevance without new unverified claims, and links to
+the project's existing detail. Controls work by touch and keyboard, progress
+is announced accessibly, and tour use leaves audience URL state intact.
+
+Evidence: `npm.cmd run verify` passed (106 source files linted, 40 tests passed,
+86 assets/15 routes/14 projects/21 artwork records checked, production build
+and 24 static route documents generated). Browser verification on
+`http://127.0.0.1:5173/` covered all three stops, Back/Next/Finish, accessible
+progress, project links, stop-heading focus, focus restoration on close, and
+unchanged homepage URL. On a 584 × 585 browser viewport, opening and advancing
+the tour scrolled each focused stop heading into view. The local server remains
+running for user review.
+
+## Skills-to-project explorer: Package 16
+
+Goal: let visitors select Audio, Python, or Local-first and see the projects,
+evidence, and limitations that support each skill relationship.
+
+### Scope
+
+- [x] Add explicit, source-grounded skill tags to canonical project records;
+      do not infer matches from free text or duplicate project IDs in a second
+      catalog.
+- [x] Build a deterministic selector that returns tagged projects with their
+      existing outcomes, limitations, proof labels, and relevant technologies.
+- [x] Add an accessible homepage explorer with Audio, Python, and Local-first
+      controls and links into each project's existing detail view.
+- [x] Show an accessible cover-unavailable fallback when a project image fails
+      to load, matching the existing project-card behavior.
+- [x] Preserve keyboard and touch operation, current URL state, responsive
+      layout, distinct topic palettes, theme support, and reduced motion.
+
+### Non-goals
+
+No constellation visualization, new claims or evidence, AI/provider calls,
+interactive project-story changes, comparison tool, animation package, audio
+signal explorer, AI project selector, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/data/projects.js`, `src/lib/projectSkills.js`,
+`src/components/SkillsProjectExplorer.jsx`,
+`src/components/SkillsProjectExplorer.css`, `src/pages/home/Home.jsx`,
+`tests/projectSkills.test.mjs`, `tests/skillsProjectExplorer.test.mjs`,
+`package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, deterministic match/evidence
+unit tests, a component render regression for a missing thumbnail, and rendered
+browser checks for every skill selection, project detail links, keyboard
+operation, unchanged URL state, responsive layout, and reduced motion.
+
+Acceptance: selecting Audio, Python, or Local-first shows only projects whose
+canonical records carry that skill, pairs each project with its existing
+outcome and proof context, keeps its limitations visible, and links to its
+existing detail. Failed and missing images show accessible fallbacks. Controls
+work by keyboard and touch, announce their selected state, and do not change
+URL-backed audience or search state.
+
+Evidence: `npm.cmd run verify` passed (109 source files linted, 45 tests passed,
+86 assets/15 routes/14 projects/21 artwork records checked, production build
+and 24 static route documents generated). Browser checks on
+`http://127.0.0.1:5173/` returned Audio → 2 projects, Python → 6, and
+Local-first → 3; all cards showed existing outcomes, limitations, proof labels,
+and detail links. Enter selected Audio, and the homepage URL remained unchanged.
+The Python view rendered a labeled missing-preview fallback for the archive-only
+Student Dropout record, with its repository-pending proof label intact. The
+explorer also switches a failed remote cover to its accessible fallback. At
+584 × 585, the page had no horizontal overflow; reduced motion was active and
+the controls used 100 ms color/background/shadow transitions without spatial
+movement. A fresh reload produced no new browser console errors. The local
+server remains running for user review.
+
+## Saved-project comparison: Package 17
+
+Goal: give visitors a second use for the existing reading list by comparing
+two saved projects against their recorded goals, architecture, technologies,
+and limitations.
+
+### Scope
+
+- [x] Add an accessible comparison toggle beside the existing reading-list
+      control; require at least two saved projects.
+- [x] Limit both project selectors to distinct, current reading-list entries.
+- [x] Compare each project's problem statement, recorded architecture note,
+      key decision, technology stack, and limitations; label missing
+      architecture notes clearly.
+- [x] Link to existing project details and architecture diagrams where
+      canonical links exist.
+- [x] Preserve the existing reading-list storage and URL filter contracts;
+      support keyboard use, small viewports, and reduced motion.
+
+### Non-goals
+
+No AI/provider calls, new project claims or architecture metadata, unsaved
+comparison choices, new routes, persistent comparison state, deployment,
+publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/Projects.jsx`, `src/components/Projects.css`,
+`src/components/ProjectComparison.jsx`,
+`src/components/ProjectComparison.css`, `src/lib/projectComparison.js`,
+`tests/projectComparison.test.mjs`,
+`tests/projectComparisonComponent.test.mjs`, `package.json`, and this backlog
+entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, unit tests for distinct saved
+IDs and stale/unsaved choices, a component render regression for saved-only
+options and source fields, and browser checks for saving, selecting, comparing,
+detail and diagram links, responsive layout, reduced motion, and unchanged URL
+state.
+
+Acceptance: visitors can compare exactly two distinct projects from their
+  current reading list. The comparison uses each canonical problem statement,
+  technology stack, and limitation; it shows an architecture note only when one
+  is recorded, identifies missing notes, and keeps the recorded key decision
+  separate. Existing detail links and available diagram links work; opening
+  project details preserves existing search, tag, saved, and audience query
+  parameters while adding the selected project. Comparison controls are
+  keyboard accessible.
+
+Evidence: `npm.cmd run verify` passed (112 source files linted, 48 tests passed,
+86 assets/15 routes/14 projects/21 artwork records checked, production build,
+and 24 static route documents generated); `git diff --check` passed. Browser
+checks at `http://127.0.0.1:5173/projects` confirmed the comparison control is
+disabled and its panel hidden with one saved project. After temporarily saving
+Audio Recognition, the two selectors contained only StadiumPulse AI and Audio
+  Recognition; the comparison showed goal/problem, architecture note, key
+  decision, technologies, and limitations, plus the existing diagram and detail
+  links. The missing architecture note was labeled explicitly, the URL stayed
+  `/projects`, and a 584 × 585 viewport displayed the comparison dimensions in a
+  single-column layout without visible horizontal overflow. Component coverage
+  confirms detail links preserve `q`, `tag`, `saved`, and `lens` while adding
+  the selected project. The temporary save was removed and the original
+  one-project reading list restored. The local server remains available for
+  user review.
+
+## Expressive project transitions: Package 18
+
+Goal: make project archive interactions feel connected and responsive through
+a cover-to-detail transition, measured filter reflow, and immediate press
+feedback.
+
+### Scope
+
+- [x] Share the selected project's cover frame between its archive card and
+      detail dialog, including a matching return transition on close.
+- [x] Animate only the position of remaining project cards when search or area
+      filters change; preserve canonical order and existing URL state.
+- [x] Give archive and dialog buttons short press feedback that works for touch
+      as well as pointer input; keep hover-only styling for fine pointers.
+- [x] Preserve the existing category palettes, focus handling, Escape close,
+      direct project URLs, touch/keyboard operation, and ordinary scrolling.
+- [x] Under reduced motion, remove shared and positional movement while keeping
+      immediate state changes and a brief dialog opacity transition.
+
+### Non-goals
+
+No site-wide animation redesign, new animation dependency, content or data
+changes, route/storage changes, deployment, publication, or merge. Existing
+first-view project reveals remain unchanged.
+
+### Files, tests, and acceptance
+
+Files: `src/components/Projects.jsx`, `src/components/Projects.css`,
+`src/components/ProjectDetailDialog.jsx`,
+`src/styles/components/project-detail-dialog.css`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, and local browser checks for
+card-to-dialog open/close, direct URL fallback, keyboard and Escape/focus,
+filter reflow and URL preservation, touch press feedback, fine-pointer hover
+gating, reduced motion, and responsive overflow.
+
+Acceptance: selecting a project connects its cover to the dialog's media frame
+and closing it returns the frame to its card; a project opened from a direct
+URL gets a short fallback transition. Filters move remaining cards using a
+position-only transition under 300 ms without changing result order or URL
+state. Press feedback is immediate and subtle, hover effects remain fine-pointer
+only, and reduced motion removes spatial movement while preserving semantic
+dialog/focus behavior and readable state feedback.
+
+Evidence: `npm.cmd run verify` passed: 112 source files linted, 48 tests passed,
+86 assets, 15 routes, 14 projects, and 21 artwork records checked, and 24 static
+route documents generated. The optional resume sync skipped because
+`resume/resume.tex` is absent; the production build retains the existing
+552.51 kB main-chunk warning. `git diff --check` passed. Browser checks covered
+card open/close, keyboard open and Escape focus restoration, direct project URL
+fallback, and AI filtering (`?tag=AI`, three matching projects). At the 569 px
+viewport, the filter chips wrapped without visible horizontal overflow. Source
+inspection confirms positional/shared motion is disabled under reduced motion,
+press feedback uses the existing 140 ms token, and hover styles are gated to
+fine pointers; touch and reduced-motion preferences were not separately
+emulated. The original one-project reading list was restored, the archive is
+back at `/projects`, and the local server remains available for user review.
+
+## Audio signal explorer: Package 19
+
+Goal: give visitors a small, hands-on explanation of how generated audio
+signals change across a waveform and frequency spectrum, alongside the
+Audio Recognition case study.
+
+### Scope
+
+- [x] Add three clearly named synthetic signal presets with frequency and noise
+      controls that update a deterministic waveform and DFT spectrum.
+- [x] Add keyboard- and touch-operable controls and explicit, short local audio
+      playback with a stop control and cleanup.
+- [x] Label the widget as an educational synthetic example, separate from any
+      recording, catalog comparison, or recognition result.
+- [x] Keep the explorer inside the Audio Recognition detail view; preserve
+      existing project facts, dialog navigation, reduced motion, and scrolling.
+
+### Non-goals
+
+No microphone or upload access, external samples or network calls, claims that
+the widget reproduces the project's recognition pipeline, new route, storage,
+provider integration, deployment, publication, or merge.
+
+### Files, tests, and acceptance
+
+Files: `src/components/AudioSignalExplorer.jsx`,
+`src/components/AudioSignalExplorer.css`, `src/lib/audioSignalModel.js`,
+`tests/audioSignal.test.mjs`, `src/components/ProjectDetailDialog.jsx`,
+`package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, deterministic signal-model unit
+tests, and browser checks for project-only rendering, control-to-plot updates,
+explicit playback with no autoplay, keyboard operation, responsive overflow,
+dialog scrolling, direct URLs, and runtime errors.
+
+Acceptance: visitors can change the generated signal's shape, frequency, and
+noise and see both plots update. Playback starts only after activation, stays
+local and brief, and can be stopped. Accessible native controls work by
+keyboard and touch. Clear copy explains that the visualization is synthetic
+and is not a recognition result. Other project dialogs and existing evidence
+remain unchanged.
+
+Evidence: `npm.cmd run verify` passed: 115 source files linted, 52 tests passed
+(including four signal-model tests), 86 assets, 15 routes, 14 projects, and 21
+artwork records checked, and 24 static route documents generated. The optional
+resume sync skipped because `resume/resume.tex` is absent; the production build
+retains the >500 kB main-chunk warning (562.20 kB). `git diff --check` passed.
+Browser checks covered the direct Audio Recognition URL, no explorer on a
+different project's detail, preset/frequency/noise updates to both plots,
+keyboard frequency adjustment, explicit play/stop status, and dialog scrolling.
+At the 584 px viewport the plot and controls fit the dialog without visible
+horizontal overflow. No audio played until Play was activated. Native controls
+provide touch operation; the browser session did not emulate a touch device or
+reduced-motion preference. The plot has no animated transitions, and the local
+server remains available at `/projects?project=audio-recognition` for review.
+Independent review found and drove two fixes: light-theme preset accents now
+contrast at 5.60:1 or better against the cream surface, and an in-flight start
+lock with a disabled `Starting...` control prevents repeated activation while
+the browser resumes audio. A light-theme screenshot confirmed the harmonic
+palette remains distinct and readable.
+
+## Guided project finder: Package 20
+
+Goal: Let a visitor describe a topic in plain language, select relevant existing projects through TypeSafe Jev, and read only the canonical project descriptions already recorded in this site.
+
+### Scope
+
+- [x] Add an explicit-submit prompt bounded to 240 characters and a short disclosure before sending it.
+- [x] Send only the visitor prompt and bounded public project fields to a server-side TypeSafe endpoint; keep the API key off the browser.
+- [x] Bound provider request volume and concurrent work per running endpoint instance.
+- [x] Validate typed Noul responses, threshold and rank matches, cap results at three, and return canonical IDs only.
+- [x] Show canonical project summaries with links into the existing project detail dialog.
+- [x] Provide deterministic local keyword matching when TypeSafe is unavailable; do not store the prompt or put it in the URL.
+- [x] Document TypeSafe as a third-party processor and advise visitors not to enter personal or private information.
+
+### Non-goals
+
+Generated project copy, automatic prompt submission, prompt history, analytics, account state, new project retrieval, dependency additions, secret setup, deployment, publication, or merging.
+
+### Files, tests, and acceptance
+
+Files: `api/project-picker.js`, `vite.config.js`, `src/lib/projectFinder.js`, `src/components/ProjectFinder.jsx`, `src/components/ProjectFinder.css`, `src/components/Projects.jsx`, `src/pages/privacy/PrivacyPage.jsx`, `tests/projectFinder.test.mjs`, `package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, focused finder handler and selection tests, `git diff --check`, local API behavior, and browser inspection of the finder form and privacy copy.
+
+Acceptance: query length, request body, and provider request volume are bounded; only the server contacts TypeSafe; provider output is validated and mapped to known IDs; fallback uses site records; results do not change archive URL state; submitted text is not written to browser storage, the URL, or application logs; local preview remains available.
+
+Evidence: `npm.cmd run verify` passed: 118 source files linted, all 61 tests passed, 86 assets, 15 routes, 14 projects, and 21 artwork records checked, and 24 static route documents generated. The optional resume sync skipped because `resume/resume.tex` is absent; the production build retains a 567.19 kB main-chunk warning. `git diff --check` passed. Local `/projects` returned HTTP 200; the browser accessibility snapshot showed the labeled prompt, 240-character counter, disabled empty-submit control, pre-submit provider-data/privacy notice, and existing 14-project archive. A local POST returned `503 PROVIDER_UNAVAILABLE` because no local key is configured, with no upstream call. Automated tests verify deterministic local ranking, typed ID-only provider output, request limits, fallback paths, and archive mapping. The browser form was not manually submitted in this verification session. Jev reviewed all 10 changed text files with no exclusions or sensitive files; its generic privacy/test-risk gate contained no concrete finding. Independent review found no code findings. The request/concurrency limiter is best-effort per running endpoint instance, not a global provider spend ceiling.
+
+Implementation branch: `codex/portfolio-project-finder`.
+
 ## Professional-field SEO and profile alignment: Package 11
 
 Goal: make the portfolio and its public identity clearly relevant to software
@@ -573,3 +965,135 @@ Tests: `npm.cmd run verify`, `npm.cmd run build`, `git diff --check`, and render
 Acceptance: each major section presents one obvious next action; labels describe the destination or result; focus and press states remain visible; loading text does not duplicate affordances; utility controls remain visually secondary.
 
 Evidence: `npm.cmd run verify` passes with 77 source files linted, 16 tests, 78 local assets, 10 routes, 8 projects, and 21 artwork records. At the available 868x614 browser viewport, dark and light contact states show a single readable `Send message` affordance with visible keyboard focus; the homepage shows one filled `View projects` action beside a restrained résumé link; and the project dialog separates the filled `View source code` action from the outlined `Close details` control. The local browser console reported no application errors. Exact phone-width emulation was unavailable in the connected browser surface.
+
+## Homepage pad removal: Package 21
+
+Goal: remove the Touchscreen Launchpad four-pad demo from the main homepage.
+
+### Scope
+
+- [x] Remove the audio-pad section and its import from the homepage.
+- [x] Keep the Touchscreen Launchpad project record and project detail story intact.
+- [x] Add homepage render regression coverage for the removed pad group.
+
+### Non-goals
+
+Delete the Touchscreen Launchpad project, its project-story experience, or the reusable audio-playground source files; add replacement homepage content; publish or deploy.
+
+### Files, tests, acceptance, and evidence
+
+Files: `src/pages/home/Home.jsx`, `tests/homePage.test.mjs`, `package.json`, and this backlog entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, and a rendered homepage browser check at the repository's local development URL.
+
+Acceptance: the homepage no longer renders the four musical note pads or their invitation section. The selected-work and skills sections remain available, and the Touchscreen Launchpad project remains in the archive with its detail story.
+
+Evidence: `npm.cmd run verify` passed (118 source files linted, 62 tests passed,
+86 local assets/15 routes/14 projects/21 artwork records checked, production
+build passed, and 24 static route documents generated). The optional resume
+sync skipped because `resume/resume.tex` is absent. The build used a temporary
+PATH shim for the installed Vite CLI because this worktree lacks
+`node_modules/.bin/vite.cmd`. Browser check at `http://127.0.0.1:5174/` showed
+the selected-work and skills sections without the four-pad group; Touchscreen
+Launchpad remains discoverable through its project link. The existing large
+JavaScript chunk warning remains.
+
+## Smoother interactive panels: Package 22
+
+Goal: make the existing homepage and project-story interactions feel connected and responsive while preserving their content, URLs, keyboard access, and current visual system.
+
+### Scope
+
+- [x] Add a shared audience-lens selection indicator and a brief transition for pointer-driven content changes.
+- [x] Add direction-aware guided-tour step changes and smooth opening/closing while preserving Next, Back, Restart, Close, and focus restoration.
+- [x] Reposition surviving skill cards without scaling their text; fade in newly added cards.
+- [x] Smooth project-story stage changes, architecture expansion/collapse, and selected-node feedback.
+- [x] Remove the stale sentence about the deleted homepage audio demo.
+
+### Non-goals
+
+New features, restored audio pads, provider or project-data changes, URL or saved-project behavior changes, global scrolling effects, deployment, publication, or merge.
+
+### Files, tests, acceptance, and evidence
+
+Files: `src/pages/home/Home.jsx` and `Home.css`; `src/components/PortfolioTour.jsx` and `.css`; `src/components/SkillsProjectExplorer.jsx` and `.css`; `src/components/ProjectStory.jsx` and `.css`; `src/lib/motion.js`; `tests/interactivePanels.test.mjs`; `package.json`; and this backlog entry.
+
+Tests: `node --test tests/interactivePanels.test.mjs` during incremental work; one final `npm.cmd run verify`; `git diff --check`; and browser checks at `http://127.0.0.1:5174/` in desktop/mobile layouts, both themes, and separate normal/reduced-motion sessions. Exercise rapid reversals, focus restoration, overflow, and console health.
+
+Acceptance: rapid changes always settle on the latest selection with no blank wait, duplicate accessible links or announcements, clipped controls, or text scaling. The tour controls and focus behavior remain intact. Lens URLs, saved projects, comparisons, and detail dialogs continue to work. Keyboard and reduced-motion changes remain immediate. Desktop/mobile content remains readable and palettes stay distinct.
+
+Evidence: `npm.cmd run verify` passed: 118 source files linted, 64 tests passed,
+86 local assets/15 routes/14 projects/21 artwork records checked, production
+build passed, and 24 static route documents generated. Resume sync skipped
+because `resume/resume.tex` is absent. A temporary PATH shim exposed the
+installed Vite CLI because this worktree lacks `node_modules/.bin/vite.cmd`.
+The existing large JavaScript chunk warning remains.
+
+Browser checks at `http://127.0.0.1:5174/` passed in a visible desktop
+viewport (1280 × 900) and mobile viewport (390 × 844), with light and dark
+themes. The homepage showed no pads and retained the audience, project, skills,
+and tour content. Lens click and arrow-key changes updated the selected lens and
+URL. Rapid tour Next/Back changes settled on the latest stop, kept one project
+link, and Close restored focus to the tour button. Rapid skill changes settled
+on Audio with two cards and links. The Touchscreen Launchpad story remained
+available; its system map expanded, collapsed to an inert subtree, and rapid
+node changes left one selection and one live detail. Mobile project controls
+fit without horizontal overflow. The in-app browser reported
+`prefers-reduced-motion: reduce`; keyboard and reduced-motion changes were
+immediate. Supplemental touch-enabled Chromium viewport emulation passed at
+390 × 844, 768 × 1024, and 1024 × 768 in both reduced-motion and
+`no-preference` sessions. Lens URL updates, tour Next/Back/Close and focus
+return, all skill filters, project-story stages and nodes, and saved-project
+comparison worked without horizontal overflow or page errors. The normal-motion
+run also verified the intro's touch-operated Skip control. The first-visit
+privacy note was dismissed before feature checks; at 1024 × 768 its fixed
+overlay can cover the tour's bottom control until dismissed. These are emulated
+viewports, not physical-device tests. The isolated runner denied several
+external resource requests, while page error collection remained empty.
+
+
+## Responsive navigation and pointer feedback: Package 23
+
+Goal: keep every navigation link reachable on phones and tablets, including short screens, and provide clear pointer/tap feedback in both themes.
+
+Scope: compact right-side drawer below 900px, smaller unnumbered primary links, two-column archive, one scroll region including profile links, fixed header/close control, and comfortable tap targets. Larger desktop cursor with color inversion (`mix-blend-mode: difference`) and a subtle center; brief touch/pen halo canceled during scrolling or dragging. Preserve keyboard focus, Escape, reduced motion, and laptop navigation.
+
+Non-goals: desktop navigation redesign, route/content/provider changes, dependency changes, publication, merge, or deployment.
+
+Files: `src/components/layout/Navbar.jsx`, `src/styles/components/navbar.css`, and this entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, responsive Chromium viewport checks in both themes and motion modes, keyboard/focus checks, pointer/touch feedback checks, and complete-diff Jev review.
+
+Acceptance: all primary/archive/profile links remain reachable; no phone/tablet clipping or horizontal overflow; close control stays visible while content scrolls; laptop navigation preserves its layout; decorative feedback never captures input.
+
+Evidence: `npm.cmd run verify` passed: 118 source files linted, all 64 tests
+passed, 86 assets/15 routes/14 projects/21 artwork records checked, production
+build passed, and 24 static route documents generated. A temporary PATH shim
+outside the repository exposed the installed Vite CLI; no dependencies changed.
+Optional resume sync skipped the missing source; the existing large-chunk
+warning remains. `git diff --check` passed.
+
+Responsive Playwright checks used the existing canonical server at
+`http://127.0.0.1:5174/about` with Chromium viewport emulation: 320 x 568,
+390 x 844, 844 x 390, 768 x 1024, 899 x 600, 1024 x 768, and 1440 x 900,
+in light/dark themes and separate normal/reduced-motion sessions. Checks cover
+all 15 drawer links, 44px targets for primary/archive/profile links, two archive
+columns, no horizontal clipping, a stationary close control while content
+scrolls, focus entry/wrap/Escape/return, and archive link navigation. Actual
+emulated touch input verified halo visibility, timeout, and drag cancellation;
+window and nested drawer scrolling canceled feedback. Desktop navigation
+geometry matched the original CSS. Reduced-motion pointer placement was
+immediate, the larger circle stayed outlined, and feedback used pointer-events
+none. No page runtime errors or framework overlays were seen. Supplemental
+console inspection found only the pre-existing About-page React fetchPriority
+warning, confirmed in HEAD. Screenshots and results are stored outside the repo.
+These are emulated checks, not physical-device or hosted deployment evidence.
+
+Complete-diff Jev review completed with `jev-1.13.0`, all three changed files
+covered, no exclusions or truncation, and a non-empty usage receipt. The latest
+cursor follow-up returned an advisory verification-gap signal; focused checks
+confirmed white-fill difference blending in both themes, visible inversion in
+screenshots, preserved size, pointer-events none, and working theme controls.
+Follow-up lint and diff checks passed. The user accepted the result and
+requested commit/push plus safe repository cleanup. Independent ChatGPT
+validation remains required before implementing the next package.

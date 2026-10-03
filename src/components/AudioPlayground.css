@@ -1,0 +1,188 @@
+.audio-playground {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.1rem, 3vw, 2rem);
+    border: 1px solid var(--line-bright);
+    border-radius: 1rem;
+    background:
+        radial-gradient(circle at 90% 0%, color-mix(in srgb, var(--green) 10%, transparent), transparent 20rem),
+        var(--surface);
+}
+
+.audio-playground__topline,
+.audio-playground__footer,
+.audio-playground__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.audio-playground__eyebrow,
+.audio-playground__local-label,
+.audio-playground__pad-key,
+.audio-playground__pad-note {
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.075em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.audio-playground__eyebrow {
+    margin: 0;
+    color: var(--green);
+}
+
+.audio-playground__instruction {
+    margin: 0.3rem 0 0;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.audio-playground__local-label {
+    flex: 0 0 auto;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+}
+
+.audio-playground__pads {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(0.55rem, 1.5vw, 1rem);
+}
+
+.audio-playground__pad {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: clamp(7.5rem, 16vw, 11.5rem);
+    align-content: space-between;
+    justify-items: start;
+    padding: clamp(0.85rem, 2vw, 1.35rem);
+    border: 1px solid color-mix(in srgb, var(--pad-color) 84%, #172033);
+    border-radius: 0.8rem;
+    background: var(--pad-color);
+    color: #172033;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 150ms ease-out, box-shadow 150ms ease-out, filter 150ms ease-out;
+}
+
+.audio-playground__pad:focus-visible,
+.audio-playground__reset:focus-visible {
+    outline: 3px solid var(--text);
+    outline-offset: 3px;
+}
+
+.audio-playground__pad--active {
+    box-shadow: inset 0 0 0 3px #172033;
+    transform: translateY(-2px);
+}
+
+.audio-playground__pad-key {
+    display: grid;
+    width: 1.85rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid rgb(23 32 51 / 38%);
+    border-radius: 0.4rem;
+    color: #172033;
+}
+
+.audio-playground__pad-name {
+    align-self: end;
+    font-family: var(--sans);
+    font-size: clamp(1.35rem, 2.8vw, 2.25rem);
+    font-weight: 650;
+    letter-spacing: -0.06em;
+    line-height: 1;
+}
+
+.audio-playground__pad-note {
+    color: rgb(23 32 51 / 76%);
+}
+
+.audio-playground__footer {
+    align-items: start;
+    padding-top: 0.25rem;
+}
+
+.audio-playground__status {
+    min-height: 1.5rem;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.audio-playground__actions {
+    flex: 0 0 auto;
+}
+
+.audio-playground__story-link {
+    padding-bottom: 0.25rem;
+    font-size: 0.62rem;
+}
+
+.audio-playground__reset {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line-bright);
+    border-radius: 0.6rem;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.audio-playground__note {
+    margin: -0.35rem 0 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-faint);
+    font-size: 0.77rem;
+    line-height: 1.55;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .audio-playground__pad:hover {
+        filter: saturate(1.08);
+        transform: translateY(-2px);
+    }
+
+    .audio-playground__reset:hover {
+        border-color: var(--green);
+        color: var(--green);
+    }
+}
+
+@media (max-width: 760px) {
+    .audio-playground__pads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .audio-playground__pad { min-height: 8.75rem; }
+    .audio-playground__footer { flex-direction: column; }
+    .audio-playground__actions { width: 100%; justify-content: space-between; }
+}
+
+@media (max-width: 420px) {
+    .audio-playground__topline { align-items: start; flex-direction: column; }
+    .audio-playground__actions { align-items: start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .audio-playground__pad,
+    .audio-playground__reset { transition-duration: 0ms !important; }
+    .audio-playground__pad,
+    .audio-playground__pad:hover,
+    .audio-playground__pad--active { transform: none !important; filter: none; }
+}

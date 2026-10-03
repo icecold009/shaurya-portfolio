@@ -9,6 +9,21 @@ export const EDITORIAL_DURATION = {
     reveal: 0.72,
 };
 
+export const INTERACTION_OFFSET = 7;
+export const INTERACTION_TRANSITION = {
+    duration: EDITORIAL_DURATION.normal,
+    ease: EDITORIAL_EASE,
+};
+export const IMMEDIATE_TRANSITION = { duration: 0 };
+
+export function shouldAnimatePointerInteraction(event, shouldReduceMotion) {
+    return !shouldReduceMotion && (event?.detail ?? 0) > 0;
+}
+
+export function getInteractionTransition(shouldAnimate) {
+    return shouldAnimate ? INTERACTION_TRANSITION : IMMEDIATE_TRANSITION;
+}
+
 export const EDITORIAL_STAGGER = {
     delay: 0,
     interval: 0.05,
