@@ -8,8 +8,13 @@ const achievements = [
         items: [
             {
                 title: 'Cambridge A-Level Predicted Grades',
-                detail: 'A*, A*, A*, A, A - Further Mathematics, Computer Science, Mathematics, Physics, English Language',
+                detail: 'A* in Mathematics, Further Mathematics, Physics, and Computer Science.',
                 meta: 'Vidyashilp Academy · 2025-2027',
+            },
+            {
+                title: 'Cambridge AS Level Results',
+                detail: 'Mathematics A (99), Further Mathematics A (93), Physics A (89), and Computer Science A (88).',
+                meta: 'Vidyashilp Academy · Achieved results',
             },
             {
                 title: 'Cambridge IGCSE Grades',
