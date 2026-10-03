@@ -37,7 +37,7 @@ function PointerFollower({ reduceMotion }) {
     const pointerY = useMotionValue(-100);
     const springX = useSpring(pointerX, { stiffness: reduceMotion ? 1000 : 100, damping: reduceMotion ? 100 : 10 });
     const springY = useSpring(pointerY, { stiffness: reduceMotion ? 1000 : 100, damping: reduceMotion ? 100 : 10 });
-    const pointerTransform = useTransform([springX, springY], ([x, y]) => `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`);
+    const pointerTransform = useTransform([reduceMotion ? pointerX : springX, reduceMotion ? pointerY : springY], ([x, y]) => `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`);
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -66,6 +66,46 @@ function PointerFollower({ reduceMotion }) {
     }, [pointerX, pointerY]);
 
     return <motion.span className={["site-pointer-ball", visible ? "site-pointer-ball--visible" : ""].filter(Boolean).join(" ")} style={{ transform: pointerTransform }} aria-hidden="true" />;
+}
+
+function TapHalo() {
+    const [tap, setTap] = useState(null);
+
+    useEffect(() => {
+        let activePointer = null;
+        let timer;
+        const hide = () => {
+            window.clearTimeout(timer);
+            activePointer = null;
+            setTap(null);
+        };
+        const handleDown = (event) => {
+            hide();
+            if (!event.isPrimary || !["touch", "pen"].includes(event.pointerType)) return;
+            activePointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+            setTap({ x: event.clientX, y: event.clientY });
+            timer = window.setTimeout(hide, 320);
+        };
+        const handleMove = (event) => {
+            if (activePointer?.id !== event.pointerId) return;
+            if (Math.hypot(event.clientX - activePointer.x, event.clientY - activePointer.y) > 8) hide();
+        };
+        window.addEventListener("pointerdown", handleDown, { passive: true });
+        window.addEventListener("pointermove", handleMove, { passive: true });
+        window.addEventListener("pointercancel", hide, { passive: true });
+        window.addEventListener("scroll", hide, { passive: true, capture: true });
+        window.addEventListener("blur", hide);
+        return () => {
+            window.clearTimeout(timer);
+            window.removeEventListener("pointerdown", handleDown);
+            window.removeEventListener("pointermove", handleMove);
+            window.removeEventListener("pointercancel", hide);
+            window.removeEventListener("scroll", hide, true);
+            window.removeEventListener("blur", hide);
+        };
+    }, []);
+
+    return tap && <span className="site-tap-halo" style={{ left: tap.x, top: tap.y }} aria-hidden="true" />;
 }
 
 function Navbar() {
@@ -188,6 +228,7 @@ function Navbar() {
     return (
         <>
             <PointerFollower reduceMotion={reduceMotion} />
+            <TapHalo />
             <header className={["site-header", scrolled ? "site-header--scrolled" : "", menuOpen ? "site-header--menu-open" : ""].filter(Boolean).join(" ")}>
                 <nav className="navbar" aria-label="Main navigation">
                     <Link to="/" className="nav-brand" aria-label="Shaurya portfolio home">
@@ -249,14 +290,14 @@ function Navbar() {
                             <div className="mobile-nav-scroll">
                                 <p className="mobile-nav-section-label">Navigate</p>
                                 <div className="mobile-primary-links">
-                                    {primaryLinks.map(({ to, label }, index) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-primary-link mobile-primary-link--active" : "mobile-primary-link"}><span className="mobile-link-index">{String(index + 1).padStart(2, "0")}</span><span className="mobile-link-label">{label}</span><ArrowUpRight className="mobile-link-arrow" size={19} aria-hidden="true" /></NavLink>)}
+                                    {primaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-primary-link mobile-primary-link--active" : "mobile-primary-link"}><span className="mobile-link-label">{label}</span><ArrowUpRight className="mobile-link-arrow" size={19} aria-hidden="true" /></NavLink>)}
                                 </div>
-                                <div className="mobile-secondary-section"><p className="mobile-nav-section-label">Explore</p><div className="mobile-secondary-links">{secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-secondary-link mobile-secondary-link--active" : "mobile-secondary-link"}><span>{label}</span></NavLink>)}</div></div>
-                            </div>
-                            <div className="mobile-nav-footer">
-                                <div className="mobile-status"><span className="mobile-status-dot" /><p>Open to internships, research, and collaborations</p></div>
-                                <div className="mobile-social-links">
-                                    {profileLinks.map((link) => <a key={link.key} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} download={link.download ? true : undefined} aria-label={link.external ? `${link.label} (opens in a new tab)` : link.label}>{link.key === "github" ? <GithubIcon size={16} /> : link.key === "email" ? <Mail size={16} /> : null}{link.label}</a>)}
+                                <div className="mobile-secondary-section"><p className="mobile-nav-section-label">Archive</p><div className="mobile-secondary-links">{secondaryLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={closeMenu} className={({ isActive }) => isActive ? "mobile-secondary-link mobile-secondary-link--active" : "mobile-secondary-link"}><span>{label}</span></NavLink>)}</div></div>
+                                <div className="mobile-nav-footer">
+                                    <div className="mobile-status"><span className="mobile-status-dot" /><p>Open to internships, research, and collaborations</p></div>
+                                    <div className="mobile-social-links">
+                                        {profileLinks.map((link) => <a key={link.key} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} download={link.download ? true : undefined} aria-label={link.external ? `${link.label} (opens in a new tab)` : link.label}>{link.key === "github" ? <GithubIcon size={16} /> : link.key === "email" ? <Mail size={16} /> : null}{link.label}</a>)}
+                                    </div>
                                 </div>
                             </div>
                         </motion.aside>

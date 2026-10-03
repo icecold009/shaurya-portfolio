@@ -1050,3 +1050,50 @@ privacy note was dismissed before feature checks; at 1024 × 768 its fixed
 overlay can cover the tour's bottom control until dismissed. These are emulated
 viewports, not physical-device tests. The isolated runner denied several
 external resource requests, while page error collection remained empty.
+
+
+## Responsive navigation and pointer feedback: Package 23
+
+Goal: keep every navigation link reachable on phones and tablets, including short screens, and provide clear pointer/tap feedback in both themes.
+
+Scope: compact right-side drawer below 900px, smaller unnumbered primary links, two-column archive, one scroll region including profile links, fixed header/close control, and comfortable tap targets. Larger desktop cursor with color inversion (`mix-blend-mode: difference`) and a subtle center; brief touch/pen halo canceled during scrolling or dragging. Preserve keyboard focus, Escape, reduced motion, and laptop navigation.
+
+Non-goals: desktop navigation redesign, route/content/provider changes, dependency changes, publication, merge, or deployment.
+
+Files: `src/components/layout/Navbar.jsx`, `src/styles/components/navbar.css`, and this entry.
+
+Tests: `npm.cmd run verify`, `git diff --check`, responsive Chromium viewport checks in both themes and motion modes, keyboard/focus checks, pointer/touch feedback checks, and complete-diff Jev review.
+
+Acceptance: all primary/archive/profile links remain reachable; no phone/tablet clipping or horizontal overflow; close control stays visible while content scrolls; laptop navigation preserves its layout; decorative feedback never captures input.
+
+Evidence: `npm.cmd run verify` passed: 118 source files linted, all 64 tests
+passed, 86 assets/15 routes/14 projects/21 artwork records checked, production
+build passed, and 24 static route documents generated. A temporary PATH shim
+outside the repository exposed the installed Vite CLI; no dependencies changed.
+Optional resume sync skipped the missing source; the existing large-chunk
+warning remains. `git diff --check` passed.
+
+Responsive Playwright checks used the existing canonical server at
+`http://127.0.0.1:5174/about` with Chromium viewport emulation: 320 x 568,
+390 x 844, 844 x 390, 768 x 1024, 899 x 600, 1024 x 768, and 1440 x 900,
+in light/dark themes and separate normal/reduced-motion sessions. Checks cover
+all 15 drawer links, 44px targets for primary/archive/profile links, two archive
+columns, no horizontal clipping, a stationary close control while content
+scrolls, focus entry/wrap/Escape/return, and archive link navigation. Actual
+emulated touch input verified halo visibility, timeout, and drag cancellation;
+window and nested drawer scrolling canceled feedback. Desktop navigation
+geometry matched the original CSS. Reduced-motion pointer placement was
+immediate, the larger circle stayed outlined, and feedback used pointer-events
+none. No page runtime errors or framework overlays were seen. Supplemental
+console inspection found only the pre-existing About-page React fetchPriority
+warning, confirmed in HEAD. Screenshots and results are stored outside the repo.
+These are emulated checks, not physical-device or hosted deployment evidence.
+
+Complete-diff Jev review completed with `jev-1.13.0`, all three changed files
+covered, no exclusions or truncation, and a non-empty usage receipt. The latest
+cursor follow-up returned an advisory verification-gap signal; focused checks
+confirmed white-fill difference blending in both themes, visible inversion in
+screenshots, preserved size, pointer-events none, and working theme controls.
+Follow-up lint and diff checks passed. The user accepted the result and
+requested commit/push plus safe repository cleanup. Independent ChatGPT
+validation remains required before implementing the next package.
