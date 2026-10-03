@@ -81,6 +81,12 @@ npm run sync:resume -- path/to/resume.tex
 
 If the source is unavailable, the existing PDF is left unchanged.
 
+The current canonical résumé is the supplied `Shaurya_saria_CV_Oct2026.pdf`,
+copied unchanged to `public/resume.pdf`. All résumé links (desktop navigation,
+mobile menu, homepage, and About page) use `/resume.pdf`.
+`public/resume-preview.png` shows its first page. When replacing a supplied PDF,
+refresh this preview as well; no local LaTeX source is currently present.
+
 ## Project structure
 
 ```text

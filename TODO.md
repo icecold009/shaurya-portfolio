@@ -1097,3 +1097,46 @@ screenshots, preserved size, pointer-events none, and working theme controls.
 Follow-up lint and diff checks passed. The user accepted the result and
 requested commit/push plus safe repository cleanup. Independent ChatGPT
 validation remains required before implementing the next package.
+
+
+## October 2026 résumé update: Package 24
+
+Goal: use the supplied October 2026 résumé consistently across the portfolio.
+
+Scope: replace `public/resume.pdf` byte-for-byte with
+`Shaurya_saria_CV_Oct2026.pdf`, refresh the first-page preview at its existing
+1191 x 1684 size, align the Achievements predicted grades and AS results with
+the supplied academic record, and document canonical résumé provenance.
+All existing desktop/mobile/homepage/About résumé links retain `/resume.pdf`.
+
+Non-goals: editing the supplied PDF, rewriting project claims or personal bio,
+adding a LaTeX source, changing link behavior, or updating external profiles.
+
+Files: `public/resume.pdf`, `public/resume-preview.png`,
+`src/components/Achievements.jsx`, `README.md`, and this backlog entry.
+
+Tests: source/destination SHA-256 equality, both PDF pages visually inspected,
+preview render and dimensions checked, local HTTP PDF response hash checked,
+all résumé entry points and academic records checked in the browser,
+`npm.cmd run verify`, `git diff --check`, and complete-diff Jev review with
+binary coverage limitations reported separately.
+
+Acceptance: every existing résumé action resolves to the supplied two-page PDF;
+preview matches its first page; the academic page distinguishes A-Level
+predictions from achieved AS results; optional missing-source résumé sync leaves
+the supplied PDF unchanged.
+
+Evidence: source, `public/resume.pdf`, the built `dist/resume.pdf`, and the
+local HTTP PDF response match SHA-256
+`45a9f07b4facb2548cc8734f901e0a070c32b7f6b98087815f926badd42e1fb8`.
+Both supplied pages and the refreshed 1191 x 1684 preview were visually checked.
+`npm.cmd run verify` passed: 118 source files linted, 64 tests passed, 86 local
+assets/15 routes/14 projects/21 artwork records checked, production build
+passed, and 24 static route documents generated. Optional résumé sync skipped
+the absent LaTeX source and preserved the supplied PDF. Existing large-chunk
+warning remains; a temporary Vite PATH shim outside the repository was used.
+Browser checks at `http://127.0.0.1:5174/` and `/about` verified résumé links;
+the 390px mobile menu exposed the same PDF. `/achievements` displayed the
+updated predictions and AS results without horizontal overflow or page errors.
+Complete-diff Jev review follows; binary PDF/PNG fidelity is verified locally.
+Independent ChatGPT validation is required before the next package.
