@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-04",
+  "sourceSnapshot": "dc8e784e00b631376d8a4d31afc88a0e54c93151",
+  "publicationParent": "dc8e784e00b631376d8a4d31afc88a0e54c93151",
+  "scope": "Actual documentation publication patch before this generated receipt; PNGs independently rendered and inspected",
+  "coveredTextFiles": [
+    "README.md",
+    "docs/architecture/README.md",
+    "docs/architecture/detail.mmd",
+    "docs/architecture/overview.mmd",
+    "docs/architecture/publication.md",
+    "TODO.md",
+    "docs/architecture/coverage.md",
+    "docs/architecture/verification.md",
+    "docs/architecture/verify.mjs"
+  ],
+  "excludedTextFiles": [],
+  "binaryPreviews": [
+    "overview.png",
+    "detail.png"
+  ],
+  "reviews": [
+    {
+      "model": "jev-1.13.0",
+      "gate": "resolve_findings_or_human_review",
+      "outcome": "no_clear_issue",
+      "confidence": 0.66,
+      "riskSignals": {
+        "correctness": 0.2,
+        "security": 0.09,
+        "regression": 0.09,
+        "test_gap": 0.59,
+        "context_gap": 0.21
+      },
+      "usage": {
+        "input_tokens": 9404,
+        "output_tokens": 499
+      }
+    },
+    {
+      "model": "jev-1.13.0",
+      "gate": "resolve_findings_or_human_review",
+      "outcome": "no_clear_issue",
+      "confidence": 0.69,
+      "riskSignals": {
+        "correctness": 0.42,
+        "security": 0.09,
+        "regression": 0.1,
+        "test_gap": 0.39,
+        "context_gap": 0.25
+      },
+      "usage": {
+        "input_tokens": 12672,
+        "output_tokens": 499
+      }
+    }
+  ],
+  "approvalClaim": false,
+  "mainMergeAuthorized": false
+}
