@@ -1,0 +1,30 @@
+flowchart TB
+  %% Solid arrows: runtime/data dependency; dotted arrows: optional, build or local-only boundary.
+  UI["React route shell, shared design and navigation"]
+  PAGES["Projects, blog, contact and other routed pages"]
+  CONTENT["MDX writing, project/profile and public content data"]
+  FINDER["Deterministic filtering, comparison, audience and shortlist"]
+  AI["Server-side Jev project picker and budgets"]
+  BUILD["Vite/MDX, static routes, SEO and resume/image tooling"]
+  POLICY["Privacy notice, theme and storage preferences"]
+  CONTACT["Validated/honeypot contact form to Formspree"]
+  CONTRIB["Contribution display via external contributions API"]
+  LOCAL["Shortlist, preferences and theme in browser storage"]
+  PLAY["Interactive simulations and project demos"]
+  METRICS["Vercel Analytics component"]
+  SUPPORT["Supporting tests, assets, documentation and delivery config"]
+  UI --> PAGES
+  CONTENT --> PAGES
+  CONTENT --> FINDER
+  FINDER --> PAGES
+  PAGES -. optional project suggestion .-> AI
+  BUILD -. generates site assets .-> UI
+  POLICY --> UI
+  PAGES --> CONTACT
+  UI --> CONTRIB
+  FINDER --> LOCAL
+  POLICY --> LOCAL
+  PAGES --> PLAY
+  AI -. public project IDs only .-> FINDER
+  UI -. analytics component .-> METRICS
+  SUPPORT -. supports .-> UI
