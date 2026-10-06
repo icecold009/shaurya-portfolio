@@ -184,8 +184,8 @@
 .github-contribution-cell[data-level="4"] { border-color: var(--github-tone-13); background: var(--github-tone-13); }
 
 .github-contributions__calendar[data-state="loading"] .github-contribution-cell {
-    border-color: var(--github-tone-14);
-    background: var(--github-tone-15);
+    border-color: var(--skeleton-border);
+    background: var(--skeleton-base);
     animation: github-contribution-skeleton 1.8s ease-in-out infinite alternate;
 }
 

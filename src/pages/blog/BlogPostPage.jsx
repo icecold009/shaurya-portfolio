@@ -76,10 +76,13 @@ function ArticleLoadingState() {
     return (
         <div className="blog-loading" role="status" aria-live="polite">
             <span className="blog-loading__label">Loading essay</span>
-            <span className="blog-loading__line blog-loading__line--long" aria-hidden="true" />
-            <span className="blog-loading__line blog-loading__line--medium" aria-hidden="true" />
-            <span className="blog-loading__line blog-loading__line--short" aria-hidden="true" />
-            <span className="blog-loading__block" aria-hidden="true" />
+            {[0, 1, 2].map((paragraph) => (
+                <div className="blog-loading__paragraph" key={paragraph} aria-hidden="true">
+                    <span className="blog-loading__line blog-loading__line--long" />
+                    <span className="blog-loading__line blog-loading__line--medium" />
+                    <span className="blog-loading__line blog-loading__line--short" />
+                </div>
+            ))}
         </div>
     );
 }

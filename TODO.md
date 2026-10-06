@@ -1282,3 +1282,22 @@ Production build passed: 2275 modules and 24 static route documents.
 Existing large-chunk warning and optional absent resume source remain.
 Final Jev diff review did not return a typed review result; it is not counted
 as completed. Source/browser/build inspection completed independently.
+
+
+## Skeleton consistency: Package 29
+
+Goal: align all existing skeleton screens with new palette and typography.
+Scope/files: shared skeleton tokens in variables.css; BlogPostPage.jsx article
+fallback and blog.css paragraph shapes; GitHubContributions.css loading cells.
+Non-goals: new loading flows, content changes, artificial delays, merging or
+deployment. Acceptance: theme-derived neutral placeholders, actual reading
+column/calendar geometry, Inter status label, polite status and hidden visual
+bars, reduced-motion preservation. Evidence: source/diff inspection and build.
+No automated tests requested. Jev plan review gave generic scope advice; exact
+two-component source inventory and user instruction resolve that concern.
+
+Skeleton evidence: full source inventory confirms two existing skeletons.
+Production build passed (2275 modules, 24 route documents); diff check passed.
+Jev 1.13.0 reviewed all five text files without exclusions/truncation,
+5621 input/500 output tokens, advisory no-clear-issue. Transient skeleton
+rendering was not forced or visually captured; reduced-motion rules preserved.
