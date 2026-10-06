@@ -238,7 +238,7 @@ const sections = [
                 org: "Springpod / Leeds Beckett University",
                 entries: [
                     {
-                        title: "BSc (Hons) Data Science & AI",
+                        title: "BSc (Hons) Data Science & AI - Springpod Experience",
                         year: "2026",
                         img: "/certificates/images/cert-Springpod-BSc-Hons-Data-Science-AI.webp",
                         pdf: "/certificates/pdfs/cert-Springpod-BSc-Hons-Data-Science-AI.pdf",
