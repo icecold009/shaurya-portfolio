@@ -4,20 +4,20 @@
 :root {
     color-scheme: dark;
 
-    --bg: #0b1220;
-    --bg-2: #111b2d;
-    --surface: #121d30;
-    --surface-2: #18263b;
-    --line: #263650;
-    --line-bright: #3b5274;
+    --bg: #101010;
+    --bg-2: #171716;
+    --surface: #1c1c1a;
+    --surface-2: #252522;
+    --line: #363632;
+    --line-bright: #66645d;
 
-    --text: #e9eef7;
-    --text-dim: #b7c4d9;
-    --text-faint: #8d9bb2;
+    --text: #f5f1e7;
+    --text-dim: #ccc7bc;
+    --text-faint: #a39e93;
 
-    --green: #7da8ff;
-    --green-dim: #9abaff;
-    --green-faint: #1d355d;
+    --green: #f5f1e7;
+    --green-dim: #ddd7ca;
+    --green-faint: #353530;
 
     --max-width: 1260px;
     --content-width: 70rem;
@@ -42,7 +42,7 @@
     --transition-fast: var(--duration-press) var(--ease-out);
     --transition-normal: var(--duration-page) var(--ease-editorial);
 
-    --accent-rgb: 125, 168, 255;
+    --accent-rgb: 245, 241, 231;
 }
 
 /* LIGHT MODE */

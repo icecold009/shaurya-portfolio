@@ -165,11 +165,11 @@
     position: absolute;
     right: 0.85rem;
     bottom: 0.85rem;
-    border: 1px solid rgba(23, 32, 51, 0.14);
+    border: 1px solid rgba(25, 24, 22, 0.14);
     border-radius: 0.3rem;
     padding: 0.45rem 0.6rem;
     background: rgba(255, 253, 248, 0.9);
-    color: #172033;
+    color: #191816;
     font-family: var(--mono);
     font-size: 0.72rem;
     letter-spacing: 0.07em;

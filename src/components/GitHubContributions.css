@@ -1,23 +1,23 @@
 /* Theme-aware contribution density, labels and tooltip tones. */
 .home-section--activity {
-    --github-tone-0: #9aa3ad;
-    --github-tone-1: #8a929b;
-    --github-tone-2: #f2f4f5;
-    --github-tone-3: #1a1d20;
-    --github-tone-4: #050505;
-    --github-tone-5: #87909b;
-    --github-tone-6: #161b22;
-    --github-tone-7: #242a31;
-    --github-tone-8: #075b31;
-    --github-tone-9: #0e4429;
-    --github-tone-10: #0d813f;
-    --github-tone-11: #006d32;
-    --github-tone-12: #26a641;
-    --github-tone-13: #39d353;
-    --github-tone-14: #1f252b;
-    --github-tone-15: #111417;
-    --github-tone-16: #3a424b;
-    --github-tone-17: #1f2429;
+    --github-tone-0: #a39e93;
+    --github-tone-1: #a39e93;
+    --github-tone-2: #f5f1e7;
+    --github-tone-3: #363632;
+    --github-tone-4: #101010;
+    --github-tone-5: #a39e93;
+    --github-tone-6: #171716;
+    --github-tone-7: #363632;
+    --github-tone-8: #494841;
+    --github-tone-9: #353530;
+    --github-tone-10: #858074;
+    --github-tone-11: #68645c;
+    --github-tone-12: #a49f93;
+    --github-tone-13: #f5f1e7;
+    --github-tone-14: #363632;
+    --github-tone-15: #1c1c1a;
+    --github-tone-16: #66645d;
+    --github-tone-17: #252522;
 }
 
 [data-theme="light"] .home-section--activity {

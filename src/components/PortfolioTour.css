@@ -81,8 +81,8 @@
 .portfolio-tour__panel[hidden] { display: none; }
 
 .portfolio-tour__stop {
-    --tour-accent: #89b9ff;
-    --tour-wash: rgba(69, 125, 204, 0.13);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 13%, transparent);
 
     overflow: hidden;
     border: 1px solid var(--line);
@@ -92,18 +92,18 @@
 }
 
 .portfolio-tour__stop[data-audience="admissions"] {
-    --tour-accent: #e7ae6b;
-    --tour-wash: rgba(231, 174, 107, 0.14);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 14%, transparent);
 }
 
 .portfolio-tour__stop[data-audience="collaboration"] {
-    --tour-accent: #83b4ff;
-    --tour-wash: rgba(131, 180, 255, 0.14);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 14%, transparent);
 }
 
 .portfolio-tour__stop[data-audience="curious"] {
-    --tour-accent: #7ed0a7;
-    --tour-wash: rgba(126, 208, 167, 0.13);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 13%, transparent);
 }
 
 [data-theme="light"] .portfolio-tour__stop[data-audience="admissions"] {

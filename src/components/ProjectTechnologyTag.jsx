@@ -77,42 +77,6 @@ const TECHNOLOGY_ICONS = {
     vite: SiVite,
 };
 
-const TECHNOLOGY_COLORS = {
-    docker: "#2496ed",
-    express: "#8a91a0",
-    facerecognition: "#da8e85",
-    ffmpeg: "#80b918",
-    fingerprinting: "#a782d7",
-    flask: "#758092",
-    fireworksai: "#f18d67",
-    git: "#f05032",
-    github: "#7a8392",
-    gemini: "#8e75ff",
-    jupyter: "#f37626",
-    matplotlib: "#7fa7a1",
-    nextjs: "#7c8492",
-    opencv: "#7964e8",
-    pandas: "#a58ade",
-    pdfparsing: "#d16b77",
-    postgresql: "#5b87d3",
-    prisma: "#7180c6",
-    pullrequests: "#8a97aa",
-    pytest: "#5b9c63",
-    python: "#4f9bd8",
-    react: "#53c1de",
-    realtime: "#dfb66b",
-    rls: "#88a3cf",
-    scikitlearn: "#eea33a",
-    spotifyapi: "#1db954",
-    supabase: "#3ecf8e",
-    tailwind: "#38bdf8",
-    tmdb: "#01b878",
-    typescript: "#4c8dcc",
-    vercel: "#9aa2ae",
-    vite: "#a89aff",
-    csv: "#6da7cf",
-};
-
 function normalizeTechnology(value) {
     const normalized = value.toLowerCase().replace(/[^a-z0-9]/g, "");
     return normalized === "ffmeg" ? "ffmpeg" : normalized;
@@ -126,7 +90,6 @@ export default function ProjectTechnologyTag({ technology, compact = false }) {
     return (
         <span
             className={`project-tech-tag${compact ? " project-tech-tag--compact" : ""}`}
-            style={{ "--project-tech-mark-color": TECHNOLOGY_COLORS[key] ?? "currentColor" }}
         >
             <Icon
                 className="project-tech-tag__icon"

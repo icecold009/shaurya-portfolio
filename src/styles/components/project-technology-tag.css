@@ -10,19 +10,12 @@
     flex: 0 0 auto;
     box-sizing: content-box;
     padding: 0.16rem;
-    border: 1px solid color-mix(in srgb, var(--project-tech-mark-color, currentColor) 56%, var(--line-bright));
+    border: 1px solid var(--line-bright);
     border-radius: 0.32rem;
-    background: color-mix(in srgb, var(--project-tech-mark-color, currentColor) 22%, var(--surface));
-    color: color-mix(in srgb, var(--project-tech-mark-color, currentColor) 78%, var(--text));
+    background: var(--surface-2);
+    color: var(--text);
 }
 
 .project-tech-tag__label {
     min-width: 0;
-}
-
-/* Brand marks follow the site's light-mode ink palette. */
-[data-theme="light"] .project-tech-tag__icon {
-    border-color: var(--line-bright);
-    background: var(--surface-2);
-    color: var(--text);
 }
