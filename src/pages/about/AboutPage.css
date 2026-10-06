@@ -67,7 +67,7 @@
 .about-hero h1 em,
 .about-section h2 em {
     color: var(--green-dim);
-    font-style: normal;
+    font-style: italic;
 }
 
 .about-hero__intro {

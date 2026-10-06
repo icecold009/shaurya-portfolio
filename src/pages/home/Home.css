@@ -27,7 +27,7 @@
     line-height: 1.15;
 }
 
-.home-section h2 em { color: var(--green); font-style: normal; font-weight: 470; }
+.home-section h2 em { color: var(--green); font-style: italic; font-weight: 470; }
 
 .home-section__intro {
     max-width: 27rem;

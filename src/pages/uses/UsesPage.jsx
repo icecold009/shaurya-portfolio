@@ -195,7 +195,7 @@ export default function UsesPage() {
                     <p className="uses-eyebrow">A practical setup for thoughtful software</p>
                     <h1>
                         Less stack,
-                        <span> more signal.</span>
+                        <em> more signal.</em>
                     </h1>
                     <p className="uses-hero-description">
                         The tools, habits and boundaries behind my ML experiments,

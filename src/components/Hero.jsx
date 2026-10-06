@@ -65,10 +65,10 @@ export default function Hero() {
             >
                 <motion.div className="portfolio-hero__copy" variants={shouldReduceMotion ? undefined : REVEAL}>
                     <p className="portfolio-hero__eyebrow">Student developer · {academicProfile.location}</p>
-                    <h1 id="portfolio-hero-title" className="portfolio-hero__title">Shaurya Saria</h1>
+                    <h1 id="portfolio-hero-title" className="portfolio-hero__title">Shaurya <em>Saria</em></h1>
                     <p className="portfolio-hero__statement">{positioningStatement}</p>
                     <p className="portfolio-hero__context">
-                        Studying {academicProfile.curriculum} at {academicProfile.school} · expected graduation {academicProfile.expectedGraduation}
+                        Studying <strong>{academicProfile.curriculum}</strong> at {academicProfile.school} · expected graduation {academicProfile.expectedGraduation}
                     </p>
                     <div className="portfolio-hero__actions">
                         <a href="#home-selected-work" className="portfolio-button portfolio-button--primary cta-link">

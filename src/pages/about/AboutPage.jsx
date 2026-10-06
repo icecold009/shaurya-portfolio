@@ -102,8 +102,8 @@ export default function AboutPage() {
                         </h1>
 
                         <p className="about-hero__intro">
-                            I’m Shaurya, a student developer building web
-                            products and applied machine-learning projects. I
+                            I’m Shaurya, a student developer building <strong>web
+                            products</strong> and <strong>applied machine-learning projects.</strong> I
                             care about whether people can understand what the
                             software is doing, not only whether it runs.
                         </p>
