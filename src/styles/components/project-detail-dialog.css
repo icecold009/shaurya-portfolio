@@ -40,7 +40,7 @@
 .project-detail-dialog__stack-label,
 .project-detail-dialog__stack > span:not(.project-detail-dialog__stack-label) {
     font-family: var(--mono);
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.045em;
     text-transform: uppercase;
 }
@@ -147,15 +147,15 @@
 
 .project-detail-dialog__media-fallback strong {
     font-family: var(--mono);
-    font-size: clamp(4rem, 11vw, 7rem);
+    font-size: clamp(2.3rem, 8vw, 4rem);
     font-weight: 500;
-    letter-spacing: -0.09em;
+    letter-spacing: -0.035em;
 }
 
 .project-detail-dialog__media-fallback small {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -166,18 +166,18 @@
 
 .project-detail-dialog__content .selected-work-kicker {
     margin: 0;
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     letter-spacing: 0.12em;
 }
 
 .project-detail-dialog__content h2 {
-    max-width: 15ch;
+    max-width: 24ch;
     margin: 0.8rem 0 1rem;
     font-family: var(--sans), Arial, sans-serif;
     font-size: clamp(2.25rem, 5.3vw, 4rem);
     font-weight: 620;
-    letter-spacing: -0.075em;
-    line-height: 0.98;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
     overflow-wrap: anywhere;
 }
 
@@ -213,7 +213,7 @@
 .project-detail-dialog__evidence small {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.6rem;
+    font-size: 0.72rem;
     letter-spacing: 0.045em;
     line-height: 1.5;
     text-transform: uppercase;
@@ -266,7 +266,7 @@
     margin: 0;
     color: var(--green);
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     letter-spacing: 0.07em;
     line-height: 1.55;
     font-weight: 500;
@@ -311,7 +311,7 @@
     border-radius: 0.6rem;
     color: var(--text);
     font-family: var(--mono);
-    font-size: 0.61rem;
+    font-size: 0.72rem;
     letter-spacing: 0.035em;
     line-height: 1.4;
     text-decoration: none;
@@ -334,7 +334,7 @@
 
 .project-detail-dialog__facts dt {
     color: var(--green);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
 }
 
 .project-detail-dialog__facts dd {
@@ -366,7 +366,7 @@
     border-radius: 999px;
     background: color-mix(in srgb, var(--surface-2) 86%, transparent);
     color: var(--text);
-    font-size: 0.59rem;
+    font-size: 0.72rem;
 }
 
 .project-detail-dialog__footer {
@@ -406,7 +406,7 @@
     background: transparent;
     color: var(--text);
     font-family: var(--mono);
-    font-size: 0.61rem;
+    font-size: 0.72rem;
     letter-spacing: 0.025em;
     line-height: 1.35;
     text-align: center;
@@ -500,7 +500,7 @@
 
     .project-detail-dialog__identity {
         gap: 0.55rem;
-        font-size: 0.58rem;
+        font-size: 0.72rem;
     }
 
     .project-detail-dialog__body {
@@ -554,7 +554,7 @@
     .project-detail-dialog__actions .case-study-source-note {
         min-width: 0;
         padding-inline: 0.4rem;
-        font-size: 0.56rem;
+        font-size: 0.72rem;
         overflow-wrap: anywhere;
     }
 

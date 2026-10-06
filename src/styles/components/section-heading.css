@@ -31,7 +31,7 @@
 .section-heading h2 {
     margin: 0;
     font-size: clamp(2.2rem, 4vw, 3.2rem);
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -0.03em;
     font-weight: 800;
     color: var(--text);
@@ -40,6 +40,6 @@
 .section-heading h1 em,
 .section-heading h2 em {
     color: color-mix(in srgb, var(--green) 54%, var(--text));
-    font-style: italic;
+    font-style: normal;
     font-weight: 430;
 }

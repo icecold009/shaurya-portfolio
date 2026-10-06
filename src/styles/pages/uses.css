@@ -24,7 +24,7 @@
 .uses-eyebrow {
     color: color-mix(in srgb, var(--green) 70%, var(--text-dim));
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 650;
     letter-spacing: 0.11em;
     line-height: 1.5;
@@ -32,19 +32,19 @@
 }
 
 .uses-hero h1 {
-    max-width: 10ch;
+    max-width: 24ch;
     margin: 1rem 0 0;
     color: var(--text);
     font-family: var(--sans), Arial, sans-serif;
-    font-size: clamp(3.8rem, 8.5vw, 8rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 620;
-    letter-spacing: -0.09em;
-    line-height: 0.88;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .uses-hero h1 span {
     color: color-mix(in srgb, var(--green) 55%, var(--text));
-    font-style: italic;
+    font-style: normal;
     font-weight: 420;
 }
 
@@ -67,7 +67,7 @@
     border-bottom: 1px solid var(--green);
     color: var(--text);
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 650;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -93,7 +93,7 @@
     gap: 1rem;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.58rem;
+    font-size: 0.72rem;
     letter-spacing: 0.07em;
     text-transform: uppercase;
 }
@@ -141,7 +141,7 @@
 .uses-hero-meta dt {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.57rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -171,7 +171,7 @@
     padding-top: 0.25rem;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.61rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     line-height: 1.4;
     text-transform: uppercase;
@@ -188,8 +188,8 @@
     font-family: var(--sans), Arial, sans-serif;
     font-size: clamp(1.55rem, 3vw, 2.7rem);
     font-weight: 450;
-    letter-spacing: -0.055em;
-    line-height: 1.08;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .uses-principles {
@@ -208,7 +208,7 @@
 .uses-workflow-number {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.61rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
 }
 
@@ -218,8 +218,8 @@
     font-family: var(--sans), Arial, sans-serif;
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
     font-weight: 620;
-    letter-spacing: -0.04em;
-    line-height: 1.08;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .uses-principle p {
@@ -248,7 +248,7 @@
     gap: 0.6rem;
     color: color-mix(in srgb, var(--green) 72%, var(--text));
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -287,7 +287,7 @@
     font-family: var(--sans), Arial, sans-serif;
     font-size: clamp(1.15rem, 1.8vw, 1.55rem);
     font-weight: 620;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.035em;
 }
 
 .uses-workflow-step p {
@@ -310,19 +310,19 @@
 }
 
 .uses-tools-heading h2 {
-    max-width: 13ch;
+    max-width: 24ch;
     margin-top: 0.85rem;
     color: var(--text);
     font-family: var(--sans), Arial, sans-serif;
-    font-size: clamp(2.4rem, 4.5vw, 4.6rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 560;
-    letter-spacing: -0.075em;
-    line-height: 0.92;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .uses-tools-heading h2 em {
     color: color-mix(in srgb, var(--green) 52%, var(--text));
-    font-style: italic;
+    font-style: normal;
     font-weight: 430;
 }
 
@@ -366,7 +366,7 @@
 .uses-tool-group-header span {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.57rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -377,7 +377,7 @@
     font-family: var(--sans), Arial, sans-serif;
     font-size: 1.1rem;
     font-weight: 620;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.035em;
 }
 
 .uses-tool-list {
@@ -441,7 +441,7 @@
     border-radius: 999px;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.5rem;
+    font-size: 0.72rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
@@ -452,7 +452,7 @@
     border-top: 1px solid var(--line);
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.67rem;
+    font-size: 0.72rem;
     letter-spacing: 0.04em;
 }
 
@@ -526,7 +526,7 @@
     }
 
     .uses-hero h1 {
-        font-size: clamp(3.5rem, 16vw, 5.5rem);
+        font-size: clamp(2.3rem, 8vw, 4rem);
     }
 
     .uses-hero-meta {

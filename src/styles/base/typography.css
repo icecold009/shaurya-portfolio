@@ -1,5 +1,5 @@
 body {
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 1rem;
     line-height: 1.7;
     color: var(--text);
@@ -28,13 +28,13 @@ p {
 .contact-ending__heading h2 {
     font-family: var(--sans);
     font-weight: 720;
-    letter-spacing: -0.085em;
-    line-height: 0.86;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .section-heading h1,
 .section-heading h2 {
-    line-height: 0.9;
+    line-height: 1.15;
 }
 
 .about-editorial__principle h2,
@@ -43,16 +43,16 @@ p {
 .blog-post-title {
     font-family: var(--sans);
     font-weight: 680;
-    letter-spacing: -0.055em;
+    letter-spacing: -0.035em;
 }
 
 .about-editorial__principle h2 {
-    line-height: 0.94;
+    line-height: 1.15;
 }
 
 .blog-title,
 .blog-post-title {
-    line-height: 0.98;
+    line-height: 1.15;
 }
 
 .editorial-hero-title span,
@@ -67,7 +67,7 @@ p {
 .blog-title.heading-italic,
 .contact-ending__heading h2 span {
     font-weight: 480;
-    letter-spacing: -0.075em;
+    letter-spacing: -0.035em;
 }
 
 @media (max-width: 600px) {
@@ -79,6 +79,12 @@ p {
     .section-heading h1,
     .case-study-heading h3,
     .contact-ending__heading h2 {
-        letter-spacing: -0.07em;
+        letter-spacing: -0.035em;
     }
 }
+
+/* Comfortable reading measure; controls follow the same family as the page. */
+body { font-weight: 400; line-height: 1.65; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--sans); text-wrap: balance; overflow-wrap: break-word; }
+p { overflow-wrap: break-word; }
+code, pre, kbd, samp { font-family: var(--code-font); }

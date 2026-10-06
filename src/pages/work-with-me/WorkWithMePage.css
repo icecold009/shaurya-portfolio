@@ -24,7 +24,7 @@
     border-bottom: 1px solid var(--line);
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -41,7 +41,7 @@
     margin: 1rem 0 0;
     color: var(--green);
     font-family: var(--mono);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -53,17 +53,17 @@
     margin: 1rem 0 0;
     color: var(--text);
     font-family: var(--sans);
-    font-size: clamp(3rem, 8vw, 7.5rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 700;
-    letter-spacing: -0.085em;
-    line-height: 0.88;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .work-with-me-hero h1 em,
 .work-with-me-section h2 em,
 .work-with-me-final h2 em {
     color: var(--green);
-    font-style: italic;
+    font-style: normal;
     font-weight: 480;
 }
 
@@ -112,14 +112,14 @@
     left: 1.35rem;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 
 .work-with-me-hero__note svg { color: var(--green); }
 .work-with-me-hero__note p { margin: 0; color: var(--text); font-family: var(--sans); font-size: 1.08rem; line-height: 1.45; }
-.work-with-me-hero__note span { color: var(--text-faint); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.work-with-me-hero__note span { color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
 
 .work-with-me-section {
     position: relative;
@@ -135,7 +135,7 @@
     margin-bottom: clamp(2rem, 5vw, 4rem);
 }
 
-.work-with-me-section__heading h2 { max-width: 12ch; font-size: clamp(2.5rem, 5vw, 5rem); }
+.work-with-me-section__heading h2 { max-width: 24ch; font-size: clamp(2.3rem, 4.5vw, 4rem); }
 .work-with-me-section__heading > p { margin: 0 0 0.4rem; color: var(--text-dim); font-family: var(--sans); font-size: 1rem; line-height: 1.55; }
 
 .work-offer-selector {
@@ -160,7 +160,7 @@
     transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
 }
 
-.work-offer-option > span { color: var(--green); font-family: var(--mono); font-size: 0.65rem; }
+.work-offer-option > span { color: var(--green); font-family: var(--mono); font-size: 0.72rem; }
 .work-offer-option strong { color: inherit; font-family: var(--sans); font-size: 0.92rem; font-weight: 620; line-height: 1.15; }
 .work-offer-option svg { color: var(--text-faint); transition: transform var(--transition-fast), color var(--transition-fast); }
 .work-offer-option:hover,
@@ -182,7 +182,7 @@
     box-shadow: 0 1.25rem 2.5rem color-mix(in srgb, var(--bg) 28%, transparent);
 }
 
-.work-offer-panel__heading h3 { max-width: 13ch; margin: 3rem 0 0.8rem; color: var(--text); font-family: var(--sans); font-size: clamp(2rem, 4vw, 4rem); letter-spacing: -0.065em; line-height: 0.94; }
+.work-offer-panel__heading h3 { max-width: 24ch; margin: 3rem 0 0.8rem; color: var(--text); font-family: var(--sans); font-size: clamp(2rem, 4vw, 4rem); letter-spacing: -0.035em; line-height: 1.15; }
 .work-offer-panel__heading p { max-width: 38rem; margin: 0; color: var(--text-dim); font-size: 1rem; line-height: 1.55; }
 .work-offer-panel__details { display: grid; align-content: start; gap: 1.15rem; }
 .work-offer-panel__details > .section-label { margin: 0; }
@@ -195,9 +195,9 @@
 .work-offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
 .work-offer-card { display: flex; min-height: 24rem; flex-direction: column; padding: 1.25rem; border: 1px solid var(--line); background: var(--surface); }
-.work-offer-card__topline { display: flex; justify-content: space-between; gap: 1rem; color: var(--green); font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.07em; text-transform: uppercase; }
+.work-offer-card__topline { display: flex; justify-content: space-between; gap: 1rem; color: var(--green); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .work-offer-card__topline span:last-child { color: var(--text-faint); text-align: right; }
-.work-offer-card h3 { margin: 4rem 0 0.8rem; color: var(--text); font-family: var(--sans); font-size: clamp(1.5rem, 2.5vw, 2.4rem); letter-spacing: -0.06em; line-height: 0.98; }
+.work-offer-card h3 { margin: 4rem 0 0.8rem; color: var(--text); font-family: var(--sans); font-size: clamp(1.5rem, 2.5vw, 2.4rem); letter-spacing: -0.035em; line-height: 1.15; }
 .work-offer-card p { margin: 0; color: var(--text-dim); line-height: 1.5; }
 .work-offer-card ul { display: grid; gap: 0.6rem; margin: auto 0 1.5rem; padding: 2rem 0 0; list-style: none; color: var(--text); font-family: var(--sans); font-size: 0.9rem; }
 .work-offer-card li { display: flex; align-items: center; gap: 0.5rem; }
@@ -206,8 +206,8 @@
 
 .work-process-list { border-top: 1px solid var(--line); }
 .work-process-step { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1.25rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
-.work-process-step > span { color: var(--green); font-family: var(--mono); font-size: 0.7rem; }
-.work-process-step h3 { margin: 0; color: var(--text); font-family: var(--sans); font-size: clamp(1.6rem, 3vw, 2.8rem); letter-spacing: -0.06em; }
+.work-process-step > span { color: var(--green); font-family: var(--mono); font-size: 0.72rem; }
+.work-process-step h3 { margin: 0; color: var(--text); font-family: var(--sans); font-size: clamp(1.6rem, 3vw, 2.8rem); letter-spacing: -0.035em; }
 .work-process-step p { max-width: 38rem; margin: 0.5rem 0 0; color: var(--text-dim); line-height: 1.55; }
 
 .work-process-selector {
@@ -230,7 +230,7 @@
     transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
 }
 
-.work-process-option span { color: var(--green); font-family: var(--mono); font-size: 0.65rem; }
+.work-process-option span { color: var(--green); font-family: var(--mono); font-size: 0.72rem; }
 .work-process-option strong { color: inherit; font-family: var(--sans); font-size: 1.1rem; font-weight: 620; }
 .work-process-option:hover,
 .work-process-option:focus-visible,
@@ -247,8 +247,8 @@
     background: var(--collaboration-surface);
 }
 
-.work-process-panel > span { color: var(--green); font-family: var(--mono); font-size: 0.7rem; }
-.work-process-panel h3 { margin: 0; color: var(--text); font-family: var(--sans); font-size: clamp(1.6rem, 3vw, 2.8rem); letter-spacing: -0.06em; }
+.work-process-panel > span { color: var(--green); font-family: var(--mono); font-size: 0.72rem; }
+.work-process-panel h3 { margin: 0; color: var(--text); font-family: var(--sans); font-size: clamp(1.6rem, 3vw, 2.8rem); letter-spacing: -0.035em; }
 .work-process-panel p { max-width: 38rem; margin: 0.5rem 0 0; color: var(--text-dim); line-height: 1.55; }
 
 .work-proof-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
@@ -256,12 +256,12 @@
 .work-proof-item:hover, .work-proof-item:focus-visible { border-color: color-mix(in srgb, var(--green) 52%, var(--line)); color: var(--green); transform: translateY(-2px); }
 .work-proof-item strong, .work-proof-item small { display: block; }
 .work-proof-item strong { font-family: var(--sans); font-size: 1.1rem; }
-.work-proof-item small, .work-proof-item > span:nth-child(2) { color: var(--text-faint); font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.04em; line-height: 1.5; text-transform: uppercase; }
+.work-proof-item small, .work-proof-item > span:nth-child(2) { color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; line-height: 1.5; text-transform: uppercase; }
 .work-proof-item > span:nth-child(2) { grid-column: 1 / 2; text-align: left; }
 .work-proof-item svg { color: var(--text-faint); }
 
 .work-with-me-final { display: grid; justify-items: start; padding-top: clamp(5rem, 10vw, 9rem); border-top: 1px solid var(--line); }
-.work-with-me-final h2 { max-width: 11ch; font-size: clamp(3rem, 7vw, 7rem); }
+.work-with-me-final h2 { max-width: 24ch; font-size: clamp(2.3rem, 4.5vw, 4rem); }
 .work-with-me-final > p:not(.section-label) { max-width: 36rem; margin: 2rem 0; color: var(--text-dim); font-family: var(--sans); font-size: 1.15rem; line-height: 1.5; }
 
 @media (max-width: 800px) {
@@ -279,7 +279,7 @@
 @media (max-width: 560px) {
     .work-with-me-hero__topline span:last-child { display: none; }
     .work-with-me-hero__topline span:nth-child(2) { margin-left: auto; }
-    .work-with-me-hero h1 { font-size: clamp(3rem, 16vw, 5rem); }
+    .work-with-me-hero h1 { font-size: clamp(2.3rem, 8vw, 4rem); }
     .work-proof-item { grid-template-columns: minmax(0, 1fr) auto; }
     .work-process-selector { grid-template-columns: 1fr; }
     .work-process-option { border-right: 0; }

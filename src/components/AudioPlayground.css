@@ -24,7 +24,7 @@
 .audio-playground__pad-note {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.63rem;
+    font-size: 0.72rem;
     letter-spacing: 0.075em;
     line-height: 1.5;
     text-transform: uppercase;
@@ -98,7 +98,7 @@
     font-family: var(--sans);
     font-size: clamp(1.35rem, 2.8vw, 2.25rem);
     font-weight: 650;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.035em;
     line-height: 1;
 }
 
@@ -125,7 +125,7 @@
 
 .audio-playground__story-link {
     padding-bottom: 0.25rem;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
 }
 
 .audio-playground__reset {
@@ -139,7 +139,7 @@
     background: transparent;
     color: var(--text);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 0.035em;
     text-transform: uppercase;
     cursor: pointer;

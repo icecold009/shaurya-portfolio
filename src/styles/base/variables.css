@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700&display=swap");
 
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
@@ -22,17 +22,11 @@
     --max-width: 1260px;
     --content-width: 70rem;
 
-    --sans:
-        "Archivo",
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    --mono:
-        "IBM Plex Mono",
-        "Courier New",
-        monospace;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    /* Legacy UI aliases share one professional family. */
+    --mono: var(--sans);
+    --display: var(--sans);
+    --code-font: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
     --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
