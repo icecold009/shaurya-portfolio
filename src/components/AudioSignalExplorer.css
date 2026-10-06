@@ -20,15 +20,15 @@
 }
 
 [data-theme="light"] .audio-signal-explorer[data-preset="single-tone"] {
-    --signal-accent: #2156a4;
+    --signal-accent: var(--text);
 }
 
 [data-theme="light"] .audio-signal-explorer[data-preset="two-tone"] {
-    --signal-accent: #8e4f14;
+    --signal-accent: var(--text);
 }
 
 [data-theme="light"] .audio-signal-explorer[data-preset="harmonics"] {
-    --signal-accent: #176543;
+    --signal-accent: var(--text);
 }
 
 .audio-signal-explorer__header {

@@ -186,3 +186,15 @@
     .audio-playground__pad:hover,
     .audio-playground__pad--active { transform: none !important; filter: none; }
 }
+
+[data-theme="light"] .audio-playground__pad {
+    background: var(--surface-2);
+    border-color: var(--line-bright);
+    color: var(--text);
+}
+[data-theme="light"] .audio-playground__pad--active {
+    background: var(--green-faint);
+    box-shadow: inset 0 0 0 3px var(--text);
+}
+[data-theme="light"] .audio-playground__pad-key { border-color: var(--line-bright); color: var(--text); }
+[data-theme="light"] .audio-playground__pad-note { color: var(--text-dim); }

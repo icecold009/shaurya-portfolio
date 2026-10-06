@@ -1237,3 +1237,24 @@ passed: 118 source files linted, 64 tests passed, 101 local assets/15 routes/
 24 static route documents generated. A temporary Vite PATH shim was used;
 the existing large-chunk warning and optional missing resume source remain.
 The recommendation requisition is a form and was not published as a credential.
+
+
+## Black and cream light palette: Package 27
+
+Goal: unify all light-mode UI around black, cream and warm neutral tones.
+Scope/files: global theme tokens; Home, About, GitHub contributions, tour,
+skill/signal explorers, audio pads, technology badges, contact and artwork CSS.
+Non-goals: content/layout changes, source-media recoloring, dark-mode redesign,
+providers, merging or deployment. Acceptance: consistent neutral light UI on
+all routes; five distinguishable contribution levels; visible focus, selected
+and error states. Evidence: source/diff inspection and canonical-port browser
+review. No automated tests requested for this styling package. Jev plan advice
+requested revision without a concrete finding; source inventory and explicit
+light-mode scope resolve its scope concern.
+
+Palette evidence: browser inspection at 5174 covered all 15 page types,
+expanded homepage discovery panels, neutral five-level contribution legend,
+and dark/light toggle. Cream canvas resolved to rgb(245,241,231), ink to
+rgb(25,24,22); dark canvas and contribution panel retained original colors.
+Jev 1.13.0 covered all 12 text files without exclusions or truncation; its
+advisory verification-gap concern is disclosed. No automated tests run.

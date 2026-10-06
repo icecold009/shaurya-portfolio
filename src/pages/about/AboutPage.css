@@ -811,3 +811,10 @@
         transform: none !important;
     }
 }
+
+[data-theme="light"] .about-portrait__frame { background: var(--surface-2); }
+[data-theme="light"] .about-portrait__label {
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    color: var(--text);
+}
