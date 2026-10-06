@@ -300,16 +300,16 @@
 
 /* Direction A: warm editorial canvas with the hackathon work immediately below the hero. */
 .home-page {
-    --home-page: #101813;
-    --home-surface: #17221b;
-    --home-surface-alt: #1e2c22;
-    --home-ink: #f3f1e8;
-    --home-muted: #c3cbbf;
-    --home-faint: #9ba797;
-    --home-line: #354438;
-    --home-line-bright: #647660;
-    --home-accent: #c9ef75;
-    --home-accent-contrast: #192316;
+    --home-page: #101010;
+    --home-surface: #1c1c1a;
+    --home-surface-alt: #252522;
+    --home-ink: #f5f1e7;
+    --home-muted: #ccc7bc;
+    --home-faint: #a39e93;
+    --home-line: #363632;
+    --home-line-bright: #66645d;
+    --home-accent: #f5f1e7;
+    --home-accent-contrast: #191816;
     --bg: var(--home-page);
     --surface: var(--home-surface);
     --surface-2: var(--home-surface-alt);
@@ -318,8 +318,8 @@
     --text-faint: var(--home-faint);
     --line: var(--home-line);
     --line-bright: var(--home-line-bright);
-    --green: #b6df6d;
-    --green-dim: #c9ef75;
+    --green: #f5f1e7;
+    --green-dim: #f5f1e7;
     min-width: 0;
     background: var(--home-page);
     color: var(--home-ink);
@@ -362,11 +362,11 @@
 .home-section h2 em { color: var(--home-accent); }
 
 .home-section--hackathons {
-    --hackathon-bg: #c9ef75;
-    --hackathon-ink: #192316;
-    --hackathon-muted: #3d4a34;
-    --hackathon-line: rgba(25, 35, 22, 0.22);
-    --hackathon-accent: #253b22;
+    --hackathon-bg: #f5f1e7;
+    --hackathon-ink: #191816;
+    --hackathon-muted: #504c45;
+    --hackathon-line: rgba(25, 24, 22, 0.22);
+    --hackathon-accent: #191816;
     width: 100%;
     margin: 0;
     scroll-margin-top: 5.5rem;

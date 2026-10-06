@@ -1322,3 +1322,32 @@ transition computed 0s. Browser reduced motion was enabled, so automatic
 rotation was source-reviewed but not observed live. Viewport reset.
 Jev 1.13.0 reviewed all three files, no exclusions/truncation, 7044 input/499
 output tokens; generic verification-gap advice, no concrete finding.
+
+
+## Black dark theme: Package 31
+
+Goal: replace blue/green dark UI with black, charcoal and cream site-wide.
+Scope/files: shared dark tokens; homepage and hackathon contrast panel; tour,
+skills, audio, technology marks, contribution density, About label and errors.
+Non-goals: content, original media, typography/layout changes, merge/deployment.
+Acceptance: neutral backgrounds, links, badges, focus and loading placeholders
+in dark mode; preserved cream light palette and five contribution levels.
+Evidence: complete source/diff inventory, production build and browser styles.
+Jev plan returned generic scope advice; bounded component inventory and explicit
+user request resolve it. No automated tests requested.
+
+Dark theme evidence: inspected all 15 representative route URLs in the browser;
+body background #101010 and cream text, no horizontal document overflow at
+the current narrow viewport. Projects plus six other routes had no blue DOM
+text/background/border hits; technology marks computed cream. Homepage
+black/cream hackathon panel and light palette checked through the theme toggle.
+Complete CSS color inventory contains neutral UI literals; obsolete colored
+inline data removed. Shared skeleton tokens inherit this palette; transient
+loading states were not forced. Original media retain their own colors.
+
+Final production build passed: 2275 modules and 24 route documents.
+Diff whitespace check passed. Jev 1.13.0 reviewed all 13 text files with no
+exclusions or truncation (11234 input/498 output tokens); generic verification
+gap advice, no concrete defect reported. Independent diff inspection confirms
+five contribution levels, theme-based controls and unchanged original media.
+No automated tests run; draft PR awaits independent validation and merge approval.

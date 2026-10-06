@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import "./AudioPlayground.css";
 
 const PADS = [
-    { id: "low", name: "Low", note: "C4", key: "Q", frequency: 261.63, color: "#f6b967" },
-    { id: "lift", name: "Lift", note: "E4", key: "W", frequency: 329.63, color: "#f18b91" },
-    { id: "open", name: "Open", note: "G4", key: "E", frequency: 392, color: "#81cbb0" },
-    { id: "bright", name: "Bright", note: "C5", key: "R", frequency: 523.25, color: "#93aff6" },
+    { id: "low", name: "Low", note: "C4", key: "Q", frequency: 261.63 },
+    { id: "lift", name: "Lift", note: "E4", key: "W", frequency: 329.63 },
+    { id: "open", name: "Open", note: "G4", key: "E", frequency: 392 },
+    { id: "bright", name: "Bright", note: "C5", key: "R", frequency: 523.25 },
 ];
 
 const PAD_BY_KEY = new Map(PADS.map((pad) => [pad.key.toLowerCase(), pad]));
@@ -170,7 +170,6 @@ export default function AudioPlayground() {
                         key={pad.id}
                         type="button"
                         className={`audio-playground__pad${activePads.has(pad.id) ? " audio-playground__pad--active" : ""}`}
-                        style={{ "--pad-color": pad.color }}
                         onClick={() => void playPad(pad)}
                         aria-label={`Play ${pad.name}, ${pad.note}. Keyboard shortcut ${pad.key}.`}
                         aria-keyshortcuts={pad.key}

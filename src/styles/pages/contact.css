@@ -357,7 +357,7 @@
 
 .form-field-error {
     margin: -0.2rem 0 0;
-    color: #e27787;
+    color: var(--text);
     font-family: var(--mono);
     font-size: 0.72rem;
     font-weight: 600;
@@ -367,8 +367,8 @@
 
 .form-group input[aria-invalid="true"],
 .form-group textarea[aria-invalid="true"] {
-    border-color: #e27787;
-    box-shadow: 0 1px 0 #e27787;
+    border-color: var(--text);
+    box-shadow: 0 1px 0 var(--text);
 }
 
 .contact-form-privacy {

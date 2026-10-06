@@ -1,25 +1,25 @@
 .skills-project-explorer {
-    --skill-accent: #83b4ff;
-    --skill-wash: rgba(131, 180, 255, 0.12);
-    --skill-line: rgba(131, 180, 255, 0.36);
+    --skill-accent: var(--text);
+    --skill-wash: color-mix(in srgb, var(--text) 12%, transparent);
+    --skill-line: color-mix(in srgb, var(--text) 36%, transparent);
 }
 
 .skills-project-explorer[data-skill="audio"] {
-    --skill-accent: #e7ae6b;
-    --skill-wash: rgba(231, 174, 107, 0.12);
-    --skill-line: rgba(231, 174, 107, 0.36);
+    --skill-accent: var(--text);
+    --skill-wash: color-mix(in srgb, var(--text) 12%, transparent);
+    --skill-line: color-mix(in srgb, var(--text) 36%, transparent);
 }
 
 .skills-project-explorer[data-skill="python"] {
-    --skill-accent: #83b4ff;
-    --skill-wash: rgba(131, 180, 255, 0.12);
-    --skill-line: rgba(131, 180, 255, 0.36);
+    --skill-accent: var(--text);
+    --skill-wash: color-mix(in srgb, var(--text) 12%, transparent);
+    --skill-line: color-mix(in srgb, var(--text) 36%, transparent);
 }
 
 .skills-project-explorer[data-skill="local-first"] {
-    --skill-accent: #7ed0a7;
-    --skill-wash: rgba(126, 208, 167, 0.12);
-    --skill-line: rgba(126, 208, 167, 0.36);
+    --skill-accent: var(--text);
+    --skill-wash: color-mix(in srgb, var(--text) 12%, transparent);
+    --skill-line: color-mix(in srgb, var(--text) 36%, transparent);
 }
 
 [data-theme="light"] .skills-project-explorer[data-skill="audio"] {
@@ -68,9 +68,9 @@
 }
 
 .skills-project-explorer__choice:last-child { border-right: 0; }
-.skills-project-explorer__choice[data-skill="audio"] { --choice-accent: #e7ae6b; --choice-wash: rgba(231, 174, 107, 0.12); }
-.skills-project-explorer__choice[data-skill="python"] { --choice-accent: #83b4ff; --choice-wash: rgba(131, 180, 255, 0.12); }
-.skills-project-explorer__choice[data-skill="local-first"] { --choice-accent: #7ed0a7; --choice-wash: rgba(126, 208, 167, 0.12); }
+.skills-project-explorer__choice[data-skill="audio"] { --choice-accent: var(--text); --choice-wash: color-mix(in srgb, var(--text) 12%, transparent); }
+.skills-project-explorer__choice[data-skill="python"] { --choice-accent: var(--text); --choice-wash: color-mix(in srgb, var(--text) 12%, transparent); }
+.skills-project-explorer__choice[data-skill="local-first"] { --choice-accent: var(--text); --choice-wash: color-mix(in srgb, var(--text) 12%, transparent); }
 [data-theme="light"] .skills-project-explorer__choice[data-skill="audio"] { --choice-accent: var(--text); --choice-wash: color-mix(in srgb, var(--text) 8%, transparent); }
 [data-theme="light"] .skills-project-explorer__choice[data-skill="python"] { --choice-accent: var(--text); --choice-wash: color-mix(in srgb, var(--text) 8%, transparent); }
 [data-theme="light"] .skills-project-explorer__choice[data-skill="local-first"] { --choice-accent: var(--text); --choice-wash: color-mix(in srgb, var(--text) 8%, transparent); }
