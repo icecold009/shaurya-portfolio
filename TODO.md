@@ -1226,3 +1226,14 @@ validation is required before the next package.
 ## Architecture documentation publication — 2026-10-04
 
 Goal: publish source-linked architecture documentation and diagram previews. Scope: README, this backlog and docs/architecture artifacts. Source snapshot: dc8e784e00b631376d8a4d31afc88a0e54c93151; no runtime, dependency, data or deployment changes. Acceptance: pinned inventory/source-map/embedding checks, ten intended negative cases, renderer checks, bounded Jev review, documentation-only commit and remotely verified PR. Jev remains advisory; pre-existing workspace changes are excluded.
+
+Certificate package finalization (2026-10-06): all ten supplied certificate originals
+(nine PDFs and the IIT Madras JPG) match their stored copies by SHA-256.
+Seven new PDFs, the original JPG, and eight WebP previews are retained in Git;
+the two Amazon PDFs already exist in Git. The finalized homepage from PR #48
+is retained without the superseded Package 25 homepage edits. npm.cmd run verify
+passed: 118 source files linted, 64 tests passed, 101 local assets/15 routes/
+14 projects/21 artwork records checked, Vite production build passed, and
+24 static route documents generated. A temporary Vite PATH shim was used;
+the existing large-chunk warning and optional missing resume source remain.
+The recommendation requisition is a form and was not published as a credential.
