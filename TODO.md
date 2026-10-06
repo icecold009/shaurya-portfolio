@@ -1140,3 +1140,47 @@ the 390px mobile menu exposed the same PDF. `/achievements` displayed the
 updated predictions and AS results without horizontal overflow or page errors.
 Complete-diff Jev review follows; binary PDF/PNG fidelity is verified locally.
 Independent ChatGPT validation is required before the next package.
+
+## Homepage hierarchy and featured hackathons: Package 26
+
+Goal: reshape the homepage around a clear identity, evidence-backed selected work,
+and the user's priority of making the lablab.ai hackathon certificates highly visible.
+
+Scope: pair the introduction with one real product preview; place three lablab.ai
+hackathon certificates in a high-contrast, full-width section immediately after
+the hero; feature three source-linked projects with their findings and limits;
+keep audience, skills, and guided-tour exploration reachable in a disclosure;
+retain a personal artwork interlude and two writing links; preserve the global
+contact and resume footer.
+
+Non-goals: changing certificate records, adding new project claims, changing
+routes or providers, publishing, merging, deploying, or modifying other packages.
+
+Files: src/pages/home/Home.jsx, src/pages/home/Home.css,
+src/components/Hero.jsx, src/components/Hero.css, tests/homePage.test.mjs,
+and this entry.
+
+Tests: npm.cmd run verify, git diff --check, desktop/mobile browser checks at
+the canonical port 5174 in light and dark themes, plus keyboard and reduced-motion
+checks for the homepage disclosure and links. Complete-diff Jev review completed in three named batches.
+
+Acceptance: the three lablab.ai hackathons are prominent directly below the
+hero; curated project statements retain evidence and boundaries; all deeper
+exploration and existing project, artwork, writing, contact, and resume paths
+remain reachable by keyboard and touch; the homepage has no narrow-screen
+horizontal overflow or reduced-motion-only animation.
+
+Evidence: npm.cmd run verify passed via a temporary Vite PATH shim outside the repo:
+118 source files linted, all 64 tests passed, 86 local assets/15 routes/14 projects/
+21 artwork records checked, production build passed, and 24 static route documents
+generated. git diff --check passed. Optional resume sync skipped the absent source;
+the existing >500 kB JS chunk warning remains. Browser review at 5174 covered a
+1265 x 720 desktop viewport and 568 x 570 narrow viewport in dark/light themes.
+The hackathon section was visible after the hero in both; Space opened and closed
+the deeper-work disclosure, and the certificates CTA opened /certificates. The
+in-app browser reported reduced motion enabled; it did not expose console logs or
+viewport emulation. Screenshots were emitted during QA.
+Jev 1.13.0 covered all six changed files in three named batches; no batch was truncated,
+and each had non-empty usage. Results had no concrete findings: two batches returned
+incomplete-context gates and one returned no-clear-issue. Independent ChatGPT
+validation is required before the next package.
