@@ -114,7 +114,7 @@
 .portfolio-hero__statement em,
 .home-section h2 em {
     color: var(--green);
-    font-style: normal;
+    font-style: italic;
     font-weight: 470;
 }
 

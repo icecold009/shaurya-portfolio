@@ -1351,3 +1351,29 @@ exclusions or truncation (11234 input/498 output tokens); generic verification
 gap advice, no concrete defect reported. Independent diff inspection confirms
 five contribution levels, theme-based controls and unchanged original media.
 No automated tests run; draft PR awaits independent validation and merge approval.
+
+
+## Expressive typography: Package 32
+
+Goal: varied bold/italic hierarchy and restrained text features site-wide.
+Scope: real Inter italic weights, existing emphasized headings and editorial
+spans, selective body emphasis, shared title/label hierarchy, one-time heading
+rule reveal and pointer-only reading-link underline feedback.
+Non-goals: copy/claims, palette, new libraries, moving body text, merge/deploy.
+Acceptance: bold anchors and genuine lighter italics across routes, readable
+stationary text, immediate keyboard feedback, static reduced-motion version.
+Evidence: source/diff, production build, browser typography/theme inspection
+and complete Jev diff review. No automated tests requested. Plan review gave
+generic scope advice; the exact existing emphasis inventory bounds this work.
+
+Typography evidence: production build passed (2276 modules, 24 route documents).
+Browser observed italic heading phrases on homepage and 12 other route URLs,
+bold 650 body emphasis on About and bold 700 homepage title, no narrow
+viewport document overflow. Browser prefers reduced motion: heading rule
+computed animation none; ordinary-motion reveal is source-reviewed only.
+
+Light About browser check confirmed cream canvas, bold 700 title, true italic
+heading phrase, 650 body emphasis and no document overflow. Restored dark
+mode and homepage. Jev 1.13.0 covered all 21 text files, no exclusions or
+truncation, 9152 input/497 output tokens; generic verification-gap advice
+without concrete defect. Independent diff inspection completed.

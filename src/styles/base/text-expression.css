@@ -1,0 +1,78 @@
+/* One family, distinct editorial voices: bold anchors and lighter italics. */
+:is(.portfolio-hero__title, .about-hero h1, .selected-work-header h1,
+    .section-heading h1, .uses-hero h1, .achievements-intro h1,
+    .work-with-me-hero h1, .legal-page__header h1, .thank-you-page h1) {
+    font-weight: 700;
+}
+:is(.home-section, .about-section, .section-heading, .contact-ending__hero,
+    .work-with-me-section, .work-with-me-final) h2 {
+    font-weight: 700;
+}
+:is(h1, h2) em,
+.portfolio-hero__title em,
+.about-hero h1 em,
+.about-section h2 em {
+    font-style: italic;
+    font-weight: 450;
+}
+.heading-italic { font-style: italic; }
+p strong, li strong, dd strong {
+    font-weight: 650;
+    color: inherit;
+}
+blockquote p { font-style: italic; font-weight: 450; }
+:is(.project-card__title, .home-curated-card h3, .blog-card h2) { font-weight: 650; }
+:is(.portfolio-hero__eyebrow, .about-eyebrow, .about-section__eyebrow,
+    .home-section__eyebrow, .uses-eyebrow) { font-weight: 600; }
+:is(.selected-work-facts, .about-hero__facts, .home-hackathon-card) strong {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Decorative entrance: reading text stays stationary and fully visible. */
+main h1:not(.notfound-code)::after {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    margin-top: 0.65em;
+    background: currentColor;
+    opacity: 0.6;
+    transform-origin: left;
+}
+@media (prefers-reduced-motion: no-preference) {
+    main h1:not(.notfound-code)::after {
+        animation: text-rule-reveal var(--duration-reveal) var(--ease-editorial) both;
+    }
+}
+@keyframes text-rule-reveal {
+    from { transform: scaleX(0); opacity: 0; }
+    to { transform: scaleX(1); opacity: 0.6; }
+}
+
+/* Pointer feedback for reading links; keyboard focus remains immediate. */
+:is(.home-text-link, .about-text-link, .portfolio-tour__project-link) {
+    position: relative;
+}
+:is(.home-text-link, .about-text-link, .portfolio-tour__project-link)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -0.2rem;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :is(.home-text-link, .about-text-link, .portfolio-tour__project-link)::after {
+        transition: transform var(--duration-press) var(--ease-out);
+    }
+    :is(.home-text-link, .about-text-link, .portfolio-tour__project-link):hover::after { transform: scaleX(1); }
+}
+:is(.home-text-link, .about-text-link, .portfolio-tour__project-link):focus-visible::after { transform: scaleX(1); transition: none; }
+@media (prefers-reduced-motion: reduce) {
+    main h1:not(.notfound-code)::after { animation: none !important; transform: none; }
+    :is(.home-text-link, .about-text-link, .portfolio-tour__project-link)::after { transition-duration: 0ms !important; }
+}

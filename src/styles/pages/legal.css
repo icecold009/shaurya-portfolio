@@ -30,7 +30,7 @@
 .legal-page__header h1 em,
 .thank-you-page h1 em {
     color: var(--green);
-    font-style: normal;
+    font-style: italic;
     font-weight: 470;
 }
 

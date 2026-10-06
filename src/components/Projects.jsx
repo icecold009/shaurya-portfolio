@@ -360,7 +360,7 @@ export default function Projects() {
                             variants={shouldReduceMotion ? undefined : REVEAL}
                         >
                             Projects,
-                            <span> explored in depth.</span>
+                            <em> explored in depth.</em>
                         </motion.h1>
                     </div>
 
