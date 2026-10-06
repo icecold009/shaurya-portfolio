@@ -1,0 +1,36 @@
+%% Source-reviewed overview; 2026-10-04; commit dc8e784e00b631376d8a4d31afc88a0e54c93151
+%% Solid edges: core flow. Dashed edges: optional or separately invoked services.
+%%{init: {"theme":"base","securityLevel":"loose","fontFamily":"Arial, sans-serif","themeVariables":{"background":"#0b1220","primaryColor":"#17283d","primaryTextColor":"#edf4ff","primaryBorderColor":"#71c4ec","lineColor":"#9fadc1","secondaryColor":"#213548","tertiaryColor":"#17283d","edgeLabelBackground":"#0b1220","clusterBkg":"#101d2e","clusterBorder":"#456783","fontSize":"17px"},"flowchart":{"htmlLabels":true,"curve":"linear","nodeSpacing":35,"rankSpacing":50}}}%%
+flowchart TD
+  V["Visitor + React routes"]
+  P["Curated project records"]
+  M["MDX writing + assets"]
+  A["URL filters + project archive"]
+  D["Case study dialog"]
+  L["Local shortlist + keywords"]
+  F["Optional Project Finder"]
+  S["Server-only picker endpoint"]
+  J["Optional TypeSafe / Jev"]
+  V --> A
+  P --> A
+  M --> V
+  A --> D
+  A <-->|saved projects| L
+  P --> F
+  F -.->|bounded query| S
+  S -.->|public metadata selection| J
+  J -.->|typed relevance judgments| S
+  S -.->|validated IDs| F
+  F -->|provider unavailable| L
+  F --> D
+  click V "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/app/App.jsx" "Open source"
+  click P "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/data/projects.js" "Open source"
+  click M "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/posts/index.js" "Open source"
+  click A "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/components/Projects.jsx" "Open source"
+  click D "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/components/ProjectDetailDialog.jsx" "Open source"
+  click L "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/lib/projectFinder.js" "Open source"
+  click F "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/components/ProjectFinder.jsx" "Open source"
+  click S "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/api/project-picker.js" "Open source"
+  click J "https://github.com/icecold009/shaurya-portfolio/blob/dc8e784e00b631376d8a4d31afc88a0e54c93151/src/lib/projectFinder.js" "Open source"
+  classDef core fill:#17283d,stroke:#71c4ec,stroke-width:1.6px,color:#edf4ff;
+  class V,P,M,A,D,L,F,S,J core;

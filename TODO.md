@@ -1184,3 +1184,7 @@ Jev 1.13.0 covered all six changed files in three named batches; no batch was tr
 and each had non-empty usage. Results had no concrete findings: two batches returned
 incomplete-context gates and one returned no-clear-issue. Independent ChatGPT
 validation is required before the next package.
+
+## Architecture documentation publication — 2026-10-04
+
+Goal: publish source-linked architecture documentation and diagram previews. Scope: README, this backlog and docs/architecture artifacts. Source snapshot: dc8e784e00b631376d8a4d31afc88a0e54c93151; no runtime, dependency, data or deployment changes. Acceptance: pinned inventory/source-map/embedding checks, ten intended negative cases, renderer checks, bounded Jev review, documentation-only commit and remotely verified PR. Jev remains advisory; pre-existing workspace changes are excluded.
