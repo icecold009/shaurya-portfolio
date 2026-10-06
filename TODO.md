@@ -1301,3 +1301,24 @@ Production build passed (2275 modules, 24 route documents); diff check passed.
 Jev 1.13.0 reviewed all five text files without exclusions/truncation,
 5621 input/500 output tokens, advisory no-clear-issue. Transient skeleton
 rendering was not forced or visually captured; reduced-motion rules preserved.
+
+
+## Rotating homepage preview stack: Package 30
+
+Goal: replace single preview with stackable rotating project cards.
+Scope/files: Hero.jsx and Hero.css; three canonical projects and real assets,
+previous/next and pause controls, seven-second auto rotation, pause on hover/
+focus/hidden tab, manual-only reduced motion, inactive cards inert/hidden.
+Non-goals: new claims/media, other pages, merging/deployment. Acceptance:
+visible layered cards, reachable active project links, stable responsive
+geometry and keyboard-instant/reduced-motion navigation. Evidence: source/diff,
+build and browser controls. No automated tests requested. Jev plan gave generic
+scope advice; exact user request and source inventory resolve that concern.
+
+Preview stack evidence: production build passed (2275 modules, 24 documents).
+Browser observed all three cards, next/wraparound, canonical active links,
+inert inactive cards and no overflow at narrow/desktop widths. Keyboard
+transition computed 0s. Browser reduced motion was enabled, so automatic
+rotation was source-reviewed but not observed live. Viewport reset.
+Jev 1.13.0 reviewed all three files, no exclusions/truncation, 7044 input/499
+output tokens; generic verification-gap advice, no concrete finding.
