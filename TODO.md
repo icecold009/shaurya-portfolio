@@ -1377,3 +1377,13 @@ heading phrase, 650 body emphasis and no document overflow. Restored dark
 mode and homepage. Jev 1.13.0 covered all 21 text files, no exclusions or
 truncation, 9152 input/497 output tokens; generic verification-gap advice
 without concrete defect. Independent diff inspection completed.
+
+
+## Final homepage label: Package 33
+
+Goal/scope: replace the malformed featured-card label separator observed on
+production with an ASCII slash. Files: Hero.jsx and this backlog. Non-goals:
+layout, behavior or content changes. Acceptance: no replacement character in
+all three labels, existing status text retained. Source/diff and browser
+inspection plus existing hosted Quality checks are the evidence. User
+explicitly approved final main update and publication in this turn.

@@ -126,7 +126,7 @@ export default function Hero() {
                                         <figcaption>Project preview / {project.year}</figcaption>
                                     </figure>
                                     <div className="portfolio-hero__feature-copy">
-                                        <p className="portfolio-hero__feature-label">Featured work � {project.status}</p>
+                                        <p className="portfolio-hero__feature-label">Featured work / {project.status}</p>
                                         <h2 id={"home-featured-project-title-" + project.id}>{project.title}</h2>
                                         <p>{project.description}</p>
                                         <p className="portfolio-hero__feature-decision">{project.decisions}</p>
