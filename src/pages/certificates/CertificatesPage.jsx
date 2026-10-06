@@ -133,6 +133,51 @@ const sections = [
                     },
                 ],
             },
+            {
+                org: "lablab.ai",
+                entries: [
+                    {
+                        title: "AMD Developer Hackathon: ACT II",
+                        year: "2026",
+                        img: "/certificates/images/cert-AMD-Developer-Hackathon-ACT-II.webp",
+                        pdf: "/certificates/pdfs/cert-AMD-Developer-Hackathon-ACT-II.pdf",
+                    },
+                    {
+                        title: "Alpaca AI Trading Agents Hackathon",
+                        year: "2026",
+                        img: "/certificates/images/cert-Alpaca-AI-Trading-Agents-Hackathon.webp",
+                        pdf: "/certificates/pdfs/cert-Alpaca-AI-Trading-Agents-Hackathon.pdf",
+                    },
+                    {
+                        title: "IBM Bob 2.0 Hackathon",
+                        year: "2026",
+                        img: "/certificates/images/cert-IBM-Bob-2.0-Hackathon.webp",
+                        pdf: "/certificates/pdfs/cert-IBM-Bob-2.0-Hackathon.pdf",
+                    },
+                ],
+            },
+            {
+                org: "AI Challenge / All Cups",
+                entries: [
+                    {
+                        title: "AI Challenge 2026 - Main Stage Participant",
+                        year: "2026",
+                        img: "/certificates/images/cert-All-Cups-AI-Challenge-2026.webp",
+                        pdf: "/certificates/pdfs/cert-All-Cups-AI-Challenge-2026.pdf",
+                    },
+                ],
+            },
+            {
+                org: "ClimateScience Olympiad",
+                entries: [
+                    {
+                        title: "ClimateScience Olympiad Semifinalist",
+                        year: "2024",
+                        img: "/certificates/images/cert-ClimateScience-Olympiad-2024-Semifinalist.webp",
+                        pdf: "/certificates/pdfs/cert-ClimateScience-Olympiad-2024-Semifinalist.pdf",
+                    },
+                ],
+            },
         ],
     },
     {
@@ -169,6 +214,34 @@ const sections = [
                         year: "2025",
                         img: "/certificates/images/cert-IIT-Madras-Data-Science.webp",
                         pdf: null,
+                    },
+                    {
+                        title: "Introduction to Electronic Systems",
+                        year: "2026",
+                        img: "/certificates/images/cert-IIT-Madras-Electronic-Systems.webp",
+                        pdf: null,
+                    },
+                ],
+            },
+            {
+                org: "ClimateScience",
+                entries: [
+                    {
+                        title: "Industrial Innovation Course",
+                        year: "2024",
+                        img: "/certificates/images/cert-ClimateScience-Industrial-Innovation.webp",
+                        pdf: "/certificates/pdfs/cert-ClimateScience-Industrial-Innovation.pdf",
+                    },
+                ],
+            },
+            {
+                org: "Springpod / Leeds Beckett University",
+                entries: [
+                    {
+                        title: "BSc (Hons) Data Science & AI",
+                        year: "2026",
+                        img: "/certificates/images/cert-Springpod-BSc-Hons-Data-Science-AI.webp",
+                        pdf: "/certificates/pdfs/cert-Springpod-BSc-Hons-Data-Science-AI.pdf",
                     },
                 ],
             },
@@ -211,13 +284,13 @@ const sections = [
                 entries: [
                     {
                         title: "Amazon Data Analysis",
-                        year: "2025",
+                        year: "2026",
                         img: "/certificates/images/cert-Amazon-Data-analysis.webp",
                         pdf: "/certificates/pdfs/cert-Amazon-Data-analysis.pdf",
                     },
                     {
                         title: "Amazon Future Careers Experience",
-                        year: "2025",
+                        year: "2026",
                         img: "/certificates/images/cert-Amazon-Future-careers-experience.webp",
                         pdf: "/certificates/pdfs/cert-Amazon-Future-careers-experience.pdf",
                     },

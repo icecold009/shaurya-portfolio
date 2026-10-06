@@ -25,6 +25,11 @@ import { formatPostDate, posts } from "../../posts";
 import "./Home.css";
 
 const writingSlugs = ["shazam-clone", "shipping-is-a-design-decision"];
+const lablabHackathons = [
+    "AMD Developer Hackathon: ACT II",
+    "Alpaca AI Trading Agents Hackathon",
+    "IBM Bob 2.0 Hackathon",
+];
 
 export default function Home() {
     const shouldReduceMotion = useReducedMotion();
@@ -69,6 +74,49 @@ export default function Home() {
     return (
         <div className="home-page">
             <Hero />
+
+            <motion.section
+                className="home-section home-section--hackathons"
+                aria-labelledby="home-hackathons-title"
+                variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                initial={shouldReduceMotion ? undefined : "hidden"}
+                whileInView={shouldReduceMotion ? undefined : "visible"}
+                viewport={REVEAL_VIEWPORT}
+            >
+                <motion.div className="home-section__heading home-hackathon-heading" variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <div>
+                        <p className="home-kicker">Featured / lablab.ai</p>
+                        <h2 id="home-hackathons-title">Three AI <em>hackathons.</em></h2>
+                    </div>
+                    <p className="home-section__intro">
+                        Three AI-focused events hosted by lablab.ai.
+                    </p>
+                </motion.div>
+                <motion.ul
+                    className="home-hackathon-list"
+                    aria-label="Featured lablab.ai hackathons"
+                    variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
+                >
+                    {lablabHackathons.map((title, index) => (
+                        <motion.li
+                            className="home-hackathon-item"
+                            key={title}
+                            variants={shouldReduceMotion ? undefined : REVEAL}
+                        >
+                            <span className="home-hackathon-item__index" aria-hidden="true">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <strong>{title}</strong>
+                            <span className="home-hackathon-item__issuer">lablab.ai</span>
+                        </motion.li>
+                    ))}
+                </motion.ul>
+                <motion.div variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <Link className="home-hackathon-cta cta-link" to="/certificates">
+                        Browse all certificates <ArrowUpRight size={16} aria-hidden="true" />
+                    </Link>
+                </motion.div>
+            </motion.section>
 
             <motion.section
                 className="home-section home-section--work"
