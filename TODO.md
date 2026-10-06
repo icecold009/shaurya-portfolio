@@ -1258,3 +1258,27 @@ and dark/light toggle. Cream canvas resolved to rgb(245,241,231), ink to
 rgb(25,24,22); dark canvas and contribution panel retained original colors.
 Jev 1.13.0 covered all 12 text files without exclusions or truncation; its
 advisory verification-gap concern is disclosed. No automated tests run.
+
+
+## Professional typography and text placement: Package 28
+
+Goal: consistent professional fonts and comfortable text placement site-wide.
+Scope: Inter for UI including legacy mono/display aliases; professional code
+font; less compressed tracking/line height, restrained display scale, readable
+paragraph measures, left-aligned Home actions, About hero and section grids.
+Non-goals: palette/content/media/provider changes, merging or deployment.
+Files: existing typography and affected component/page styles plus backlog.
+Acceptance: headings and copy remain legible and naturally positioned across
+routes and narrow layouts. Evidence: source/diff and canonical-port browser
+inspection; no automated tests requested. Jev plan advisory supplied generic
+scope concerns; inspected source and explicit user scope resolve those.
+
+Typography evidence: browser inspected all 15 page types at narrow width;
+each reported the Inter UI family and no document horizontal overflow.
+About was additionally inspected at a desktop two-column width with no
+overflow; browser font check confirmed Inter available. No tests run.
+
+Production build passed: 2275 modules and 24 static route documents.
+Existing large-chunk warning and optional absent resume source remain.
+Final Jev diff review did not return a typed review result; it is not counted
+as completed. Source/browser/build inspection completed independently.

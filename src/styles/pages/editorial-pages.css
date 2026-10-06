@@ -58,25 +58,25 @@
 .section-label {
     color: color-mix(in srgb, var(--green) 68%, var(--text-dim));
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 650;
     letter-spacing: 0.11em;
 }
 
 .section-heading h1,
 .section-heading h2 {
-    max-width: 14ch;
-    font-size: clamp(2.8rem, 6vw, 6rem);
+    max-width: 24ch;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 560;
-    letter-spacing: -0.07em;
-    line-height: 0.94;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
     text-wrap: balance;
 }
 
 .section-heading h1 em,
 .section-heading h2 em {
     color: color-mix(in srgb, var(--green) 52%, var(--text));
-    font-style: italic;
+    font-style: normal;
     font-weight: 430;
 }
 
@@ -134,7 +134,7 @@
 .cert-org-label {
     color: color-mix(in srgb, var(--green) 68%, var(--text-dim));
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
 }
 
@@ -148,7 +148,7 @@
 
 .blog-title.heading-italic {
     color: color-mix(in srgb, var(--green) 54%, var(--text));
-    font-style: italic;
+    font-style: normal;
     font-weight: 430;
 }
 
@@ -193,7 +193,7 @@
     background: color-mix(in srgb, var(--surface-2) 76%, transparent);
     color: var(--text-dim);
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     letter-spacing: 0.05em;
 }
 
@@ -261,11 +261,11 @@
 }
 
 .blog-post-title {
-    max-width: 12ch;
-    font-size: clamp(3rem, 7vw, 7rem);
+    max-width: 24ch;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 560;
-    letter-spacing: -0.07em;
-    line-height: 0.94;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .blog-post-body {
@@ -326,8 +326,8 @@
 .contact-text {
     max-width: 20ch;
     font-size: clamp(1.35rem, 3vw, 2.2rem);
-    letter-spacing: -0.045em;
-    line-height: 1.08;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .contact-links a {
@@ -466,7 +466,7 @@
 .footer-social > p,
 .contact-ending__bottom p,
 .footer-bottom p {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
 }
 
 @media (max-width: 720px) {
@@ -492,11 +492,11 @@
     .contact-availability span,
     .blog-row .blog-tag,
     .contact-ending__eyebrow {
-        font-size: 0.7rem;
+        font-size: 0.72rem;
     }
 
     .achievements-overview span {
-        font-size: 0.68rem;
+        font-size: 0.72rem;
     }
 }
 
@@ -560,9 +560,9 @@
 }
 
 .uses-page .uses-hero h1 {
-    max-width: 11ch;
-    font-size: clamp(2.8rem, 6vw, 6rem);
-    line-height: 0.94;
+    max-width: 24ch;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
+    line-height: 1.15;
 }
 
 .blog-page-shell .blog,
@@ -572,10 +572,10 @@
 
 .blog-page-shell .blog-archive-heading h1,
 .blog-page-shell .blog-post-title {
-    max-width: 14ch;
+    max-width: 24ch;
     font-family: var(--sans);
-    font-size: clamp(2.8rem, 6vw, 6rem);
-    line-height: 0.94;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
+    line-height: 1.15;
 }
 
 .blog-page-shell .blog-featured-content h2,
@@ -666,12 +666,12 @@
     }
 
     .uses-page .uses-hero h1 {
-        font-size: clamp(2.8rem, 13vw, 4.8rem);
+        font-size: clamp(2.3rem, 8vw, 4rem);
     }
 
     .blog-page-shell .blog-archive-heading h1,
     .blog-page-shell .blog-post-title {
-        font-size: clamp(2.8rem, 13vw, 4.8rem);
+        font-size: clamp(2.3rem, 8vw, 4rem);
     }
 }
 
@@ -683,3 +683,10 @@
         transition: none;
     }
 }
+
+.section-heading h1, .section-heading h2 {
+    max-width: 24ch;
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    line-height: 1.15;
+}
+.section-heading p { max-width: 65ch; line-height: 1.65; }

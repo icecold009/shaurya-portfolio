@@ -152,7 +152,7 @@
     grid-column: 1 / -1;
     color: color-mix(in srgb, var(--green) 60%, var(--text-dim));
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     line-height: 1.5;
@@ -160,20 +160,20 @@
 }
 
 .footer-callout h2 {
-    max-width: 11ch;
+    max-width: 24ch;
     margin: 0;
     color: var(--text);
     font-family: var(--sans);
-    font-size: clamp(3.4rem, 7.5vw, 7.8rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 540;
-    letter-spacing: -0.075em;
-    line-height: 0.9;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
     text-wrap: balance;
 }
 
 .footer-callout h2 span {
     color: color-mix(in srgb, var(--green) 48%, var(--text));
-    font-style: italic;
+    font-style: normal;
     font-weight: 420;
 }
 
@@ -232,7 +232,7 @@
     font-family: var(--sans);
     font-size: clamp(1.6rem, 3vw, 2.5rem);
     font-weight: 560;
-    letter-spacing: -0.055em;
+    letter-spacing: -0.035em;
     line-height: 1;
 }
 
@@ -260,7 +260,7 @@
     margin-bottom: 0.5rem;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.56rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -333,7 +333,7 @@
 .footer-bottom p {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.55rem;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -345,7 +345,7 @@
     }
 
     .footer-callout h2 {
-        max-width: 12ch;
+        max-width: 24ch;
     }
 
     .footer-contact-link {
@@ -373,7 +373,7 @@
 
     .footer-callout h2 {
         max-width: none;
-        font-size: clamp(3.3rem, 16vw, 5rem);
+        font-size: clamp(2.3rem, 8vw, 4rem);
     }
 
     .footer-directory {

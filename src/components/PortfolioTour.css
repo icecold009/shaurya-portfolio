@@ -19,14 +19,14 @@
 }
 
 .portfolio-tour__intro h3 {
-    max-width: 17ch;
+    max-width: 24ch;
     margin: 0.45rem 0 0.5rem;
     color: var(--text);
     font-family: var(--sans);
     font-size: clamp(1.35rem, 2.7vw, 2rem);
     font-weight: 620;
-    letter-spacing: -0.045em;
-    line-height: 1.05;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .portfolio-tour__intro > div > p:last-child {
@@ -125,7 +125,7 @@
     padding: 1rem 1.15rem 0;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     letter-spacing: 0.07em;
     text-transform: uppercase;
 }
@@ -175,7 +175,7 @@
     background: color-mix(in srgb, var(--surface) 90%, transparent);
     color: var(--tour-accent);
     font-family: var(--mono);
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -191,7 +191,7 @@
     margin: 0 0 0.65rem;
     color: var(--tour-accent);
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     letter-spacing: 0.09em;
     text-transform: uppercase;
 }
@@ -202,7 +202,7 @@
     font-family: var(--sans);
     font-size: clamp(1.6rem, 3.7vw, 2.6rem);
     font-weight: 630;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.035em;
     line-height: 1;
 }
 
@@ -227,7 +227,7 @@
 .portfolio-tour__rationale > span {
     color: var(--tour-accent);
     font-family: var(--mono);
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }

@@ -14,7 +14,7 @@
     border-bottom: 1px solid var(--line);
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     line-height: 1.4;
@@ -34,8 +34,8 @@
 }
 
 .contact .section-heading h1 {
-    max-width: 10ch;
-    font-size: clamp(3.8rem, 8.5vw, 8.5rem);
+    max-width: 24ch;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
 }
 
 .contact-grid {
@@ -62,7 +62,7 @@
     border-bottom: 1px solid var(--line);
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -87,7 +87,7 @@
 .form-group label {
     color: var(--text-dim);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -276,7 +276,7 @@
 .contact-availability span {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -311,7 +311,7 @@
 @media (max-width: 720px) {
     .contact-topline {
         grid-template-columns: 1fr auto;
-        font-size: 0.6rem;
+        font-size: 0.72rem;
     }
 
     .contact-topline span:nth-child(2) {
@@ -323,7 +323,7 @@
     }
 
     .contact .section-heading h1 {
-        font-size: clamp(3.4rem, 16vw, 5.5rem);
+        font-size: clamp(2.3rem, 8vw, 4rem);
     }
 
     .contact-grid {
@@ -343,7 +343,7 @@
     margin: -0.5rem 0 0;
     color: var(--green);
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     line-height: 1.5;
@@ -359,7 +359,7 @@
     margin: -0.2rem 0 0;
     color: #e27787;
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     line-height: 1.5;
@@ -375,7 +375,7 @@
     margin: -0.35rem 0 0;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     line-height: 1.55;
 }
 

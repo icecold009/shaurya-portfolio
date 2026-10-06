@@ -33,7 +33,7 @@
 .blog-reading-time,
 .blog-post-aside {
     font-family: var(--mono);
-    font-size: 0.67rem;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.11em;
     line-height: 1.4;
@@ -63,12 +63,12 @@
 }
 
 .blog-archive-heading h1 {
-    max-width: 9ch;
+    max-width: 24ch;
     margin: 0;
-    font-size: clamp(3.8rem, 10vw, 9.5rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 680;
-    letter-spacing: -0.09em;
-    line-height: 0.84;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .blog-archive-description {
@@ -100,7 +100,7 @@
 .blog-topic-label {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     line-height: 1.4;
@@ -174,7 +174,7 @@
     margin: 0;
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     letter-spacing: 0.05em;
     text-align: right;
     text-transform: uppercase;
@@ -212,7 +212,7 @@
     background: var(--surface);
     color: var(--text-dim);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     font-weight: 550;
     letter-spacing: 0.035em;
     line-height: 1.2;
@@ -254,7 +254,7 @@
 .blog-empty h2 {
     color: var(--text);
     font-size: clamp(1.7rem, 4vw, 3rem);
-    letter-spacing: -0.055em;
+    letter-spacing: -0.035em;
 }
 
 .blog-empty p {
@@ -333,13 +333,13 @@
 }
 
 .blog-featured-content h2 {
-    max-width: 10ch;
+    max-width: 24ch;
     margin: 0 0 1.8rem;
     color: var(--text);
-    font-size: clamp(2.8rem, 7vw, 7.5rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 680;
-    letter-spacing: -0.085em;
-    line-height: 0.87;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .blog-featured-content p {
@@ -434,7 +434,7 @@
     border-radius: 999px;
     color: var(--green);
     font-family: var(--mono);
-    font-size: 0.63rem;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.08em;
 }
@@ -453,7 +453,7 @@
     background: color-mix(in srgb, var(--green) 9%, var(--surface-2));
     color: var(--text-dim);
     font-family: var(--mono);
-    font-size: 0.58rem;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.045em;
     line-height: 1.25;
@@ -465,8 +465,8 @@
     color: var(--text);
     font-size: clamp(1.45rem, 2.5vw, 2.4rem);
     font-weight: 650;
-    letter-spacing: -0.065em;
-    line-height: 0.98;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .blog-row .blog-excerpt {
@@ -565,13 +565,13 @@
 }
 
 .blog-post-title {
-    max-width: 11ch;
+    max-width: 24ch;
     margin: 0 0 2rem;
     color: var(--text);
-    font-size: clamp(3.5rem, 9vw, 9.5rem);
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
     font-weight: 680;
-    letter-spacing: -0.095em;
-    line-height: 0.84;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .blog-post-deck {
@@ -683,7 +683,7 @@
     margin-top: 3.5rem;
     color: var(--text);
     font-size: clamp(1.4rem, 2.4vw, 2rem);
-    letter-spacing: -0.055em;
+    letter-spacing: -0.035em;
     line-height: 1;
 }
 
@@ -782,7 +782,7 @@
     gap: 0.4rem;
     color: var(--green);
     font-family: var(--mono);
-    font-size: 0.61rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -791,14 +791,14 @@
 .blog-neighbor-card strong {
     max-width: 28ch;
     font-size: clamp(1.05rem, 1.8vw, 1.45rem);
-    letter-spacing: -0.04em;
-    line-height: 1.1;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
 
 .blog-neighbor-card small {
     color: var(--text-faint);
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -827,7 +827,7 @@
     margin-bottom: 0.45rem;
     color: var(--text);
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -942,7 +942,7 @@
 
     .blog-featured-content h2 {
         margin-bottom: 1.5rem;
-        font-size: clamp(2.8rem, 15vw, 5.5rem);
+        font-size: clamp(2.3rem, 8vw, 4rem);
     }
 
     .blog-featured-footer {

@@ -54,7 +54,7 @@
 
 .nav-brand-copy { min-width: 0; display: flex; flex-direction: column; line-height: 1.15; }
 .nav-brand-copy strong { color: var(--text); font-size: 0.85rem; letter-spacing: -0.02em; }
-.nav-brand-copy small { margin-top: 0.2rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.nav-brand-copy small { margin-top: 0.2rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; }
 
 .site-pointer-ball {
     position: fixed;
@@ -94,7 +94,7 @@
     background: transparent;
     color: var(--text-dim);
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     cursor: pointer;
@@ -164,7 +164,7 @@
 }
 .desktop-more-menu-close:hover,
 .desktop-more-menu-close:focus-visible { border-color: var(--green); color: var(--green); outline: none; }
-.desktop-more-label { margin: 0; color: var(--text-faint); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.desktop-more-label { margin: 0; color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .desktop-more-links { width: min(100%, 48rem); border-top: 1px solid var(--line); }
 .desktop-more-link { display: flex; align-items: center; min-height: clamp(4.5rem, 9vw, 7rem); padding: 0 0.15rem; border-bottom: 1px solid var(--line); color: var(--text-dim); font-family: var(--mono); font-size: clamp(1rem, 2.4vw, 1.8rem); letter-spacing: -0.03em; text-transform: uppercase; }
 .desktop-more-link:hover,
@@ -176,10 +176,10 @@
 
 .navbar-actions { display: flex; align-items: center; gap: 0.4rem; }
 .navbar-profile-links { display: none; align-items: center; gap: 0.75rem; }
-.navbar-profile-links a { color: var(--text-faint); font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.navbar-profile-links a { color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .navbar-profile-links a:hover,
 .navbar-profile-links a:focus-visible { color: var(--green); }
-.navbar-resume-link { position: relative; display: none; min-height: 2.5rem; align-items: center; padding: 0 0.8rem; border: 1px solid var(--line-bright); color: var(--text); font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.navbar-resume-link { position: relative; display: none; min-height: 2.5rem; align-items: center; padding: 0 0.8rem; border: 1px solid var(--line-bright); color: var(--text); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .navbar-resume-link:hover,
 .navbar-resume-link:focus-visible { border-color: var(--green); color: var(--green); }
 
@@ -211,7 +211,7 @@
 .nav-icon-button:active,
 .mobile-menu-trigger:active,
 .mobile-nav-close:active { transform: scale(0.97); }
-.mobile-menu-trigger { padding-inline: 0.7rem; font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.mobile-menu-trigger { padding-inline: 0.7rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
 
 @media (hover: hover) and (pointer: fine) {
     .site-pointer-ball { display: block; }
@@ -224,15 +224,15 @@
 .mobile-nav-identity { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--text); }
 .mobile-nav-identity > span:last-child { display: flex; flex-direction: column; gap: 0.2rem; }
 .mobile-nav-identity strong { font-size: 0.86rem; }
-.mobile-nav-identity small { color: var(--text-faint); font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.mobile-nav-identity small { color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .mobile-nav-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 1rem 0.75rem max(1rem, env(safe-area-inset-bottom)); }
-.mobile-nav-section-label { margin: 0 0 0.8rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.59rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.mobile-nav-section-label { margin: 0 0 0.8rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 .mobile-primary-links { border-top: 1px solid var(--line); }
 .mobile-primary-link { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.75rem; min-height: 3rem; padding: 0.5rem 0.25rem; border-bottom: 1px solid var(--line); color: var(--text); }
 .mobile-primary-link:hover,
 .mobile-primary-link:focus-visible,
 .mobile-primary-link--active { padding-inline: 0.65rem; color: var(--green); background: color-mix(in srgb, var(--green-faint) 45%, transparent); }
-.mobile-link-label { font-size: clamp(1.05rem, 3vw, 1.3rem); font-weight: 560; letter-spacing: -0.055em; }
+.mobile-link-label { font-size: clamp(1.05rem, 3vw, 1.3rem); font-weight: 560; letter-spacing: -0.035em; }
 .mobile-link-arrow { color: var(--text-faint); }
 .mobile-primary-link--active .mobile-link-arrow { color: var(--green); }
 .mobile-secondary-section { margin-top: 1.25rem; }
@@ -246,7 +246,7 @@
 .mobile-status p { margin: 0; color: var(--text-dim); font-size: 0.76rem; line-height: 1.45; }
 .mobile-status-dot { width: 0.45rem; height: 0.45rem; flex: 0 0 auto; margin-top: 0.35rem; border-radius: 50%; background: var(--green); }
 .mobile-social-links { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; margin-top: 1rem; }
-.mobile-social-links a { min-height: 2.75rem; display: inline-flex; align-items: center; gap: 0.3rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.59rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.mobile-social-links a { min-height: 2.75rem; display: inline-flex; align-items: center; gap: 0.3rem; color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .mobile-social-links a:hover,
 .mobile-social-links a:focus-visible { color: var(--green); }
 
