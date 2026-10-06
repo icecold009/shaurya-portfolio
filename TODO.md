@@ -1141,6 +1141,44 @@ updated predictions and AS results without horizontal overflow or page errors.
 Complete-diff Jev review follows; binary PDF/PNG fidelity is verified locally.
 Independent ChatGPT validation is required before the next package.
 
+## lablab.ai hackathon feature and certificate additions: Package 25
+
+Goal: highlight the supplied lablab.ai hackathons on the homepage and add all
+new certificates to the existing gallery and storage pattern.
+
+Scope: add the AMD Developer Hackathon ACT II, Alpaca AI Trading Agents, and
+IBM Bob 2.0 certificates to Competitions and feature those three lablab.ai
+events on the homepage. Add the separate AI Challenge 2026 All Cups participant
+certificate and ClimateScience Olympiad semifinalist to Competitions. Add the
+ClimateScience Industrial Innovation course, Springpod BSc (Hons) Data Science
+& AI, and IIT Madras Introduction to Electronic Systems to Programs. Store the
+seven supplied PDFs unchanged under public/certificates/pdfs/ and all eight
+optimized WebP previews under public/certificates/images/. Keep Amazon
+certificates under Coding & ML with their 2026 issue years.
+
+Non-goals: claiming awards or placements not shown by the sources, treating the
+All Cups certificate as a lablab.ai event, adding the recommendation requisition
+as a credential, modifying source certificates, or deploying/publishing.
+
+Files: src/pages/home/Home.jsx, src/pages/home/Home.css,
+src/pages/certificates/CertificatesPage.jsx, public/certificates/pdfs/,
+public/certificates/images/, and this backlog entry.
+
+Tests: verify source/PDF copy hashes, inspect generated previews, run
+npm.cmd run verify and git diff --check, and visually inspect the homepage at
+desktop and narrow widths when the local browser session is available.
+
+Acceptance: the homepage names the three source-verified lablab.ai events and
+links to the certificate gallery; all eight new credentials appear in their
+existing categories with accurate issuer, title, year, and source files; the
+Amazon issue years read 2026; no unsupported award or placement is claimed.
+
+Evidence: all seven source PDFs were visually inspected and copied byte-for-byte;
+the IIT Madras source JPG was retained as an image-only certificate. Each PDF
+has an optimized WebP first-page preview, and the IIT JPG has an optimized WebP
+preview. The three lablab.ai source certificates are AMD ACT II, Alpaca AI
+Trading Agents, and IBM Bob 2.0; All Cups is a separate AI Challenge 2026
+participant certificate. Amazon source PDF hashes match the existing copies.
 ## Homepage hierarchy and featured hackathons: Package 26
 
 Goal: reshape the homepage around a clear identity, evidence-backed selected work,
@@ -1188,3 +1226,14 @@ validation is required before the next package.
 ## Architecture documentation publication — 2026-10-04
 
 Goal: publish source-linked architecture documentation and diagram previews. Scope: README, this backlog and docs/architecture artifacts. Source snapshot: dc8e784e00b631376d8a4d31afc88a0e54c93151; no runtime, dependency, data or deployment changes. Acceptance: pinned inventory/source-map/embedding checks, ten intended negative cases, renderer checks, bounded Jev review, documentation-only commit and remotely verified PR. Jev remains advisory; pre-existing workspace changes are excluded.
+
+Certificate package finalization (2026-10-06): all ten supplied certificate originals
+(nine PDFs and the IIT Madras JPG) match their stored copies by SHA-256.
+Seven new PDFs, the original JPG, and eight WebP previews are retained in Git;
+the two Amazon PDFs already exist in Git. The finalized homepage from PR #48
+is retained without the superseded Package 25 homepage edits. npm.cmd run verify
+passed: 118 source files linted, 64 tests passed, 101 local assets/15 routes/
+14 projects/21 artwork records checked, Vite production build passed, and
+24 static route documents generated. A temporary Vite PATH shim was used;
+the existing large-chunk warning and optional missing resume source remain.
+The recommendation requisition is a form and was not published as a credential.
