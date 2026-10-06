@@ -71,3 +71,15 @@
 
     --accent-rgb: 25, 24, 22;
 }
+
+/* Loading placeholders inherit the active page palette, including nested themes. */
+:root {
+    --skeleton-base: color-mix(in srgb, var(--text) 8%, var(--surface));
+    --skeleton-highlight: color-mix(in srgb, var(--text) 15%, var(--surface));
+    --skeleton-border: var(--line);
+}
+[data-theme="light"], .home-page {
+    --skeleton-base: color-mix(in srgb, var(--text) 8%, var(--surface));
+    --skeleton-highlight: color-mix(in srgb, var(--text) 15%, var(--surface));
+    --skeleton-border: var(--line);
+}
