@@ -384,3 +384,10 @@
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
+
+/* Error messages retain their text/icon cues in the monochrome theme. */
+[data-theme="light"] .form-field-error { color: var(--text); }
+[data-theme="light"] .form-group [aria-invalid="true"] {
+    border-color: var(--text);
+    box-shadow: 0 1px 0 var(--text);
+}

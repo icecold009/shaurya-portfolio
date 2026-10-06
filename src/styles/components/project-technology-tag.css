@@ -19,3 +19,10 @@
 .project-tech-tag__label {
     min-width: 0;
 }
+
+/* Brand marks follow the site's light-mode ink palette. */
+[data-theme="light"] .project-tech-tag__icon {
+    border-color: var(--line-bright);
+    background: var(--surface-2);
+    color: var(--text);
+}

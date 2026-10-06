@@ -1,3 +1,46 @@
+/* Theme-aware contribution density, labels and tooltip tones. */
+.home-section--activity {
+    --github-tone-0: #9aa3ad;
+    --github-tone-1: #8a929b;
+    --github-tone-2: #f2f4f5;
+    --github-tone-3: #1a1d20;
+    --github-tone-4: #050505;
+    --github-tone-5: #87909b;
+    --github-tone-6: #161b22;
+    --github-tone-7: #242a31;
+    --github-tone-8: #075b31;
+    --github-tone-9: #0e4429;
+    --github-tone-10: #0d813f;
+    --github-tone-11: #006d32;
+    --github-tone-12: #26a641;
+    --github-tone-13: #39d353;
+    --github-tone-14: #1f252b;
+    --github-tone-15: #111417;
+    --github-tone-16: #3a424b;
+    --github-tone-17: #1f2429;
+}
+
+[data-theme="light"] .home-section--activity {
+    --github-tone-0: #686259;
+    --github-tone-1: #686259;
+    --github-tone-2: #191816;
+    --github-tone-3: #d1cbbf;
+    --github-tone-4: #faf7ef;
+    --github-tone-5: #686259;
+    --github-tone-6: #ece7db;
+    --github-tone-7: #d1cbbf;
+    --github-tone-8: #b9b1a3;
+    --github-tone-9: #d1cbbf;
+    --github-tone-10: #847d70;
+    --github-tone-11: #9d9587;
+    --github-tone-12: #615b51;
+    --github-tone-13: #191816;
+    --github-tone-14: #d1cbbf;
+    --github-tone-15: #eee9de;
+    --github-tone-16: #938d82;
+    --github-tone-17: #f5f1e7;
+}
+
 .home-section--activity {
     width: min(100%, 90rem);
 }
@@ -16,7 +59,7 @@
     align-items: center;
     gap: 0.75rem;
     margin: 0;
-    color: #9aa3ad;
+    color: var(--github-tone-0);
     font-family: var(--mono);
     font-size: clamp(0.7rem, 1.15vw, 0.96rem);
     letter-spacing: 0.02em;
@@ -26,11 +69,11 @@
 
 .github-contributions__metric svg {
     flex: 0 0 auto;
-    color: #8a929b;
+    color: var(--github-tone-1);
 }
 
 .github-contributions__metric strong {
-    color: #f2f4f5;
+    color: var(--github-tone-2);
     font-size: 1.15em;
     font-weight: 700;
 }
@@ -40,9 +83,9 @@
     --github-cell-gap: clamp(0.24rem, 0.48vw, 0.48rem);
     padding: clamp(1.4rem, 3vw, 2.4rem);
     overflow: hidden;
-    border: 1px solid #1a1d20;
+    border: 1px solid var(--github-tone-3);
     border-radius: 1.5rem;
-    background: #050505;
+    background: var(--github-tone-4);
 }
 
 .github-contributions__viewport {
@@ -57,13 +100,13 @@
 }
 
 .github-contributions__viewport:focus-visible {
-    outline: 2px solid #f2f4f5;
+    outline: 2px solid var(--github-tone-2);
     outline-offset: 0.35rem;
 }
 
 .github-contributions__calendar {
     min-width: 51rem;
-    color: #87909b;
+    color: var(--github-tone-5);
     font-family: var(--mono);
 }
 
@@ -129,20 +172,20 @@
     padding: 0;
     border: 1px solid transparent;
     border-radius: 50%;
-    background: #161b22;
+    background: var(--github-tone-6);
     color: inherit;
     cursor: pointer;
 }
 
-.github-contribution-cell[data-level="0"] { border-color: #242a31; background: #161b22; }
-.github-contribution-cell[data-level="1"] { border-color: #075b31; background: #0e4429; }
-.github-contribution-cell[data-level="2"] { border-color: #0d813f; background: #006d32; }
-.github-contribution-cell[data-level="3"] { border-color: #26a641; background: #26a641; }
-.github-contribution-cell[data-level="4"] { border-color: #39d353; background: #39d353; }
+.github-contribution-cell[data-level="0"] { border-color: var(--github-tone-7); background: var(--github-tone-6); }
+.github-contribution-cell[data-level="1"] { border-color: var(--github-tone-8); background: var(--github-tone-9); }
+.github-contribution-cell[data-level="2"] { border-color: var(--github-tone-10); background: var(--github-tone-11); }
+.github-contribution-cell[data-level="3"] { border-color: var(--github-tone-12); background: var(--github-tone-12); }
+.github-contribution-cell[data-level="4"] { border-color: var(--github-tone-13); background: var(--github-tone-13); }
 
 .github-contributions__calendar[data-state="loading"] .github-contribution-cell {
-    border-color: #1f252b;
-    background: #111417;
+    border-color: var(--github-tone-14);
+    background: var(--github-tone-15);
     animation: github-contribution-skeleton 1.8s ease-in-out infinite alternate;
 }
 
@@ -172,7 +215,7 @@
 
 .github-contribution-cell:focus-visible {
     z-index: 2;
-    outline: 2px solid #f2f4f5;
+    outline: 2px solid var(--github-tone-2);
     outline-offset: 2px;
 }
 
@@ -184,10 +227,10 @@
     width: max-content;
     max-width: 15rem;
     padding: 0.45rem 0.6rem;
-    border: 1px solid #3a424b;
+    border: 1px solid var(--github-tone-16);
     border-radius: 0.35rem;
-    background: #1f2429;
-    color: #f2f4f5;
+    background: var(--github-tone-17);
+    color: var(--github-tone-2);
     content: attr(data-tooltip);
     font-family: var(--mono);
     font-size: 0.65rem;
@@ -217,7 +260,7 @@
 .github-contributions__selected,
 .github-contributions__fallback {
     margin: 0;
-    color: #9aa3ad;
+    color: var(--github-tone-0);
     font-size: 0.72rem;
     line-height: 1.45;
 }
@@ -227,7 +270,7 @@
     align-items: center;
     gap: 0.45rem;
     margin-left: auto;
-    color: #87909b;
+    color: var(--github-tone-5);
     font-size: 0.68rem;
     white-space: nowrap;
 }
@@ -240,11 +283,11 @@
     border-radius: 50%;
 }
 
-.github-contributions__legend i[data-level="0"] { border-color: #242a31; background: #161b22; }
-.github-contributions__legend i[data-level="1"] { border-color: #075b31; background: #0e4429; }
-.github-contributions__legend i[data-level="2"] { border-color: #0d813f; background: #006d32; }
-.github-contributions__legend i[data-level="3"] { border-color: #26a641; background: #26a641; }
-.github-contributions__legend i[data-level="4"] { border-color: #39d353; background: #39d353; }
+.github-contributions__legend i[data-level="0"] { border-color: var(--github-tone-7); background: var(--github-tone-6); }
+.github-contributions__legend i[data-level="1"] { border-color: var(--github-tone-8); background: var(--github-tone-9); }
+.github-contributions__legend i[data-level="2"] { border-color: var(--github-tone-10); background: var(--github-tone-11); }
+.github-contributions__legend i[data-level="3"] { border-color: var(--github-tone-12); background: var(--github-tone-12); }
+.github-contributions__legend i[data-level="4"] { border-color: var(--github-tone-13); background: var(--github-tone-13); }
 
 .github-contributions__fallback {
     margin-top: 0.75rem;
@@ -255,14 +298,14 @@
     align-items: center;
     gap: 0.25rem;
     margin-left: 0.25rem;
-    color: #f2f4f5;
+    color: var(--github-tone-2);
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
 
 .github-contributions__fallback a:hover,
 .github-contributions__fallback a:focus-visible {
-    color: #39d353;
+    color: var(--github-tone-13);
 }
 
 @media (max-width: 760px) {

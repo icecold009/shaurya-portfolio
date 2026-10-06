@@ -107,18 +107,18 @@
 }
 
 [data-theme="light"] .portfolio-tour__stop[data-audience="admissions"] {
-    --tour-accent: #8e4f14;
-    --tour-wash: rgba(142, 79, 20, 0.09);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 8%, transparent);
 }
 
 [data-theme="light"] .portfolio-tour__stop[data-audience="collaboration"] {
-    --tour-accent: #2156a4;
-    --tour-wash: rgba(33, 86, 164, 0.09);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 8%, transparent);
 }
 
 [data-theme="light"] .portfolio-tour__stop[data-audience="curious"] {
-    --tour-accent: #176543;
-    --tour-wash: rgba(23, 101, 67, 0.09);
+    --tour-accent: var(--text);
+    --tour-wash: color-mix(in srgb, var(--text) 8%, transparent);
 }
 
 .portfolio-tour__progress-row {

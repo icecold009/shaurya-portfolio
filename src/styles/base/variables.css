@@ -55,25 +55,25 @@
 [data-theme="light"] {
     color-scheme: light;
 
-    /* Cream and white backgrounds */
-    --bg: #f7f3e8;
-    --bg-2: #efe9dc;
-    --surface: #fffdf8;
-    --surface-2: #f5efe4;
+    /* Minimal cream canvas and tonal surfaces */
+    --bg: #f5f1e7;
+    --bg-2: #ece7db;
+    --surface: #faf7ef;
+    --surface-2: #eee9de;
 
     /* Borders */
-    --line: #d8d1c4;
-    --line-bright: #aebbd2;
+    --line: #d1cbbf;
+    --line-bright: #938d82;
 
-    /* Navy text */
-    --text: #172033;
-    --text-dim: #40506a;
-    --text-faint: #5d6b82;
+    /* Black ink and neutral secondary text */
+    --text: #191816;
+    --text-dim: #504c45;
+    --text-faint: #686259;
 
-    /* Blue accent */
-    --green: #2563eb;
-    --green-dim: #1d4ed8;
-    --green-faint: #dbeafe;
+    /* Actions, links and focus share the same black ink */
+    --green: #191816;
+    --green-dim: #35322d;
+    --green-faint: #e4ded1;
 
-    --accent-rgb: 37, 99, 235;
+    --accent-rgb: 25, 24, 22;
 }
