@@ -412,3 +412,53 @@
     .portfolio-hero__title, .portfolio-hero__statement, .portfolio-hero__context { margin-inline: 0; }
     .portfolio-hero__actions { justify-content: flex-start; }
 }
+
+/* Spatial consistency: the active project moves to the front of one shared stack. */
+.project-preview-stack { min-width: 0; padding: 0.5rem 1.2rem 0 0.35rem; }
+.project-preview-stack__stage { display: grid; padding-bottom: 2rem; isolation: isolate; }
+.project-preview-stack__card {
+    grid-area: 1 / 1;
+    min-width: 0;
+    align-self: stretch;
+    border-radius: 0.65rem;
+    box-shadow: 0 0.4rem 1.5rem color-mix(in srgb, var(--text) 9%, transparent);
+    transform-origin: center 40%;
+    transition: transform var(--duration-page) var(--ease-out);
+}
+.project-preview-stack__card .portfolio-hero__feature-copy { padding: clamp(1rem, 2vw, 1.4rem); }
+.project-preview-stack__card .portfolio-hero__visual img { aspect-ratio: 16 / 9; }
+.project-preview-stack__controls, .project-preview-stack__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+.project-preview-stack__controls { position: relative; z-index: 4; padding-block: 0.25rem; }
+.project-preview-stack__controls button {
+    display: inline-flex;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem;
+    border: 1px solid var(--line-bright);
+    border-radius: 0.35rem;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.project-preview-stack__navigation span { min-width: 2.5rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.project-preview-stack__controls button:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.project-preview-stack__controls button:disabled { cursor: default; color: var(--text-dim); }
+.project-preview-stack[data-keyboard="true"] .project-preview-stack__card { transition: none; transition-duration: 0ms !important; }
+@media (hover: hover) and (pointer: fine) {
+    .project-preview-stack__controls button:not(:disabled):hover { background: var(--surface-2); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-preview-stack__card { transition: none; transition-duration: 0ms !important; }
+}
+
+.portfolio-hero__actions { align-items: flex-start; }
