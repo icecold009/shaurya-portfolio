@@ -255,3 +255,149 @@
     .portfolio-button svg { transition: none; }
 }
 
+/* Direction A: pair identity with one real product surface. */
+.portfolio-hero {
+    min-height: 0;
+    display: block;
+    padding: clamp(2.25rem, 6vw, 5rem) 0 clamp(1.75rem, 4vw, 3rem);
+    border-bottom: 0;
+    background: transparent;
+    overflow: visible;
+}
+
+.portfolio-hero::before,
+.portfolio-hero::after { display: none; }
+
+.portfolio-hero__content {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    width: min(calc(100% - 2rem), var(--content-width));
+}
+
+.portfolio-hero__copy { max-width: 34rem; min-width: 0; }
+.portfolio-hero__eyebrow { color: var(--home-accent, var(--green-dim)); }
+.portfolio-hero__title {
+    max-width: 9ch;
+    margin-top: clamp(0.85rem, 2vw, 1.25rem);
+    font-size: clamp(3.35rem, 6.2vw, 6rem);
+    letter-spacing: -0.075em;
+    line-height: 0.91;
+}
+
+.portfolio-hero__statement {
+    max-width: 34ch;
+    margin-top: clamp(1rem, 2vw, 1.4rem);
+    color: var(--text-dim);
+    font-size: clamp(1.12rem, 1.8vw, 1.42rem);
+    font-weight: 450;
+    letter-spacing: -0.025em;
+    line-height: 1.42;
+}
+
+.portfolio-hero__context {
+    max-width: 34rem;
+    margin: 1rem 0 0;
+    color: var(--text-faint);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.portfolio-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+    margin-top: 1.45rem;
+    border-top: 0;
+}
+
+.portfolio-hero__actions .portfolio-button {
+    min-height: 3rem;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.72rem 0.9rem;
+    border: 1px solid var(--line-bright);
+    font-size: 0.88rem;
+}
+
+.portfolio-hero__actions .portfolio-button--primary {
+    border-color: var(--home-accent, var(--green));
+    background: var(--home-accent, var(--green));
+    color: var(--home-accent-contrast, var(--bg));
+}
+
+.portfolio-hero__actions .portfolio-button--secondary {
+    background: transparent;
+    color: var(--text);
+}
+
+.portfolio-hero__feature {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.portfolio-hero__visual {
+    margin: 0;
+    border-bottom: 1px solid var(--line);
+    background: #101010;
+}
+
+.portfolio-hero__image-link { display: block; overflow: hidden; }
+.portfolio-hero__visual img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.portfolio-hero__visual figcaption {
+    padding: 0.62rem 0.85rem;
+    background: var(--surface-2);
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.portfolio-hero__feature-copy { display: grid; gap: 0.65rem; padding: clamp(1rem, 2vw, 1.55rem); }
+.portfolio-hero__feature-label {
+    margin: 0;
+    color: var(--home-accent, var(--green-dim));
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    line-height: 1.45;
+    text-transform: uppercase;
+}
+
+.portfolio-hero__feature h2 {
+    margin: 0;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: clamp(1.55rem, 3vw, 2.35rem);
+    font-weight: 620;
+    letter-spacing: -0.06em;
+    line-height: 1;
+}
+
+.portfolio-hero__feature-copy > p:not(.portfolio-hero__feature-label) {
+    max-width: 54rem;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.94rem;
+    line-height: 1.55;
+}
+
+.portfolio-hero__feature-copy .portfolio-hero__feature-decision { color: var(--text-faint); font-size: 0.85rem; }
+.portfolio-hero__feature-copy .home-text-link { justify-self: start; margin-top: 0.35rem; }
+
+@media (max-width: 760px) {
+    .portfolio-hero { padding-top: 2rem; padding-bottom: 1.25rem; }
+    .portfolio-hero__content { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+    .portfolio-hero__title { max-width: none; font-size: clamp(3rem, 13vw, 4.35rem); }
+    .portfolio-hero__statement { max-width: 34ch; font-size: 1.12rem; }
+    .portfolio-hero__actions { align-items: center; }
+    .portfolio-hero__actions .portfolio-button { min-height: 2.85rem; }
+    .portfolio-hero__visual img { aspect-ratio: 16 / 10; }
+}
+

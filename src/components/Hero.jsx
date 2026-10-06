@@ -3,14 +3,21 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { REVEAL, REVEAL_CONTAINER } from "../lib/motion";
-import { academicProfile, availability } from "../data/profile";
+import { academicProfile } from "../data/profile";
+import { projects } from "../data/projects";
 import { positioningStatement } from "../lib/profileLinks";
 
-import BubbleField from "./BubbleField";
 import "./Hero.css";
+
+const featuredProject = projects.find((project) => project.id === "movie-tracker");
 
 export default function Hero() {
     const shouldReduceMotion = useReducedMotion();
+    const projectUrl = featuredProject ? "/projects?project=" + featuredProject.id : "/projects";
+
+    if (!featuredProject) {
+        return null;
+    }
 
     return (
         <motion.section
@@ -21,85 +28,59 @@ export default function Hero() {
             initial={shouldReduceMotion ? undefined : "hidden"}
             animate={shouldReduceMotion ? undefined : "visible"}
         >
-            <BubbleField />
-
-            <motion.div
-                className="portfolio-hero__rail"
-                aria-hidden="true"
-                variants={shouldReduceMotion ? undefined : REVEAL}
-            >
-                <span>Shaurya Saria</span>
-                <span>Bengaluru, India</span>
-                <span>{availability.headline}</span>
-            </motion.div>
-
             <motion.div
                 className="portfolio-hero__content"
                 variants={shouldReduceMotion ? undefined : REVEAL_CONTAINER}
             >
-                <motion.p
-                    className="portfolio-hero__eyebrow"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
-                >
-                    Student developer · {academicProfile.location}
-                </motion.p>
-
-                <motion.h1
-                    id="portfolio-hero-title"
-                    className="portfolio-hero__title"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
-                >
-                    Shaurya Saria
-                </motion.h1>
-                <motion.p
-                    className="portfolio-hero__statement"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
-                >
-                    I build web applications, full-stack software, and applied AI and machine-learning projects.
-                </motion.p>
-
-                <motion.div
-                    className="portfolio-hero__bottom"
-                    variants={shouldReduceMotion ? undefined : REVEAL}
-                >
-                    <motion.p
-                        className="portfolio-hero__description"
-                        variants={shouldReduceMotion ? undefined : REVEAL}
-                    >
-                        {positioningStatement} I am currently studying {academicProfile.curriculum.toLowerCase()} at {academicProfile.school}, with an expected graduation in {academicProfile.expectedGraduation}.
-                    </motion.p>
-
+                <motion.div className="portfolio-hero__copy" variants={shouldReduceMotion ? undefined : REVEAL}>
+                    <p className="portfolio-hero__eyebrow">Student developer · {academicProfile.location}</p>
+                    <h1 id="portfolio-hero-title" className="portfolio-hero__title">Shaurya Saria</h1>
+                    <p className="portfolio-hero__statement">{positioningStatement}</p>
+                    <p className="portfolio-hero__context">
+                        Studying {academicProfile.curriculum} at {academicProfile.school} · expected graduation {academicProfile.expectedGraduation}
+                    </p>
                     <div className="portfolio-hero__actions">
-                        <Link to="/projects" className="portfolio-button portfolio-button--primary cta-link">
-                            Explore the work
-                            <ArrowDownRight size={18} aria-hidden="true" />
-                        </Link>
-                        <Link to="/work-with-me" className="portfolio-button portfolio-button--secondary cta-link">
-                            Work with me
-                            <ArrowUpRight size={17} aria-hidden="true" />
-                        </Link>
+                        <a href="#home-selected-work" className="portfolio-button portfolio-button--primary cta-link">
+                            Explore selected work <ArrowDownRight size={18} aria-hidden="true" />
+                        </a>
                         <a
                             href="/resume.pdf"
-                            className="portfolio-button portfolio-button--tertiary cta-link"
+                            className="portfolio-button portfolio-button--secondary cta-link"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Open résumé PDF in a new tab"
                         >
-                            Open résumé
-                            <ArrowUpRight size={17} aria-hidden="true" />
+                            Open résumé <ArrowUpRight size={17} aria-hidden="true" />
                         </a>
                     </div>
                 </motion.div>
-            </motion.div>
 
-            <motion.div
-                className="portfolio-hero__footer"
-                aria-hidden="true"
-                variants={shouldReduceMotion ? undefined : REVEAL}
-            >
-                <span>01 / 04</span>
-                <span>Selected work follows</span>
-                <span>Scroll to explore</span>
+                <motion.article
+                    className="portfolio-hero__feature"
+                    aria-labelledby="home-featured-project-title"
+                    variants={shouldReduceMotion ? undefined : REVEAL}
+                >
+                    <figure className="portfolio-hero__visual">
+                        <Link className="portfolio-hero__image-link" to={projectUrl} aria-label="Open Movie Tracker project details">
+                            <img
+                                src={featuredProject.thumbnail}
+                                alt={featuredProject.thumbnailAlt || featuredProject.title + " project preview."}
+                                loading="eager"
+                                decoding="async"
+                            />
+                        </Link>
+                        <figcaption>Product preview / {featuredProject.year}</figcaption>
+                    </figure>
+                    <div className="portfolio-hero__feature-copy">
+                        <p className="portfolio-hero__feature-label">Featured product · {featuredProject.status}</p>
+                        <h2 id="home-featured-project-title">{featuredProject.title}</h2>
+                        <p>{featuredProject.description}</p>
+                        <p className="portfolio-hero__feature-decision">{featuredProject.decisions}</p>
+                        <Link className="home-text-link cta-link" to={projectUrl}>
+                            Read the project notes <ArrowUpRight size={16} aria-hidden="true" />
+                        </Link>
+                    </div>
+                </motion.article>
             </motion.div>
         </motion.section>
     );
