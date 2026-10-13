@@ -1387,3 +1387,23 @@ layout, behavior or content changes. Acceptance: no replacement character in
 all three labels, existing status text retained. Source/diff and browser
 inspection plus existing hosted Quality checks are the evidence. User
 explicitly approved final main update and publication in this turn.
+
+
+## Supplied CV replacement: Package 34 (2026-10-13)
+
+Goal: replace the website CV with Shaurya_saria_resume_oct2026.pdf exactly.
+Files/scope: public/resume.pdf, public/resume-preview.png, README.md and
+this canonical backlog. Non-goals: rewriting CV, profile changes or new links.
+Acceptance: source/public/build/live PDF SHA256 equality, refreshed first-page
+preview (1191 x 1684), existing /resume.pdf links and optional sync preserved.
+Evidence: both A4 PDF pages rendered and visually inspected; no encryption,
+forms or JavaScript. Build and hosted Quality checks; no local tests requested.
+Jev plan offered generic scope advice; exact asset inventory and user request
+resolve it. Binary integrity is checked locally, separately from Jev text review.
+
+CV evidence: source/public/dist PDF SHA256 matches
+D84874D3D8423989B82815DC29CE9B293005C15C06465D4F2F8CA57E41FC51DC.
+Build passed (2276 modules, 24 route documents); optional sync preserved PDF.
+Jev 1.13.0 reviewed README/TODO only, 4214 input/500 output tokens; PDF
+sensitive-path skip and PNG binary skip leave partial coverage. Both binary
+assets independently inspected locally; no complete binary review claimed.
